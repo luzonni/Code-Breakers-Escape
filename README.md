@@ -1,9 +1,9 @@
 # Jogo de estratégia.
 
-# Conceito do Jogo:
+## Conceito do Jogo:
 Em cada nível, você assumirá o controle de um personagem que deve navegar por ambientes complexos e superar obstáculos diversos, usando comandos inteligentes e movendo seu personagem de forma estratégica para prosseguir.
 
-# Características Principais:
+## Características Principais:
 
 ### Níveis Progressivamente Desafiadores:
   Cada nível aumenta em dificuldade, exigindo pensamento crítico e planejamento cuidadoso.
