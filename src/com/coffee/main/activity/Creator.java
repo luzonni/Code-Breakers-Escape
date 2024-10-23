@@ -210,10 +210,10 @@ public class Creator implements Activity {
 		return message;
 	}
 	
+	private char[] cs = new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 	private void getLevel() {
 		if(sizes == null)
 			return;
-		char[] cs = new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 		NAME = name_sublime.readText(null);
 		BUILDER = name_builder.readText(null);
 		String string_w = sizes[0].readText(cs);

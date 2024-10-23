@@ -44,6 +44,9 @@ public class Console {
 				lastCommands.add(commands);
 			}
 		}
+		if(Keyboard.KeyPressed("Enter") && !textButton.isSelect()) {
+			textButton.setSelect(true);
+		}
 		chat.tick();
 	}
 	

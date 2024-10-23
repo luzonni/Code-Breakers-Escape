@@ -6,8 +6,8 @@ import java.awt.image.BufferedImage;
 
 import com.coffee.main.Engine;
 import com.coffee.main.Geometry;
-import com.coffee.main.Sound;
 import com.coffee.main.activity.Game;
+import com.coffee.main.sound.Sound;
 import com.coffee.main.tools.Timer;
 import com.coffee.objects.Variables;
 import com.coffee.objects.tiles.Tile;
@@ -50,7 +50,7 @@ public class Cannon extends Entity {
 			int x = (int)getMiddle().x + (int)(Math.cos(r)*Tile.getSize()/1.75);
 			int y = (int)getMiddle().y + (int)(Math.sin(r)*Tile.getSize()/1.75);
 			Game.getLevel().addEntity(new IronBall(x, y, r, Engine.GameScale*3));
-			Sound.play("poft");
+			//TODO Sound.play("poft");
 		}
 	}
 	

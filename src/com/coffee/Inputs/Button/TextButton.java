@@ -9,7 +9,8 @@ import com.coffee.Inputs.Mouse;
 import com.coffee.Inputs.Mouse_Button;
 import com.coffee.graphics.FontG;
 import com.coffee.main.Engine;
-import com.coffee.main.Sound;
+import com.coffee.main.sound.Sound;
+import com.coffee.main.sound.Sounds;
 import com.coffee.main.tools.Responsive;
 
 public class TextButton extends Button {
@@ -36,14 +37,14 @@ public class TextButton extends Button {
 		if(Keyboard.KeyPressed("Space")) {
 			word.insert(index_write, " ");
 			//TODO trocar o som!
-			Sound.play("click");
+			Sound.play(Sounds.Click);
 			index_write++;
 			return;
 		}
 		if(Keyboard.KeyPressed("Back_Space") && index_write > 0) {
 			word.delete(index_write-1, index_write);
 			//TODO trocar o som!
-			Sound.play("click");
+			Sound.play(Sounds.Click);
 			index_write--;
 			return;
 		}
@@ -51,17 +52,25 @@ public class TextButton extends Button {
 		if(keyChar != '?') {
 			word.insert(index_write, keyChar);
 			//TODO trocar o som!
-			Sound.play("click");
+			Sound.play(Sounds.Click);
 			index_write++;
 		}
-		if(Keyboard.KeyPressed("Enter") && !word.isEmpty()) {
-			sent = true;
-			this.selected = false;
+		if(Keyboard.KeyPressed("Enter")) {
+			if(!word.isEmpty()) {
+				sent = true;
+				this.selected = false;
+			}else {
+				this.selected = false;
+			}
 		}
 	}
 	
 	public boolean isSelect() {
 		return this.selected;
+	}
+	
+	public void setSelect(boolean selected) {
+		this.selected = selected;
 	}
 	
 	public String[] getText(char[] Caracteres) {

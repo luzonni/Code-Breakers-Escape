@@ -19,7 +19,7 @@ public class Arrow extends Entity {
 		this.direction = direction;
 		this.speed = speed;
 		if(sprite == null)
-			sprite = getSprite("Arrow", Engine.Color_Primary)[0].getSubimage(0, 0, 15*Engine.GameScale, 5*Engine.GameScale);
+			sprite = getSprite("arrow", Engine.Color_Primary)[0].getSubimage(0, 0, 15*Engine.GameScale, 5*Engine.GameScale);
 		this.setSize(sprite.getWidth(), sprite.getHeight());
 		setDepth(1);
 	}

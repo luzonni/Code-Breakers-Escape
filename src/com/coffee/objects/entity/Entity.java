@@ -10,8 +10,8 @@ import com.coffee.graphics.SpriteSheet;
 import com.coffee.items.Item;
 import com.coffee.items.Usable;
 import com.coffee.main.Engine;
-import com.coffee.main.Sound;
 import com.coffee.main.activity.Game;
+import com.coffee.main.sound.Sound;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Objects;
 import com.coffee.objects.Variables;
@@ -209,7 +209,7 @@ public abstract class Entity extends Objects {
 			for(int i = 0; i < 40; i++)
 				Game.getLevel().addParticle(new Kabum(getMiddle().x, getMiddle().y));
 			Game.getLevel().getEntities().remove(this);
-			Sound.play("die");
+			//TODO Sound.play("die");
 		}else {
 			this.setVar(Variables.Armored, false);
 		}

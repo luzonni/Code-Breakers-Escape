@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 
 import com.coffee.main.Engine;
 import com.coffee.main.Geometry;
-import com.coffee.main.Sound;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Variables;
 import com.coffee.objects.particles.Dust;
@@ -41,7 +40,7 @@ public class Bomb extends Entity {
 		Player player = Game.getPlayer();
 		if(Geometry.Theta(player.getMiddle(), getMiddle()) <= radius) {
 			activity = true;
-			Sound.loop("sss");
+			//TODO Sound.loop("sss");
 		}
 		if(activity) {
 			count++;
@@ -50,7 +49,7 @@ public class Bomb extends Entity {
 				count = 0;
 				index++;
 				if(index == sprites.length-1) {
-					Sound.stop("sss");
+					//TODO Sound.stop("sss");
 					explode();
 				}
 			}
@@ -74,7 +73,7 @@ public class Bomb extends Entity {
 			}
 		}
 		Game.getLevel().getEntities().remove(this);
-		Sound.play("kabum");
+		//TODO Sound.play("kabum");
 	}
 
 	@Override

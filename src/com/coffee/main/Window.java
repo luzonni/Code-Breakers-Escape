@@ -29,9 +29,15 @@ public class Window extends Canvas implements Runnable {
 	private JFrame frame;
 	private Toolkit toolkit = Toolkit.getDefaultToolkit();
 	private int C_W, C_H;
+	boolean oglEnabled = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment()
+            .getDefaultScreenDevice()
+            .getDefaultConfiguration()
+            .getImageCapabilities()
+            .isAccelerated();
+
 	
 	public Window(String name) {
-		createOpenGl(true);
+		createOpenGl(Engine.OpenGL);
 		//Set's
 		frame = new JFrame(name);
 		initFrame();
@@ -50,6 +56,7 @@ public class Window extends Canvas implements Runnable {
 			try {
 	            System.setProperty("sun.java2d.opengl", "True");
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				System.out.println("OpenGL Pipeline enabled: " + oglEnabled);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -7,8 +7,8 @@ import java.awt.Rectangle;
 import com.coffee.Inputs.Mouse;
 import com.coffee.Inputs.Mouse_Button;
 import com.coffee.main.Engine;
-import com.coffee.main.Sound;
 import com.coffee.main.activity.Creator;
+import com.coffee.main.sound.Sound;
 import com.coffee.main.tools.Responsive;
 import com.coffee.objects.Objects;
 import com.coffee.objects.tiles.Tile;
@@ -57,7 +57,7 @@ public class Grid {
 				if(Mouse.pressingOnMap(Mouse_Button.LEFT, new Rectangle(px, py, Tile.getSize(), Tile.getSize()), Creator.getCam()))
 					if(Grid[x+y*Width] == null) {
 						Grid[x+y*Width] = object;
-						Sound.play("place");
+						//TODO Sound.play("place");
 					}
 			}
 		}
@@ -91,7 +91,7 @@ public class Grid {
 					if(Grid[x+y*Width] != null) {
 						if(Mouse.clickOnMap(Mouse_Button.RIGHT, new Rectangle(px, py, Tile.getSize(), Tile.getSize()), Creator.getCam())) {
 							Grid[x+y*Width] = null;
-							Sound.play("clear");
+							//TODO Sound.play("clear");
 							return true;
 						}
 					}

@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import com.coffee.main.Engine;
-import com.coffee.main.Sound;
 import com.coffee.main.activity.Game;
 
 public class Button extends Entity {
@@ -30,7 +29,7 @@ public class Button extends Entity {
 	
 	private void click(boolean bool) {
 		if(this.pressed != bool) {
-			Sound.play("poft");
+			//TODO Sound.play("poft");
 			this.pressed = bool;
 		}
 	}

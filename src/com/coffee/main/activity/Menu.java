@@ -187,6 +187,9 @@ public class Menu implements Activity, Receiver {
 		String text = "";
 		for(String v : values)
 			text += v+" ";
+		if(values[0] != "" && values[0].equalsIgnoreCase("exit")) {
+			System.exit(1);
+		}
 		text = text.trim();
 		message += response(text);
 		return message.trim();

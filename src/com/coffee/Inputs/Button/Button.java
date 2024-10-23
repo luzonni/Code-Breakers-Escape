@@ -10,7 +10,8 @@ import com.coffee.Inputs.Mouse;
 import com.coffee.Inputs.Mouse_Button;
 import com.coffee.graphics.FontG;
 import com.coffee.main.Engine;
-import com.coffee.main.Sound;
+import com.coffee.main.sound.Sound;
+import com.coffee.main.sound.Sounds;
 import com.coffee.main.tools.Responsive;
 
 public class Button {
@@ -69,7 +70,7 @@ public class Button {
 	
 	public boolean function() {
 		if(Mouse.clickOn(Mouse_Button.LEFT, getBounds())) {
-			Sound.play("click");
+			Sound.play(Sounds.Click);
 			return true;
 		}
 		return false;

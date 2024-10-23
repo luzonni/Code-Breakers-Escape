@@ -20,6 +20,7 @@ import org.json.simple.parser.JSONParser;
 import com.coffee.graphics.FontG;
 import com.coffee.main.activity.Activity;
 import com.coffee.main.activity.Menu;
+import com.coffee.main.sound.Sound;
 import com.coffee.main.ui.UserInterface;
 import com.coffee.objects.Objects;
 
@@ -42,6 +43,7 @@ public class Engine implements Runnable {
 	public static int GameScale = 3;
 	public static int Volume = 40;
 	public static boolean ANTIALIASING = false;
+	public static boolean OpenGL = true;
 	
 	public static final int[][] resolutions = {{800, 600}, {1280, 720}, {1366, 768}, {1600, 900}, {1920, 1080}, {2560, 1440}, {3840, 2160}};
 	public static int INDEX_RES = 1;
@@ -59,7 +61,7 @@ public class Engine implements Runnable {
 	public static Activity ACTIVITY;
 	public static boolean ACTIVITY_RUNNING;
 	
-	public static String[] LEVELS = {"start", "maybe"};
+	public static String[] LEVELS = {"start", "lilly", "maybe"};
 	public static int INDEX_LEVEL = 1;
 	
 	public static Random RAND;
@@ -102,10 +104,13 @@ public class Engine implements Runnable {
 		SET_PALLET();
 		WINDOW = new Window(GameTag + " / The Universe");
 		Sound.load();
+		
 		UI = new UserInterface();
 		ACTIVITY = new Menu();
 		ACTIVITY.enter();
 		ACTIVITY_RUNNING = true;
+		UI.setReceiver(ACTIVITY);
+		
 		thread = new Thread(ME, "Thread - Game");
 		isRunning = true;
 		thread.start();
@@ -238,6 +243,7 @@ public class Engine implements Runnable {
 		Buffer.show();
 	}
 	
+	
 	@Override
 	public void run() {
 		//System values
@@ -301,6 +307,13 @@ public class Engine implements Runnable {
 		}
 		stop();
 	}
+	
+	
+	public static void listAllThreads() {
+		Thread.getAllStackTraces().keySet().forEach(thread -> {
+			System.out.println("Thread: " + thread.getName() + " - Estado: " + thread.getState());
+		});		
+    }
 
 }
 

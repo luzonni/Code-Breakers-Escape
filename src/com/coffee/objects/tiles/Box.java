@@ -4,8 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import com.coffee.main.Engine;
-import com.coffee.main.Sound;
 import com.coffee.main.activity.Game;
+import com.coffee.main.sound.Sound;
 import com.coffee.main.tools.Timer;
 import com.coffee.objects.entity.Entity;
 
@@ -27,7 +27,7 @@ public class Box extends Tile {
 
 	public void change(boolean bool) {
 		if(this.isSolid() != bool) {
-			Sound.play("poft");
+			//TODO Sound.play("poft");
 			this.setSolid(bool);
 		}
 	}

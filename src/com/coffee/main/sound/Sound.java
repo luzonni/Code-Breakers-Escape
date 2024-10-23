@@ -1,43 +1,44 @@
-package com.coffee.main;
+package com.coffee.main.sound;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.coffee.main.Engine;
 import com.coffee.main.tools.Clips;
 
 public class Sound {
 	
 	//Sound
 	
-	private static Map<String ,Clips> sounds;
+	private static Map<String, Clips> sounds;
 	private static String[] names = {"poft", "click", "place", "clear", "kabum", "sss", "die"};
 	
 	public static void load() {
 		sounds = new HashMap<String, Clips>();
 		for(String name : names) {
-			Clips clips = load(name.toLowerCase(), 16);
+			Clips clips = load(name.toLowerCase(), 1);
 			sounds.put(name.toLowerCase(), clips);
 		}	
 	}
 	
-	public static void play(String name) {
-		if(!sounds.containsKey(name))
+	public static void play(Sounds sound) {
+		if(!sounds.containsKey(sound.resource()))
 			throw new RuntimeException("sound not exists");
-		sounds.get(name).play();
+		sounds.get(sound.resource()).play();
 	}
 	
-	public static void loop(String name) {
-		if(!sounds.containsKey(name))
+	public static void loop(Sounds sound) {
+		if(!sounds.containsKey(sound.resource()))
 			throw new RuntimeException("sound not exists");
-		sounds.get(name).loop();
+		sounds.get(sound.resource()).loop();
 	}
 	
-	public static void stop(String name) {
-		if(!sounds.containsKey(name))
+	public static void stop(Sounds sound) {
+		if(!sounds.containsKey(sound.resource()))
 			throw new RuntimeException("sound not exists");
-		sounds.get(name).stop();
+		sounds.get(sound.resource()).stop();
 	}
 	
 	private static Clips load(String name, int amount) {
@@ -55,13 +56,9 @@ public class Sound {
 			byte[] data = baos.toByteArray();
 			return new Clips(name, data, amount);
 		}catch(Exception e) {
-			System.out.println("Erro na criação do audio!");
+			System.out.println("Erro na criação do audio: " + name);
 			e.printStackTrace();
-			try {
-				return new Clips("", null, 0);
-			}catch(Exception ee) {
-				return null;
-			}
+			throw new RuntimeException("Erro na criação do audio: " + name + " Com quantidade: " + amount);
 		}
 	}
 	
