@@ -67,7 +67,7 @@ public class Engine implements Runnable {
 	public static Random RAND;
 	
 	public static final int PRIMARY = 0xffffffff;
-	public static final int SECUNDATY = 0xffcccccc;
+	public static final int SECUNDARY = 0xffcccccc;
 	public static final int TERTIARY = 0xff000000;
 	
 	

@@ -85,7 +85,7 @@ public abstract class Entity extends Objects {
 	public BufferedImage[] getSprite(String name) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.GameScale);
 		spriteSheet.replaceColor(Engine.PRIMARY, Engine.Color_Primary.getRGB());
-		spriteSheet.replaceColor(Engine.SECUNDATY, Engine.Color_Secondary.getRGB());
+		spriteSheet.replaceColor(Engine.SECUNDARY, Engine.Color_Secondary.getRGB());
 		spriteSheet.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
 		int lenght = spriteSheet.getWidth()/16;
 		BufferedImage[] sprites = new BufferedImage[lenght];
