@@ -18,7 +18,7 @@ public class Clips {
 	private final float MAX_VALUE = 6.0206f;
 	private final float MIN_VALUE = -80f;
 	private float volume = 0;
-	private String name;
+	private final String name;
 	
 	public Clips(String name, byte[] buffer, int count) throws Exception {
 		this.name = name;

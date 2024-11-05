@@ -30,7 +30,7 @@ public class MenuButton extends Button {
 	private BufferedImage[] buildIcon() {
 		SpriteSheet sp = new SpriteSheet(Engine.ResPath+"/ui/menubutton.png", Engine.GameScale);
 		sp.replaceColor(Engine.PRIMARY, Engine.Color_Primary.getRGB());
-		sp.replaceColor(Engine.SECUNDARY, Engine.Color_Secondary.getRGB());
+		sp.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
 		sp.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
 		BufferedImage[] icons = new BufferedImage[sp.getWidth()/10];
 		for(int i = 0; i < icons.length; i++) {
