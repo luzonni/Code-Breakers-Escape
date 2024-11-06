@@ -1,6 +1,5 @@
 # Jogo de estratégia.
 
-<<<<<<< HEAD
 # Conceito do Jogo:
 Em cada nível, você assumirá o controle de um personagem que deve navegar por ambientes complexos e superar obstáculos diversos, usando comandos inteligentes e movendo seu personagem de forma estratégica para prosseguir.
 
@@ -46,4 +45,8 @@ Em cada nível, você assumirá o controle de um personagem que deve navegar por
 
 ### Criação de níveis personalizados:
   Também é possível criar seus próprios níveis, e compartilhá-los com seus amigos!
->>>>>>> 2e4587642ebf65f0aba3fc4e8d5fac9867ccd84d
+
+> Para executar a versão atual, basta entrar em out/artifacts/Code_Break_s_Escape_jar/
+> Dentro da pasta, execute o commando: java -jar Code\ Break\'s\ Ecape.jar 
+>
+> Certifique-se que sua versão do java é maior que jre-21.
