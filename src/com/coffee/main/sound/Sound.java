@@ -17,7 +17,7 @@ public class Sound {
 	private static final String[] names = {"poft", "click", "place", "clear", "kabum", "sss", "die"};
 	
 	public static void load() {
-		sounds = new HashMap<String, Clips>();
+		sounds = new HashMap<>();
 		for(String name : names) {
 			Clips clips = load(name.toLowerCase());
 			sounds.put(name.toLowerCase(), clips);

@@ -27,69 +27,72 @@ public abstract class Entity extends Objects {
 		int id = (int)values[0];
 		int x = (int)values[1];
 		int y = (int)values[2];
-		switch (id) {
-		case 0: 
-			return null;
-		case 1: 
-			entity = new Player(id, x, y);
-			return entity;
-		case 2: 
-			entity = new Flag(id, x, y);
-			return entity;
-		case 3: 
-			entity = new Cannon(id, x, y);
-			return entity;
-		case 4: 
-			entity = new Crossbow(id, x, y);
-			return entity;
-		case 5: 
-			entity = new Ant(id, x, y);
-			return entity;
-		case 6: 
-			entity = new Button(id, x, y);
-			return entity;
-		case 7: 
-			entity = new Computer(id, x, y);
-			return entity;
-		case 8: 
-			entity = new Skull(id, x, y);
-			return entity;
-		case 9: 
-			entity = new Pluuter(id, x, y);
-			return entity;
-		case 10: 
-			entity = new Karto(id, x, y);
-			return entity;
-		case 11: 
-			entity = new Saw(id, x, y);
-			return entity;
-		case 12: 
-			entity = new Bomb(id, x, y);
-			return entity;
-		case 13: 
-			entity = new Fish(id, x, y);
-			return entity;
-		case 14: 
-			entity = new Beetle(id, x, y);
-			return entity;
-		case 15: 
-			entity = new Fly(id, x, y);
-			return entity;
-		case 16: 
-			entity = new Berne(id, x, y);
-			return entity;
-		}
-		throw new RuntimeException("Tile not exist");
-	}
+        return switch (id) {
+            case 0 -> null;
+            case 1 -> {
+                entity = new Player(id, x, y);
+                yield entity;
+            }
+            case 2 -> {
+                entity = new Flag(id, x, y);
+                yield entity;
+            }
+            case 3 -> {
+                entity = new Cannon(id, x, y);
+                yield entity;
+            }
+            case 4 -> {
+                entity = new Crossbow(id, x, y);
+                yield entity;
+            }
+            case 5 -> {
+                entity = new Ant(id, x, y);
+                yield entity;
+            }
+            case 6 -> {
+                entity = new Button(id, x, y);
+                yield entity;
+            }
+            case 7 -> {
+                entity = new Computer(id, x, y);
+                yield entity;
+            }
+            case 8 -> {
+                entity = new Skull(id, x, y);
+                yield entity;
+            }
+            case 9 -> {
+                entity = new Pluuter(id, x, y);
+                yield entity;
+            }
+            case 10 -> {
+                entity = new Karto(id, x, y);
+                yield entity;
+            }
+            case 11 -> {
+                entity = new Saw(id, x, y);
+                yield entity;
+            }
+            case 12 -> {
+                entity = new Bomb(id, x, y);
+                yield entity;
+            }
+            case 13 -> {
+                entity = new Fish(id, x, y);
+                yield entity;
+            }
+            default -> throw new RuntimeException("Tile not exist");
+        };
+    }
 	
 	public BufferedImage[] getSprite(String name) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.GameScale);
 		spriteSheet.replaceColor(Engine.PRIMARY, Engine.Color_Primary.getRGB());
 		spriteSheet.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
 		spriteSheet.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
-		int lenght = spriteSheet.getWidth()/16;
-		BufferedImage[] sprites = new BufferedImage[lenght];
-		for(int i = 0; i < lenght; i++) {
+		int length = spriteSheet.getWidth()/16;
+		BufferedImage[] sprites = new BufferedImage[length];
+		for(int i = 0; i < length; i++) {
 			sprites[i] = spriteSheet.getSprite(i*16, 0, 16, 16);
 		}
 		return sprites;
