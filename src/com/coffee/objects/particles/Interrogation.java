@@ -20,6 +20,11 @@ public class Interrogation extends Particle {
 	}
 
 	@Override
+	public void spawn(int x, int y) {
+
+	}
+
+	@Override
 	public void tick() {
 		setY(getY() - 1*Engine.GameScale);
 		dead();

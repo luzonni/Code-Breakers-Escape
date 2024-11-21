@@ -14,7 +14,7 @@ import com.coffee.main.activity.Game;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Objects;
 import com.coffee.objects.Variables;
-import com.coffee.objects.particles.Kabum;
+import com.coffee.objects.particles.Kaboom;
 import com.coffee.objects.tiles.Tile;
 
 public abstract class Entity extends Objects {
@@ -209,7 +209,7 @@ public abstract class Entity extends Objects {
 	public void die() {
 		if(!this.getVar(Variables.Armored)) {
 			for(int i = 0; i < 40; i++)
-				Game.getLevel().addParticle(new Kabum(getMiddle().x, getMiddle().y));
+				Game.getLevel().addParticle(new Kaboom(getMiddle().x, getMiddle().y));
 			Game.getLevel().getEntities().remove(this);
 			//TODO Sound.play("die");
 		}else {

@@ -14,8 +14,8 @@ public class Miniboll extends Entity {
 	private double radians;
 	private int count;
 	
-	public Miniboll(int id, int x, int y, double radians) {
-		super(id, x, y);
+	public Miniboll(int x, int y, double radians) {
+		super(-1, x, y);
 		this.radians = radians;
 		this.setSize(2*Engine.GameScale, 2*Engine.GameScale);
 	}

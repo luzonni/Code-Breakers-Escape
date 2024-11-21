@@ -18,9 +18,11 @@ public abstract class Particle extends Objects {
 		super(-1);
 		int size = (3 + Engine.RAND.nextInt(3)) * Engine.GameScale;
 		this.setSize(size, size);
-		this.setX(x - size/2);
-		this.setY(y - size/2);
+		this.setX(x - (double) size /2);
+		this.setY(y - (double) size /2);
 	}
+
+	public abstract void spawn(int x, int y);
 	
 	@Override
 	public String giveCommand(String[] keys) {
@@ -45,7 +47,7 @@ public abstract class Particle extends Objects {
 	}
 	
 	public void dead() {
-		f -= 0.02;
+		f -= 0.02F;
 		if(f < 0) {
 			f = 0;
 			Game.getLevel().getParticles().remove(this);

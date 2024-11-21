@@ -9,7 +9,7 @@ import com.coffee.main.Geometry;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Variables;
 import com.coffee.objects.particles.Dust;
-import com.coffee.objects.particles.Kabum;
+import com.coffee.objects.particles.Kaboom;
 import com.coffee.objects.tiles.Tile;
 
 public class Bomb extends Entity {
@@ -68,7 +68,7 @@ public class Bomb extends Entity {
 		while(amount < 500) {
 			Point point = new Point((int)(getMiddle().x - radius) + Engine.RAND.nextInt((int)radius*2), (int)(getMiddle().y - radius) + Engine.RAND.nextInt((int)radius*2));
 			if(Geometry.Theta(getMiddle(), point) <= radius) {
-				Game.getLevel().addParticle(new Kabum(point.x, point.y));
+				Game.getLevel().addParticle(new Kaboom(point.x, point.y));
 				amount++;
 			}
 		}

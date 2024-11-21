@@ -132,9 +132,15 @@ public class DrawableBox implements Runnable {
 	@Override
 	public void run() {
 		while(running) {
-			if(this.drawnable)
-				draw();
-		}
+			try {
+				if(this.drawnable)
+					draw();
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
 	}
 	
 }

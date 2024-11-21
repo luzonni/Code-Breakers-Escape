@@ -37,14 +37,16 @@ public class Engine implements Runnable {
 	public static final double T = 1_000_000_000.0;
 	public static int FRAMES;
 	public static int HERTZ;
-	
+
+	//Game configs
 	public static boolean FullScreen = false;
 	public static boolean AlwaysOnTop = false;
 	public static int GameScale = 3;
 	public static int Volume = 40;
 	public static boolean ANTIALIASING = false;
-	public static boolean OpenGL = true;
-	
+	public static boolean OpenGL = false;
+	public static int PARTICLES = 4;
+
 	public static final int[][] resolutions = {{800, 600}, {1280, 720}, {1366, 768}, {1600, 900}, {1920, 1080}, {2560, 1440}, {3840, 2160}};
 	public static int INDEX_RES = 1;
 
@@ -298,7 +300,7 @@ public class Engine implements Runnable {
 					Hz = 0;
 					timer+=1000;
 				}
-				
+				Thread.sleep(1); //Otimização de CPU ( limita a renderização ilimitada )
 			}catch(Exception e) {
 				System.out.println("ERROR!");
 				e.printStackTrace();

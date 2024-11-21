@@ -23,6 +23,11 @@ public class Trail extends Particle {
 	}
 
 	@Override
+	public void spawn(int x, int y) {
+
+	}
+
+	@Override
 	public BufferedImage getSprite() {
 		return sprites[index];
 	}

@@ -210,7 +210,7 @@ public class Creator implements Activity {
 		return message;
 	}
 	
-	private char[] cs = new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+	private final char[] cs = new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 	private void getLevel() {
 		if(sizes == null)
 			return;
@@ -271,9 +271,8 @@ public class Creator implements Activity {
 			if(getSelected() instanceof Tile) {
 				MAP_TILES.setGrid(getSelected());
 			}
-			if(getSelected() instanceof Entity) {
-				Entity entity = (Entity) getSelected();
-				boolean can_place = true;
+			if(getSelected() instanceof Entity entity) {
+                boolean can_place = true;
 				if(entity instanceof Player)
 					for(Entity e : (Entity[])MAP_ENTITIES.getArray())
 						if((e instanceof Player))
@@ -311,9 +310,7 @@ public class Creator implements Activity {
 		Engine.UI.addOption("draw", ()-> {
 			picture.setDrawnable(!picture.isDrawing());
 		});
-		Engine.UI.addOption("try", () -> {
-			testeAndSaveLevel();
-		});
+		Engine.UI.addOption("try", this::testeAndSaveLevel);
 	}
 	
 	@Override

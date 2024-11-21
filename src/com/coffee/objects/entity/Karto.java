@@ -57,7 +57,7 @@ public class Karto extends Entity {
 		int length = 64;
 		for(int i = 0; i < length; i++) {
 			double angle = Math.toRadians((360d/(double)length)*i);
-			Game.getLevel().addEntity(new Miniboll(0, getMiddle().x, getMiddle().y, angle));
+			Game.getLevel().addEntity(new Miniboll(getMiddle().x, getMiddle().y, angle));
 		}
 	}
 

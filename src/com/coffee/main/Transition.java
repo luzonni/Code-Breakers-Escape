@@ -80,7 +80,7 @@ class Transition implements Runnable {
 					tick();
 					delta_HZ--;
 				}
-				
+				Thread.sleep(1);
 			}catch(Exception e) {
 				System.out.println("ERROR!");
 				e.printStackTrace();

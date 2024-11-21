@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import com.coffee.level.Level;
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Game;
-import com.coffee.objects.particles.Kabum;
+import com.coffee.objects.particles.Kaboom;
 
 public class Fake_Wall extends Tile {
 	
@@ -50,7 +50,7 @@ public class Fake_Wall extends Tile {
 					for(int y = (int)getY()/Engine.GameScale; y < (int)getY()/Engine.GameScale + getHeight()/Engine.GameScale; y++)
 						for(int x = (int)getX()/Engine.GameScale; x < (int)getX()/Engine.GameScale + getWidth()/Engine.GameScale; x++)
 							if(Engine.RAND.nextInt(100) < 15)
-								Game.getLevel().addParticle(new Kabum(x*Engine.GameScale, y*Engine.GameScale));
+								Game.getLevel().addParticle(new Kaboom(x*Engine.GameScale, y*Engine.GameScale));
 				}
 			}
 		}

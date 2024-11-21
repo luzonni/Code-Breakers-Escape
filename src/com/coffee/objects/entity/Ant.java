@@ -14,8 +14,8 @@ public class Ant extends Entity {
 	
 	private static BufferedImage[] sprite;
 	private int index_animation;
-	private Path ai;
-	private Timer timer;
+	private final Path ai;
+	private final Timer timer;
 	private int tt;
 	
 	public Ant(int id, int x, int y) {

@@ -18,6 +18,11 @@ public class Boom extends Particle {
 	}
 
 	@Override
+	public void spawn(int x, int y) {
+
+	}
+
+	@Override
 	public void tick() {
 		dead();
 		double dirX = this.getX() + Math.cos(this.radians)*speed;

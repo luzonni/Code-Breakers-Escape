@@ -5,19 +5,25 @@ import java.awt.Graphics2D;
 
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Game;
+import com.coffee.objects.entity.Miniboll;
 
-public class Kabum extends Particle {
+public class Kaboom extends Particle {
 
-	private double radians;
+	private final double radians;
 	private double rotate;
-	private double speed;
-	private Color c;
+	private final double speed;
+	private final Color c;
 	
-	public Kabum(int x, int y) {
+	public Kaboom(int x, int y) {
 		super(x, y);
 		this.radians = Engine.RAND.nextDouble()*(Math.PI*2);
 		this.speed = Engine.RAND.nextDouble();
 		c = Engine.RAND.nextBoolean() ? Engine.Color_Primary : Engine.Color_Tertiary;
+	}
+
+	@Override
+	public void spawn(int x, int y) {
+
 	}
 
 	@Override
