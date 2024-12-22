@@ -38,7 +38,7 @@ public class Engine implements Runnable {
 	public static int FRAMES;
 	public static int HERTZ;
 
-	//Game configs
+	//Game configs teste
 	public static boolean FullScreen = false;
 	public static boolean AlwaysOnTop = false;
 	public static int GameScale = 3;
