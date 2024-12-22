@@ -4,7 +4,7 @@ public enum Sounds {
 	
 	Click("click"), Poft("poft");
 	
-	private String ResourceName;
+	private final String ResourceName;
 	
 	Sounds(String resourceName) {
 		this.ResourceName = resourceName;

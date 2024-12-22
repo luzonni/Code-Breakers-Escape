@@ -10,7 +10,7 @@ public enum Commands {
 	use(2, "Use to use an item on some entity", "use \"item name\" in \"entity name\" "),
 	put(4, "Use to place an object from your inventory on the map", "put \"objct name\" X Y (position relative to you)");
 	
-	int length;
+	final int length;
 	String text_help;
 	String command_help;
 	

@@ -1,15 +1,6 @@
 package com.coffee.main;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.image.BufferStrategy;
 
 import javax.imageio.ImageIO;
@@ -57,9 +48,7 @@ public class Window extends Canvas implements Runnable {
 	            System.setProperty("sun.java2d.opengl", "True");
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 				System.out.println("OpenGL Pipeline enabled: " + oglEnabled);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			} catch (Exception ignore) { }
 	}
 	
 	public void initFrame(){
@@ -67,9 +56,14 @@ public class Window extends Canvas implements Runnable {
 		frame.setUndecorated(Engine.FullScreen);
 		frame.setResizable(false);
 		frame.setAlwaysOnTop(Engine.AlwaysOnTop);
-		if(Engine.FullScreen)
-			setPreferredSize(getScreenSize());
-		else {
+		if(Engine.FullScreen) {
+			GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+			gd.setFullScreenWindow(frame);
+			if (!gd.isFullScreenSupported()) {
+				System.out.println("Fullscreen não suportado!");
+				System.exit(0);
+			}
+		}else {
 			setPreferredSize(new Dimension(Engine.getResolution()[0], Engine.getResolution()[1]));
 			frame.setMinimumSize(new Dimension(Engine.getResolution()[0], Engine.getResolution()[1]));
 		}

@@ -2,9 +2,7 @@ package com.coffee.main.tools;
 
 import java.io.ByteArrayInputStream;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.*;
 
 import com.coffee.main.Engine;
 
@@ -28,8 +26,22 @@ public class Clips {
 		this.count = count;
 		this.gainControl = new FloatControl[this.count];
 		for(int i = 0; i < count; i++) {
+
+			AudioInputStream audioStream = AudioSystem.getAudioInputStream(new ByteArrayInputStream(buffer));
+			AudioFormat baseFormat = audioStream.getFormat();
+			AudioFormat decodedFormat = new AudioFormat(
+					AudioFormat.Encoding.PCM_SIGNED,
+					baseFormat.getSampleRate(),
+					16,
+					baseFormat.getChannels(),
+					baseFormat.getChannels() * 2,
+					baseFormat.getSampleRate(),
+					false
+			);
+			AudioInputStream decodedAudioStream = AudioSystem.getAudioInputStream(decodedFormat, audioStream);
+
 			clips[i] = AudioSystem.getClip();
-			clips[i].open(AudioSystem.getAudioInputStream(new ByteArrayInputStream(buffer)));
+			clips[i].open(decodedAudioStream);
 			gainControl[i] = (FloatControl) clips[i].getControl(FloatControl.Type.MASTER_GAIN);
 		}
 	}

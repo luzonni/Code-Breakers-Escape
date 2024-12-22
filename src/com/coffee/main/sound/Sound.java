@@ -2,12 +2,19 @@ package com.coffee.main.sound;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
+import java.io.File;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 import com.coffee.main.Engine;
 import com.coffee.main.tools.Clips;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class Sound {
 	
@@ -17,11 +24,13 @@ public class Sound {
 	private static final String[] names = {"poft", "click", "place", "clear", "kabum", "sss", "die"};
 	
 	public static void load() {
+		if(sounds != null)
+			return;
 		sounds = new HashMap<>();
 		for(String name : names) {
 			Clips clips = load(name.toLowerCase());
 			sounds.put(name.toLowerCase(), clips);
-		}	
+		}
 	}
 	
 	public static void play(Sounds sound) {
