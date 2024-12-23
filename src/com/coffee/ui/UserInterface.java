@@ -1,4 +1,4 @@
-package com.coffee.main.ui;
+package com.coffee.ui;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -11,10 +11,12 @@ import com.coffee.main.Engine;
 import com.coffee.main.activity.Menu;
 import com.coffee.main.tools.ActionBack;
 import com.coffee.main.tools.Responsive;
-import com.coffee.main.ui.win.View;
+import com.coffee.ui.win.View;
 
 public class UserInterface {
-	
+
+	private PopTag tag;
+
 	private Receiver RECEIVER;
 	private Console console;
 	
@@ -24,6 +26,7 @@ public class UserInterface {
 
 	public UserInterface() {
 		console = new Console();
+		tag = new PopTag();
 		menuButton = new MenuButton(1, 1, Responsive.createPoint(null, 2, 2) , Engine.GameScale);
 		views = new ArrayList<View>();
 	}
@@ -49,7 +52,6 @@ public class UserInterface {
 	}
 
 	public void clearOptions() {
-		this.menuButton.hide();
 		this.menuButton.clearOption();
 	}
 	
@@ -72,6 +74,10 @@ public class UserInterface {
 	public Console getConsole() {
 		return console;
 	}
+
+	public PopTag getPopTag() {
+		return this.tag;
+	}
 	
 	public synchronized void tick() {
 		console.tick();
@@ -88,6 +94,7 @@ public class UserInterface {
 		for(int i = 0; i < views.size(); i++) {
 			views.get(i).render(g);
 		}
+		tag.renderName(g);
 	}
 	
 }

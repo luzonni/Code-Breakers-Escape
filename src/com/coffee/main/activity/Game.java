@@ -12,7 +12,7 @@ import com.coffee.level.Level;
 import com.coffee.level.Next;
 import com.coffee.main.Engine;
 import com.coffee.main.tools.Responsive;
-import com.coffee.main.ui.win.Helper;
+import com.coffee.ui.win.Helper;
 import com.coffee.objects.Camera;
 import com.coffee.objects.Objects;
 import com.coffee.objects.entity.Entity;

@@ -8,7 +8,6 @@ import java.util.List;
 import com.coffee.command.Commands;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.items.Item;
-import com.coffee.items.Usable;
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Directions;
@@ -134,15 +133,15 @@ public abstract class Entity extends Objects {
 	public String giveCommand(String[] keys) {
 		Objects object = Game.getSelect();
 		String message = "Command no access";
+
 		if(take(keys, Commands.remove)) {
 			message = "Was removed";
 			Game.getLevel().getEntities().remove(object);
 			Game.clearSelect();
 			used(Commands.remove);
 		}
+
 		if(take(keys, Commands.move)) {
-			//TODO see later
-			System.out.println("Olhar esse sistema! (Sistema de mover das entidades)");
 			Entity nextEntity = null;
 			int x = (int)getX() / Tile.getSize();
 			int y = (int)getY() / Tile.getSize();
@@ -163,25 +162,9 @@ public abstract class Entity extends Objects {
 				setY((y + y_next) * Tile.getSize());
 			}
 		}
-
-		if(take(keys, Commands.use)) {
-			Item[] items = Game.getPlayer().getInventory().getList();
-			for(int i = 0; i < items.length; i++) {
-				if(items[i] instanceof Usable) {
-					if(((Usable)items[i]).set(keys[1], this)) {
-						Game.getPlayer().getInventory().remove(items[i]);
-						used(Commands.use);
-						Game.getLevel().clearSelect();
-						message = "";
-					}else
-						message = "Item not found";
-				}else {
-					message = "Item not found";
-				}
-			}
-		}
 		return message;
 	}
+
 	public Directions getDirection() {
 		return this.oe.getDirection();
 	} 
@@ -207,14 +190,10 @@ public abstract class Entity extends Objects {
 	}
 	
 	public void die() {
-		if(!this.getVar(Variables.Armored)) {
-			for(int i = 0; i < 40; i++)
-				Game.getLevel().addParticle(new Kaboom(getMiddle().x, getMiddle().y));
-			Game.getLevel().getEntities().remove(this);
-			//TODO Sound.play("die");
-		}else {
-			this.setVar(Variables.Armored, false);
-		}
+		for(int i = 0; i < 40; i++)
+			Game.getLevel().addParticle(new Kaboom(getMiddle().x, getMiddle().y));
+		Game.getLevel().getEntities().remove(this);
+		//TODO Sound.play("die");
 	}
 	
 	public boolean collidingWith(Entity o) {

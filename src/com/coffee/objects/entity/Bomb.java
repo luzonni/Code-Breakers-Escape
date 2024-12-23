@@ -27,6 +27,8 @@ public class Bomb extends Entity {
 		if(sprites == null) {
 			sprites = getSprite("bomb", Engine.Color_Primary);
 		}
+		setEffect(Variables.Selectable);
+		setEffect(Variables.Movable);
 		radius = Tile.getSize()*2.5;
 	}
 

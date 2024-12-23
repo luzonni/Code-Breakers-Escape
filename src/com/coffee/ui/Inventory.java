@@ -1,4 +1,4 @@
-package com.coffee.objects.entity;
+package com.coffee.ui;
 
 import java.awt.BasicStroke;
 import java.awt.Font;
@@ -11,6 +11,7 @@ import com.coffee.Inputs.Mouse;
 import com.coffee.graphics.FontG;
 import com.coffee.items.Item;
 import com.coffee.main.Engine;
+import com.coffee.main.activity.Game;
 
 public class Inventory {
 	
@@ -96,26 +97,8 @@ public class Inventory {
 		}
 		for(int i = 0; i < size; i++) 
 			if(inventory[i] != null)
-				if(Mouse.On_Mouse(new Rectangle(x + i*16*Engine.GameScale, y, 16*Engine.GameScale, 16*Engine.GameScale))) 
-					renderName(inventory[i], g);
-	}
-	
-	private void renderName(Item item, Graphics2D g) {
-		int x = Mouse.getX();
-		int y = Mouse.getY();
-		String name = item.getName();
-		Font f = FontG.font(12*Engine.GameScale);
-		int wF = FontG.getWidth(name, f);
-		int hF = FontG.getHeight(name, f);
-		g.setFont(f);
-		g.setColor(Engine.Color_Tertiary);
-		g.fillRect(x + 8*Engine.GameScale, y + 17*Engine.GameScale - hF, wF + 2*Engine.GameScale, hF);
-		g.setColor(Engine.Color_Secondary);
-		g.fillRect(x + 7*Engine.GameScale, y + 16*Engine.GameScale - hF, wF + 2*Engine.GameScale, hF);
-		g.setColor(Engine.Color_Tertiary);
-		g.drawString(name, x + 9*Engine.GameScale, y + 15*Engine.GameScale);
-		g.setColor(Engine.Color_Primary);
-		g.drawString(name, x + 8*Engine.GameScale, y + 14*Engine.GameScale);
+				if(Mouse.On_Mouse(new Rectangle(x + i*16*Engine.GameScale, y, 16*Engine.GameScale, 16*Engine.GameScale)))
+					Engine.UI.getPopTag().setText(inventory[i].getName());
 	}
 	
 }

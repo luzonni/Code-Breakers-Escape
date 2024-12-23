@@ -14,7 +14,7 @@ import com.coffee.main.tools.Responsive;
 public class MenuButton extends Button {
 	
 	private List<ActionButton> actionButtons;
-	private boolean showing;
+	private boolean showing = true;
 	private BufferedImage icon[];
 	private int indexAnim;
 	private int size;
@@ -73,7 +73,6 @@ public class MenuButton extends Button {
 				ActionButton acb = actionButtons.get(i);
 				if(acb.function()) {
 					acb.action();
-					hide();
 				}
 			}
 		}

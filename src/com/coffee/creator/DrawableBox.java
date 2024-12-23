@@ -95,9 +95,8 @@ public class DrawableBox implements Runnable {
 	private void draw() {
 		if(Engine.UI.overButtons()) 
 			return;
-		
-		int scrool = Mouse.Scrool();
-		this.size_drawn -= scrool;
+		int scroll = Mouse.Scrool();
+		this.size_drawn -= scroll;
 		if(size_drawn < 2)
 			this.size_drawn = 2;
 		int x_d = (Mouse.getX() - getBounds().x + Creator.getCam().getX())/Engine.GameScale;

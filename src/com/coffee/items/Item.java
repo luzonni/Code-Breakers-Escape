@@ -22,30 +22,47 @@ public abstract class Item {
 		int id = (int)values[0];
 		int x = (int)values[1];
 		int y = (int)values[2];
-		switch (id) {
-		case 0: 
-			return null;
-		case 1: 
-			item = new EntityItem(id, new Key(), x, y);
-			return item;
-		case 2: 
-			item = new EntityItem(id, new CMD(Commands.select), x, y);
-			return item;
-		case 3: 
-			item = new EntityItem(id, new CMD(Commands.move), x, y);
-			return item;
-		case 4: 
-			item = new EntityItem(id, new Bow(), x, y);
-			return item;
-		case 5: 
-			item = new EntityItem(id, new Placeable(12), x, y);
-			return item;
-		case 6: 
-			item = new EntityItem(id, new Usable(Variables.Armored), x, y);
-			return item;
-		}
-		throw new RuntimeException("Tile not exist");
-	}
+        return switch (id) {
+            case 0 -> null;
+            case 1 -> {
+                item = new EntityItem(id, new Key(), x, y);
+                yield item;
+            }
+            case 2 -> {
+                item = new EntityItem(id, new CMD(Commands.select), x, y);
+                yield item;
+            }
+            case 3 -> {
+                item = new EntityItem(id, new CMD(Commands.move), x, y);
+                yield item;
+            }
+			case 4 -> {
+				item = new EntityItem(id, new CMD(Commands.put), x, y);
+				yield item;
+			}
+			case 5 -> {
+				item = new EntityItem(id, new CMD(Commands.clear), x, y);
+				yield item;
+			}
+			case 6 -> {
+				item = new EntityItem(id, new CMD(Commands.remove), x, y);
+				yield item;
+			}
+			case 7 -> {
+				item = new EntityItem(id, new CMD(Commands.shot), x, y);
+				yield item;
+			}
+            case 8 -> {
+                item = new EntityItem(id, new Bow(), x, y);
+                yield item;
+            }
+            case 9 -> {
+                item = new EntityItem(id, new Placeable(12), x, y);
+                yield item;
+            }
+            default -> throw new RuntimeException("Tile not exist");
+        };
+    }
 	
 	public Item(String name) {
 		this.name = name.toLowerCase();

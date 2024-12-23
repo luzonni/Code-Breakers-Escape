@@ -1,4 +1,4 @@
-package com.coffee.main.ui;
+package com.coffee.ui;
 
 public class Message {
 	

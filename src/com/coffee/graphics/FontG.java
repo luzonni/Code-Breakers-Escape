@@ -7,7 +7,7 @@ import java.awt.geom.AffineTransform;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class FontG {
+public abstract class FontG {
 	
 
 	private static InputStream stream;

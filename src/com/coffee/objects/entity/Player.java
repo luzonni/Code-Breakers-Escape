@@ -9,6 +9,7 @@ import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Variables;
+import com.coffee.ui.Inventory;
 
 public class Player extends Entity {
 	

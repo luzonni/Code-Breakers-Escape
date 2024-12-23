@@ -7,19 +7,22 @@ import java.awt.Rectangle;
 
 import com.coffee.Inputs.Mouse;
 import com.coffee.Inputs.Mouse_Button;
+import com.coffee.items.CMD;
+import com.coffee.items.Item;
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Creator;
 import com.coffee.main.tools.Responsive;
 import com.coffee.objects.Objects;
+import com.coffee.objects.entity.EntityItem;
 import com.coffee.objects.tiles.Tile;
 
 public class Inventory {
 	
-	private Objects[] default_inventory; 
+	private final Objects[] default_inventory;
 	private Objects[] inventory;
 	private int page;
-	private Responsive bounds;
-	private int size;
+	private final Responsive bounds;
+	private final int size;
 	
 	public Inventory(Objects[] inventory, Responsive ref, int x, int y, int size) {
 		this.default_inventory = inventory;
@@ -30,8 +33,8 @@ public class Inventory {
 	private void setList(int page_size) {
 		this.getResponsive().setSize(Tile.getSize(), Tile.getSize()*page_size);
 		if(Mouse.On_Mouse(getResponsive().getBounds())) {
-			int scrool = Mouse.Scrool();
-			int p = page + scrool;
+			int scroll = Mouse.Scrool();
+			int p = page + scroll;
 			if(p >= 0 && p + page_size <= default_inventory.length)
 				page = p;
 		}
@@ -40,7 +43,7 @@ public class Inventory {
 		for(int i = page; i < page + page_size; i++) {
 			Objects o = default_inventory[i];
 			o.setX(getResponsive().getBounds().x);
-			o.setY(getResponsive().getBounds().y + index*Tile.getSize());
+			o.setY(getResponsive().getBounds().y + index * Tile.getSize());
 			inventory[index] = o;
 			index++;
 		}
@@ -78,8 +81,14 @@ public class Inventory {
 			Objects t = inventory[i];
 			int x = (int)t.getX();
 			int y = (int)t.getY();
+			int w = Tile.getSize() - 4*Engine.GameScale;
+			int h = Tile.getSize() - 4*Engine.GameScale;
+			if(Mouse.On_Mouse(t.getBounds()) && t instanceof EntityItem ei) {
+				Item item = ei.getItem();
+				Engine.UI.getPopTag().setText(item.getName());
+			}
 			g.setColor(new Color(Engine.Color_Secondary.getRed(), Engine.Color_Secondary.getGreen(), Engine.Color_Secondary.getBlue(), 60));
-			g.fillRect(x + 2*Engine.GameScale, y + 2*Engine.GameScale, Tile.getSize() - 4*Engine.GameScale, Tile.getSize() - 4*Engine.GameScale);
+			g.fillRect(x + 2*Engine.GameScale, y + 2*Engine.GameScale, w, h);
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, t == Creator.getSelected() ? 1f : 0.5f));
 			g.drawImage(t.getSprite(), x , y, Tile.getSize(), Tile.getSize(), null);
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));

@@ -48,7 +48,7 @@ public class Creator implements Activity {
 	private Commands_Boxe c_b;
 	private DrawableBox picture;
 	
-	private Camera camera;
+	private final Camera camera;
 	
 	private JSONObject level;
 	private String NAME;

@@ -54,6 +54,10 @@ public class EntityItem extends Entity {
 			side = !side;
 	}
 
+	public Item getItem() {
+		return this.item;
+	}
+
 	@Override
 	public void render(Graphics2D g) {
 		double radians = Math.toRadians((flying/10d)*2);

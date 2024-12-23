@@ -4,12 +4,12 @@ import com.coffee.command.Commands;
 
 public class CMD extends Item {
 
-	private Commands command;
+	private final Commands command;
 
-	public CMD(Commands comman) {
-		super(comman.getName());
-		setSprite(comman.getName()+"_command");
-		this.command = comman;
+	public CMD(Commands command) {
+		super(command.getName());
+		this.command = command;
+		setSprite("commands");
 	}
 	
 	public Commands getCMD() {

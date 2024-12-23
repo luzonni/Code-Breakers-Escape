@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Game;
+import com.coffee.objects.Variables;
 
 public class Button extends Entity {
 	
@@ -16,6 +17,7 @@ public class Button extends Entity {
 		super(id, x, y);
 		if(sprite == null)
 			sprite = getSprite("button", Engine.Color_Primary);
+		setEffect(Variables.Movable);
 	}
 
 	@Override

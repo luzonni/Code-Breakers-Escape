@@ -21,7 +21,7 @@ import com.coffee.graphics.FontG;
 import com.coffee.main.activity.Activity;
 import com.coffee.main.activity.Menu;
 import com.coffee.main.sound.Sound;
-import com.coffee.main.ui.UserInterface;
+import com.coffee.ui.UserInterface;
 import com.coffee.objects.Objects;
 
 public class Engine implements Runnable {
