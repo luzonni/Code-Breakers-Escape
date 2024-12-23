@@ -1,4 +1,4 @@
-package com.coffee.creator;
+package com.coffee.ui.creator;
 
 import java.io.File;
 import java.io.FileWriter;

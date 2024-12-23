@@ -27,8 +27,7 @@ public class EntityItem extends Entity {
 	
 	@Override
 	public String giveCommand(String[] values) {
-		String message = super.giveCommand(values);
-		return message;
+        return super.giveCommand(values);
 	}
 
 	@Override
@@ -40,7 +39,7 @@ public class EntityItem extends Entity {
 	public void tick() {
 		item.tick();
 		Player p = Game.getPlayer();
-		if(p != null && p.collidingWith(this)) {
+		if(p.collidingWith(this)) {
 			if(p.getInventory().put(item)) {
 				Game.getLevel().getEntities().remove(this);
 			}
@@ -63,9 +62,9 @@ public class EntityItem extends Entity {
 		double radians = Math.toRadians((flying/10d)*2);
 		if(side)
 			radians *= -1;
-		g.rotate(radians, getX() + getWidth()/2  - Game.getCam().getX(), getY() + getHeight()/2  - Game.getCam().getY());
+		g.rotate(radians, getX() + (double) getWidth() /2  - Game.getCam().getX(), getY() + getHeight()/2  - Game.getCam().getY());
 		g.drawImage(item.getSprite(), (int)getX() - Game.getCam().getX(), (int)getY() + (int)(flying/10d) - Game.getCam().getY(), null);
-		g.rotate(-radians, getX() + getWidth()/2  - Game.getCam().getX(), getY() + getHeight()/2  - Game.getCam().getY());
+		g.rotate(-radians, getX() + (double) getWidth() /2  - Game.getCam().getX(), getY() + getHeight()/2  - Game.getCam().getY());
 	}
 	
 	@Override

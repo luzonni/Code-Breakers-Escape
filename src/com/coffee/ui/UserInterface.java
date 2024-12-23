@@ -15,12 +15,12 @@ import com.coffee.ui.win.View;
 
 public class UserInterface {
 
-	private PopTag tag;
+	private final PopTag tag;
 
 	private Receiver RECEIVER;
-	private Console console;
+	private final Console console;
 	
-	private MenuButton menuButton;
+	private final MenuButton menuButton;
 	
 	public List<View> views;
 

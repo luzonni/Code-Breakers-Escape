@@ -86,13 +86,14 @@ public class Engine implements Runnable {
 			};
 	
 	public static volatile int INDEX_PALLET = 1;
-	public static Color Color_Primary = new Color(233, 212, 165);
-	public static Color Color_Secondary = new Color(127, 121, 99);
-	public static Color Color_Tertiary = new Color(26, 23, 18);
+	public static Color Color_Primary = PALLET[1][0];
+	public static Color Color_Secondary = PALLET[1][1];
+	public static Color Color_Tertiary = PALLET[1][2];
 	
 	
 	public static void main(String[] args) {
 		FontG.addFont("septem");
+		Sound.load();
 		RAND = new Random();
 		ME = new Engine();
 		ME.start();
@@ -105,8 +106,7 @@ public class Engine implements Runnable {
 	public synchronized void start() {
 		SET_PALLET();
 		WINDOW = new Window(GameTag + " / The Universe");
-		Sound.load();
-		
+
 		UI = new UserInterface();
 		ACTIVITY = new Menu();
 		ACTIVITY.enter();
@@ -176,7 +176,7 @@ public class Engine implements Runnable {
 		}catch (Exception e) {}
 		Engine.Volume = ((Number)object.get("VOLUM")).intValue();
 		Engine.INDEX_PALLET = ((Number)object.get("PALLET")).intValue();
-		Engine.FullScreen = ((Boolean)object.get("FULLSCREEN")).booleanValue();
+		Engine.FullScreen = (Boolean) object.get("FULLSCREEN");
 		Engine.INDEX_RES = ((Number)object.get("RESOLUTION")).intValue();
 		Engine.GameScale = ((Number)object.get("SCALE")).intValue();
 	}

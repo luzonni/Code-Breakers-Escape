@@ -2,7 +2,7 @@ package com.coffee.main.sound;
 
 public enum Sounds {
 	
-	Click("click"), Poft("poft");
+	Click("click"), Poft("poft"), Clear("clear"), Place("place"), Die("die");
 	
 	private final String ResourceName;
 	

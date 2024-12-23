@@ -1,4 +1,4 @@
-package com.coffee.io.reader;
+package com.coffee.main.io.reader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 
-import com.coffee.io.Filer;
+import com.coffee.main.io.Filer;
 
 public class Filer_Reader extends Filer {
 

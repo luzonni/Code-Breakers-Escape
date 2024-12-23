@@ -1,4 +1,4 @@
-package com.coffee.creator;
+package com.coffee.ui.creator;
 
 import java.awt.Color;
 import java.awt.Font;

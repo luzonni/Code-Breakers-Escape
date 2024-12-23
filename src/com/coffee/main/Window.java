@@ -2,6 +2,7 @@ package com.coffee.main;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.io.Serial;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -14,11 +15,13 @@ import com.coffee.graphics.SpriteSheet;
 
 public class Window extends Canvas implements Runnable {
 	
+	@Serial
 	private static final long serialVersionUID = 36752349087L;
-	
+
+	private final String name;
 	private Thread thread;
 	private JFrame frame;
-	private Toolkit toolkit = Toolkit.getDefaultToolkit();
+	private final Toolkit toolkit = Toolkit.getDefaultToolkit();
 	private int C_W, C_H;
 	boolean oglEnabled = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment()
             .getDefaultScreenDevice()
@@ -28,12 +31,9 @@ public class Window extends Canvas implements Runnable {
 
 	
 	public Window(String name) {
+		this.name = name;
 		createOpenGl(Engine.OpenGL);
-		//Set's
-		frame = new JFrame(name);
 		initFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//Canvas
 		Mouse m = new Mouse();
 		Keyboard k = new Keyboard();
 		addMouseListener(m);
@@ -52,10 +52,12 @@ public class Window extends Canvas implements Runnable {
 	}
 	
 	public void initFrame(){
+		this.frame = new JFrame(this.name);
 		frame.add(this);
 		frame.setUndecorated(Engine.FullScreen);
 		frame.setResizable(false);
 		frame.setAlwaysOnTop(Engine.AlwaysOnTop);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		if(Engine.FullScreen) {
 			GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 			gd.setFullScreenWindow(frame);
@@ -69,15 +71,18 @@ public class Window extends Canvas implements Runnable {
 		}
 		frame.pack();
 		try {
-			SpriteSheet cursor = new SpriteSheet(Engine.ResPath+"/ui/cursor.png");
-			cursor.replaceColor(0xff000000, Engine.Color_Tertiary.getRGB());
-			cursor.replaceColor(0xffffffff, Engine.Color_Primary.getRGB());
-			cursor.replaceColor(0xffd8e3e6, Engine.Color_Secondary.getRGB());
-			Image icone = ImageIO.read(getClass().getResource(Engine.ResPath+"/ui/icon.png"));
+			SpriteSheet icon = new SpriteSheet(Engine.ResPath+"/ui/icon.png", 3);
+			icon.replaceColor(Engine.PRIMARY, Engine.Color_Primary.getRGB());
+			icon.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
+			icon.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
+			SpriteSheet cursor = new SpriteSheet(Engine.ResPath+"/ui/cursor.png", 2);
+			cursor.replaceColor(Engine.PRIMARY, Engine.Color_Primary.getRGB());
+			cursor.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
+			cursor.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
 			Cursor c = toolkit.createCustomCursor(cursor.getImage(), new Point(0,0), "cursor");
 			frame.setCursor(c);
-			frame.setIconImage(icone);
-		}catch(Exception e) { e.printStackTrace(); }
+			frame.setIconImage(icon.getImage());
+		}catch(Exception ignore) { }
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		createBufferStrategy(3);

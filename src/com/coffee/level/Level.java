@@ -22,7 +22,7 @@ import com.coffee.Inputs.Mouse;
 import com.coffee.Inputs.Mouse_Button;
 import com.coffee.command.Commands;
 import com.coffee.command.Receiver;
-import com.coffee.creator.DrawableBox;
+import com.coffee.ui.creator.DrawableBox;
 import com.coffee.exceptions.Dead;
 import com.coffee.graphics.FontG;
 import com.coffee.items.Bow;

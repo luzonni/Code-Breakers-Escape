@@ -10,6 +10,8 @@ import com.coffee.graphics.SpriteSheet;
 import com.coffee.items.Item;
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Game;
+import com.coffee.main.sound.Sound;
+import com.coffee.main.sound.Sounds;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Objects;
 import com.coffee.objects.Variables;
@@ -99,9 +101,9 @@ public abstract class Entity extends Objects {
 	
 	public BufferedImage[] getSprite(String name, Color color) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.GameScale);
-		spriteSheet.replaceColor(0xffffffff, color.getRGB());
-		spriteSheet.replaceColor(0xffcccccc, Engine.Color_Secondary.getRGB());
-		spriteSheet.replaceColor(0xff000000, Engine.Color_Tertiary.getRGB());
+		spriteSheet.replaceColor(Engine.PRIMARY, color.getRGB());
+		spriteSheet.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
+		spriteSheet.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
 		int lenght = (spriteSheet.getWidth())/16;
 		BufferedImage[] sprites = new BufferedImage[lenght];
 		for(int i = 0; i < lenght; i++) {
@@ -112,9 +114,9 @@ public abstract class Entity extends Objects {
 	
 	public BufferedImage[] getSprite(String name, Color color, int verticalIndex) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.GameScale);
-		spriteSheet.replaceColor(0xffffffff, color.getRGB());
-		spriteSheet.replaceColor(0xffcccccc, Engine.Color_Secondary.getRGB());
-		spriteSheet.replaceColor(0xff000000, Engine.Color_Tertiary.getRGB());
+		spriteSheet.replaceColor(Engine.PRIMARY, color.getRGB());
+		spriteSheet.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
+		spriteSheet.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
 		int lenght = (spriteSheet.getWidth())/16;
 		BufferedImage[] sprites = new BufferedImage[lenght];
 		for(int i = 0; i < lenght; i++)
@@ -193,7 +195,7 @@ public abstract class Entity extends Objects {
 		for(int i = 0; i < 40; i++)
 			Game.getLevel().addParticle(new Kaboom(getMiddle().x, getMiddle().y));
 		Game.getLevel().getEntities().remove(this);
-		//TODO Sound.play("die");
+		Sound.play(Sounds.Die);
 	}
 	
 	public boolean collidingWith(Entity o) {

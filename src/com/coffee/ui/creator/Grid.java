@@ -1,4 +1,4 @@
-package com.coffee.creator;
+package com.coffee.ui.creator;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -9,6 +9,7 @@ import com.coffee.Inputs.Mouse_Button;
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Creator;
 import com.coffee.main.sound.Sound;
+import com.coffee.main.sound.Sounds;
 import com.coffee.main.tools.Responsive;
 import com.coffee.objects.Objects;
 import com.coffee.objects.tiles.Tile;
@@ -57,7 +58,7 @@ public class Grid {
 				if(Mouse.pressingOnMap(Mouse_Button.LEFT, new Rectangle(px, py, Tile.getSize(), Tile.getSize()), Creator.getCam()))
 					if(Grid[x+y*Width] == null) {
 						Grid[x+y*Width] = object;
-						//TODO Sound.play("place");
+						Sound.play(Sounds.Place);
 					}
 			}
 		}
@@ -76,7 +77,7 @@ public class Grid {
 		return this.Grid;
 	}
 	
-	public boolean clearGrid() {
+	public void clearGrid() {
 		Responsive center = Creator.getCenter();
 		int X = center.getPosition().x;
 		int Y = center.getPosition().y;
@@ -88,16 +89,15 @@ public class Grid {
 			for(int x = 0; x < Width; x++) {
 				int px = xx + x * Tile.getSize() + Engine.GameScale;
 				int py = yy + y * Tile.getSize() + Engine.GameScale;
-					if(Grid[x+y*Width] != null) {
-						if(Mouse.clickOnMap(Mouse_Button.RIGHT, new Rectangle(px, py, Tile.getSize(), Tile.getSize()), Creator.getCam())) {
-							Grid[x+y*Width] = null;
-							//TODO Sound.play("clear");
-							return true;
-						}
+				if(Grid[x+y*Width] != null) {
+					if(Mouse.clickOnMap(Mouse_Button.RIGHT, new Rectangle(px, py, Tile.getSize(), Tile.getSize()), Creator.getCam())) {
+						Grid[x+y*Width] = null;
+						Sound.play(Sounds.Clear);
+						return;
 					}
+				}
 			}
 		}
-		return false;
 	}
 	
 	public void render(Graphics2D g, boolean renderGrid) {

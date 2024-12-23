@@ -13,12 +13,12 @@ import org.json.simple.JSONObject;
 import com.coffee.Inputs.Button.Button;
 import com.coffee.Inputs.Button.TextButton;
 import com.coffee.command.Commands;
-import com.coffee.creator.Commands_Boxe;
-import com.coffee.creator.DrawableBox;
-import com.coffee.creator.Grid;
-import com.coffee.creator.Inventory;
-import com.coffee.creator.Saver;
-import com.coffee.creator.Selected;
+import com.coffee.ui.creator.Commands_Boxe;
+import com.coffee.ui.creator.DrawableBox;
+import com.coffee.ui.creator.Grid;
+import com.coffee.ui.creator.Shelf;
+import com.coffee.ui.creator.Saver;
+import com.coffee.ui.creator.Selected;
 import com.coffee.graphics.FontG;
 import com.coffee.items.Item;
 import com.coffee.level.Level;
@@ -42,9 +42,9 @@ public class Creator implements Activity {
 	private TextButton[] sizes;
 	private Button create_button;
 	private static Selected Selected;
-	private Inventory inventoryTiles;
-	private Inventory inventoryEntities;
-	private Inventory inventoryItems;
+	private Shelf inventoryTiles;
+	private Shelf inventoryEntities;
+	private Shelf inventoryItems;
 	private Commands_Boxe c_b;
 	private DrawableBox picture;
 	
@@ -75,8 +75,8 @@ public class Creator implements Activity {
 			}
 			index++;
 		}
-		Responsive res = Responsive.createPoint(Engine.UI.getMenuPosition(), -1, 5*Engine.GameScale);
-		inventoryTiles = new Inventory(tiles.toArray(new Tile[0]), res, 1, 1, size);
+		Responsive res = Responsive.createPoint(Engine.UI.getMenuPosition(), -1, 30*Engine.GameScale);
+		inventoryTiles = new Shelf("Tiles", tiles.toArray(new Tile[0]), res, 1, 1, size);
 	}
 	
 	private void buildInventoryEntities(int size) {
@@ -91,7 +91,7 @@ public class Creator implements Activity {
 			}
 			index++;
 		}
-		inventoryEntities = new Inventory(entities.toArray(new Entity[0]), inventoryTiles.getResponsive(), 4*Engine.GameScale, 0, size);
+		inventoryEntities = new Shelf("Entity", entities.toArray(new Entity[0]), inventoryTiles.getResponsive(), 8*Engine.GameScale, 0, size);
 	}
 	
 	private void buildInventoryItems(int size) {
@@ -106,7 +106,7 @@ public class Creator implements Activity {
 			}
 			index++;
 		}
-		inventoryItems = new Inventory(entities.toArray(new Entity[0]), inventoryEntities.getResponsive(), 4*Engine.GameScale, 0, size);
+		inventoryItems = new Shelf("Items", entities.toArray(new Entity[0]), inventoryEntities.getResponsive(), 8*Engine.GameScale, 0, size);
 	}
 	
 	public static Camera getCam() {
@@ -124,9 +124,9 @@ public class Creator implements Activity {
 		Creator.getCam().setPosition(0, 0);
 		Selected = new Selected();
 		center = Responsive.createPoint(null, 50, 50);
-		buildInventoryTiles(10);
-		buildInventoryEntities(10);
-		buildInventoryItems(5);
+		buildInventoryTiles(6);
+		buildInventoryEntities(6);
+		buildInventoryItems(6);
 		if(level != null) {
 			loader();
 			addButtonsMenu();

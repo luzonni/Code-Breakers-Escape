@@ -1,4 +1,4 @@
-package com.coffee.io.reader;
+package com.coffee.main.io.reader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.coffee.io.Filer;
+import com.coffee.main.io.Filer;
 
 public class JSON_Reader extends Filer {
 
