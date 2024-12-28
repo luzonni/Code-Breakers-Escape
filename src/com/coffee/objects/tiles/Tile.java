@@ -62,12 +62,9 @@ public abstract class Tile extends Objects {
 			tile = new Thorn(id, x, y);
 			return tile;
 		case 10:
-			tile = new Trampoline(id, x, y);
-			return tile;
-		case 11: 
 			tile = new Repellent(id, x, y);
 			return tile;
-		case 12: 
+		case 11:
 			tile = new Fake_Wall(id, x, y);
 			return tile;
 		}

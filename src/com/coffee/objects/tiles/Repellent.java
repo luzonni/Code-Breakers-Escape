@@ -30,7 +30,7 @@ public class Repellent extends Tile {
 		List<Entity> entities = Game.getLevel().getEntities();
 		for(int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
-			if(this.collidingWith(entity) && entity.getVar(Variables.Alive)) {
+			if(this.collidingWith(entity)) {
 				entity.getOE().setDirection(entity.getOE().getReverse());
 			}
 		}

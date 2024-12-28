@@ -60,6 +60,10 @@ public abstract class Item {
                 item = new EntityItem(id, new Placeable(12), x, y);
                 yield item;
             }
+			case 10 -> {
+				item = new EntityItem(id, new Placeable(14), x, y);
+				yield item;
+			}
             default -> throw new RuntimeException("Tile not exist");
         };
     }
@@ -95,8 +99,9 @@ public abstract class Item {
 	
 	public static BufferedImage[] getSprite(String name) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/items/"+name+".png", Engine.GameScale);
-		spriteSheet.replaceColor(0xffffffff, Engine.Color_Primary.getRGB());
-		spriteSheet.replaceColor(0xff000000, Engine.Color_Tertiary.getRGB());
+		spriteSheet.replaceColor(Engine.PRIMARY, Engine.Color_Primary.getRGB());
+		spriteSheet.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
+		spriteSheet.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
 		int lenght = (spriteSheet.getWidth())/16;
 		BufferedImage[] sprites = new BufferedImage[lenght];
 		for(int i = 0; i < lenght; i++) {

@@ -1,4 +1,4 @@
-package com.coffee.objects.tiles;
+package com.coffee.objects.entity;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -8,11 +8,10 @@ import com.coffee.graphics.Flip;
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Directions;
-import com.coffee.objects.Variables;
-import com.coffee.objects.entity.Entity;
 import com.coffee.objects.particles.Dust;
+import com.coffee.objects.tiles.Tile;
 
-public class Trampoline extends Tile {
+public class Trampoline extends Entity {
 	
 	private static BufferedImage[] sprites;
 	private boolean active;
@@ -21,7 +20,7 @@ public class Trampoline extends Tile {
 	public Trampoline(int id, int x, int y) {
 		super(id, x, y);
 		if(sprites == null)
-			sprites = getSprite("trampoline", Engine.Color_Primary);
+			sprites = getSprite("trampoline");
 	}
 	
 	private void setType() {
@@ -46,7 +45,10 @@ public class Trampoline extends Tile {
 		List<Entity> entities = Game.getLevel().getEntities();
 		for(int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
-			if(this.centralizedWith(entity) && entity.getVar(Variables.Alive)) {
+			if(entity == this ) {
+				continue;
+			}
+			if(this.getOE().centralizedWith(entity)) {
 				double radians = Math.PI;
 				Directions direction = entity.getOE().getDirection();
 				if(cartesian == 0) {
@@ -95,8 +97,7 @@ public class Trampoline extends Tile {
 	
 	@Override
 	public void render(Graphics2D g) {
-		renderTile(Floor.sprite[Floor.index], g);
-		super.render(g);
+		renderEntity(getSprite(), g);
 	}
 	
 	@Override

@@ -5,19 +5,20 @@ import java.awt.image.BufferedImage;
 
 import com.coffee.graphics.Flip;
 import com.coffee.main.activity.Game;
+import com.coffee.objects.Directions;
 import com.coffee.objects.tiles.Tile;
 
 public class Fish extends Entity {
 	
 	private static BufferedImage[] sprite;
 	private int indexAnim, counter;
-	private int side = -1;
 	private double speed;
 	
 	public Fish(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null)
 			sprite = getSprite("fish");
+		setDirection(Directions.Left);
 	}
 
 	@Override
@@ -42,12 +43,17 @@ public class Fish extends Entity {
 	}
 	
 	private void swim() {
+		int side = 0;
+		if(getOE().getDirection() == Directions.Right)
+			side = 1;
+		if(getOE().getDirection() == Directions.Left)
+			side = -1;
 		int x = (getMiddle().x + side*getWidth()/2) / Tile.getSize();
 		int y = (getMiddle().y) / Tile.getSize();
 		Tile t = Game.getLevel().getTile(x, y);
 		if(t != null && t.isSolid()) {
 			speed = 0;
-			side *=-1;
+			getOE().setDirection(getOE().getReverse());
 			indexAnim = 0;
 		}
 		double currentSpeed = side * speed;
@@ -59,7 +65,7 @@ public class Fish extends Entity {
 	@Override
 	public void render(Graphics2D g) {
 		BufferedImage currentSprite = sprite[indexAnim];
-		if(side > 0)
+		if(getOE().getDirection() == Directions.Right)
 			currentSprite = Flip.Vertical(currentSprite);
 		renderEntity(currentSprite, g);
 	}

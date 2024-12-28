@@ -136,6 +136,10 @@ public class Orienteering_Physics {
 		}
 		return colliding;
 	}
+
+	public boolean centralizedWith(Entity e) {
+		return entity.getMiddle().x == e.getMiddle().x && entity.getMiddle().y == e.getMiddle().y;
+	}
 	
 	private boolean outOfMapBounds() {
 		Rectangle rec = Game.getLevel().getBounds();

@@ -29,6 +29,7 @@ public class Bomb extends Entity {
 		}
 		setEffect(Variables.Selectable);
 		setEffect(Variables.Movable);
+		setEffect(Variables.Breakable);
 		radius = Tile.getSize()*2.5;
 	}
 

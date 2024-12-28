@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Game;
+import com.coffee.main.sound.Sound;
+import com.coffee.main.sound.Sounds;
 import com.coffee.objects.Variables;
 
 public class Button extends Entity {
@@ -18,6 +20,7 @@ public class Button extends Entity {
 		if(sprite == null)
 			sprite = getSprite("button", Engine.Color_Primary);
 		setEffect(Variables.Movable);
+		setDepth(0);
 	}
 
 	@Override
@@ -31,7 +34,7 @@ public class Button extends Entity {
 	
 	private void click(boolean bool) {
 		if(this.pressed != bool) {
-			//TODO Sound.play("poft");
+			//TODO Sound.play(Sounds.Poft); ajeitar som "poft"
 			this.pressed = bool;
 		}
 	}

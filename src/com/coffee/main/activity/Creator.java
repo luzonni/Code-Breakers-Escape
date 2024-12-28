@@ -50,7 +50,7 @@ public class Creator implements Activity {
 	
 	private final Camera camera;
 	
-	private JSONObject level;
+	private final JSONObject level;
 	private String NAME;
 	private String BUILDER;
 	private List<Commands> COMMANDS;

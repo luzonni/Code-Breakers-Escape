@@ -14,6 +14,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Random;
 
+import com.coffee.level.Level;
+import com.coffee.main.activity.Creator;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -97,19 +99,22 @@ public class Engine implements Runnable {
 		Sound.load();
 		RAND = new Random();
 		ME = new Engine();
-		ME.start();
+		ME.start(args[0]);
 	}
 	
 	public Engine() {
 		getConfig();
 	}
 
-	public synchronized void start() {
+	public synchronized void start(String levelName) {
 		SET_PALLET();
 		WINDOW = new Window(GameTag + " / The Universe");
 
 		UI = new UserInterface();
-		ACTIVITY = new Menu();
+		if(levelName != null && !levelName.isBlank())
+			ACTIVITY = new Creator(Level.getLevel(new File(levelName + ".json")));
+		else
+			ACTIVITY = new Menu();
 		ACTIVITY.enter();
 		ACTIVITY_RUNNING = true;
 		UI.setReceiver(ACTIVITY);
@@ -126,7 +131,7 @@ public class Engine implements Runnable {
             WINDOW.getFrame().dispose();
             Objects.disposeAll();
             ME = new Engine();
-            ME.start();
+            ME.start(null);
         }).start();
 		if(!WINDOW.isEnabled()) {
 			WINDOW = null;

@@ -21,6 +21,7 @@ public class Barrel extends Entity {
             sprite = getSprite("barrel");
         }
         getValues().addInt("speed", Engine.GameScale * 2);
+        setDepth(1);
     }
 
     @Override
@@ -39,15 +40,21 @@ public class Barrel extends Entity {
     @Override
     public void tick() {
         //TODO verificando logica!
+        boolean overEntity = false;
         setVar(Variables.Breakable, getOE().getDirection() == Directions.Idle);
         List<Entity> entities = Game.getLevel().getEntities();
         for(int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
-            if(e == this || e.getOE().getDirection() == Directions.Idle) { //Entidades sem direção ou a mesma entidade são ignoradas!
+            if(e == this) // Mesma entidade
+                continue;
+            if(e.collidingWith(this))  // Caso o barril esteja sobre alguma entidade
+                overEntity = true;
+            if(e.getOE().getDirection() == Directions.Idle) { //Entidades sem direção são ignoradas!
                 continue;
             }
             if(rolling() && e.collidingWith(this)) { //caso alguma entidade bata enquanto esta rolando
                 getOE().setDirection(getOE().getReverse());
+                return;
             }
             Tile tile = getOE().nextTile(e.getOE().getDirection());
             if(tile != null && tile.isSolid()) // caso o barrel não tenha para onde rolar!
@@ -58,7 +65,7 @@ public class Barrel extends Entity {
             }
         }
         indexAnim = rolling() ? ((getOE().getDirection() == Directions.Up || getOE().getDirection() == Directions.Down) ? 1 : 2) : 0;
-        if(!getVar(Variables.Breakable) && !getOE().sliding(getSpeed())) {
+        if(!getOE().sliding(getSpeed()) && !overEntity) { // TODO rever essa logica!
             stop();
         }
     }

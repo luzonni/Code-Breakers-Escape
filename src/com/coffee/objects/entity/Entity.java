@@ -85,6 +85,10 @@ public abstract class Entity extends Objects {
 				entity = new Barrel(id, x, y);
 				yield entity;
 			}
+			case 15 -> {
+				entity = new Trampoline(id, x, y);
+				yield entity;
+			}
             default -> throw new RuntimeException("Tile not exist");
         };
     }
