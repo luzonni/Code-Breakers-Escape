@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.coffee.command.Commands;
 import com.coffee.graphics.SpriteSheet;
-import com.coffee.items.Item;
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Game;
 import com.coffee.main.sound.Sound;
@@ -21,7 +20,7 @@ import com.coffee.objects.tiles.Tile;
 public abstract class Entity extends Objects {
 	
 	private boolean floating;
-	private Orienteering_Physics oe;
+	private final Orienteering_Physics oe;
 	
 	public static Entity Factory(Object... values) {
 		Entity entity;
@@ -82,6 +81,10 @@ public abstract class Entity extends Objects {
                 entity = new Fish(id, x, y);
                 yield entity;
             }
+			case 14 -> {
+				entity = new Barrel(id, x, y);
+				yield entity;
+			}
             default -> throw new RuntimeException("Tile not exist");
         };
     }
@@ -166,10 +169,6 @@ public abstract class Entity extends Objects {
 		}
 		return message;
 	}
-
-	public Directions getDirection() {
-		return this.oe.getDirection();
-	} 
 	
 	public Orienteering_Physics getOE() {
 		return this.oe;
@@ -196,6 +195,14 @@ public abstract class Entity extends Objects {
 			Game.getLevel().addParticle(new Kaboom(getMiddle().x, getMiddle().y));
 		Game.getLevel().getEntities().remove(this);
 		Sound.play(Sounds.Die);
+		if(this instanceof Player ) {
+			new Thread(() -> {
+                try {
+                    Thread.sleep(1000);
+                	Game.restart();
+                } catch (Exception ignore) { }
+            }).start();
+		}
 	}
 	
 	public boolean collidingWith(Entity o) {
@@ -205,45 +212,17 @@ public abstract class Entity extends Objects {
 		int xO = ((int)o.getX() + o.getWidth()/2) / Tile.getSize();
 		int yO = ((int)o.getY() + o.getHeight()/2) / Tile.getSize();
 		Tile oTile = Game.getLevel().getTile(xO, yO);
-		if(getBounds().intersects(o.getBounds()) && meTile == oTile && !o.isFloating() && !this.isFloating()) {
-			return true;
-		}
-		return false;
-	}
+        return getBounds().intersects(o.getBounds()) && meTile == oTile && !o.isFloating() && !this.isFloating();
+    }
 	
 	public void renderEntity(BufferedImage sprite, Graphics2D g) {
 		int x = (int)getX();
 		int y = (int)getY();
 		if(floating && Engine.RAND.nextInt(10) < 5) {
-			x += (Engine.RAND.nextInt(3*Engine.GameScale) - 1*Engine.GameScale);
-			y += (Engine.RAND.nextInt(3*Engine.GameScale) - 1*Engine.GameScale);
+			x += (Engine.RAND.nextInt(3*Engine.GameScale) - Engine.GameScale);
+			y += (Engine.RAND.nextInt(3*Engine.GameScale) - Engine.GameScale);
 		}
 		g.drawImage(sprite, x - Game.getCam().getX(), y - Game.getCam().getY(), getWidth(), getHeight(), null);
-		//TODO fix effect shower
-//		renderEffect(x, y, g);
 	}
-	
-//	private void renderEffect(int x, int y, Graphics2D g) {
-//		if(getVar(Variables.Armored)) {
-//			BufferedImage image = Usable.getIcon();
-//			switch (getDirection()) {
-//			case Up: 
-//				image = Flip.Horizontal(image);
-//				break;
-//			case Right:
-//				image = Flip.Rotate(image, -90);
-//				break;
-//			case Left:
-//				image = Flip.Rotate(image, 90);
-//				break;
-//			default:
-//				break;
-//			}
-//			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
-//			g.drawImage(image, x - Game.getCam().getX(), y - Game.getCam().getY(), getWidth(), getHeight(), null);
-//			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-//		}
-//	}
-	
 	
 }

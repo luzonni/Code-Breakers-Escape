@@ -15,9 +15,8 @@ import com.coffee.objects.Variables;
 public class Skull extends Entity {
 	
 	private static BufferedImage[] sprites;
-	private int index_sprite;
-	private Directions dir;
-	private Timer timer;
+	private final int index_sprite;
+	private final Timer timer;
 
 	public Skull(int id, int x, int y) {
 		super(id, x, y);
@@ -25,7 +24,6 @@ public class Skull extends Entity {
 			sprites = getSprite("skull", Engine.Color_Primary);
 		index_sprite = Engine.RAND.nextInt(sprites.length);
 		getValues().addInt("speed", Engine.GameScale * 8);
-		this.dir = Directions.Down;
 		this.timer = new Timer(2);
 		this.setDepth(1);
 		this.setVar(Variables.Selectable, true);
@@ -36,6 +34,7 @@ public class Skull extends Entity {
 	@Override
 	public BufferedImage getSprite() {
 		BufferedImage image = sprites[index_sprite];
+		Directions dir = getOE().getDirection();
 		switch (dir) {
 			case Up: 
 				image = Flip.Horizontal(image);
@@ -54,10 +53,9 @@ public class Skull extends Entity {
 
 	@Override
 	public void tick() {
-		if(getOE().colliding(dir))
-			if(this.timer.tiktak())
-				setDirection();
-		dynamics();
+		if(this.timer.tiktak())
+			setDirection();
+		getOE().sliding(getSpeed());
 		Player p = Game.getPlayer();
 		if(p.collidingWith(this))
 			p.die();
@@ -73,7 +71,7 @@ public class Skull extends Entity {
 			possible_dir.add(Directions.Left);
 		if(!getOE().colliding(Directions.Right))
 			possible_dir.add(Directions.Right);
-		this.dir = chose_direction(possible_dir);
+		getOE().setDirection(chose_direction(possible_dir));
 	}
 
 	private Directions chose_direction(List<Directions> possible_dir) {
@@ -87,33 +85,6 @@ public class Skull extends Entity {
 		if(possible_dir.contains(Directions.Right) && p.getY() > getY())
 			return Directions.Right;
 		return possible_dir.get(Engine.RAND.nextInt(possible_dir.size()));
-	}
-	
-	private void dynamics() {
-		switch(dir) {
-			case Up:
-				if(!getOE().colliding(Directions.Up)) {
-					this.setY(this.getY() - this.getSpeed());
-				}
-				break;
-			case Right:
-				if(!getOE().colliding(Directions.Right)) {
-					this.setX(this.getX() + this.getSpeed());
-				}
-				break;
-			case Down:
-				if(!getOE().colliding(Directions.Down)) {
-					this.setY(this.getY() + this.getSpeed());
-				}
-				break;
-			case Left:
-				if(!getOE().colliding(Directions.Left)) {
-					this.setX(this.getX() - this.getSpeed());
-				}
-				break;
-			default:
-				break;
-		}
 	}
 	
 	public int getSpeed() {

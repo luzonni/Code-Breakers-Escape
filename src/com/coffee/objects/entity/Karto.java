@@ -8,7 +8,7 @@ import com.coffee.main.activity.Game;
 import com.coffee.objects.Variables;
 
 public class Karto extends Entity {
-	
+	//TODO karto está causando muito lag com suas particulas! Fix...
 	private static BufferedImage[][] sprites;
 	private int index;
 	private boolean actived;

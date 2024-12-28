@@ -42,10 +42,9 @@ public class Engine implements Runnable {
 	public static boolean FullScreen = false;
 	public static boolean AlwaysOnTop = false;
 	public static int GameScale = 3;
-	public static int Volume = 40;
+	public static int Volume = 50;
 	public static boolean ANTIALIASING = false;
 	public static boolean OpenGL = false;
-	public static int PARTICLES = 4;
 
 	public static final int[][] resolutions = {{800, 600}, {1280, 720}, {1366, 768}, {1600, 900}, {1920, 1080}, {2560, 1440}, {3840, 2160}};
 	public static int INDEX_RES = 1;
@@ -92,6 +91,8 @@ public class Engine implements Runnable {
 	
 	
 	public static void main(String[] args) {
+		for(String s : args)
+			System.out.println(s);
 		FontG.addFont("septem");
 		Sound.load();
 		RAND = new Random();
@@ -120,16 +121,13 @@ public class Engine implements Runnable {
 	
 	public synchronized void stop() {
 		thread.interrupt();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				WINDOW.getFrame().setVisible(false);
-				WINDOW.getFrame().dispose();
-				Objects.disposeAll();
-				ME = new Engine();
-				ME.start();
-			}
-		}).start();
+		new Thread(() -> {
+            WINDOW.getFrame().setVisible(false);
+            WINDOW.getFrame().dispose();
+            Objects.disposeAll();
+            ME = new Engine();
+            ME.start();
+        }).start();
 		if(!WINDOW.isEnabled()) {
 			WINDOW = null;
 			UI = null;

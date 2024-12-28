@@ -52,16 +52,16 @@ public class Player extends Entity {
 			ticksAnim = 0;
 			indexAnim++;
 		}
-		if(indexAnim > sprite[getOE().colliding(getDirection()) ? 0 : 1].length - 1) {
+		if(indexAnim > sprite[getOE().colliding(getOE().getDirection()) ? 0 : 1].length - 1) {
 			indexAnim = 0;
 		}
 		keyDirection();
-		dynamics();
+		getOE().sliding(getSpeed());
 		getInventory().tick();
 	}
 	
 	private void keyDirection() {
-		if(!getOE().colliding(getDirection())) {
+		if(!getOE().colliding(getOE().getDirection())) {
 			collide = true;
 			return;
 		}
@@ -69,7 +69,7 @@ public class Player extends Entity {
 			collide = false;
 //			Game.getCam().impact(getDirection(), 10);				
 		}
-		Directions new_dir = this.getDirection();
+		Directions new_dir = this.getOE().getDirection();
 		if((Keyboard.KeyPressing("W") || Keyboard.KeyPressing("Up"))) 
 			new_dir = Directions.Up;
 		if((Keyboard.KeyPressing("D") || Keyboard.KeyPressing("Right"))) 
@@ -78,12 +78,12 @@ public class Player extends Entity {
 			new_dir = Directions.Down;
 		if((Keyboard.KeyPressing("A") || Keyboard.KeyPressing("Left"))) 
 			new_dir = Directions.Left;
-		if(!getDirection().equals(new_dir)) 
+		if(!getOE().getDirection().equals(new_dir))
 			setDirection(new_dir);
 	}
 	
 	private void dynamics() {
-		switch(getDirection()) {
+		switch(getOE().getDirection()) {
 		case Up:
 			if(!getOE().colliding(Directions.Up)) {
 				this.setY(this.getY() - this.getSpeed());
@@ -140,8 +140,8 @@ public class Player extends Entity {
 	}
 	
 	public BufferedImage Sprite() {
-		BufferedImage image = sprite[getOE().colliding(getDirection()) ? 0 : 1][indexAnim];
-		switch (getDirection()) {
+		BufferedImage image = sprite[getOE().colliding(getOE().getDirection()) ? 0 : 1][indexAnim];
+		switch (getOE().getDirection()) {
 		case Up: 
 			image = Flip.Horizontal(image);
 			break;
@@ -161,7 +161,6 @@ public class Player extends Entity {
 	public void render(Graphics2D g) {
 		getInventory().render(g);
 		renderEntity(Sprite(), g);
-		
 	}
 	
 	@Override

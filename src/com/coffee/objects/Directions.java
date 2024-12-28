@@ -4,9 +4,9 @@ public enum Directions {
 	
 	Idle(0, 0), Up(0, -1), Right(1, 0), Down(0, 1), Left(-1, 0);
 	
-	int x, y;
+	final int x, y;
 	
-	private Directions(int x, int y) {
+	Directions(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -22,5 +22,5 @@ public enum Directions {
 	public int getY() {
 		return this.y;
 	}
-	
+
 }

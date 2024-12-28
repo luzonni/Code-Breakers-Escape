@@ -6,7 +6,7 @@ import com.coffee.objects.tiles.Tile;
 
 public class Placeable extends Item {
 
-	private int entity_id;
+	private final int entity_id;
 
 	public Placeable(int entity_id) {
 		super(Entity.Factory(entity_id, 0, 0).getClass().getSimpleName());

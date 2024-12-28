@@ -11,7 +11,7 @@ import com.coffee.objects.tiles.Tile;
 public class Arrow extends Entity {
 	
 	private static BufferedImage sprite;
-	private double direction;
+	private final double direction;
 	private int speed;
 	
 	public Arrow(int x, int y, double direction, int speed) {
@@ -21,7 +21,7 @@ public class Arrow extends Entity {
 		if(sprite == null)
 			sprite = getSprite("arrow", Engine.Color_Primary)[0].getSubimage(0, 0, 15*Engine.GameScale, 5*Engine.GameScale);
 		this.setSize(sprite.getWidth(), sprite.getHeight());
-		setDepth(1);
+		this.setDepth(1);
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class Arrow extends Entity {
 	@Override
 	public void tick() {
 		if(colliding())
-			this.speed = 0;
+			die();
 		for(int i = 0; i < Game.getLevel().getEntities().size(); i++) {
 			Entity e = Game.getLevel().getEntities().get(i);
 			if(e.collidingWith(this) && this.speed != 0)

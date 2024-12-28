@@ -318,20 +318,17 @@ public class Level implements Receiver {
 		entities.sort(Objects.Depth);
 		for(int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
-			if(!e.getVar(Variables.Freeze)) {
-				try {
+			try {
+				if(!e.getVar(Variables.Freeze)) {
 					e.tick();
-				}catch (Dead exception) {
-					continue;
 				}
-			}
+			} catch (Dead ignore) {}
 		}
 		for(int i = 0; i < map.length; i++) {
 			try {
-				map[i].tick();
-			}catch (Dead entity) {
-				continue;
-			}
+				Tile tile = map[i];
+				tile.tick();
+			}catch (Dead ignore) {}
 		}
 		for(int i = 0; i < particles.size(); i++)
 			particles.get(i).tick();

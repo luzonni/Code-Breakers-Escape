@@ -10,10 +10,10 @@ import com.coffee.objects.tiles.Tile;
 
 class IronBall extends Entity {
 
-	private double radians;
+	private final double radians;
 	private double rotate;
 	private static BufferedImage sprite;
-	private int speed;
+	private final int speed;
 
 	public IronBall(int x, int y, double radians, int speed) {
 		super(0, x - 5*Engine.GameScale, y - 5*Engine.GameScale);

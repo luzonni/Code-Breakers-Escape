@@ -31,16 +31,7 @@ public class Repellent extends Tile {
 		for(int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
 			if(this.collidingWith(entity) && entity.getVar(Variables.Alive)) {
-				Directions direction = entity.getOE().getDirection();
-				if(direction.equals(Directions.Left)) {
-					entity.getOE().setDirection(Directions.Right);
-				}else if(direction.equals(Directions.Right)) {
-					entity.getOE().setDirection(Directions.Left);
-				}else if(direction.equals(Directions.Up)) {
-					entity.getOE().setDirection(Directions.Down);
-				}else if(direction.equals(Directions.Down)) {
-					entity.getOE().setDirection(Directions.Up);
-				}
+				entity.getOE().setDirection(entity.getOE().getReverse());
 			}
 		}
 	}

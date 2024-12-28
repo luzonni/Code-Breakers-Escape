@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import com.coffee.command.Commands;
 import com.coffee.graphics.SpriteSheet;
@@ -96,16 +97,26 @@ public abstract class Tile extends Objects {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/tiles/"+name+".png", Engine.GameScale);
 		spriteSheet.replaceColor(0xffffffff, color.getRGB());
 		spriteSheet.replaceColor(0xff000000, Engine.Color_Tertiary.getRGB());
-		int lenght = (spriteSheet.getWidth())/16;
-		BufferedImage[] sprites = new BufferedImage[lenght];
-		for(int i = 0; i < lenght; i++) {
+		int length = (spriteSheet.getWidth())/16;
+		BufferedImage[] sprites = new BufferedImage[length];
+		for(int i = 0; i < length; i++) {
 			sprites[i] = spriteSheet.getSprite(i*(16), 16*verticalIndex, 16, 16);
 		}
 		return sprites;
 	}
-	
+
 	public boolean isSolid() {
-		return this.solid;
+		boolean breaking = false;
+		try {
+			List<Entity> entities = Game.getLevel().getEntities();
+			for(int i = 0; i < entities.size(); i++) {
+				Entity e = entities.get(i);
+				if(e.getVar(Variables.Breakable) && e.collidingWith(this)) {
+					breaking = true;
+				}
+			}
+		}catch (Exception ignore) { }
+		return this.solid || breaking;
 	}
 	
 	public void setSolid(boolean solid) {

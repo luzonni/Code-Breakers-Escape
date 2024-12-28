@@ -62,7 +62,7 @@ public class Window extends Canvas implements Runnable {
 			GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 			gd.setFullScreenWindow(frame);
 			if (!gd.isFullScreenSupported()) {
-				System.out.println("Fullscreen não suportado!");
+				System.out.println("Fullscreen without support!");
 				System.exit(0);
 			}
 		}else {

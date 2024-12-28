@@ -11,7 +11,7 @@ import com.coffee.objects.tiles.Tile;
 public class Orienteering_Physics {
 
 	private Directions direction;
-	private Entity entity;
+	private final Entity entity;
 
 	public Orienteering_Physics(Entity entity) {
 		this.entity = entity;
@@ -22,21 +22,71 @@ public class Orienteering_Physics {
 		return this.direction;
 	} 
 
+	public Directions getReverse() {
+		if(this.direction == Directions.Up) {
+			return Directions.Down;
+		}else if(this.direction == Directions.Down) {
+			return Directions.Up;
+		}else if(this.direction == Directions.Left) {
+			return Directions.Right;
+		}else if(this.direction == Directions.Right) {
+			return Directions.Left;
+		}
+		return Directions.Idle;
+	}
+
 	public void setDirection(Directions newdir) {
 		this.direction = newdir;
 	}
-	
+
+	public boolean sliding(int speed) {
+		switch(getDirection()) {
+			case Up:
+				if(!colliding(Directions.Up)) {
+					entity.setY(entity.getY() - speed);
+				}else {
+					return false;
+				}
+				break;
+			case Right:
+				if(!colliding(Directions.Right)) {
+					entity.setX(entity.getX() + speed);
+				}else{
+					return false;
+				}
+				break;
+			case Down:
+				if(!colliding(Directions.Down)) {
+					entity.setY(entity.getY() + speed);
+				}else{
+					return false;
+				}
+				break;
+			case Left:
+				if(!colliding(Directions.Left)) {
+					entity.setX(entity.getX() - speed);
+				}else{
+					return false;
+				}
+				break;
+			default:
+				return false;
+		}
+		return true;
+	}
+
 	public boolean colliding(Directions dir) {
 		boolean colliding = false;
 		Level L = Game.getLevel();
 		int map_Width = Game.getLevel().getBounds().width / Tile.getSize();
 		int x = (entity.getMiddle().x / Tile.getSize());
 		int y = (entity.getMiddle().y / Tile.getSize());
+		Tile tile;
 		switch(dir) {
 			case Up:
 				y--;
-				Tile tile = L.getTile(x+y*map_Width);
-				if(tile == null || outOfMapBounds()) 
+				tile = L.getTile(x+y*map_Width);
+				if(tile == null || outOfMapBounds())
 					break;
 				if(tile.isSolid()) {
 					colliding = true;
@@ -48,7 +98,7 @@ public class Orienteering_Physics {
 			case Right:
 				x++;
 				tile = L.getTile(x+y*map_Width);
-				if(tile == null || outOfMapBounds()) 
+				if(tile == null || outOfMapBounds())
 					break;
 				if(tile.isSolid()) {
 					colliding = true;
@@ -60,7 +110,7 @@ public class Orienteering_Physics {
 			case Down:
 				y++;
 				tile = L.getTile(x+y*map_Width);
-				if(tile == null || outOfMapBounds()) 
+				if(tile == null || outOfMapBounds())
 					break;
 				if(tile.isSolid()) {
 					colliding = true;
@@ -72,7 +122,7 @@ public class Orienteering_Physics {
 			case Left:
 				x--;
 				tile = L.getTile(x+y*map_Width);
-				if(tile == null || outOfMapBounds()) 
+				if(tile == null || outOfMapBounds())
 					break;
 				if(L.getMap()[x+y*map_Width].isSolid()) {
 					colliding = true;
@@ -90,14 +140,14 @@ public class Orienteering_Physics {
 	private boolean outOfMapBounds() {
 		Rectangle rec = Game.getLevel().getBounds();
 		return !rec.contains(entity.getMiddle());
-	} 
+	}
 	
 	public Tile nextTile() {
 		Level level = Game.getLevel();
 		Tile tile = null;
 		int x = (entity.getMiddle().x) / Tile.getSize();
 		int y = (entity.getMiddle().y) / Tile.getSize();
-		switch(entity.getDirection()) {
+		switch(entity.getOE().getDirection()) {
 			case Up:
 				y--;
 				tile = level.getTile(x, y);
@@ -127,13 +177,49 @@ public class Orienteering_Physics {
 		}
 		return tile;
 	}
-	
+
+	public Tile nextTile(Directions dir) {
+		Level level = Game.getLevel();
+		Tile tile = null;
+		int x = (entity.getMiddle().x) / Tile.getSize();
+		int y = (entity.getMiddle().y) / Tile.getSize();
+		switch(dir) {
+			case Up:
+				y--;
+				tile = level.getTile(x, y);
+				if(tile == null)
+					break;
+				return tile;
+			case Right:
+				x++;
+				tile = level.getTile(x, y);
+				if(tile == null)
+					break;
+				return tile;
+			case Down:
+				y++;
+				tile = level.getTile(x, y);
+				if(tile == null)
+					break;
+				return tile;
+			case Left:
+				x--;
+				tile = level.getTile(x, y);
+				if(tile == null)
+					break;
+				return tile;
+			default:
+				break;
+		}
+		return tile;
+	}
+
 	public Tile overTile() {
 		Level level = Game.getLevel();
 		Tile tile_over = null;
 		int x = entity.getMiddle().x / Tile.getSize();
 		int y = entity.getMiddle().y / Tile.getSize();
-		switch(entity.getDirection()) {
+		switch(entity.getOE().getDirection()) {
 			case Up:
 				y = (entity.getMiddle().y - entity.getHeight()/2 - Engine.GameScale)  / Tile.getSize();
 				tile_over = level.getTile(x, y);

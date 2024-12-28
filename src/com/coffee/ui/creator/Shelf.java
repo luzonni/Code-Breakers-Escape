@@ -87,9 +87,13 @@ public class Shelf {
 			int y = (int)t.getY();
 			int w = Tile.getSize() - 4*Engine.GameScale;
 			int h = Tile.getSize() - 4*Engine.GameScale;
-			if(Mouse.On_Mouse(t.getBounds()) && t instanceof EntityItem ei) {
-				Item item = ei.getItem();
-				Engine.UI.getPopTag().setText(item.getName());
+			if(Mouse.On_Mouse(t.getBounds())) {
+				if(t instanceof EntityItem ei) {
+					Item item = ei.getItem();
+					Engine.UI.getPopTag().setText(item.getName());
+				}else{
+					Engine.UI.getPopTag().setText(t.getClass().getSimpleName());
+				}
 			}
 			g.setColor(new Color(Engine.Color_Secondary.getRed(), Engine.Color_Secondary.getGreen(), Engine.Color_Secondary.getBlue(), 60));
 			g.fillRect(x + 2*Engine.GameScale, y + 2*Engine.GameScale, w, h);
@@ -117,6 +121,5 @@ public class Shelf {
 		g.setColor(Engine.Color_Primary);
 		g.drawString(value, xx , yy);
 	}
-
 
 }
