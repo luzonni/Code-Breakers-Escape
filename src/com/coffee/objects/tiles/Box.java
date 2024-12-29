@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Game;
-import com.coffee.main.sound.Sound;
 import com.coffee.main.tools.Timer;
 import com.coffee.objects.entity.Entity;
 

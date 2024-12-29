@@ -168,9 +168,9 @@ public class Creator implements Activity {
 			int id = ((Number)entity.get("ID")).intValue();
 			int x = ((Number)entity.get("X")).intValue();
 			int y = ((Number)entity.get("Y")).intValue();
-			if(type.equals("E"))
-				array_item[x+y*this.WIDTH] = Entity.Factory(id, x, y);
-			else if(type.equals("I"))
+			if(type.equals("E")) {
+				array_item[x + y * this.WIDTH] = Entity.Factory(id, x, y);
+			} else if(type.equals("I"))
 				array_item[x+y*this.WIDTH] = Item.Factory(id, x, y);
 		}
 		MAP_ENTITIES = new Grid(array_item, this.WIDTH, this.HEIGHT);

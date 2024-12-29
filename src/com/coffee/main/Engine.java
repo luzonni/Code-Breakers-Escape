@@ -99,20 +99,20 @@ public class Engine implements Runnable {
 		Sound.load();
 		RAND = new Random();
 		ME = new Engine();
-		ME.start(args[0]);
+		ME.start(args);
 	}
 	
 	public Engine() {
 		getConfig();
 	}
 
-	public synchronized void start(String levelName) {
+	public synchronized void start(String[] levelName) {
 		SET_PALLET();
 		WINDOW = new Window(GameTag + " / The Universe");
 
 		UI = new UserInterface();
-		if(levelName != null && !levelName.isBlank())
-			ACTIVITY = new Creator(Level.getLevel(new File(levelName + ".json")));
+		if(levelName != null && levelName.length > 0 && !levelName[0].isBlank())
+			ACTIVITY = new Creator(Level.getLevel(new File(levelName[0] + ".json")));
 		else
 			ACTIVITY = new Menu();
 		ACTIVITY.enter();

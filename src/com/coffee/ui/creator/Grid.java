@@ -16,8 +16,8 @@ import com.coffee.objects.tiles.Tile;
 
 public class Grid {
 
-	private Objects[] Grid;
-	private int Width, Height;
+	private final Objects[] Grid;
+	private final int Width, Height;
 
 	private int lastX_mouse, lastY_mouse;
 	

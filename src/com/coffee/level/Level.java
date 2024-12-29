@@ -332,6 +332,10 @@ public class Level implements Receiver {
 		}
 		for(int i = 0; i < particles.size(); i++)
 			particles.get(i).tick();
+		if(selected != null)
+			Engine.UI.getConsole().setIcon(selected.getSprite());
+		else
+			Engine.UI.getConsole().cleatIcon();
 	}
 	
 	public void render(Graphics2D g) {

@@ -19,8 +19,7 @@ public abstract class Tile extends Objects {
 	private int xF, yF;
 	
 	private boolean solid;
-	private boolean floating;
-	
+
 	public static int getSize() {
 		return Engine.GameScale*16;
 	}
@@ -30,46 +29,58 @@ public abstract class Tile extends Objects {
 		int id = (int)values[0];
 		int x = (int)values[1];
 		int y = (int)values[2];
-		switch (id) {
-		case 0: 
-			tile = new Air(id, x, y);
-			return tile;
-		case 1: 
-			tile = new Wall(id, x, y);
-			return tile;
-		case 2: 
-			tile = new Floor(id, x, y);
-			return tile;
-		case 3:
-			tile = new Door(id, x, y);
-			return tile;
-		case 4:
-			tile = new Reforced_Door(id, x, y);
-			return tile;
-		case 5:
-			tile = new Box(id, x, y);
-			return tile;
-		case 6:
-			tile = new Crate(id, x, y);
-			return tile;
-		case 7:
-			tile = new Spine(id, x, y);
-			return tile;
-		case 8:
-			tile = new Vase(id, x, y);
-			return tile;
-		case 9:
-			tile = new Thorn(id, x, y);
-			return tile;
-		case 10:
-			tile = new Repellent(id, x, y);
-			return tile;
-		case 11:
-			tile = new Fake_Wall(id, x, y);
-			return tile;
-		}
-		throw new RuntimeException("Tile not exist");
-	}
+        return switch (id) {
+            case 0 -> {
+                tile = new Air(id, x, y);
+                yield tile;
+            }
+            case 1 -> {
+                tile = new Wall(id, x, y);
+                yield tile;
+            }
+            case 2 -> {
+                tile = new Floor(id, x, y);
+                yield tile;
+            }
+            case 3 -> {
+                tile = new Door(id, x, y);
+                yield tile;
+            }
+            case 4 -> {
+                tile = new Reforced_Door(id, x, y);
+                yield tile;
+            }
+            case 5 -> {
+                tile = new Box(id, x, y);
+                yield tile;
+            }
+            case 6 -> {
+                tile = new Crate(id, x, y);
+                yield tile;
+            }
+            case 7 -> {
+                tile = new Spine(id, x, y);
+                yield tile;
+            }
+            case 8 -> {
+                tile = new Vase(id, x, y);
+                yield tile;
+            }
+            case 9 -> {
+                tile = new Thorn(id, x, y);
+                yield tile;
+            }
+            case 10 -> {
+                tile = new Repellent(id, x, y);
+                yield tile;
+            }
+            case 11 -> {
+                tile = new Fake_Wall(id, x, y);
+                yield tile;
+            }
+            default -> throw new RuntimeException("Tile not exist");
+        };
+    }
 	
 	public Tile(int id, int x, int y) {
 		super(id);
@@ -77,23 +88,25 @@ public abstract class Tile extends Objects {
 		this.setY(y);
 		this.setSize(getSize(), getSize());
 	}
-	
+
 	public BufferedImage[] getSprite(String name, Color color) {
-		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/tiles/"+name+".png", Engine.GameScale);
-		spriteSheet.replaceColor(0xffffffff, color.getRGB());
-		spriteSheet.replaceColor(0xff000000, Engine.Color_Tertiary.getRGB());
-		int lenght = spriteSheet.getWidth()/16;
-		BufferedImage[] sprites = new BufferedImage[lenght];
-		for(int i = 0; i < lenght; i++) {
+		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath + "/tiles/" + name + ".png", Engine.GameScale);
+		spriteSheet.replaceColor(Engine.PRIMARY, color.getRGB());
+		spriteSheet.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
+		spriteSheet.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
+		int length = spriteSheet.getWidth()/16;
+		BufferedImage[] sprites = new BufferedImage[length];
+		for(int i = 0; i < length; i++) {
 			sprites[i] = spriteSheet.getSprite(i*(16), 0, 16, 16);
 		}
 		return sprites;
 	}
 	
 	public BufferedImage[] getSprite(String name, Color color, int verticalIndex) {
-		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/tiles/"+name+".png", Engine.GameScale);
-		spriteSheet.replaceColor(0xffffffff, color.getRGB());
-		spriteSheet.replaceColor(0xff000000, Engine.Color_Tertiary.getRGB());
+		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath + "/tiles/" + name + ".png", Engine.GameScale);
+		spriteSheet.replaceColor(Engine.PRIMARY, color.getRGB());
+		spriteSheet.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
+		spriteSheet.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
 		int length = (spriteSheet.getWidth())/16;
 		BufferedImage[] sprites = new BufferedImage[length];
 		for(int i = 0; i < length; i++) {
@@ -179,10 +192,6 @@ public abstract class Tile extends Objects {
 	public void renderTile(BufferedImage Sprite, Graphics2D g) {
 		int x = (int)getX() + xF;
 		int y = (int)getY() + yF;
-		if(floating && Engine.RAND.nextInt(1000) < 5) {
-			xF = (Engine.RAND.nextInt(2) - 1)*Engine.GameScale;
-			yF = (Engine.RAND.nextInt(2) - 1)*Engine.GameScale;
-		}
 		g.drawImage(Sprite, x - Game.getCam().getX(), y - Game.getCam().getY(), null);
 	}
 

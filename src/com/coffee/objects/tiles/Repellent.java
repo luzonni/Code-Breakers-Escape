@@ -6,8 +6,6 @@ import java.util.List;
 
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Game;
-import com.coffee.objects.Directions;
-import com.coffee.objects.Variables;
 import com.coffee.objects.entity.Entity;
 
 public class Repellent extends Tile {

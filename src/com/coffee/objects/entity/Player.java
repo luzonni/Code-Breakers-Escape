@@ -33,7 +33,7 @@ public class Player extends Entity {
 		}
 	}
 	
-	public Player(int id, int x, int y) {
+	public Player(int id, int x, int y, Directions direction) {
 		super(id, x, y);
 		buildSprites();
 		inventory = new Inventory(3);
@@ -43,7 +43,7 @@ public class Player extends Entity {
 		setVar(Variables.Selectable, true);
 		setVar(Variables.Movable, false);
 		setVar(Variables.Removeble, false);
-		getOE().setDirection(Directions.Down);
+		getOE().setDirection(direction);
 	}
 	
 	public void tick() {

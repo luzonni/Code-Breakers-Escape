@@ -21,6 +21,9 @@ public class Barrel extends Entity {
             sprite = getSprite("barrel");
         }
         getValues().addInt("speed", Engine.GameScale * 2);
+        setVar(Variables.Selectable, true);
+        setVar(Variables.Movable, true);
+        setVar(Variables.Removeble, true);
         setDepth(1);
     }
 
@@ -65,7 +68,7 @@ public class Barrel extends Entity {
             }
         }
         indexAnim = rolling() ? ((getOE().getDirection() == Directions.Up || getOE().getDirection() == Directions.Down) ? 1 : 2) : 0;
-        if(!getOE().sliding(getSpeed()) && !overEntity) { // TODO rever essa logica!
+        if(!getOE().sliding(getSpeed()) && !overEntity) {
             stop();
         }
     }

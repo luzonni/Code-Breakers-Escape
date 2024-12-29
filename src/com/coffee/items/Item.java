@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import com.coffee.command.Commands;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
-import com.coffee.objects.Variables;
 import com.coffee.objects.entity.EntityItem;
 
 public abstract class Item {

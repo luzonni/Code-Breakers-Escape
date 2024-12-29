@@ -2,7 +2,7 @@ package com.coffee.objects;
 
 public enum Directions {
 	
-	Idle(0, 0), Up(0, -1), Right(1, 0), Down(0, 1), Left(-1, 0);
+	Up(0, -1), Right(1, 0), Down(0, 1), Left(-1, 0), Idle(0, 0);
 	
 	final int x, y;
 	
@@ -23,4 +23,7 @@ public enum Directions {
 		return this.y;
 	}
 
+    public double getRadians() {
+		return Math.atan2(getDir()[1], getDir()[0]);
+    }
 }

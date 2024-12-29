@@ -8,7 +8,6 @@ import com.coffee.graphics.FontG;
 import com.coffee.items.Item;
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Creator;
-import com.coffee.main.activity.Game;
 import com.coffee.main.tools.Responsive;
 import com.coffee.objects.Objects;
 import com.coffee.objects.entity.EntityItem;
@@ -110,7 +109,7 @@ public class Shelf {
 	}
 
 	public void renderTitle(int x, int y, int w, int h, Graphics2D g) {
-		Font f = FontG.font(8*Engine.GameScale);
+		Font f = FontG.font(6*Engine.GameScale);
 		String value = this.name;
 		int wF = FontG.getWidth(value, f);
 		int xx = x + w/2 - wF/2;

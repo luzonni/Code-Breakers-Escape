@@ -26,11 +26,12 @@ public abstract class Entity extends Objects {
 		Entity entity;
 		int id = (int)values[0];
 		int x = (int)values[1];
-		int y = (int)values[2];
+		int y = (int)values[2];//TODO problema nas direções em criação!
+		Directions dir = Directions.Down;//Directions.values()[(int)values[3]];
         return switch (id) {
             case 0 -> null;
             case 1 -> {
-                entity = new Player(id, x, y);
+                entity = new Player(id, x, y, dir);
                 yield entity;
             }
             case 2 -> {
@@ -89,6 +90,10 @@ public abstract class Entity extends Objects {
 				entity = new Trampoline(id, x, y);
 				yield entity;
 			}
+			case 16 -> {
+				entity = new Blaster(id, x, y);
+				yield entity;
+			}
             default -> throw new RuntimeException("Tile not exist");
         };
     }
@@ -140,12 +145,16 @@ public abstract class Entity extends Objects {
 	
 	@Override
 	public String giveCommand(String[] keys) {
-		Objects object = Game.getSelect();
+		Entity selected = (Entity) Game.getSelect();
 		String message = "Command no access";
 
 		if(take(keys, Commands.remove)) {
+			if(!selected.getVar(Variables.Removeble)) {
+				message = "This object don't be removed";
+				return message;
+			}
 			message = "Was removed";
-			Game.getLevel().getEntities().remove(object);
+			selected.die();
 			Game.clearSelect();
 			used(Commands.remove);
 		}
