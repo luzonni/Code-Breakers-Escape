@@ -37,7 +37,7 @@ public class Lazer extends Entity {
             if(e == this)
                 continue;
             if(Geometry.isRectangleBetweenPoints(e.getBounds(), pi, getMiddle())) {
-                e.die();
+                e.kill();
             }
         }
         if(Engine.RAND.nextInt(100) < 20)

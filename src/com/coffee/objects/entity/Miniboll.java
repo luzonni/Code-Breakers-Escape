@@ -47,16 +47,17 @@ public class Miniboll extends Entity {
 			this.radians = Math.atan2(ay, ax);
 			this.count++;
 		}
-		Game.getLevel().addParticle(new Dust(getMiddle().x, getMiddle().y, this.radians-Math.PI*2));
+		if(Engine.RAND.nextInt(100) < 20 && count < 2)
+			Game.getLevel().addParticle(new Dust(getMiddle().x, getMiddle().y, this.radians-Math.PI*2));
 		for(int i = 0; i < Game.getLevel().getEntities().size(); i++) {
 			Entity entity = Game.getLevel().getEntities().get(i);
 			if(entity.getVar(Variables.Alive) && entity.collidingWith(this)) {
-				entity.die();
-				die();
+				entity.kill();
+				disappear();
 			}
 		}
 		if(count > 3) {
-			die();
+			disappear();
 		}
 	}
 

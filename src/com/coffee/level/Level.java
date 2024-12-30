@@ -256,15 +256,14 @@ public class Level implements Receiver {
 			return selected.giveCommand(keys);
 		if(take(keys, Commands.select)) {
 			message = "Click on an tile to select it";
-			new Thread() {
-				public void run() {
-					while(selected == null) {
-						selected = setSelected();
-						if(selected != null)
-							used(Commands.select);
-					}
-				}
-			}.start();
+			new Thread(() -> {
+                while(selected == null) {
+					System.out.println("Search");
+                    selected = setSelected();
+                    if(selected != null)
+                        used(Commands.select);
+                }
+            }).start();
 		}
 		if(take(keys, Commands.shot)) {
 			message = "";
@@ -301,19 +300,21 @@ public class Level implements Receiver {
 		for(int i = 0; i < map.length; i++) {
 			Tile T = map[i];
 			if(Mouse.clickOnMap(Mouse_Button.LEFT, T.getBounds(), Game.getCam())) {
-				for(int ii = 0; ii < entities.size(); ii++) {
-					Entity E = entities.get(ii);
-					if(T.centralizedWith(E) && E.getVar(Variables.Selectable)) {
-						return E;
-					}
-				}
 				if(T.getVar(Variables.Selectable))
 					return T;
 			}
 		}
+		for(int ii = 0; ii < entities.size(); ii++) {
+			Entity E = entities.get(ii);
+			if(Mouse.clickOnMap(Mouse_Button.LEFT, E.getBounds(), Game.getCam())) {
+				if (E.getVar(Variables.Selectable)) {
+					return E;
+				}
+			}
+		}
 		return null;
 	}
-	
+
 	public void tick() {
 		entities.sort(Objects.Depth);
 		for(int i = 0; i < entities.size(); i++) {

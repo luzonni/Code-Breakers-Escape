@@ -31,7 +31,7 @@ public class Spine extends Tile {
 		if(this.centralizedWith(p)) {
 			actived = true;
 			if(indexAnim == sprite.length-1) {
-				p.die();
+				p.kill();
 			}
 		}
 		if(actived) {

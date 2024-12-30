@@ -33,7 +33,7 @@ class Spit extends Entity {
 			setX(getX() + 2*Engine.GameScale);
 		Player p = Game.getPlayer();
 		if(this.collidingWith(p))
-			p.die();
+			p.kill();
 	}
 	
 	private boolean colliding() {

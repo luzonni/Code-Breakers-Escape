@@ -58,7 +58,7 @@ public class Skull extends Entity {
 		getOE().sliding(getSpeed());
 		Player p = Game.getPlayer();
 		if(p.collidingWith(this))
-			p.die();
+			p.kill();
 	}
 	
 	private void setDirection() {

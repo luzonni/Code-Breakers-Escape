@@ -39,7 +39,7 @@ public class Karto extends Entity {
 				index = 0;
 				if(actived) {
 					kabum();
-					die();
+					kill();
 				}
 			}
 		}

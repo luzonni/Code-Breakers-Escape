@@ -1,8 +1,16 @@
 package com.coffee.objects;
 
 public enum Directions {
-	
-	Up(0, -1), Right(1, 0), Down(0, 1), Left(-1, 0), Idle(0, 0);
+
+	Idle(0, 0),
+	Up(0, -1),
+	UpRight(1,-1),
+	Right(1, 0),
+	RightDown(1, 1),
+	Down(0, 1),
+	DownLeft(-1, 1),
+	Left(-1, 0),
+	LeftUp(-1, -1);
 	
 	final int x, y;
 	

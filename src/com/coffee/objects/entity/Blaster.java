@@ -16,26 +16,36 @@ public class Blaster extends Entity {
     private final Timer t;
     private final Lazer lazer;
 
-    public Blaster(int id, int x, int y) {
+    public Blaster(int id, int x, int y, Directions direction) {
         super(id, x, y);
         if(sprite == null) {
             sprite = getSprite("blaster", Engine.Color_Primary);
         }
-        setDirection(getOrientation());
+        getOE().setDirection(direction);
         t = new Timer(1);
-        setVar(Variables.Breakable, true);
+        setVar(Variables.Breakable, false);
         lazer = new Lazer(getMiddle().x, getMiddle().y, getOE().getDirection());
     }
 
     @Override
     public BufferedImage getSprite() {
-        return sprite[0];
+        switch(getOE().getDirection()) {
+            case Up -> {
+                return sprite[0];
+            }
+            case Right -> {
+                return sprite[1];
+            }
+            case Down -> {
+                return sprite[2];
+            }
+            case Left -> {
+                return sprite[3];
+            }
+            default -> throw new RuntimeException("Sprite not found for direction");
+        }
     }
 
-    private Directions getOrientation() {
-        //TODO logica para o lado.
-        return Directions.Right;
-    }
 
     public void tick() {
         if(t.tiktak()) {
@@ -46,10 +56,14 @@ public class Blaster extends Entity {
     }
 
     @Override
-    public void render(Graphics2D g) {
-        int index = 1;
-        renderEntity(sprite[index], g);
+    public void kill() {
+        super.kill();
+        lazer.disappear();
+    }
 
+    @Override
+    public void render(Graphics2D g) {
+        renderEntity(getSprite(), g);
     }
 
     @Override

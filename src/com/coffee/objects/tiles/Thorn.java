@@ -20,7 +20,7 @@ public class Thorn extends Tile {
 	public void tick() {
 		Player player = Game.getPlayer();
 		if(player.getOE().overTile().equals(this))
-			player.die();
+			player.kill();
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import com.coffee.objects.Objects;
 
 public abstract class Particle extends Objects {
 	
-	private float f = 1;
+	private float f = 1f;
 	
 	public Particle(int x, int y) {
 		super(-1);

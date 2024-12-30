@@ -26,12 +26,11 @@ public abstract class Entity extends Objects {
 		Entity entity;
 		int id = (int)values[0];
 		int x = (int)values[1];
-		int y = (int)values[2];//TODO problema nas direções em criação!
-		Directions dir = Directions.Down;//Directions.values()[(int)values[3]];
+		int y = (int)values[2]; //TODO problema nas direções em criação!
         return switch (id) {
             case 0 -> null;
             case 1 -> {
-                entity = new Player(id, x, y, dir);
+                entity = new Player(id, x, y, Directions.Down);
                 yield entity;
             }
             case 2 -> {
@@ -87,11 +86,35 @@ public abstract class Entity extends Objects {
 				yield entity;
 			}
 			case 15 -> {
-				entity = new Trampoline(id, x, y);
+				entity = new Trampoline(id, x, y, Directions.UpRight);
 				yield entity;
 			}
 			case 16 -> {
-				entity = new Blaster(id, x, y);
+				entity = new Trampoline(id, x, y, Directions.RightDown);
+				yield entity;
+			}
+			case 17 -> {
+				entity = new Trampoline(id, x, y, Directions.DownLeft);
+				yield entity;
+			}
+			case 18 -> {
+				entity = new Trampoline(id, x, y, Directions.LeftUp);
+				yield entity;
+			}
+			case 19 -> {
+				entity = new Blaster(id, x, y, Directions.Up);
+				yield entity;
+			}
+			case 20 -> {
+				entity = new Blaster(id, x, y, Directions.Right);
+				yield entity;
+			}
+			case 21 -> {
+				entity = new Blaster(id, x, y, Directions.Down);
+				yield entity;
+			}
+			case 22 -> {
+				entity = new Blaster(id, x, y, Directions.Left);
 				yield entity;
 			}
             default -> throw new RuntimeException("Tile not exist");
@@ -154,7 +177,7 @@ public abstract class Entity extends Objects {
 				return message;
 			}
 			message = "Was removed";
-			selected.die();
+			selected.kill();
 			Game.clearSelect();
 			used(Commands.remove);
 		}
@@ -203,7 +226,7 @@ public abstract class Entity extends Objects {
 		return this.floating;
 	}
 	
-	public void die() {
+	public void kill() {
 		for(int i = 0; i < 40; i++)
 			Game.getLevel().addParticle(new Kaboom(getMiddle().x, getMiddle().y));
 		Game.getLevel().getEntities().remove(this);
@@ -215,6 +238,18 @@ public abstract class Entity extends Objects {
                 	Game.restart();
                 } catch (Exception ignore) { }
             }).start();
+		}
+	}
+
+	public void disappear() {
+		Game.getLevel().getEntities().remove(this);
+		if(this instanceof Player ) {
+			new Thread(() -> {
+				try {
+					Thread.sleep(1000);
+					Game.restart();
+				} catch (Exception ignore) { }
+			}).start();
 		}
 	}
 	

@@ -239,6 +239,8 @@ public class Engine implements Runnable {
 			graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics.setColor(Color_Tertiary);
 		graphics.fillRect(0, 0, WINDOW.getWidth(), WINDOW.getHeight());
+		graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
+
 		return graphics;
 	}
 	

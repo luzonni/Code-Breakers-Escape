@@ -32,12 +32,12 @@ public class Arrow extends Entity {
 	@Override
 	public void tick() {
 		if(colliding())
-			die();
+			kill();
 		for(int i = 0; i < Game.getLevel().getEntities().size(); i++) {
 			Entity e = Game.getLevel().getEntities().get(i);
 			if(e.collidingWith(this) && this.speed != 0)
 				if(e.getVar(Variables.Alive)) {
-					e.die();
+					e.kill();
 					Game.getLevel().getEntities().remove(this);
 				}
 		}

@@ -54,7 +54,7 @@ public class Ant extends Entity {
 		}
 		Player P = Game.getPlayer();
 		if(this.collidingWith(P))
-			P.die();
+			P.kill();
 	}
 
 	@Override

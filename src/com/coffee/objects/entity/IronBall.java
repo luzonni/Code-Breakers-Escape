@@ -37,7 +37,7 @@ class IronBall extends Entity {
 			Game.getLevel().getEntities().remove(this);
 		Player p = Game.getPlayer();
 		if(p.collidingWith(this)) {
-			p.die();
+			p.kill();
 			Game.getLevel().getEntities().remove(this);
 		}
 		this.setX(this.getX() + Math.cos(this.radians)*this.speed);

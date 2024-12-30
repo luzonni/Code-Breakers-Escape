@@ -1,11 +1,12 @@
 package com.coffee.objects.entity;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import com.coffee.graphics.Flip;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Directions;
+import com.coffee.objects.Variables;
 import com.coffee.objects.tiles.Tile;
 
 public class Fish extends Entity {
@@ -19,6 +20,9 @@ public class Fish extends Entity {
 		if(sprite == null)
 			sprite = getSprite("fish");
 		setDirection(Directions.Left);
+		setVar(Variables.Selectable, true);
+		setVar(Variables.Removeble, true);
+		setVar(Variables.Alive, true);
 	}
 
 	@Override
@@ -39,7 +43,7 @@ public class Fish extends Entity {
 		}
 		swim();
 		if(Game.getPlayer().collidingWith(this))
-			Game.getPlayer().die();
+			Game.getPlayer().kill();
 	}
 	
 	private void swim() {

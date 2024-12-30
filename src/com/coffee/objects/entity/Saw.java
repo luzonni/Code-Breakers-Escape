@@ -45,7 +45,7 @@ public class Saw extends Entity {
 			}
 		}
 		if(tile.isSolid() || tile == null) {
-			die();
+			kill();
 			return;
 		}
 		int botton_index = 0;
@@ -103,13 +103,13 @@ public class Saw extends Entity {
 			}
 		}
 		if(!colliding) {
-			die();
+			kill();
 			return;
 		}
 		for(int i = 0; i < Game.getLevel().getEntities().size(); i++) {
 			Entity entity = Game.getLevel().getEntities().get(i);
 			if(entity.getVar(Variables.Alive) && entity.collidingWith(this)) {
-				entity.die();
+				entity.kill();
 			}
 		}
 		this.rotate -= 0.15;

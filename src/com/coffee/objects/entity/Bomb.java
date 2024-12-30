@@ -64,7 +64,7 @@ public class Bomb extends Entity {
 		for(int i = 0; i < entities.length; i++) {
 			Entity entity = entities[i];
 			if(Geometry.Theta(entity.getMiddle(), getMiddle()) <= radius && entity.getVar(Variables.Alive)) {
-				entity.die();
+				entity.kill();
 			}
 		}
 		int amount = 0;
