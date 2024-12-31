@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.io.Serial;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -72,13 +71,13 @@ public class Window extends Canvas implements Runnable {
 		frame.pack();
 		try {
 			SpriteSheet icon = new SpriteSheet(Engine.ResPath+"/ui/icon.png", 3);
-			icon.replaceColor(Engine.PRIMARY, Engine.Color_Primary.getRGB());
-			icon.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
-			icon.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
+			icon.replaceColor(Theme.PRIMARY, Theme.Color_Primary.getRGB());
+			icon.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
+			icon.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
 			SpriteSheet cursor = new SpriteSheet(Engine.ResPath+"/ui/cursor.png", 2);
-			cursor.replaceColor(Engine.PRIMARY, Engine.Color_Primary.getRGB());
-			cursor.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
-			cursor.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
+			cursor.replaceColor(Theme.PRIMARY, Theme.Color_Primary.getRGB());
+			cursor.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
+			cursor.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
 			Cursor c = toolkit.createCustomCursor(cursor.getImage(), new Point(0,0), "cursor");
 			frame.setCursor(c);
 			frame.setIconImage(icon.getImage());

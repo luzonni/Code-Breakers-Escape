@@ -3,7 +3,7 @@ package com.coffee.objects.entity;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Variables;
 
@@ -16,7 +16,7 @@ public class Button extends Entity {
 	public Button(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null)
-			sprite = getSprite("button", Engine.Color_Primary);
+			sprite = getSprite("button", Theme.Color_Primary);
 		setEffect(Variables.Movable);
 		setDepth(0);
 	}

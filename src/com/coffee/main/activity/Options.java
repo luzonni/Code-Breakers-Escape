@@ -9,6 +9,7 @@ import com.coffee.Inputs.Button.Button;
 import com.coffee.command.Receiver;
 import com.coffee.graphics.FontG;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.tools.Responsive;
 
 public class Options implements Activity, Receiver {
@@ -34,7 +35,7 @@ public class Options implements Activity, Receiver {
 
 	@Override
 	public void enter() {
-		PALLET = Engine.INDEX_PALLET;
+		PALLET = Theme.INDEX_PALLET;
 		RESOLUTION = Engine.INDEX_RES;
 		GAME_SCALE = Engine.GameScale;
 		buttons = new HashMap<String, Button>();
@@ -72,7 +73,7 @@ public class Options implements Activity, Receiver {
 			Engine.Volume += 5;
 		if(buttons.get("minus_volum").function() && Engine.Volume - 5 >= 0)
 			Engine.Volume -= 5;
-		if(buttons.get("plus_color").function() && this.PALLET + 1 <= Engine.PALLET.length-1)
+		if(buttons.get("plus_color").function() && this.PALLET + 1 <= Theme.PALLET.length-1)
 			this.PALLET ++;
 		if(buttons.get("minus_color").function() && this.PALLET - 1 >= 0)
 			this.PALLET --;
@@ -116,9 +117,9 @@ public class Options implements Activity, Receiver {
 		buttons.get("plus_volum").getResponsive().setRelative(wF/2 + 2*Engine.GameScale, 0);
 		buttons.get("minus_volum").getResponsive().setRelative(-wF/2 - 2*Engine.GameScale, 0);
 		g.setFont(font);
-		g.setColor(Engine.Color_Tertiary);
+		g.setColor(Theme.Color_Tertiary);
 		g.drawString(value, x + Engine.GameScale, y + Engine.GameScale);
-		g.setColor(Engine.Color_Primary);
+		g.setColor(Theme.Color_Primary);
 		g.drawString(value, x, y);
 	}
 	
@@ -132,16 +133,16 @@ public class Options implements Activity, Receiver {
 		int xS = colors.getPosition().x - wF/2;
 		int yS = colors.getPosition().y - hF;
 		g.setFont(font);
-		g.setColor(Engine.Color_Tertiary);
+		g.setColor(Theme.Color_Tertiary);
 		g.drawString(value, xS + Engine.GameScale, yS + Engine.GameScale);
-		g.setColor(Engine.Color_Primary);
+		g.setColor(Theme.Color_Primary);
 		g.drawString(value, xS, yS);
 		int size = 12*Engine.GameScale;
-		int wB = Engine.PALLET[this.PALLET].length * size;
+		int wB = Theme.PALLET[this.PALLET].length * size;
 		int xB = colors.getPosition().x - wB/2;
 		int yB = colors.getPosition().y - size/2;
-		for(int i = 0; i < Engine.PALLET[this.PALLET].length; i++) {
-			g.setColor(Engine.PALLET[this.PALLET][i]);
+		for(int i = 0; i < Theme.PALLET[this.PALLET].length; i++) {
+			g.setColor(Theme.PALLET[this.PALLET][i]);
 			g.fillRect(xB + i*size, yB, size, size);
 		}
 		buttons.get("plus_color").getResponsive().setRelative(wB/2 + 2*Engine.GameScale, 0);
@@ -156,9 +157,9 @@ public class Options implements Activity, Receiver {
 		int xS = fullscreen.getPosition().x - wF/2;
 		int yS = fullscreen.getPosition().y - hF;
 		g.setFont(font);
-		g.setColor(Engine.Color_Tertiary);
+		g.setColor(Theme.Color_Tertiary);
 		g.drawString(value, xS + Engine.GameScale, yS + Engine.GameScale);
-		g.setColor(Engine.Color_Primary);
+		g.setColor(Theme.Color_Primary);
 		g.drawString(value, xS, yS);
 	}
 	
@@ -172,9 +173,9 @@ public class Options implements Activity, Receiver {
 		int xS = resolution.getPosition().x - wF/2;
 		int yS = resolution.getPosition().y - hF;
 		g.setFont(font);
-		g.setColor(Engine.Color_Tertiary);
+		g.setColor(Theme.Color_Tertiary);
 		g.drawString(value, xS + Engine.GameScale, yS + Engine.GameScale);
-		g.setColor(Engine.Color_Primary);
+		g.setColor(Theme.Color_Primary);
 		g.drawString(value, xS, yS);
 		String value_res = Engine.resolutions[this.RESOLUTION][0] + " / " + Engine.resolutions[this.RESOLUTION][1];
 		int wF_res = FontG.getWidth(value_res, font);
@@ -182,9 +183,9 @@ public class Options implements Activity, Receiver {
 		int xS_res = resolution.getPosition().x - wF_res/2;
 		int yS_res = resolution.getPosition().y + hF_res/2;
 		g.setFont(font);
-		g.setColor(Engine.Color_Tertiary);
+		g.setColor(Theme.Color_Tertiary);
 		g.drawString(value_res, xS_res + Engine.GameScale, yS_res + Engine.GameScale);
-		g.setColor(Engine.Color_Primary);
+		g.setColor(Theme.Color_Primary);
 		g.drawString(value_res, xS_res, yS_res);
 		buttons.get("plus_resolution").getResponsive().setRelative(wF_res/2 + 2*Engine.GameScale, 0);
 		buttons.get("minus_resolution").getResponsive().setRelative(-wF_res/2 - 2*Engine.GameScale, 0);
@@ -204,9 +205,9 @@ public class Options implements Activity, Receiver {
 		buttons.get("plus_scale").getResponsive().setRelative(wF/2 + 2*Engine.GameScale, 0);
 		buttons.get("minus_scale").getResponsive().setRelative(-wF/2 - 2*Engine.GameScale, 0);
 		g.setFont(font);
-		g.setColor(Engine.Color_Tertiary);
+		g.setColor(Theme.Color_Tertiary);
 		g.drawString(value, x + Engine.GameScale, y + Engine.GameScale);
-		g.setColor(Engine.Color_Primary);
+		g.setColor(Theme.Color_Primary);
 		g.drawString(value, x, y);
 	}
 	

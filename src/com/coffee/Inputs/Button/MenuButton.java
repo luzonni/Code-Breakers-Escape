@@ -8,6 +8,7 @@ import java.util.List;
 import com.coffee.Inputs.Mouse;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.tools.ActionBack;
 import com.coffee.main.tools.Responsive;
 
@@ -29,9 +30,9 @@ public class MenuButton extends Button {
 	
 	private BufferedImage[] buildIcon() {
 		SpriteSheet sp = new SpriteSheet(Engine.ResPath+"/ui/menubutton.png", Engine.GameScale);
-		sp.replaceColor(Engine.PRIMARY, Engine.Color_Primary.getRGB());
-		sp.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
-		sp.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
+		sp.replaceColor(Theme.PRIMARY, Theme.Color_Primary.getRGB());
+		sp.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
+		sp.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
 		BufferedImage[] icons = new BufferedImage[sp.getWidth()/10];
 		for(int i = 0; i < icons.length; i++) {
 			icons[i] = sp.getSprite(i*10, 0, 10, 10);

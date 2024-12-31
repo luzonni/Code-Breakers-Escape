@@ -1,7 +1,7 @@
 package com.coffee.objects.entity;
 
 import com.coffee.level.Level;
-import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.main.tools.Timer;
 import com.coffee.objects.Directions;
@@ -19,7 +19,7 @@ public class Blaster extends Entity {
     public Blaster(int id, int x, int y, Directions direction) {
         super(id, x, y);
         if(sprite == null) {
-            sprite = getSprite("blaster", Engine.Color_Primary);
+            sprite = getSprite("blaster", Theme.Color_Primary);
         }
         getOE().setDirection(direction);
         t = new Timer(1);

@@ -7,6 +7,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.coffee.command.Receiver;
+import com.coffee.main.Theme;
+import com.coffee.objects.entity.EntityTag;
+import com.coffee.objects.tiles.TileTag;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -69,7 +73,8 @@ public class Creator implements Activity {
 		int index = 1;
 		while(true) {
 			try {
-				tiles.add(Tile.Factory(index, 0, 0));
+				TileTag[] tag = TileTag.values();
+				tiles.add(Tile.Factory(tag[index], 0, 0));
 			}catch (Exception e) {
 				break;
 			}
@@ -81,10 +86,11 @@ public class Creator implements Activity {
 	
 	private void buildInventoryEntities(int size) {
 		List<Entity> entities = new ArrayList<Entity>();
-		int index = 1;
+		int index = 0;
 		while(true) {
 			try {
-				Entity E = Entity.Factory(index, 0, 0);
+				EntityTag[] tag = EntityTag.values();
+				Entity E = Entity.Factory(tag[index], 0, 0);
 				entities.add(E);
 			}catch (Exception e) {
 				break;
@@ -152,7 +158,7 @@ public class Creator implements Activity {
 		for(int i = 0; i < array_tile.length; i++) {
 			JSONObject tile = (JSONObject) tiles.get(i);
 			int id = ((Number)tile.get("ID")).intValue();
-			Tile t = Tile.Factory(id, 0, 0);
+			Tile t = Tile.Factory(TileTag.values()[id], 0, 0);
 			if(t instanceof Air)
 				continue;
 			array_tile[i] = t;
@@ -169,7 +175,7 @@ public class Creator implements Activity {
 			int x = ((Number)entity.get("X")).intValue();
 			int y = ((Number)entity.get("Y")).intValue();
 			if(type.equals("E")) {
-				array_item[x + y * this.WIDTH] = Entity.Factory(id, x, y);
+				array_item[x + y * this.WIDTH] = Entity.Factory(EntityTag.values()[id], x, y);
 			} else if(type.equals("I"))
 				array_item[x+y*this.WIDTH] = Item.Factory(id, x, y);
 		}
@@ -206,6 +212,9 @@ public class Creator implements Activity {
 			}else {
 				message = "Level not found";
 			}
+		}
+		if(keys[0].equalsIgnoreCase("try") || keys[0].equalsIgnoreCase("t")) {
+			testeAndSaveLevel();
 		}
 		return message;
 	}
@@ -342,7 +351,7 @@ public class Creator implements Activity {
 		create_button.render(g);
 		String value = "/";
 		Font f = FontG.font(12*Engine.GameScale);
-		g.setColor(Engine.Color_Primary);
+		g.setColor(Theme.Color_Primary);
 		g.setFont(f);
 		int x = Engine.getWidth()/2 - FontG.getWidth(value, f)/2 + Engine.GameScale;
 		int y = Engine.getHeight()/2 + FontG.getHeight(value, f)/2;

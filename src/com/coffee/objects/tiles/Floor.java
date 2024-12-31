@@ -3,6 +3,7 @@ package com.coffee.objects.tiles;
 import java.awt.image.BufferedImage;
 
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.objects.Variables;
 
 public class Floor extends Tile {
@@ -13,7 +14,7 @@ public class Floor extends Tile {
 	public Floor(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null) {
-			sprite = getSprite("floor", Engine.Color_Secondary);
+			sprite = getSprite("floor", Theme.Color_Secondary);
 			index = Engine.RAND.nextInt(sprite.length);
 		}
 		this.setSolid(false);

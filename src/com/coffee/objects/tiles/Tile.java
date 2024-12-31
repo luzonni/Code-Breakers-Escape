@@ -9,76 +9,74 @@ import java.util.List;
 import com.coffee.command.Commands;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Objects;
 import com.coffee.objects.Variables;
 import com.coffee.objects.entity.Entity;
 
 public abstract class Tile extends Objects {
-	
-	private int xF, yF;
-	
-	private boolean solid;
 
 	public static int getSize() {
 		return Engine.GameScale*16;
 	}
 	
-	public static Tile Factory(Object... values) {
-		Tile tile = null;
-		int id = (int)values[0];
-		int x = (int)values[1];
-		int y = (int)values[2];
-        return switch (id) {
-            case 0 -> {
+	public static Tile Factory(TileTag tag, int x, int y) {
+		Tile tile;
+		int id = tag.getId();
+        return switch (tag) {
+            case Air -> {
                 tile = new Air(id, x, y);
                 yield tile;
             }
-            case 1 -> {
+            case Wall -> {
                 tile = new Wall(id, x, y);
                 yield tile;
             }
-            case 2 -> {
+            case Floor -> {
                 tile = new Floor(id, x, y);
                 yield tile;
             }
-            case 3 -> {
+            case Door -> {
                 tile = new Door(id, x, y);
                 yield tile;
             }
-            case 4 -> {
-                tile = new Reforced_Door(id, x, y);
+            case Gate -> {
+                tile = new Gate(id, x, y);
                 yield tile;
             }
-            case 5 -> {
+            case Box -> {
                 tile = new Box(id, x, y);
                 yield tile;
             }
-            case 6 -> {
+            case Crate -> {
                 tile = new Crate(id, x, y);
                 yield tile;
             }
-            case 7 -> {
+            case Spine -> {
                 tile = new Spine(id, x, y);
                 yield tile;
             }
-            case 8 -> {
+            case Vase -> {
                 tile = new Vase(id, x, y);
                 yield tile;
             }
-            case 9 -> {
+			case Thron -> {
                 tile = new Thorn(id, x, y);
                 yield tile;
             }
-            case 10 -> {
+			case Repellent -> {
                 tile = new Repellent(id, x, y);
                 yield tile;
             }
-            case 11 -> {
+			case Fake_Wall -> {
                 tile = new Fake_Wall(id, x, y);
                 yield tile;
             }
-            default -> throw new RuntimeException("Tile not exist");
+			case Portalizer -> {
+				tile = new Portalizer(id, x, y);
+				yield tile;
+			}
         };
     }
 	
@@ -91,9 +89,9 @@ public abstract class Tile extends Objects {
 
 	public BufferedImage[] getSprite(String name, Color color) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath + "/tiles/" + name + ".png", Engine.GameScale);
-		spriteSheet.replaceColor(Engine.PRIMARY, color.getRGB());
-		spriteSheet.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
-		spriteSheet.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
+		spriteSheet.replaceColor(Theme.PRIMARY, color.getRGB());
+		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
+		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
 		int length = spriteSheet.getWidth()/16;
 		BufferedImage[] sprites = new BufferedImage[length];
 		for(int i = 0; i < length; i++) {
@@ -104,9 +102,9 @@ public abstract class Tile extends Objects {
 	
 	public BufferedImage[] getSprite(String name, Color color, int verticalIndex) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath + "/tiles/" + name + ".png", Engine.GameScale);
-		spriteSheet.replaceColor(Engine.PRIMARY, color.getRGB());
-		spriteSheet.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
-		spriteSheet.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
+		spriteSheet.replaceColor(Theme.PRIMARY, color.getRGB());
+		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
+		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
 		int length = (spriteSheet.getWidth())/16;
 		BufferedImage[] sprites = new BufferedImage[length];
 		for(int i = 0; i < length; i++) {
@@ -126,11 +124,11 @@ public abstract class Tile extends Objects {
 				}
 			}
 		}catch (Exception ignore) { }
-		return this.solid || breaking;
+		return this.getVar(Variables.Breakable) || breaking;
 	}
 	
 	public void setSolid(boolean solid) {
-		this.solid = solid;
+		setVar(Variables.Breakable, solid);
 	}
 	
 	public boolean centralizedWith(Entity o) {
@@ -138,7 +136,7 @@ public abstract class Tile extends Objects {
 		Point p2 = new Point((int)o.getX() + o.getWidth() - 1, (int)o.getY() + 1);
 		Point p3 = new Point((int)o.getX() + o.getWidth() - 1, (int)o.getY() + o.getHeight() - 1);
 		Point p4 = new Point((int)o.getX() + 1, (int)o.getY() + o.getHeight() - 1);
-		if((this.getBounds().contains(p1) && this.getBounds().contains(p2) && this.getBounds().contains(p3) && this.getBounds().contains(p4)) && !o.isFloating()) {
+		if((this.getBounds().contains(p1) && this.getBounds().contains(p2) && this.getBounds().contains(p3) && this.getBounds().contains(p4))) {
 			return true;
 		}
 		return false;
@@ -148,35 +146,12 @@ public abstract class Tile extends Objects {
 	public String giveCommand(String[] keys) {
 		String message = "Command no access";
 		if(take(keys, Commands.move)) {
-			Tile[] map = Game.getLevel().getMap();
-			int w = Game.getLevel().getBounds().width / Tile.getSize();
-			int h = Game.getLevel().getBounds().height / Tile.getSize();
-			int x_next = Integer.parseInt(keys[1]);
-			int y_next = Integer.parseInt(keys[2])*-1;
-			Tile curTile = this;
-			int xIndex = (int)curTile.getX() / Tile.getSize();
-			int yIndex = (int)curTile.getY() / Tile.getSize();
-			if(xIndex+x_next < 0 || xIndex+x_next > w || yIndex+y_next < 0 || yIndex+y_next > h)
-				return "Out position";
-			Tile nextTile = map[(xIndex+x_next)+(yIndex+y_next)*w];
-			if(!curTile.getVar(Variables.Movable) || !nextTile.getVar(Variables.Movable)) {
-				message = "The box could not be moved to this position";
-				return message;
-			}
-			for(Entity e : Game.getLevel().getEntities())
-				if(nextTile.centralizedWith(e)) {
-					message = "The position has an entity";
-					return message;
-				}
-			curTile.setX(curTile.getX()+x_next*Tile.getSize());
-			curTile.setY(curTile.getY()+y_next*Tile.getSize());
-			nextTile.setX(nextTile.getX()-x_next*Tile.getSize());
-			nextTile.setY(nextTile.getY()-y_next*Tile.getSize());
-			Game.getLevel().getMap()[xIndex+yIndex*w] = nextTile;
-			Game.getLevel().getMap()[(xIndex+x_next)+(yIndex+y_next)*w] = curTile;
-			message = "";
+			EXE.move(keys, this);
 			used(Commands.move);
-			return message;
+		}
+		if(take(keys, Commands.remove)) {
+			EXE.remove(this);
+			used(Commands.remove);
 		}
 		return message;
 	}
@@ -190,8 +165,8 @@ public abstract class Tile extends Objects {
 	}
 	
 	public void renderTile(BufferedImage Sprite, Graphics2D g) {
-		int x = (int)getX() + xF;
-		int y = (int)getY() + yF;
+		int x = (int)getX();
+		int y = (int)getY();
 		g.drawImage(Sprite, x - Game.getCam().getX(), y - Game.getCam().getY(), null);
 	}
 

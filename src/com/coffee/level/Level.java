@@ -1,9 +1,6 @@
 package com.coffee.level;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,6 +11,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.coffee.main.Theme;
+import com.coffee.objects.entity.EntityTag;
+import com.coffee.objects.tiles.TileTag;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,28 +25,24 @@ import com.coffee.command.Receiver;
 import com.coffee.ui.creator.DrawableBox;
 import com.coffee.exceptions.Dead;
 import com.coffee.graphics.FontG;
-import com.coffee.items.Bow;
 import com.coffee.items.Item;
-import com.coffee.items.Placeable;
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Game;
-import com.coffee.objects.Directions;
 import com.coffee.objects.Objects;
 import com.coffee.objects.Variables;
 import com.coffee.objects.entity.Entity;
-import com.coffee.objects.entity.Player;
 import com.coffee.objects.particles.Particle;
 import com.coffee.objects.tiles.Tile;
 
 public class Level implements Receiver {
 	
 	private List<Commands> list_keys;
-	private JSONObject level;
+	private final JSONObject level;
 	
-	public Objects selected;
+	protected Objects selected;
 	private Tile[] map;
-	private List<Entity> entities;
-	private List<Particle> particles;
+	private final List<Entity> entities;
+	private final List<Particle> particles;
 	private BufferedImage picture;
 	private Rectangle bounds;
 	
@@ -141,7 +137,7 @@ public class Level implements Receiver {
 			int id = ((Number)tile.get("ID")).intValue();
 			int x = ((Number)tile.get("X")).intValue();
 			int y = ((Number)tile.get("Y")).intValue();
-			map[i] = Tile.Factory(id, x * Tile.getSize(), y * Tile.getSize());
+			map[i] = Tile.Factory(TileTag.values()[id], x * Tile.getSize(), y * Tile.getSize());
 		}
 		for(int i = 0; i < entities.size(); i++) {
 			JSONObject entity = (JSONObject)entities.get(i);
@@ -151,7 +147,7 @@ public class Level implements Receiver {
 			int y = ((Number)entity.get("Y")).intValue();
 			Entity e = null;
 			if(type.equals("E"))
-				e = Entity.Factory(id, x * Tile.getSize(), y * Tile.getSize());
+				e = Entity.Factory(EntityTag.values()[id], x * Tile.getSize(), y * Tile.getSize());
 			else if(type.equals("I"))
 				e = Item.Factory(id, x * Tile.getSize(), y * Tile.getSize());
 			addEntity(e);
@@ -187,6 +183,10 @@ public class Level implements Receiver {
 	
 	public void clearSelect() {
 		this.selected = null;
+	}
+
+	public Objects getSelected() {
+		return this.selected;
 	}
 	
 	public List<Commands> getKeys() {
@@ -245,6 +245,7 @@ public class Level implements Receiver {
 	@Override
 	public String giveCommand(String[] keys) {
 		String message = "Command no access";
+
 		if(take(keys, Commands.clear)) {
 			if(selected != null) {
 				clearSelect();
@@ -252,67 +253,22 @@ public class Level implements Receiver {
 				message = "Clean";
 			}
 		}
+
 		if(selected != null)
 			return selected.giveCommand(keys);
+
 		if(take(keys, Commands.select)) {
 			message = "Click on an tile to select it";
-			new Thread(() -> {
-                while(selected == null) {
-					System.out.println("Search");
-                    selected = setSelected();
-                    if(selected != null)
-                        used(Commands.select);
-                }
-            }).start();
+			EXE.selector(this);
 		}
+
 		if(take(keys, Commands.shot)) {
-			message = "";
-			String dir_name = (keys[1].substring(0, 1).toUpperCase() + keys[1].substring(1).toLowerCase());
-			Directions dir = Directions.valueOf(dir_name);
-			Player player = Game.getPlayer();
-			Item[] items = player.getInventory().getList();
-			for(Item item : items)
-				if(item instanceof Bow) {
-					((Bow)item).shot(player, dir);
-					used(Commands.shot);
-					break;
-				}
-			message = "You don't have a bow to shoot";
+			EXE.shot(keys, this);
 		}
 		if(take(keys, Commands.put)) {
-			Item[] items = Game.getPlayer().getInventory().getList();
-			for(int i = 0; i < items.length; i++) {
-				if(items[i] instanceof Placeable) {
-					if(((Placeable)items[i]).place(keys)) {
-						used(Commands.put);
-						message = "";
-					}else
-						message = "Item not found";
-				}else {
-					message = "Item not found";
-				}
-			}
+			EXE.put(keys, this);
 		}
 		return message;
-	}
-	
-	private Objects setSelected() {
-		for(int i = 0; i < map.length; i++) {
-			Tile T = map[i];
-			if(Mouse.clickOnMap(Mouse_Button.LEFT, T.getBounds(), Game.getCam())) {
-				if(T.getVar(Variables.Selectable))
-					return T;
-			}
-		}
-		for(int ii = 0; ii < entities.size(); ii++) {
-			Entity E = entities.get(ii);
-			if(Mouse.clickOnMap(Mouse_Button.LEFT, E.getBounds(), Game.getCam())) {
-				if (E.getVar(Variables.Selectable)) {
-					return E;
-				}
-			}
-		}
-		return null;
 	}
 
 	public void tick() {
@@ -341,7 +297,7 @@ public class Level implements Receiver {
 	
 	public void render(Graphics2D g) {
 		drawPicture(g);
-		g.setColor(new Color(Engine.Color_Secondary.getRed(), Engine.Color_Secondary.getGreen(), Engine.Color_Secondary.getBlue(), 90));
+		g.setColor(new Color(Theme.Color_Secondary.getRed(), Theme.Color_Secondary.getGreen(), Theme.Color_Secondary.getBlue(), 90));
 		g.fillRect(bounds.x - Engine.GameScale - Game.getCam().getX(), bounds.y - Engine.GameScale - Game.getCam().getY(), bounds.width + Engine.GameScale*2, bounds.height + Engine.GameScale*2);
 		for(int i = 0; i < map.length; i++)
 			map[i].render(g);
@@ -349,8 +305,11 @@ public class Level implements Receiver {
 			Entity e = entities.get(i);
 			e.render(g);
 			if(e.getVar(Variables.Freeze)) {
-				g.setColor(new Color(Engine.Color_Primary.getRed(), Engine.Color_Primary.getGreen(), Engine.Color_Primary.getBlue(), 80));
+				g.setColor(new Color(Theme.Color_Primary.getRed(), Theme.Color_Primary.getGreen(), Theme.Color_Primary.getBlue(), 80));
 				g.fillRect((int)e.getX() - Game.getCam().getX(), (int)e.getY() - Game.getCam().getY(), e.getWidth(), e.getHeight());
+				g.setColor(Theme.Color_Primary);
+				g.setStroke(new BasicStroke(Engine.GameScale));
+				g.drawRect( (int)e.getX() - Game.getCam().getX(), (int)e.getY() - Game.getCam().getY(), e.getWidth(), e.getHeight());
 			}
 		}
 		for(int i = 0; i < particles.size(); i++)
@@ -366,9 +325,9 @@ public class Level implements Receiver {
 		int x = getBounds().x;
 		int y = getBounds().y - hF/2;
 		g.setFont(f);
-		g.setColor(Engine.Color_Secondary);
+		g.setColor(Theme.Color_Secondary);
 		g.drawString(value, x + Engine.GameScale - Game.getCam().getX(), y + Engine.GameScale - Game.getCam().getY());
-		g.setColor(Engine.Color_Primary);
+		g.setColor(Theme.Color_Primary);
 		g.drawString(value, x - Game.getCam().getX(), y - Game.getCam().getY());
 	}
 	
@@ -380,9 +339,9 @@ public class Level implements Receiver {
 		int x = getBounds().x + getBounds().width - wF;
 		int y = getBounds().y + getBounds().height + hF + Engine.GameScale;
 		g.setFont(f);
-		g.setColor(Engine.Color_Secondary);
+		g.setColor(Theme.Color_Secondary);
 		g.drawString(value, x + Engine.GameScale - Game.getCam().getX(), y + Engine.GameScale - Game.getCam().getY());
-		g.setColor(Engine.Color_Primary);
+		g.setColor(Theme.Color_Primary);
 		g.drawString(value, x - Game.getCam().getX(), y - Game.getCam().getY());
 	}
 	
@@ -397,5 +356,4 @@ public class Level implements Receiver {
 	public void dispose() {
 		
 	}
-	
 }

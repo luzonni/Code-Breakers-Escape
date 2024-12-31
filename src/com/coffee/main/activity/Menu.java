@@ -19,6 +19,7 @@ import com.coffee.graphics.FontG;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
 import com.coffee.main.Geometry;
+import com.coffee.main.Theme;
 import com.coffee.main.tools.Responsive;
 import com.coffee.objects.tiles.Tile;
 
@@ -41,8 +42,8 @@ public class Menu implements Activity, Receiver {
 		if(list == null)
 			list = new ArrayList<Buoyant>();
 		SpriteSheet sp = new SpriteSheet(Engine.ResPath + "/ui/LogoName.png", 3*Engine.GameScale);
-		sp.replaceColor(0xffffffff, Engine.Color_Primary.getRGB());
-		sp.replaceColor(0xff000000, Engine.Color_Tertiary.getRGB());
+		sp.replaceColor(0xffffffff, Theme.Color_Primary.getRGB());
+		sp.replaceColor(0xff000000, Theme.Color_Tertiary.getRGB());
 		Logo = sp.getImage();
 		logo_res = Responsive.createRectangle(null, new Rectangle(Logo.getWidth(), Logo.getHeight()), 50, 50);
 	}
@@ -70,8 +71,8 @@ public class Menu implements Activity, Receiver {
 	private void drawBackground() {
 		background = new BufferedImage(Engine.getWidth(), Engine.getHeight(), BufferedImage.TYPE_INT_ARGB);
 		SpriteSheet sp = new SpriteSheet(Engine.ResPath+"/ui/background.png", 2*Engine.GameScale);
-		sp.replaceColor(0xffffffff, Engine.Color_Secondary.getRGB());
-		sp.replaceColor(0xff000000, Engine.Color_Tertiary.getRGB());
+		sp.replaceColor(0xffffffff, Theme.Color_Secondary.getRGB());
+		sp.replaceColor(0xff000000, Theme.Color_Tertiary.getRGB());
 		Graphics2D g = (Graphics2D)background.getGraphics();
 		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f));
 		int w = Engine.getWidth() / sp.getWidth();
@@ -138,9 +139,9 @@ public class Menu implements Activity, Receiver {
 		int y = Engine.getHeight() - hF/2;
 		Rectangle recDesc = new Rectangle(x, y - hF, wF, hF);
 		if(Mouse.On_Mouse(recDesc))
-			g.setColor(Engine.Color_Secondary);
+			g.setColor(Theme.Color_Secondary);
 		else
-			g.setColor(Engine.Color_Primary);
+			g.setColor(Theme.Color_Primary);
 		g.setFont(f);
 		g.drawString(value, x, y);
 		if(Mouse.clickOn(Mouse_Button.LEFT, recDesc)) {

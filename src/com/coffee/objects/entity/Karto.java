@@ -3,7 +3,7 @@ package com.coffee.objects.entity;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Variables;
 
@@ -18,8 +18,8 @@ public class Karto extends Entity {
 		super(id, x, y);
 		if(sprites == null) {
 			sprites = new BufferedImage[2][];
-			sprites[0] = getSprite("karto", Engine.Color_Primary, 0);
-			sprites[1] = getSprite("karto", Engine.Color_Primary, 1);
+			sprites[0] = getSprite("karto", Theme.Color_Primary, 0);
+			sprites[1] = getSprite("karto", Theme.Color_Primary, 1);
 		}
 		setVar(Variables.Alive, true);
 	}

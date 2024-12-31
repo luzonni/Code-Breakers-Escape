@@ -11,6 +11,7 @@ import com.coffee.exceptions.Dead;
 import com.coffee.level.Level;
 import com.coffee.level.Next;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.tools.Responsive;
 import com.coffee.ui.win.Helper;
 import com.coffee.objects.Camera;
@@ -18,7 +19,7 @@ import com.coffee.objects.Objects;
 import com.coffee.objects.entity.Entity;
 import com.coffee.objects.entity.Player;
 
-public class Game implements Activity, Receiver {
+public class Game implements Activity {
 	
 	private Camera camera;
 	private Level level;
@@ -42,7 +43,7 @@ public class Game implements Activity, Receiver {
 
 	@Override
 	public void enter() {
-		this.level.selected = null;
+		this.level.clearSelect();
 		this.level.open();
 		if(helper == null)
 			helper = new Helper(level.getKeys());
@@ -51,9 +52,7 @@ public class Game implements Activity, Receiver {
 		Engine.UI.addOption("Back", () -> {
 			Engine.setActivity(activityToReturn);
 		});
-		Engine.UI.addOption("restart", () -> {
-			restart();
-		});
+		Engine.UI.addOption("restart", Game::restart);
 		Engine.UI.addView(helper);
 	}
 	
@@ -63,11 +62,14 @@ public class Game implements Activity, Receiver {
 			Engine.UI.getConsole().clearChat();
 			return "";
 		}
+		if(keys[0].equalsIgnoreCase("restart")) {
+			Game.restart();
+		}
 		return level.giveCommand(keys);
 	}
 	
 	public static void clearSelect() {
-		getLevel().selected = null;
+		getLevel().clearSelect();
 	}
 	
 	public static Player getPlayer() {
@@ -78,7 +80,7 @@ public class Game implements Activity, Receiver {
 	}
 	
 	public static Objects getSelect() {
-		return getLevel().selected;
+		return getLevel().getSelected();
 	}
 	
 	public static Level getLevel() {
@@ -125,9 +127,8 @@ public class Game implements Activity, Receiver {
 	}
 	
 	public static void restart() {
-		if(!(Engine.ACTIVITY instanceof Game))
+		if(!(Engine.ACTIVITY instanceof Game game))
 			throw new RuntimeException("Not in game");
-		Game game = ((Game)Engine.ACTIVITY);
 		Engine.setActivity(new Game(new Level(game.level.getLevel()), game.next, game.activityToReturn));
 	}
 	
@@ -157,14 +158,14 @@ public class Game implements Activity, Receiver {
 	
 	public void render(Graphics2D g) {
 		level.render(g);
-		if(this.level.selected != null) {
+		if(this.level.getSelected() != null) {
 			int per = (int)(f*20);
-			int x = this.level.selected.getBounds().x - getCam().getX() + per;
-			int y = this.level.selected.getBounds().y  - getCam().getY() + per;
-			int w = this.level.selected.getBounds().width - per*2;
-			int h = this.level.selected.getBounds().height - per*2;
+			int x = this.level.getSelected().getBounds().x - getCam().getX() + per;
+			int y = this.level.getSelected().getBounds().y  - getCam().getY() + per;
+			int w = this.level.getSelected().getBounds().width - per*2;
+			int h = this.level.getSelected().getBounds().height - per*2;
 			g.setStroke(new BasicStroke(Engine.GameScale + per));
-			g.setColor(Engine.Color_Tertiary);
+			g.setColor(Theme.Color_Tertiary);
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, f));
 			g.drawRect(x, y, w, h);
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
@@ -172,7 +173,7 @@ public class Game implements Activity, Receiver {
 	}
 	
 	public void dispose() {
-		this.level.selected = null;
+		this.level.clearSelect();
 		this.camera.stop();
 		this.level.dispose();
 		Engine.UI.clearViews();

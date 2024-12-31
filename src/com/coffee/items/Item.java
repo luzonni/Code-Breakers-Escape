@@ -5,7 +5,9 @@ import java.awt.image.BufferedImage;
 import com.coffee.command.Commands;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.objects.entity.EntityItem;
+import com.coffee.objects.entity.EntityTag;
 
 public abstract class Item {
 	
@@ -51,16 +53,20 @@ public abstract class Item {
 				item = new EntityItem(id, new CMD(Commands.shot), x, y);
 				yield item;
 			}
-            case 8 -> {
+			case 8 -> {
+				item = new EntityItem(id, new CMD(Commands.revive), x, y);
+				yield item;
+			}
+            case 9 -> {
                 item = new EntityItem(id, new Bow(), x, y);
                 yield item;
             }
-            case 9 -> {
-                item = new EntityItem(id, new Placeable(12), x, y);
+            case 10 -> {
+                item = new EntityItem(id, new Placeable(EntityTag.Bomb), x, y);
                 yield item;
             }
-			case 10 -> {
-				item = new EntityItem(id, new Placeable(14), x, y);
+			case 11 -> {
+				item = new EntityItem(id, new Placeable(EntityTag.Barrel), x, y);
 				yield item;
 			}
             default -> throw new RuntimeException("Tile not exist");
@@ -98,9 +104,9 @@ public abstract class Item {
 	
 	public static BufferedImage[] getSprite(String name) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/items/"+name+".png", Engine.GameScale);
-		spriteSheet.replaceColor(Engine.PRIMARY, Engine.Color_Primary.getRGB());
-		spriteSheet.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
-		spriteSheet.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
+		spriteSheet.replaceColor(Theme.PRIMARY, Theme.Color_Primary.getRGB());
+		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
+		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
 		int lenght = (spriteSheet.getWidth())/16;
 		BufferedImage[] sprites = new BufferedImage[lenght];
 		for(int i = 0; i < lenght; i++) {

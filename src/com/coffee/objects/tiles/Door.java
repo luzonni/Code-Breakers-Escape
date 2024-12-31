@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 import com.coffee.items.Item;
 import com.coffee.items.Key;
-import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.entity.Player;
 
@@ -16,7 +16,7 @@ public class Door extends Tile {
 	public Door(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null) {
-			sprite = getSprite("door", Engine.Color_Primary);
+			sprite = getSprite("door", Theme.Color_Primary);
 		}
 		this.setSolid(true);
 	}

@@ -7,6 +7,7 @@ import com.coffee.Inputs.Keyboard;
 import com.coffee.graphics.Flip;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Variables;
 import com.coffee.ui.Inventory;
@@ -22,8 +23,8 @@ public class Player extends Entity {
 	
 	private void buildSprites() {
 		SpriteSheet sp = new SpriteSheet(Engine.ResPath+"/entity/Player.png", Engine.GameScale);
-		sp.replaceColor(0xffffffff, Engine.Color_Primary.getRGB());
-		sp.replaceColor(0xff000000, Engine.Color_Tertiary.getRGB());
+		sp.replaceColor(0xffffffff, Theme.Color_Primary.getRGB());
+		sp.replaceColor(0xff000000, Theme.Color_Tertiary.getRGB());
 		sprite = new BufferedImage[2][7];
 		for(int i = 0; i < sprite[0].length; i++) {
 			sprite[0][i] = sp.getSprite(i*16, 0);
@@ -42,7 +43,7 @@ public class Player extends Entity {
 		setVar(Variables.Alive, true);
 		setVar(Variables.Selectable, true);
 		setVar(Variables.Movable, false);
-		setVar(Variables.Removeble, false);
+		setVar(Variables.Removable, false);
 		getOE().setDirection(direction);
 	}
 	
@@ -56,7 +57,7 @@ public class Player extends Entity {
 			indexAnim = 0;
 		}
 		keyDirection();
-		getOE().sliding(getSpeed());
+		getOE().slide(getSpeed());
 		getInventory().tick();
 	}
 	
@@ -67,7 +68,7 @@ public class Player extends Entity {
 		}
 		if(collide) {
 			collide = false;
-//			Game.getCam().impact(getDirection(), 10);				
+			//TODO Game.getCam().impact(getOE().getDirection(), Engine.GameScale);
 		}
 		Directions new_dir = this.getOE().getDirection();
 		if((Keyboard.KeyPressing("W") || Keyboard.KeyPressing("Up"))) 

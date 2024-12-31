@@ -7,6 +7,7 @@ import com.coffee.Inputs.Mouse_Button;
 import com.coffee.graphics.FontG;
 import com.coffee.items.Item;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Creator;
 import com.coffee.main.tools.Responsive;
 import com.coffee.objects.Objects;
@@ -78,7 +79,7 @@ public class Shelf {
 		int Y = getResponsive().getBounds().y - Engine.GameScale;
 		int width = getResponsive().getBounds().width + Engine.GameScale*3;
 		int height = getResponsive().getBounds().height + Engine.GameScale*2;
-		g.setColor(new Color(Engine.Color_Primary.getRed(), Engine.Color_Primary.getGreen(), Engine.Color_Primary.getBlue(), 60));
+		g.setColor(new Color(Theme.Color_Primary.getRed(), Theme.Color_Primary.getGreen(), Theme.Color_Primary.getBlue(), 60));
 		g.fillRect(X, Y, width, height);
 		for(int i = 0; i < inventory.length; i++) {
 			Objects t = inventory[i];
@@ -94,13 +95,13 @@ public class Shelf {
 					Engine.UI.getPopTag().setText(t.getClass().getSimpleName());
 				}
 			}
-			g.setColor(new Color(Engine.Color_Secondary.getRed(), Engine.Color_Secondary.getGreen(), Engine.Color_Secondary.getBlue(), 60));
+			g.setColor(new Color(Theme.Color_Secondary.getRed(), Theme.Color_Secondary.getGreen(), Theme.Color_Secondary.getBlue(), 60));
 			g.fillRect(x + 2*Engine.GameScale, y + 2*Engine.GameScale, w, h);
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, t == Creator.getSelected() ? 1f : 0.5f));
 			g.drawImage(t.getSprite(), x , y, Tile.getSize(), Tile.getSize(), null);
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
-		g.setColor(Engine.Color_Tertiary);
+		g.setColor(Theme.Color_Tertiary);
 		int size = (int)(((double)inventory.length / (double)default_inventory.length)*getResponsive().getBounds().height);
 		double a = ((double)size * ((double)(page) / (double)(inventory.length)));
 		g.fillRect(getResponsive().getBounds().x + getResponsive().getBounds().width, (int)(getResponsive().getBounds().y + a), Engine.GameScale, size);
@@ -115,9 +116,9 @@ public class Shelf {
 		int xx = x + w/2 - wF/2;
 		int yy = y - Engine.GameScale*2;
 		g.setFont(f);
-		g.setColor(Engine.Color_Secondary);
+		g.setColor(Theme.Color_Secondary);
 		g.drawString(value, xx + Engine.GameScale, yy + Engine.GameScale);
-		g.setColor(Engine.Color_Primary);
+		g.setColor(Theme.Color_Primary);
 		g.drawString(value, xx , yy);
 	}
 

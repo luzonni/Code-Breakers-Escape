@@ -3,7 +3,7 @@ package com.coffee.objects.tiles;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Variables;
 import com.coffee.objects.entity.Player;
@@ -16,7 +16,7 @@ public class Vase extends Tile {
 	public Vase(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null)
-			sprite = getSprite("vase", Engine.Color_Primary);
+			sprite = getSprite("vase", Theme.Color_Primary);
 		setVar(Variables.Selectable, true);
 		setVar(Variables.Movable, true);
 		this.setSolid(true);

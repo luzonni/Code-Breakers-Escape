@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.main.tools.Timer;
 import com.coffee.objects.Variables;
@@ -21,11 +22,12 @@ public class Ant extends Entity {
 	public Ant(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null) 
-			sprite = getSprite("ant", Engine.Color_Primary);
+			sprite = getSprite("ant", Theme.Color_Primary);
 		ai = new Path();
 		timer = new Timer(1);
 		setDepth(1);
 		setVar(Variables.Alive, true);
+		setEffect(Variables.Reanimable);
 	}
 
 	@Override

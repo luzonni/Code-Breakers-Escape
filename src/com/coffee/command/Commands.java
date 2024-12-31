@@ -7,7 +7,9 @@ public enum Commands {
 	move(3, "Use to move a selected object", "\"move x y\" (The values will be added to the current position)"),
 	remove(1, "Use to remove a selected object"),
 	shot(2, "Use to shot a arrow", "\"shot up\"  (Which side do you want to shoot)"),
-	put(4, "Use to place an object from your inventory on the map", "put \"object name\" X Y (position relative to you)");
+	put(4, "Use to place an object from your inventory on the map", "put \"object name\" X Y (position relative to you)"),
+	freeze(1, "freeze an entity"),
+	revive(1, "Use to revive a died selected entity");
 	
 	final int length;
 	String text_help;

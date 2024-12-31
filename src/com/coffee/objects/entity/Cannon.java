@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import com.coffee.main.Engine;
 import com.coffee.main.Geometry;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.main.tools.Timer;
 import com.coffee.objects.Variables;
@@ -21,9 +22,9 @@ public class Cannon extends Entity {
 	public Cannon(int id, int x, int y) {
 		super(id, x, y);
 		if(base == null)
-			base = getSprite("Cannon", Engine.Color_Tertiary)[0];
+			base = getSprite("Cannon", Theme.Color_Tertiary)[0];
 		if(cannon == null)
-			cannon = getSprite("Cannon", Engine.Color_Primary)[1];
+			cannon = getSprite("Cannon", Theme.Color_Primary)[1];
 		timer = new Timer(2 + Engine.RAND.nextInt(5));
 		setVar(Variables.Selectable, true);
 		setVar(Variables.Movable, true);

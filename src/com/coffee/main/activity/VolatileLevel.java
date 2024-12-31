@@ -10,6 +10,7 @@ import com.coffee.Inputs.Mouse_Button;
 import com.coffee.graphics.FontG;
 import com.coffee.level.Level;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 
 class VolatileLevel {
 	
@@ -74,14 +75,14 @@ class VolatileLevel {
 	public void render(Graphics2D g) {
 		setBounds();
 		if(bounds.contains(Mouse.getX(), Mouse.getY()) && !isBlocked())
-			g.setColor(Engine.Color_Secondary);
+			g.setColor(Theme.Color_Secondary);
 		else
-			g.setColor(Engine.Color_Tertiary);
+			g.setColor(Theme.Color_Tertiary);
 		g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
 		if(blocked)
-			g.setColor(Engine.Color_Secondary);
+			g.setColor(Theme.Color_Secondary);
 		else
-			g.setColor(Engine.Color_Primary);
+			g.setColor(Theme.Color_Primary);
 		g.setFont(font);
 		g.drawString(Name, bounds.x + Engine.GameScale*2, bounds.y + fontHeight());
 		g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);

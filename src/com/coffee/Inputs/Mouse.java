@@ -72,7 +72,7 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 		return false;
 	}
 	
-	public static synchronized boolean clickOnMap(Mouse_Button button, Rectangle rec, Camera cam) {
+	public static boolean clickOnMap(Mouse_Button button, Rectangle rec, Camera cam) {
 		if(button.equals(Mouse_Button.LEFT))
 			if(rec.contains(xClicked + cam.getX(), yClicked + cam.getY()) && clickLeftOn) {
 				clickLeftOn = false;

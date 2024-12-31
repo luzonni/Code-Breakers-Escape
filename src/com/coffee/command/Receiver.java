@@ -4,10 +4,10 @@ import com.coffee.main.Engine;
 import com.coffee.main.activity.Game;
 
 public interface Receiver {
-	
-	public String giveCommand (String[] keys);
 
-	public default boolean take(String[] keys, Commands command) {
+	String giveCommand (String[] keys);
+
+	default boolean take(String[] keys, Commands command) {
 		ginomu : for(Commands k : Game.getLevel().getKeys()) {
 			if(k.equals(command) && k.hasLength(keys)) {
 				String[] cur_key = k.name().split("_");
@@ -20,7 +20,7 @@ public interface Receiver {
 		return false;
 	}
 	
-	public default boolean used(Commands command) {
+	default boolean used(Commands command) {
 		if(Engine.ACTIVITY instanceof Game) {
 			Game.getLevel().getKeys().remove(command);
 			return true;

@@ -13,6 +13,7 @@ import com.coffee.Inputs.Mouse_Button;
 import com.coffee.command.Receiver;
 import com.coffee.level.Level;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.tools.Geometry;
 
 public class LevelMap implements Activity, Receiver {
@@ -170,9 +171,9 @@ public class LevelMap implements Activity, Receiver {
 				Point cur = levels[i].getPoint();
 				Point next = levels[i+1].getPoint();
 				if(levels[i+1].isBlocked())
-					g.setColor(Engine.Color_Secondary);
+					g.setColor(Theme.Color_Secondary);
 				else 
-					g.setColor(Engine.Color_Primary);
+					g.setColor(Theme.Color_Primary);
 				g.drawLine(cur.x, cur.y, next.x, next.y);
 			}
 			VolatileLevel vl = levels[i];

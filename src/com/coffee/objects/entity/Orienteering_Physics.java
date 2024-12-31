@@ -39,8 +39,10 @@ public class Orienteering_Physics {
 		this.direction = newdir;
 	}
 
-	public boolean sliding(int speed) {
+	public boolean slide(int speed) {
 		switch(getDirection()) {
+			case Idle:
+				break;
 			case Up:
 				if(!colliding(Directions.Up)) {
 					entity.setY(entity.getY() - speed);
@@ -69,8 +71,39 @@ public class Orienteering_Physics {
 					return false;
 				}
 				break;
-			default:
-				return false;
+			case UpRight:
+				if(!colliding(Directions.Up) && !colliding(Directions.Right)) {
+					entity.setX(entity.getX() - speed);
+					entity.setY(entity.getY() - speed);
+				}else {
+					return false;
+				}
+				break;
+			case RightDown:
+				if(!colliding(Directions.Right) && !colliding(Directions.Down)) {
+					entity.setX(entity.getX() + speed);
+					entity.setY(entity.getY() + speed);
+				}else {
+					return false;
+				}
+				break;
+			case DownLeft:
+				if(!colliding(Directions.Down) && !colliding(Directions.Left)) {
+					entity.setX(entity.getX() - speed);
+					entity.setY(entity.getY() + speed);
+				}else {
+					return false;
+				}
+				break;
+
+			case LeftUp:
+				if(!colliding(Directions.Left) && !colliding(Directions.Up)) {
+					entity.setX(entity.getX() - speed);
+					entity.setY(entity.getY() - speed);
+				}else {
+					return false;
+				}
+				break;
 		}
 		return true;
 	}

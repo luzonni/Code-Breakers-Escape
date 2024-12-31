@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import com.coffee.main.Engine;
 import com.coffee.main.Geometry;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Variables;
 import com.coffee.objects.particles.Dust;
@@ -16,7 +17,7 @@ public class Bomb extends Entity {
 
 	private static BufferedImage[] sprites;
 	private int[][] positions = {{-5, -5}, {-4, -6}, {-3, -6}, {-2, -7}, {-1, -7}, {0, -6}, {0, -6}, {0, -6}, {0, -6}};
-	private double radius;
+	private final double radius;
 	private boolean activity;
 	private int index;
 	private int count;
@@ -25,11 +26,11 @@ public class Bomb extends Entity {
 	public Bomb(int id, int x, int y) {
 		super(id, x, y);
 		if(sprites == null) {
-			sprites = getSprite("bomb", Engine.Color_Primary);
+			sprites = getSprite("bomb", Theme.Color_Primary);
 		}
-		setEffect(Variables.Selectable);
-		setEffect(Variables.Movable);
-		setEffect(Variables.Breakable);
+		setVar(Variables.Selectable, true);
+		setVar(Variables.Movable, true);
+		setVar(Variables.Breakable, true);
 		radius = Tile.getSize()*2.5;
 	}
 

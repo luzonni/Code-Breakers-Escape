@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Variables;
 import com.coffee.objects.particles.Dust;
@@ -63,7 +64,7 @@ public class Miniboll extends Entity {
 
 	@Override
 	public void render(Graphics2D g) {
-		g.setColor((count % 2 == 0) ? Engine.Color_Primary : Engine.Color_Tertiary);
+		g.setColor((count % 2 == 0) ? Theme.Color_Primary : Theme.Color_Tertiary);
 		g.fillRect((int)getX() - Game.getCam().getX(), (int)getY() - Game.getCam().getY(), getWidth(), getHeight());
 	}
 	

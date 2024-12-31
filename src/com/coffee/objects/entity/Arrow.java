@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Variables;
 import com.coffee.objects.tiles.Tile;
@@ -19,7 +20,7 @@ public class Arrow extends Entity {
 		this.direction = direction;
 		this.speed = speed;
 		if(sprite == null)
-			sprite = getSprite("arrow", Engine.Color_Primary)[0].getSubimage(0, 0, 15*Engine.GameScale, 5*Engine.GameScale);
+			sprite = getSprite("arrow", Theme.Color_Primary)[0].getSubimage(0, 0, 15*Engine.GameScale, 5*Engine.GameScale);
 		this.setSize(sprite.getWidth(), sprite.getHeight());
 		this.setDepth(1);
 	}

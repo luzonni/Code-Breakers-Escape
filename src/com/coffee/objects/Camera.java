@@ -5,19 +5,18 @@ import java.awt.Point;
 import com.coffee.main.Engine;
 
 public class Camera implements Runnable {
-	
-	
-	private Thread thread;
-	private boolean running;
+
+    private boolean running;
 	private int X, Y;
-	private Point cur;
+	private Point position;
 	private Point vector;
-	//TODO melhorar sistema
+	//TODO melhorar sistema.
+
 	public synchronized void start() {
-		cur = new Point();
+		position = new Point();
 		vector = new Point();
 		running = true;
-		thread = new Thread(this, "Camera");
+        Thread thread = new Thread(this, "Camera");
 		thread.start();
 	}
 	
@@ -26,17 +25,17 @@ public class Camera implements Runnable {
 	}
 	
 	public int getX() {
-		return cur.x;
+		return position.x;
 	}
 	
 	public int getY() {
-		return cur.y;
+		return position.y;
 	}
 
 	public void setPosition(int x, int y) {
 		this.X = x;
 		this.Y = y;
-		this.cur.setLocation(x, y);
+		this.position.setLocation(x, y);
 	}
 	
 	public void impact(Directions dir, int force) {
@@ -49,40 +48,40 @@ public class Camera implements Runnable {
 	
 	private void set(Directions directions, int amount) {
 		if(directions.equals(Directions.Up)) {
-			vector.y = Math.abs(amount) * -1;
-		}else if(directions.equals(Directions.Down)) {
 			vector.y = Math.abs(amount);
+		}else if(directions.equals(Directions.Down)) {
+			vector.y = Math.abs(amount) * -1;
 		}else if(directions.equals(Directions.Left)) {
-			vector.x = Math.abs(amount) * -1;
-		}else if(directions.equals(Directions.Right)) {
 			vector.x = Math.abs(amount);
+		}else if(directions.equals(Directions.Right)) {
+			vector.x = Math.abs(amount) * -1;
 		}
 	}
 	
 	private void moving() {
 		if(this.vector.x != 0) {
-			this.cur.x += this.vector.x;
+			this.position.x += this.vector.x;
 			if(this.vector.x > 0)
 				this.vector.x --;
 			else if(this.vector.x < 0)
 				this.vector.x ++;
 		}else {
-			if(this.cur.x > this.X)
-				this.cur.x -= Math.abs(this.cur.x - this.X)/2;
-			else if(this.cur.x < this.X)
-				this.cur.x += Math.abs(this.cur.x - this.X)/2;
+			if(this.position.x > this.X)
+				this.position.x -= Math.abs(this.position.x - this.X)/2;
+			else if(this.position.x < this.X)
+				this.position.x += Math.abs(this.position.x - this.X)/2;
 		}
 		if(this.vector.y != 0) {
-			this.cur.y += this.vector.y;
+			this.position.y += this.vector.y;
 			if(this.vector.y > 0)
 				this.vector.y --;
 			else if(this.vector.y < 0)
 				this.vector.y ++;
 		}else {
-			if(this.cur.y > this.Y)
-				this.cur.y -= Math.abs(this.cur.y - this.Y)/2;
-			else if(this.cur.y < this.Y)
-				this.cur.y += Math.abs(this.cur.y - this.Y)/2;
+			if(this.position.y > this.Y)
+				this.position.y -= Math.abs(this.position.y - this.Y)/2;
+			else if(this.position.y < this.Y)
+				this.position.y += Math.abs(this.position.y - this.Y)/2;
 		}
 	}
 
@@ -105,9 +104,8 @@ public class Camera implements Runnable {
 					delta_HZ--;
 				}
 				Thread.sleep(1);
-			}catch(Exception e) {
+			}catch(Exception ignore) {
 				System.out.println("ERROR!");
-				e.printStackTrace();
 				System.exit(1);
 			}
 		}

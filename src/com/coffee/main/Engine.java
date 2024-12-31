@@ -68,30 +68,8 @@ public class Engine implements Runnable {
 	public static int INDEX_LEVEL = 1;
 	
 	public static Random RAND;
-	
-	public static final int PRIMARY = 0xffffffff;
-	public static final int SECONDARY = 0xffcccccc;
-	public static final int TERTIARY = 0xff000000;
-	
-	
-	public final static Color[][] PALLET = {
-				{new Color(180, 180, 180), new Color(80, 80, 80), new Color(0, 0, 0)},
-				{new Color(233, 212, 165), new Color(127, 121, 99), new Color(26, 23, 18)},
-				{new Color(248, 227, 86), new Color(180, 82, 48), new Color(54, 10, 61)},
-				{new Color(117, 234, 241), new Color(58, 100, 150), new Color(40, 8, 75)},
-				{new Color(149, 230, 75), new Color(50, 99, 116), new Color(32, 12, 47)},
-				{new Color(226, 252, 165), new Color(52, 100, 80), new Color(6, 8, 16)},
-				{new Color(249, 247, 196), new Color(120, 100, 125), new Color(6, 10, 48)},
-				{new Color(141, 169, 144), new Color(94, 93, 91), new Color(27, 8, 27)},
-				{new Color(40, 40, 160), new Color(50, 30, 100), new Color(0, 0, 0)}
-			};
-	
-	public static volatile int INDEX_PALLET = 1;
-	public static Color Color_Primary = PALLET[1][0];
-	public static Color Color_Secondary = PALLET[1][1];
-	public static Color Color_Tertiary = PALLET[1][2];
-	
-	
+
+
 	public static void main(String[] args) {
 		for(String s : args)
 			System.out.println(s);
@@ -107,7 +85,7 @@ public class Engine implements Runnable {
 	}
 
 	public synchronized void start(String[] levelName) {
-		SET_PALLET();
+		Theme.SET_PALLET();
 		WINDOW = new Window(GameTag + " / The Universe");
 
 		UI = new UserInterface();
@@ -143,12 +121,6 @@ public class Engine implements Runnable {
 		ME.isRunning = false;
 	}
 
-	public static void SET_PALLET() {
-		Color_Primary = PALLET[INDEX_PALLET][0];
-		Color_Secondary = PALLET[INDEX_PALLET][1];
-		Color_Tertiary = PALLET[INDEX_PALLET][2];
-	}
-	
 	public static int[] getResolution() {
 		return Engine.resolutions[Engine.INDEX_RES];
 	}
@@ -168,7 +140,7 @@ public class Engine implements Runnable {
 		String path = System.getProperty("user.dir") + "/config.json";
 		File file = new File(path);
 		if(!file.exists()) 
-			setConfig(Engine.Volume, Engine.INDEX_PALLET, Engine.FullScreen, Engine.INDEX_RES, Engine.GameScale);
+			setConfig(Engine.Volume, Theme.INDEX_PALLET, Engine.FullScreen, Engine.INDEX_RES, Engine.GameScale);
 		JSONObject object = null;
 		try {
 			InputStream istream = new FileInputStream(file);
@@ -178,7 +150,7 @@ public class Engine implements Runnable {
 			object = (JSONObject) parse.parse(isr);
 		}catch (Exception e) {}
 		Engine.Volume = ((Number)object.get("VOLUM")).intValue();
-		Engine.INDEX_PALLET = ((Number)object.get("PALLET")).intValue();
+		Theme.INDEX_PALLET = ((Number)object.get("PALLET")).intValue();
 		Engine.FullScreen = (Boolean) object.get("FULLSCREEN");
 		Engine.INDEX_RES = ((Number)object.get("RESOLUTION")).intValue();
 		Engine.GameScale = ((Number)object.get("SCALE")).intValue();
@@ -227,7 +199,7 @@ public class Engine implements Runnable {
 		int[] rgb = new int[width*height];
 		for(int y = 0; y < height; y++)
 			for(int x = 0; x < width; x++) {
-				rgb[x+y*width] = new Color(Color_Primary.getRed(), Color_Primary.getGreen(), Color_Primary.getBlue(), RAND.nextInt(35)).getRGB();
+				rgb[x+y*width] = new Color(Theme.Color_Primary.getRed(), Theme.Color_Primary.getGreen(), Theme.Color_Primary.getBlue(), RAND.nextInt(35)).getRGB();
 			}
 		image.setRGB(0, 0, width, height, rgb, 0, width);	
 		return image;
@@ -237,7 +209,7 @@ public class Engine implements Runnable {
 		Graphics2D graphics = (Graphics2D) Buffer.getDrawGraphics();
 		if(ANTIALIASING)
 			graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		graphics.setColor(Color_Tertiary);
+		graphics.setColor(Theme.Color_Tertiary);
 		graphics.fillRect(0, 0, WINDOW.getWidth(), WINDOW.getHeight());
 		graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
 

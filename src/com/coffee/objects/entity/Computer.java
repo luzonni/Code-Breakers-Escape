@@ -7,6 +7,7 @@ import com.coffee.command.Commands;
 import com.coffee.items.CMD;
 import com.coffee.items.Item;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 
 public class Computer extends Entity {
@@ -17,7 +18,7 @@ public class Computer extends Entity {
 	public Computer(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null)
-			sprite = getSprite("server", Engine.Color_Primary);
+			sprite = getSprite("server", Theme.Color_Primary);
 		this.index = Engine.RAND.nextInt(sprite.length);
 	}
 

@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import com.coffee.graphics.Flip;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Variables;
@@ -28,9 +29,9 @@ public class Pluuter extends Entity {
 		super(id, x, y);
 		if(sprites == null) {
 			sprites = new BufferedImage[3][];
-			sprites[0] = getSprite("pluuter", Engine.Color_Primary, 0);
-			sprites[1] = getSprite("pluuter", Engine.Color_Primary, 1);
-			sprites[2] = getSprite("pluuter", Engine.Color_Primary, 2);
+			sprites[0] = getSprite("pluuter", Theme.Color_Primary, 0);
+			sprites[1] = getSprite("pluuter", Theme.Color_Primary, 1);
+			sprites[2] = getSprite("pluuter", Theme.Color_Primary, 2);
 		}
 		setVar(Variables.Alive, true);
 		this.dir = Directions.Idle;

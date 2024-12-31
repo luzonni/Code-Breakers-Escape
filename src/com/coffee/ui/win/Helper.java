@@ -10,6 +10,7 @@ import com.coffee.Inputs.Mouse_Button;
 import com.coffee.command.Commands;
 import com.coffee.graphics.FontG;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 
 public class Helper extends View {
 	
@@ -98,7 +99,7 @@ public class Helper extends View {
 		
 		public void render(int x, int y, boolean on, Graphics2D g) {
 			String name = c.getName();
-			g.setColor(Engine.Color_Primary);
+			g.setColor(Theme.Color_Primary);
 			int wF = FontG.getWidth(name, font());
 			int hF = FontG.getHeight(name, font());
 			g.drawString(name, padding + x, padding + y + hF);

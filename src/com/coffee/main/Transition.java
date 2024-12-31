@@ -8,15 +8,14 @@ import com.coffee.main.tools.ActionBack;
 
 class Transition implements Runnable {
 
-	private Thread thread;
-	public volatile boolean isRunning;
+    public volatile boolean isRunning;
 	
-	private ActionBack action;
+	private final ActionBack action;
 	private double percent;
 	
 	public Transition(ActionBack action) {
 		this.action = action;
-		thread = new Thread(this, "Thread - Transition");
+        Thread thread = new Thread(this, "Thread - Transition");
 		isRunning = true;
 		thread.start();
 	}
@@ -37,16 +36,16 @@ class Transition implements Runnable {
 		for(int y = 0; y < H; y++)
 			for(int x = 0; x < W; x++) {
 				if(Engine.RAND.nextBoolean())
-					rgb[x+y*W] = Engine.Color_Tertiary.getRGB();
+					rgb[x+y*W] = Theme.Color_Tertiary.getRGB();
 				else if(Engine.RAND.nextBoolean())
-					rgb[x+y*W] = Engine.Color_Primary.getRGB();
+					rgb[x+y*W] = Theme.Color_Primary.getRGB();
 				else {
-					rgb[x+y*W] = new Color(Engine.Color_Primary.getRed(), Engine.Color_Primary.getGreen(), Engine.Color_Primary.getBlue(), Engine.RAND.nextInt(255)).getRGB();
+					rgb[x+y*W] = new Color(Theme.Color_Primary.getRed(), Theme.Color_Primary.getGreen(), Theme.Color_Primary.getBlue(), Engine.RAND.nextInt(255)).getRGB();
 				}
 			}
 		image.setRGB(0, 0, W, H, rgb, 0, W);
 		Graphics g = image.getGraphics();
-		g.setColor(new Color(Engine.Color_Secondary.getRed(), Engine.Color_Secondary.getGreen(), Engine.Color_Secondary.getBlue(), 180));
+		g.setColor(new Color(Theme.Color_Secondary.getRed(), Theme.Color_Secondary.getGreen(), Theme.Color_Secondary.getBlue(), 180));
 		g.fillRect(0, Engine.RAND.nextInt(Engine.getHeight()), W, H/6);
 		
 		g.dispose();

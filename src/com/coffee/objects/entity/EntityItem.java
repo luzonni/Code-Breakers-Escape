@@ -22,7 +22,7 @@ public class EntityItem extends Entity {
 		timer[1] = new Timer(2);
 		setVar(Variables.Selectable, true);
 		setVar(Variables.Movable, true);
-		setVar(Variables.Removeble, true);
+		setVar(Variables.Removable, true);
 	}
 	
 	@Override

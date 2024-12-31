@@ -3,7 +3,7 @@ package com.coffee.objects.tiles;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.main.tools.Timer;
 import com.coffee.objects.entity.Entity;
@@ -18,8 +18,8 @@ public class Box extends Tile {
 		timer = new Timer(1);
 		if (sprite == null) {
 			sprite = new BufferedImage[2][2];
-			sprite[0] = getSprite("box", Engine.Color_Primary, 0);
-			sprite[1] = getSprite("box", Engine.Color_Primary, 1);
+			sprite[0] = getSprite("box", Theme.Color_Primary, 0);
+			sprite[1] = getSprite("box", Theme.Color_Primary, 1);
 		}
 		this.setSolid(false);
 	}

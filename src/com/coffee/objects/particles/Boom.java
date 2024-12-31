@@ -3,6 +3,7 @@ package com.coffee.objects.particles;
 import java.awt.Graphics2D;
 
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 
 public class Boom extends Particle {
@@ -35,7 +36,7 @@ public class Boom extends Particle {
 	@Override
 	public void render(Graphics2D g) {
 		g.rotate(rotate, getMiddle().x - Game.getCam().getX(), getMiddle().y - Game.getCam().getY());
-		renderParticle(Engine.Color_Tertiary, g);
+		renderParticle(Theme.Color_Tertiary, g);
 		g.rotate(-rotate, getMiddle().x - Game.getCam().getX(), getMiddle().y - Game.getCam().getY());
 		
 	}

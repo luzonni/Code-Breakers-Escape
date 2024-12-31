@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import com.coffee.main.Theme;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.coffee.command.Commands;
-import com.coffee.main.Engine;
 import com.coffee.objects.Objects;
 import com.coffee.objects.entity.Entity;
 import com.coffee.objects.entity.EntityItem;
@@ -90,11 +90,11 @@ public class Saver {
 		
 		JSONArray pic = new JSONArray();
 		for(int i = 0; i < picture.length; i++) {
-			if(picture[i] == Engine.Color_Primary.getRGB())
+			if(picture[i] == Theme.Color_Primary.getRGB())
 				pic.add(0);
-			else if(picture[i] == Engine.Color_Secondary.getRGB())
+			else if(picture[i] == Theme.Color_Secondary.getRGB())
 				pic.add(1);
-			else if(picture[i] == Engine.Color_Tertiary.getRGB())
+			else if(picture[i] == Theme.Color_Tertiary.getRGB())
 				pic.add(2);
 		}
 		object.put("PICTURE", pic);

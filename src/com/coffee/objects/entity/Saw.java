@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import com.coffee.level.Level;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Variables;
@@ -19,7 +20,7 @@ public class Saw extends Entity {
 	public Saw(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null)
-			sprite = getSprite("saw", Engine.Color_Primary)[0];
+			sprite = getSprite("saw", Theme.Color_Primary)[0];
 		this.dir = Directions.Idle;
 		setDepth(4);
 	}

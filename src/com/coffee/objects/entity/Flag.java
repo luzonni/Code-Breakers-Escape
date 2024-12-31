@@ -3,7 +3,7 @@ package com.coffee.objects.entity;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 
 public class Flag extends Entity {
@@ -15,8 +15,7 @@ public class Flag extends Entity {
 	public Flag(int id, int x, int y) {
 		super(id, x, y);
 		if(sprites == null)
-			sprites = getSprite("Flag", Engine.Color_Primary);
-		setFloating(false);
+			sprites = getSprite("Flag", Theme.Color_Primary);
 		setDepth(0);
 	}
 	

@@ -21,8 +21,9 @@ public class Fish extends Entity {
 			sprite = getSprite("fish");
 		setDirection(Directions.Left);
 		setVar(Variables.Selectable, true);
-		setVar(Variables.Removeble, true);
+		setVar(Variables.Removable, true);
 		setVar(Variables.Alive, true);
+		setVar(Variables.Reanimable, true);
 	}
 
 	@Override

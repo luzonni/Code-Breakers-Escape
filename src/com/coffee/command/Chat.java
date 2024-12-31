@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.coffee.graphics.FontG;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 
 class Chat {
 	
@@ -53,13 +54,13 @@ class Chat {
 	
 	protected void render(Graphics2D g) {
 		for(int i = 0; i < phrases.size(); i++) {
-			g.setColor(new Color(Engine.Color_Tertiary.getRed(), Engine.Color_Tertiary.getGreen(), Engine.Color_Tertiary.getBlue(), 120));
+			g.setColor(new Color(Theme.Color_Tertiary.getRed(), Theme.Color_Tertiary.getGreen(), Theme.Color_Tertiary.getBlue(), 120));
 			Rectangle rec = phrases.get(i).bounds;
 			g.fillRect(rec.x, rec.y, rec.width, rec.height);
 		}
 		for(int i = 0; i < phrases.size(); i++) {
 			phrases.get(i).render(g);
-			g.setColor(Engine.Color_Primary);
+			g.setColor(Theme.Color_Primary);
 			//Line top
 			Rectangle rec_top = phrases.get(phrases.size()-1).bounds;
 			g.drawLine(rec_top.x, rec_top.y, rec_top.x + rec_top.width, rec_top.y);
@@ -131,7 +132,7 @@ class Chat {
 		}
 		
 		public void render(Graphics2D g) {
-			g.setColor(Engine.Color_Primary);
+			g.setColor(Theme.Color_Primary);
 			g.setFont(font);
 			float f = Math.abs((float)timer - (float)life)/(float)life;
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (f)));

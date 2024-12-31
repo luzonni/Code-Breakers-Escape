@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Objects;
 
@@ -37,7 +38,7 @@ public abstract class Particle extends Objects {
 	protected BufferedImage[] getSprite(String name, Color color) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/particles/"+name+".png", Engine.GameScale);
 		spriteSheet.replaceColor(0xffffffff, color.getRGB());
-		spriteSheet.replaceColor(0xff000000, Engine.Color_Tertiary.getRGB());
+		spriteSheet.replaceColor(0xff000000, Theme.Color_Tertiary.getRGB());
 		int lenght = (spriteSheet.getWidth())/16;
 		BufferedImage[] sprites = new BufferedImage[lenght];
 		for(int i = 0; i < lenght; i++) {

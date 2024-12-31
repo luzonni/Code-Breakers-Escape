@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 
 public class Dust extends Particle {
@@ -18,9 +19,9 @@ public class Dust extends Particle {
 		super(x, y);
 		if(sprite == null) {
 			sprite = new BufferedImage[3];
-			sprite[0] = getSprite("dust", Engine.Color_Primary)[0].getSubimage(0, 0, 3*Engine.GameScale, 3*Engine.GameScale);
-			sprite[1] = getSprite("dust", Engine.Color_Secondary)[0].getSubimage(0, 0, 3*Engine.GameScale, 3*Engine.GameScale);
-			sprite[2] = getSprite("dust", Engine.Color_Tertiary)[0].getSubimage(0, 0, 3*Engine.GameScale, 3*Engine.GameScale);
+			sprite[0] = getSprite("dust", Theme.Color_Primary)[0].getSubimage(0, 0, 3*Engine.GameScale, 3*Engine.GameScale);
+			sprite[1] = getSprite("dust", Theme.Color_Secondary)[0].getSubimage(0, 0, 3*Engine.GameScale, 3*Engine.GameScale);
+			sprite[2] = getSprite("dust", Theme.Color_Tertiary)[0].getSubimage(0, 0, 3*Engine.GameScale, 3*Engine.GameScale);
 		}
 		this.radians = radians;
 		this.speed = Engine.RAND.nextDouble();

@@ -3,7 +3,7 @@ package com.coffee.objects.particles;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 
 public class Trail extends Particle {
@@ -15,7 +15,7 @@ public class Trail extends Particle {
 	public Trail(int x, int y) {
 		super(x, y);
 		if(sprites == null)
-			sprites = getSprite("trail", Engine.Color_Primary);
+			sprites = getSprite("trail", Theme.Color_Primary);
 		setSize(sprites[index].getWidth(), sprites[index].getHeight());
 		setX(x - getWidth()/2);
 		setY(y - getHeight()/2);	

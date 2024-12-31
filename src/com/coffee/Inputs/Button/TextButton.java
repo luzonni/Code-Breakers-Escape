@@ -9,6 +9,7 @@ import com.coffee.Inputs.Mouse;
 import com.coffee.Inputs.Mouse_Button;
 import com.coffee.graphics.FontG;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.sound.Sound;
 import com.coffee.main.sound.Sounds;
 import com.coffee.main.tools.Responsive;
@@ -125,18 +126,18 @@ public class TextButton extends Button {
 		refresh();
 		g.setStroke(new BasicStroke(Engine.GameScale));
 		g.setFont(font);
-		g.setColor(Engine.Color_Tertiary);
+		g.setColor(Theme.Color_Tertiary);
 		g.fillRect(getBounds().x, getBounds().y, getBounds().width, getBounds().height);
-		g.setColor(Engine.Color_Primary);
+		g.setColor(Theme.Color_Primary);
 		g.drawRect(getBounds().x, getBounds().y, getBounds().width, getBounds().height);
 		String value = getWord();
 		int h = FontG.getHeight(value, font);
 		if(word.isEmpty())
-			g.setColor(Engine.Color_Secondary);
+			g.setColor(Theme.Color_Secondary);
 		else
-			g.setColor(Engine.Color_Primary);
+			g.setColor(Theme.Color_Primary);
 		g.drawString(value, getBounds().x + margin/2, getBounds().y + margin/2 + h);
-		g.setColor(Engine.Color_Primary);
+		g.setColor(Theme.Color_Primary);
 		if(selected)
 			g.fillRect(getBounds().x + (FontG.getWidth(word.substring(0, index_write), font)) + margin/2, getBounds().y + margin/2, Engine.GameScale, h);
 	}

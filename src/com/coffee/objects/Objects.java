@@ -8,7 +8,9 @@ import java.util.Comparator;
 
 import com.coffee.command.Receiver;
 import com.coffee.objects.entity.Entity;
+import com.coffee.objects.entity.EntityTag;
 import com.coffee.objects.tiles.Tile;
+import com.coffee.objects.tiles.TileTag;
 
 public abstract class Objects implements Receiver {
 	
@@ -108,7 +110,7 @@ public abstract class Objects implements Receiver {
 		int indexEntities = 1;
 		while(entities) {
 			try {
-				Entity en = Entity.Factory(indexEntities, 0, 0);
+				Entity en = Entity.Factory(EntityTag.values()[indexEntities], 0, 0);
 				en.dispose();
 				indexEntities++;
 			}catch (Exception e) {
@@ -119,7 +121,7 @@ public abstract class Objects implements Receiver {
 		int indexTiles = 0;
 		while(tiles) {
 			try {
-				Tile t = Tile.Factory(indexTiles, 0, 0);
+				Tile t = Tile.Factory(TileTag.values()[indexTiles], 0, 0);
 				t.dispose();
 				indexTiles++;
 			}catch (Exception e) {

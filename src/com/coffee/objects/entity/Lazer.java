@@ -2,6 +2,7 @@ package com.coffee.objects.entity;
 
 import com.coffee.main.Engine;
 import com.coffee.main.Geometry;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Directions;
 import com.coffee.objects.particles.Dust;
@@ -30,7 +31,7 @@ public class Lazer extends Entity {
     public void tick() {
         setX(pi.x);
         setY(pi.y);
-        while(getOE().sliding(Engine.GameScale*4)) {}
+        while(getOE().slide(Engine.GameScale*4)) {}
         List<Entity> entities = Game.getLevel().getEntities();
         for(int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
@@ -46,7 +47,7 @@ public class Lazer extends Entity {
 
     @Override
     public void render(Graphics2D g) {
-        g.setColor(Engine.Color_Primary);
+        g.setColor(Theme.Color_Primary);
         g.setStroke(new BasicStroke(Engine.RAND.nextInt(Engine.GameScale*2) + 1));
         g.drawLine(pi.x - Game.getCam().getX(), pi.y - Game.getCam().getY(), (int)getX() - Game.getCam().getX(), (int)getY() - Game.getCam().getY());
     }

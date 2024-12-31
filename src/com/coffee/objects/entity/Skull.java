@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.coffee.graphics.Flip;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.main.tools.Timer;
 import com.coffee.objects.Directions;
@@ -21,7 +22,7 @@ public class Skull extends Entity {
 	public Skull(int id, int x, int y) {
 		super(id, x, y);
 		if(sprites == null)
-			sprites = getSprite("skull", Engine.Color_Primary);
+			sprites = getSprite("skull", Theme.Color_Primary);
 		index_sprite = Engine.RAND.nextInt(sprites.length);
 		getValues().addInt("speed", Engine.GameScale * 8);
 		this.timer = new Timer(2);
@@ -55,7 +56,7 @@ public class Skull extends Entity {
 	public void tick() {
 		if(this.timer.tiktak())
 			setDirection();
-		getOE().sliding(getSpeed());
+		getOE().slide(getSpeed());
 		Player p = Game.getPlayer();
 		if(p.collidingWith(this))
 			p.kill();
@@ -71,20 +72,23 @@ public class Skull extends Entity {
 			possible_dir.add(Directions.Left);
 		if(!getOE().colliding(Directions.Right))
 			possible_dir.add(Directions.Right);
-		getOE().setDirection(chose_direction(possible_dir));
+		try {
+			getOE().setDirection(chose_direction(possible_dir));
+		}catch (RuntimeException ignore) {}
 	}
 
 	private Directions chose_direction(List<Directions> possible_dir) {
 		Player p = Game.getPlayer();
 		if(possible_dir.contains(Directions.Down) && p.getY() > getY())
 			return Directions.Down;
-		if(possible_dir.contains(Directions.Up) && p.getY() < getY())
+		else if(possible_dir.contains(Directions.Up) && p.getY() < getY())
 			return Directions.Up;
-		if(possible_dir.contains(Directions.Left) && p.getX() < getX())
+		else if(possible_dir.contains(Directions.Left) && p.getX() < getX())
 			return Directions.Left;
-		if(possible_dir.contains(Directions.Right) && p.getY() > getY())
+		else if(possible_dir.contains(Directions.Right) && p.getY() > getY())
 			return Directions.Right;
-		return possible_dir.get(Engine.RAND.nextInt(possible_dir.size()));
+		else
+			throw new RuntimeException("Stuck");
 	}
 	
 	public int getSpeed() {

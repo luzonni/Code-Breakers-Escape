@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 
 public class Kaboom extends Particle {
@@ -17,7 +18,7 @@ public class Kaboom extends Particle {
 		super(x, y);
 		this.radians = Engine.RAND.nextDouble()*(Math.PI*2);
 		this.speed = Engine.RAND.nextDouble();
-		c = Engine.RAND.nextBoolean() ? Engine.Color_Primary : Engine.Color_Tertiary;
+		c = Engine.RAND.nextBoolean() ? Theme.Color_Primary : Theme.Color_Tertiary;
 	}
 
 	@Override
@@ -40,7 +41,6 @@ public class Kaboom extends Particle {
 		g.rotate(rotate, getMiddle().x - Game.getCam().getX(), getMiddle().y - Game.getCam().getY());
 		renderParticle(c, g);
 		g.rotate(-rotate, getMiddle().x - Game.getCam().getX(), getMiddle().y - Game.getCam().getY());
-		
 	}
 
 }

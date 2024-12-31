@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.objects.Variables;
 
 public class Crate extends Tile {
@@ -14,7 +15,7 @@ public class Crate extends Tile {
 	public Crate(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null) {
-			sprite = getSprite("crate", Engine.Color_Primary);
+			sprite = getSprite("crate", Theme.Color_Primary);
 			index = Engine.RAND.nextInt(sprite.length);
 		}
 		this.setSolid(true);

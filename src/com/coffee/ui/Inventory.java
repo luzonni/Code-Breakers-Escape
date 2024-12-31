@@ -1,17 +1,15 @@
 package com.coffee.ui;
 
 import java.awt.BasicStroke;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.coffee.Inputs.Mouse;
-import com.coffee.graphics.FontG;
 import com.coffee.items.Item;
 import com.coffee.main.Engine;
-import com.coffee.main.activity.Game;
+import com.coffee.main.Theme;
 
 public class Inventory {
 	
@@ -86,10 +84,10 @@ public class Inventory {
 		int x = Engine.getWidth()/2 - width/2;
 		int y = Engine.getHeight()/24;
 		for(int i = 0; i < size; i++) {
-			g2.setColor(Engine.Color_Secondary);
+			g2.setColor(Theme.Color_Secondary);
 			g2.fillRect(x + i*16*Engine.GameScale, y, 16*Engine.GameScale, 16*Engine.GameScale);
 			g2.setStroke(new BasicStroke(Engine.GameScale));
-			g2.setColor(Engine.Color_Primary);
+			g2.setColor(Theme.Color_Primary);
 			g2.drawRect(x + i*16*Engine.GameScale, y, 16*Engine.GameScale, 16*Engine.GameScale);
 			if(inventory[i] != null)
 				g2.drawImage(inventory[i].getSprite(), x + i*16*Engine.GameScale, y, 16*Engine.GameScale, 16*Engine.GameScale, null);

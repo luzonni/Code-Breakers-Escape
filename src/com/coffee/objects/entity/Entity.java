@@ -8,6 +8,7 @@ import java.util.List;
 import com.coffee.command.Commands;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
+import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.main.sound.Sound;
 import com.coffee.main.sound.Sounds;
@@ -19,113 +20,112 @@ import com.coffee.objects.tiles.Tile;
 
 public abstract class Entity extends Objects {
 	
-	private boolean floating;
 	private final Orienteering_Physics oe;
 	
-	public static Entity Factory(Object... values) {
+	public static Entity Factory(EntityTag tag, int x, int y) {
 		Entity entity;
-		int id = (int)values[0];
-		int x = (int)values[1];
-		int y = (int)values[2]; //TODO problema nas direções em criação!
-        return switch (id) {
-            case 0 -> null;
-            case 1 -> {
+		int id = tag.getId();
+        return switch (tag) {
+			case Player -> {
                 entity = new Player(id, x, y, Directions.Down);
                 yield entity;
             }
-            case 2 -> {
+			case Flag -> {
                 entity = new Flag(id, x, y);
                 yield entity;
             }
-            case 3 -> {
+			case Cannon -> {
                 entity = new Cannon(id, x, y);
                 yield entity;
             }
-            case 4 -> {
+			case CrossBow -> {
                 entity = new Crossbow(id, x, y);
                 yield entity;
             }
-            case 5 -> {
+			case Ant -> {
                 entity = new Ant(id, x, y);
                 yield entity;
             }
-            case 6 -> {
+			case Button -> {
                 entity = new Button(id, x, y);
                 yield entity;
             }
-            case 7 -> {
+			case Computer -> {
                 entity = new Computer(id, x, y);
                 yield entity;
             }
-            case 8 -> {
+			case Skull -> {
                 entity = new Skull(id, x, y);
                 yield entity;
             }
-            case 9 -> {
+			case Pluuter -> {
                 entity = new Pluuter(id, x, y);
                 yield entity;
             }
-            case 10 -> {
+			case Karto -> {
                 entity = new Karto(id, x, y);
                 yield entity;
             }
-            case 11 -> {
+            case Saw -> {
                 entity = new Saw(id, x, y);
                 yield entity;
             }
-            case 12 -> {
+			case Bomb -> {
                 entity = new Bomb(id, x, y);
                 yield entity;
             }
-            case 13 -> {
+            case Fish -> {
                 entity = new Fish(id, x, y);
                 yield entity;
             }
-			case 14 -> {
+			case Barrel -> {
 				entity = new Barrel(id, x, y);
 				yield entity;
 			}
-			case 15 -> {
+			case Trampoline_UpRight -> {
 				entity = new Trampoline(id, x, y, Directions.UpRight);
 				yield entity;
 			}
-			case 16 -> {
+			case Trampoline_RightDown -> {
 				entity = new Trampoline(id, x, y, Directions.RightDown);
 				yield entity;
 			}
-			case 17 -> {
+			case Trampoline_DownLeft -> {
 				entity = new Trampoline(id, x, y, Directions.DownLeft);
 				yield entity;
 			}
-			case 18 -> {
+			case Trampoline_LeftUp -> {
 				entity = new Trampoline(id, x, y, Directions.LeftUp);
 				yield entity;
 			}
-			case 19 -> {
+			case Blaster_Up -> {
 				entity = new Blaster(id, x, y, Directions.Up);
 				yield entity;
 			}
-			case 20 -> {
+			case Blaster_Right -> {
 				entity = new Blaster(id, x, y, Directions.Right);
 				yield entity;
 			}
-			case 21 -> {
+			case Blaster_Down -> {
 				entity = new Blaster(id, x, y, Directions.Down);
 				yield entity;
 			}
-			case 22 -> {
+			case Blaster_Left -> {
 				entity = new Blaster(id, x, y, Directions.Left);
 				yield entity;
 			}
-            default -> throw new RuntimeException("Tile not exist");
+			case Cleft -> {
+				entity = new Cleft(id, x, y);
+				yield entity;
+			}
         };
     }
 	
 	public BufferedImage[] getSprite(String name) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.GameScale);
-		spriteSheet.replaceColor(Engine.PRIMARY, Engine.Color_Primary.getRGB());
-		spriteSheet.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
-		spriteSheet.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
+		spriteSheet.replaceColor(Theme.PRIMARY, Theme.Color_Primary.getRGB());
+		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
+		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
 		int length = spriteSheet.getWidth()/16;
 		BufferedImage[] sprites = new BufferedImage[length];
 		for(int i = 0; i < length; i++) {
@@ -136,9 +136,9 @@ public abstract class Entity extends Objects {
 	
 	public BufferedImage[] getSprite(String name, Color color) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.GameScale);
-		spriteSheet.replaceColor(Engine.PRIMARY, color.getRGB());
-		spriteSheet.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
-		spriteSheet.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
+		spriteSheet.replaceColor(Theme.PRIMARY, color.getRGB());
+		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
+		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
 		int lenght = (spriteSheet.getWidth())/16;
 		BufferedImage[] sprites = new BufferedImage[lenght];
 		for(int i = 0; i < lenght; i++) {
@@ -149,9 +149,9 @@ public abstract class Entity extends Objects {
 	
 	public BufferedImage[] getSprite(String name, Color color, int verticalIndex) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.GameScale);
-		spriteSheet.replaceColor(Engine.PRIMARY, color.getRGB());
-		spriteSheet.replaceColor(Engine.SECONDARY, Engine.Color_Secondary.getRGB());
-		spriteSheet.replaceColor(Engine.TERTIARY, Engine.Color_Tertiary.getRGB());
+		spriteSheet.replaceColor(Theme.PRIMARY, color.getRGB());
+		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
+		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
 		int lenght = (spriteSheet.getWidth())/16;
 		BufferedImage[] sprites = new BufferedImage[lenght];
 		for(int i = 0; i < lenght; i++)
@@ -168,41 +168,28 @@ public abstract class Entity extends Objects {
 	
 	@Override
 	public String giveCommand(String[] keys) {
-		Entity selected = (Entity) Game.getSelect();
 		String message = "Command no access";
 
 		if(take(keys, Commands.remove)) {
-			if(!selected.getVar(Variables.Removeble)) {
-				message = "This object don't be removed";
-				return message;
-			}
-			message = "Was removed";
-			selected.kill();
-			Game.clearSelect();
+			EXE.remove(this);
 			used(Commands.remove);
 		}
 
 		if(take(keys, Commands.move)) {
-			Entity nextEntity = null;
-			int x = (int)getX() / Tile.getSize();
-			int y = (int)getY() / Tile.getSize();
-			int x_next = Integer.parseInt(keys[1]);
-			int y_next = Integer.parseInt(keys[2]);
-			List<Entity> list = Game.getLevel().getEntities();
-			for(int i = 0; i < list.size(); i++) {
-				if(Game.getLevel().getTile(x+x_next, y+y_next).centralizedWith(list.get(i))) {
-					nextEntity = list.get(i);
-				}
-			}
-			if(nextEntity != null && nextEntity.getVar(Variables.Movable)) {
-				nextEntity.setX(x * Tile.getSize());
-				nextEntity.setY(y * Tile.getSize());
-			}
-			if(this.getVar(Variables.Movable)) {
-				setX((x + x_next) * Tile.getSize());
-				setY((y + y_next) * Tile.getSize());
-			}
+			EXE.move(keys, this);
+			used(Commands.move);
 		}
+
+		if(take(keys, Commands.freeze)) {
+			EXE.freeze(keys, this);
+			used(Commands.freeze);
+		}
+
+		if(take(keys, Commands.revive)) {
+			EXE.revive(this);
+			used(Commands.revive);
+		}
+
 		return message;
 	}
 	
@@ -214,16 +201,8 @@ public abstract class Entity extends Objects {
 		this.oe.setDirection(newdir);
 	} 
 	
-	public void setFloating(boolean floating) {
-		this.floating = floating;
-	}
-	
 	public void setEffect(Variables var) {
 		this.setVar(var, true);
-	}
-	
-	public boolean isFloating() {
-		return this.floating;
 	}
 	
 	public void kill() {
@@ -260,16 +239,12 @@ public abstract class Entity extends Objects {
 		int xO = ((int)o.getX() + o.getWidth()/2) / Tile.getSize();
 		int yO = ((int)o.getY() + o.getHeight()/2) / Tile.getSize();
 		Tile oTile = Game.getLevel().getTile(xO, yO);
-        return getBounds().intersects(o.getBounds()) && meTile == oTile && !o.isFloating() && !this.isFloating();
+        return getBounds().intersects(o.getBounds()) && meTile == oTile;
     }
 	
 	public void renderEntity(BufferedImage sprite, Graphics2D g) {
 		int x = (int)getX();
 		int y = (int)getY();
-		if(floating && Engine.RAND.nextInt(10) < 5) {
-			x += (Engine.RAND.nextInt(3*Engine.GameScale) - Engine.GameScale);
-			y += (Engine.RAND.nextInt(3*Engine.GameScale) - Engine.GameScale);
-		}
 		g.drawImage(sprite, x - Game.getCam().getX(), y - Game.getCam().getY(), getWidth(), getHeight(), null);
 	}
 	
