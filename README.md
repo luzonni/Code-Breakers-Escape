@@ -45,8 +45,3 @@ Em cada nível, você assumirá o controle de um personagem que deve navegar por
 
 ### Criação de níveis personalizados:
   Também é possível criar seus próprios níveis, e compartilhá-los com seus amigos!
-
-> Para executar a versão atual, basta entrar em out/artifacts/Code_Break_s_Escape_jar/
-> Dentro da pasta, execute o commando: java -jar Code\ Break\'s\ Ecape.jar 
->
-> Certifique-se que sua versão do java é maior que jre-21.
