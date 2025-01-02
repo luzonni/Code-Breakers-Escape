@@ -8,7 +8,7 @@ import com.coffee.main.Theme;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.coffee.command.Commands;
+import com.coffee.ui.command.Commands;
 import com.coffee.objects.Objects;
 import com.coffee.objects.entity.Entity;
 import com.coffee.objects.entity.EntityItem;

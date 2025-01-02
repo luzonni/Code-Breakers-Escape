@@ -19,9 +19,9 @@ public class Dust extends Particle {
 		super(x, y);
 		if(sprite == null) {
 			sprite = new BufferedImage[3];
-			sprite[0] = getSprite("dust", Theme.Color_Primary)[0].getSubimage(0, 0, 3*Engine.GameScale, 3*Engine.GameScale);
-			sprite[1] = getSprite("dust", Theme.Color_Secondary)[0].getSubimage(0, 0, 3*Engine.GameScale, 3*Engine.GameScale);
-			sprite[2] = getSprite("dust", Theme.Color_Tertiary)[0].getSubimage(0, 0, 3*Engine.GameScale, 3*Engine.GameScale);
+			sprite[0] = getSprite("dust", Theme.Color_Primary)[0].getSubimage(0, 0, 3*Engine.SCALE, 3*Engine.SCALE);
+			sprite[1] = getSprite("dust", Theme.Color_Secondary)[0].getSubimage(0, 0, 3*Engine.SCALE, 3*Engine.SCALE);
+			sprite[2] = getSprite("dust", Theme.Color_Tertiary)[0].getSubimage(0, 0, 3*Engine.SCALE, 3*Engine.SCALE);
 		}
 		this.radians = radians;
 		this.speed = Engine.RAND.nextDouble();

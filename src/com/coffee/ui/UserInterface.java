@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.coffee.Inputs.Button.MenuButton;
-import com.coffee.command.Console;
-import com.coffee.command.Receiver;
+import com.coffee.ui.command.Console;
+import com.coffee.ui.command.Receiver;
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Menu;
 import com.coffee.main.tools.ActionBack;
@@ -19,7 +19,8 @@ public class UserInterface {
 
 	private Receiver RECEIVER;
 	private final Console console;
-	
+
+
 	private final MenuButton menuButton;
 	
 	public List<View> views;
@@ -27,7 +28,7 @@ public class UserInterface {
 	public UserInterface() {
 		console = new Console();
 		tag = new PopTag();
-		menuButton = new MenuButton(1, 1, Responsive.createPoint(null, 2, 2) , Engine.GameScale);
+		menuButton = new MenuButton(1, 1, Responsive.createPoint(null, 2, 2) , Engine.SCALE);
 		views = new ArrayList<View>();
 	}
 	
@@ -36,9 +37,9 @@ public class UserInterface {
 		if(views.contains(newView))
 			return;
 		newView.init();
-		int x = Engine.getWidth() - newView.bounds().width - 4*Engine.GameScale;
-		int y = 4*Engine.GameScale;
-		newView.setLocation(x, y + (newView.bounds().height + 4*Engine.GameScale) * (views.size()));
+		int x = Engine.getWidth() - newView.bounds().width - 4*Engine.SCALE;
+		int y = 4*Engine.SCALE;
+		newView.setLocation(x, y + (newView.bounds().height + 4*Engine.SCALE) * (views.size()));
 		views.add(newView);
 		
 	}

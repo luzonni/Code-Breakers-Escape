@@ -17,7 +17,7 @@ public abstract class Particle extends Objects {
 	
 	public Particle(int x, int y) {
 		super(-1);
-		int size = (3 + Engine.RAND.nextInt(3)) * Engine.GameScale;
+		int size = (3 + Engine.RAND.nextInt(3)) * Engine.SCALE;
 		this.setSize(size, size);
 		this.setX(x - (double) size /2);
 		this.setY(y - (double) size /2);
@@ -36,7 +36,7 @@ public abstract class Particle extends Objects {
 	}
 	
 	protected BufferedImage[] getSprite(String name, Color color) {
-		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/particles/"+name+".png", Engine.GameScale);
+		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/particles/"+name+".png", Engine.SCALE);
 		spriteSheet.replaceColor(0xffffffff, color.getRGB());
 		spriteSheet.replaceColor(0xff000000, Theme.Color_Tertiary.getRGB());
 		int lenght = (spriteSheet.getWidth())/16;

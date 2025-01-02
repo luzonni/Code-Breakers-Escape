@@ -10,7 +10,6 @@ import com.coffee.main.Engine;
 import com.coffee.main.Theme;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Variables;
-import com.coffee.ui.Inventory;
 
 public class Player extends Entity {
 	
@@ -19,10 +18,8 @@ public class Player extends Entity {
 	private int indexAnim;
 	private int ticksAnim = 0;
 	
-	private Inventory inventory;
-	
 	private void buildSprites() {
-		SpriteSheet sp = new SpriteSheet(Engine.ResPath+"/entity/Player.png", Engine.GameScale);
+		SpriteSheet sp = new SpriteSheet(Engine.ResPath+"/entity/Player.png", Engine.SCALE);
 		sp.replaceColor(0xffffffff, Theme.Color_Primary.getRGB());
 		sp.replaceColor(0xff000000, Theme.Color_Tertiary.getRGB());
 		sprite = new BufferedImage[2][7];
@@ -37,8 +34,7 @@ public class Player extends Entity {
 	public Player(int id, int x, int y, Directions direction) {
 		super(id, x, y);
 		buildSprites();
-		inventory = new Inventory(3);
-		getValues().addInt("speed", Engine.GameScale * 8);
+		getValues().addInt("speed", Engine.SCALE * 8);
 		setDepth(3);
 		setVar(Variables.Alive, true);
 		setVar(Variables.Selectable, true);
@@ -58,7 +54,6 @@ public class Player extends Entity {
 		}
 		keyDirection();
 		getOE().slide(getSpeed());
-		getInventory().tick();
 	}
 	
 	private void keyDirection() {
@@ -123,10 +118,6 @@ public class Player extends Entity {
 		return message;
 	}
 	
-	public Inventory getInventory() {
-		return this.inventory;
-	}
-	
 	public int getSpeed() {
 		return this.getValues().getInt("speed");
 	}
@@ -160,7 +151,6 @@ public class Player extends Entity {
 
 	@Override
 	public void render(Graphics2D g) {
-		getInventory().render(g);
 		renderEntity(Sprite(), g);
 	}
 	

@@ -25,18 +25,18 @@ public class PopTag {
         String name = this.text;
         int x = Mouse.getX();
         int y = Mouse.getY();
-        Font f = FontG.font(12* Engine.GameScale);
+        Font f = FontG.font(12* Engine.SCALE);
         int wF = FontG.getWidth(name, f);
         int hF = FontG.getHeight(name, f);
         g.setFont(f);
         g.setColor(Theme.Color_Tertiary);
-        g.fillRect(x + 8*Engine.GameScale, y + 17*Engine.GameScale - hF, wF + 2*Engine.GameScale, hF);
+        g.fillRect(x + 8*Engine.SCALE, y + 17*Engine.SCALE - hF, wF + 2*Engine.SCALE, hF);
         g.setColor(Theme.Color_Secondary);
-        g.fillRect(x + 7*Engine.GameScale, y + 16*Engine.GameScale - hF, wF + 2*Engine.GameScale, hF);
+        g.fillRect(x + 7*Engine.SCALE, y + 16*Engine.SCALE - hF, wF + 2*Engine.SCALE, hF);
         g.setColor(Theme.Color_Tertiary);
-        g.drawString(name, x + 9*Engine.GameScale, y + 15*Engine.GameScale);
+        g.drawString(name, x + 9*Engine.SCALE, y + 15*Engine.SCALE);
         g.setColor(Theme.Color_Primary);
-        g.drawString(name, x + 8*Engine.GameScale, y + 14*Engine.GameScale);
+        g.drawString(name, x + 8*Engine.SCALE, y + 14*Engine.SCALE);
         clear();
     }
 

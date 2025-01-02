@@ -1,4 +1,4 @@
-package com.coffee.command;
+package com.coffee.ui.command;
 
 public enum Commands {
 	

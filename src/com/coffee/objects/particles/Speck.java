@@ -2,7 +2,6 @@ package com.coffee.objects.particles;
 
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.Game;
 
 import java.awt.*;
 
@@ -17,7 +16,7 @@ public class Speck extends Particle {
         this.radians = Engine.RAND.nextDouble()*(Math.PI*2);
         this.speed = Engine.RAND.nextDouble() + 1;
         c = Engine.RAND.nextBoolean() ? Theme.Color_Primary : Theme.Color_Secondary;
-        setSize(Engine.GameScale, Engine.GameScale);
+        setSize(Engine.SCALE, Engine.SCALE);
     }
 
     @Override

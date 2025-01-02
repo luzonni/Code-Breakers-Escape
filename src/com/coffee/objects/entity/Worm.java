@@ -4,12 +4,10 @@ import com.coffee.graphics.Flip;
 import com.coffee.main.Engine;
 import com.coffee.main.Geometry;
 import com.coffee.main.activity.Game;
-import com.coffee.main.tools.Timer;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Variables;
 import com.coffee.objects.tiles.Tile;
 
-import javax.sql.RowSetEvent;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -67,8 +65,8 @@ public class Worm extends Entity {
         double pr = Math.atan2(player.getMiddle().y - getMiddle().y, player.getMiddle().x - getMiddle().x);
         angleFollower.followAngle(Math.toDegrees(pr), 1);
         this.radians = Math.toRadians(angleFollower.getAngle());
-        this.setX(getX() + Math.cos(this.radians) * Engine.GameScale);
-        this.setY(getY() + Math.sin(this.radians) * Engine.GameScale);
+        this.setX(getX() + Math.cos(this.radians) * Engine.SCALE);
+        this.setY(getY() + Math.sin(this.radians) * Engine.SCALE);
     }
 
     private void killer() {
@@ -119,8 +117,8 @@ public class Worm extends Entity {
             double mx = parent.getMiddle().getX();
             double my = parent.getMiddle().getY();
             this.radians = Math.atan2(getMiddle().getY() - my, getMiddle().getX() - mx);
-            setX(parent.getX() + Math.cos(this.radians) * (double) (Tile.getSize() - Engine.GameScale));
-            setY(parent.getY() + Math.sin(this.radians) * (double) (Tile.getSize() - Engine.GameScale));
+            setX(parent.getX() + Math.cos(this.radians) * (double) (Tile.getSize() - Engine.SCALE));
+            setY(parent.getY() + Math.sin(this.radians) * (double) (Tile.getSize() - Engine.SCALE));
         }
 
         @Override

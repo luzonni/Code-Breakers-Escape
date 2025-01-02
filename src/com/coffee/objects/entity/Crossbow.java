@@ -53,7 +53,7 @@ public class Crossbow extends Entity {
 				double r = radians - Math.PI/2; 
 				int x = (int)getMiddle().x + (int)(Math.cos(r)*Tile.getSize()/3.75);
 				int y = (int)getMiddle().y + (int)(Math.sin(r)*Tile.getSize()/3.75);
-				Game.getLevel().addEntity(new Arrow(x, y, r, 5*Engine.GameScale));
+				Game.getLevel().addEntity(new Arrow(x, y, r, 5*Engine.SCALE));
 			}
 		}
 	}

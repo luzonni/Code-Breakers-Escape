@@ -7,7 +7,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.coffee.command.Receiver;
 import com.coffee.main.Theme;
 import com.coffee.objects.entity.EntityTag;
 import com.coffee.objects.tiles.TileTag;
@@ -16,7 +15,7 @@ import org.json.simple.JSONObject;
 
 import com.coffee.Inputs.Button.Button;
 import com.coffee.Inputs.Button.TextButton;
-import com.coffee.command.Commands;
+import com.coffee.ui.command.Commands;
 import com.coffee.ui.creator.Commands_Boxe;
 import com.coffee.ui.creator.DrawableBox;
 import com.coffee.ui.creator.Grid;
@@ -80,7 +79,7 @@ public class Creator implements Activity {
 			}
 			index++;
 		}
-		Responsive res = Responsive.createPoint(Engine.UI.getMenuPosition(), -1, 30*Engine.GameScale);
+		Responsive res = Responsive.createPoint(Engine.UI.getMenuPosition(), -1, 30*Engine.SCALE);
 		inventoryTiles = new Shelf("Tiles", tiles.toArray(new Tile[0]), res, 1, 1, size);
 	}
 	
@@ -97,7 +96,7 @@ public class Creator implements Activity {
 			}
 			index++;
 		}
-		inventoryEntities = new Shelf("Entity", entities.toArray(new Entity[0]), inventoryTiles.getResponsive(), 8*Engine.GameScale, 0, size);
+		inventoryEntities = new Shelf("Entity", entities.toArray(new Entity[0]), inventoryTiles.getResponsive(), 8*Engine.SCALE, 0, size);
 	}
 	
 	private void buildInventoryItems(int size) {
@@ -112,7 +111,7 @@ public class Creator implements Activity {
 			}
 			index++;
 		}
-		inventoryItems = new Shelf("Items", entities.toArray(new Entity[0]), inventoryEntities.getResponsive(), 8*Engine.GameScale, 0, size);
+		inventoryItems = new Shelf("Items", entities.toArray(new Entity[0]), inventoryEntities.getResponsive(), 8*Engine.SCALE, 0, size);
 	}
 	
 	public static Camera getCam() {
@@ -138,11 +137,11 @@ public class Creator implements Activity {
 			addButtonsMenu();
 		}else {
 			sizes = new TextButton[2];
-			sizes[0] = new TextButton("Width", -10*Engine.GameScale, 0, center, 8);
-			sizes[1] = new TextButton("Height", 10*Engine.GameScale, 0, center, 8);
-			name_sublime = new TextButton("level name", 0, -12*Engine.GameScale, center, 8);
-			name_builder = new TextButton("your nick or @", 0, -6*Engine.GameScale, name_sublime.getResponsive(), 8);
-			create_button = new Button("create", 0, 12*Engine.GameScale, center, 8);
+			sizes[0] = new TextButton("Width", -10*Engine.SCALE, 0, center, 8);
+			sizes[1] = new TextButton("Height", 10*Engine.SCALE, 0, center, 8);
+			name_sublime = new TextButton("level name", 0, -12*Engine.SCALE, center, 8);
+			name_builder = new TextButton("your nick or @", 0, -6*Engine.SCALE, name_sublime.getResponsive(), 8);
+			create_button = new Button("create", 0, 12*Engine.SCALE, center, 8);
 			c_b = new Commands_Boxe(null);
 		}
 	}
@@ -350,10 +349,10 @@ public class Creator implements Activity {
 		name_builder.render(g);
 		create_button.render(g);
 		String value = "/";
-		Font f = FontG.font(12*Engine.GameScale);
+		Font f = FontG.font(12*Engine.SCALE);
 		g.setColor(Theme.Color_Primary);
 		g.setFont(f);
-		int x = Engine.getWidth()/2 - FontG.getWidth(value, f)/2 + Engine.GameScale;
+		int x = Engine.getWidth()/2 - FontG.getWidth(value, f)/2 + Engine.SCALE;
 		int y = Engine.getHeight()/2 + FontG.getHeight(value, f)/2;
 		g.drawString(value, x, y);
 	}

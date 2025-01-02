@@ -108,12 +108,12 @@ public class Pluuter extends Entity {
 	private void spit() {
 		int x = getMiddle().x;
 		if(this.side.equals(Directions.Left))
-			x -= 4*Engine.GameScale;
+			x -= 4*Engine.SCALE;
 		else
-			x += 4*Engine.GameScale;
+			x += 4*Engine.SCALE;
 		for(int i = 0; i < 25; i++)
-			Game.getLevel().addParticle(new Dust(x, getMiddle().y - 2*Engine.GameScale, this.side == Directions.Left ? Math.PI - Math.PI/6 + Engine.RAND.nextDouble()*(Math.PI/4) : 0 - Math.PI/6 + Engine.RAND.nextDouble()*(Math.PI/4)));
-		Game.getLevel().addEntity(new Spit(x, getMiddle().y - 3*Engine.GameScale, this.side));
+			Game.getLevel().addParticle(new Dust(x, getMiddle().y - 2*Engine.SCALE, this.side == Directions.Left ? Math.PI - Math.PI/6 + Engine.RAND.nextDouble()*(Math.PI/4) : 0 - Math.PI/6 + Engine.RAND.nextDouble()*(Math.PI/4)));
+		Game.getLevel().addEntity(new Spit(x, getMiddle().y - 3*Engine.SCALE, this.side));
 	}
 	
 	@Override

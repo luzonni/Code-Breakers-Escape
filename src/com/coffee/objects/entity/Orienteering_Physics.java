@@ -258,25 +258,25 @@ public class Orienteering_Physics {
 		int y = entity.getMiddle().y / Tile.getSize();
 		switch(entity.getOE().getDirection()) {
 			case Up:
-				y = (entity.getMiddle().y - entity.getHeight()/2 - Engine.GameScale)  / Tile.getSize();
+				y = (entity.getMiddle().y - entity.getHeight()/2 - Engine.SCALE)  / Tile.getSize();
 				tile_over = level.getTile(x, y);
 				if(tile_over == null) 
 					break;
 				return tile_over;
 			case Right:
-				x = (entity.getMiddle().x + entity.getWidth()/2 + Engine.GameScale) / Tile.getSize();
+				x = (entity.getMiddle().x + entity.getWidth()/2 + Engine.SCALE) / Tile.getSize();
 				tile_over = level.getTile(x, y);
 				if(tile_over == null) 
 					break;
 				return tile_over;
 			case Down:
-				y = (entity.getMiddle().y + entity.getHeight()/2 + Engine.GameScale) / Tile.getSize();
+				y = (entity.getMiddle().y + entity.getHeight()/2 + Engine.SCALE) / Tile.getSize();
 				tile_over = level.getTile(x, y);
 				if(tile_over == null) 
 					break;
 				return tile_over;
 			case Left:
-				x = (entity.getMiddle().x - entity.getWidth()/2 - Engine.GameScale) / Tile.getSize();
+				x = (entity.getMiddle().x - entity.getWidth()/2 - Engine.SCALE) / Tile.getSize();
 				tile_over = level.getTile(x, y);
 				if(tile_over == null) 
 					break;

@@ -14,7 +14,7 @@ import java.util.List;
 import com.coffee.Inputs.Mouse;
 import com.coffee.Inputs.Mouse_Button;
 import com.coffee.Inputs.Button.Button;
-import com.coffee.command.Receiver;
+import com.coffee.ui.command.Receiver;
 import com.coffee.graphics.FontG;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
@@ -41,7 +41,7 @@ public class Menu implements Activity, Receiver {
 		Q = new Button("Quit", 10, 0, O.getResponsive(), 8);
 		if(list == null)
 			list = new ArrayList<Buoyant>();
-		SpriteSheet sp = new SpriteSheet(Engine.ResPath + "/ui/LogoName.png", 3*Engine.GameScale);
+		SpriteSheet sp = new SpriteSheet(Engine.ResPath + "/ui/LogoName.png", 3*Engine.SCALE);
 		sp.replaceColor(0xffffffff, Theme.Color_Primary.getRGB());
 		sp.replaceColor(0xff000000, Theme.Color_Tertiary.getRGB());
 		Logo = sp.getImage();
@@ -51,26 +51,23 @@ public class Menu implements Activity, Receiver {
 	@Override
 	public void enter() {
 //		if(list.isEmpty()) {
-//			List<Objects> toDispose = new ArrayList<Objects>();
+//			List<Buoyant> toDispose = new ArrayList<>();
 //			int amount = Engine.RAND.nextInt(45) + 5;
 //			for(int i = 0; i < amount; i++) {
 //				List<BufferedImage> list_sprites = new ArrayList<BufferedImage>();
-//				
-//				
-//				
+//
+//
+//
 //				int x = Engine.RAND.nextInt(Engine.getWidth() - Tile.getSize());
 //				int y = Engine.RAND.nextInt(Engine.getHeight() - Tile.getSize());
 //				list.add(new Buoyant(list_sprites.get(Engine.RAND.nextInt(list_sprites.size())), x, y, Tile.getSize(), Tile.getSize()));
-//			}
-//			for(Objects o : toDispose) {
-//				o.dispose();
 //			}
 //		}
 	}
 	
 	private void drawBackground() {
 		background = new BufferedImage(Engine.getWidth(), Engine.getHeight(), BufferedImage.TYPE_INT_ARGB);
-		SpriteSheet sp = new SpriteSheet(Engine.ResPath+"/ui/background.png", 2*Engine.GameScale);
+		SpriteSheet sp = new SpriteSheet(Engine.ResPath+"/ui/background.png", 2*Engine.SCALE);
 		sp.replaceColor(0xffffffff, Theme.Color_Secondary.getRGB());
 		sp.replaceColor(0xff000000, Theme.Color_Tertiary.getRGB());
 		Graphics2D g = (Graphics2D)background.getGraphics();
@@ -98,7 +95,7 @@ public class Menu implements Activity, Receiver {
 			int y = Mouse.getY();
 			for(int i = 0; i < list.size(); i++) {
 				Buoyant b = list.get(i);
-				if(Geometry.Theta(x, y, b.middle().x, b.middle().y) < 64*Engine.GameScale) {
+				if(Geometry.Theta(x, y, b.middle().x, b.middle().y) < 64*Engine.SCALE) {
 					double a = Math.atan2(b.middle().y - y, b.middle().x - x);
 					b.direction = a;
 					b.speed += 15;
@@ -131,11 +128,11 @@ public class Menu implements Activity, Receiver {
 		O.render(g);
 		Rectangle recLogo = logo_res.getBounds();
 		g.drawImage(Logo, recLogo.x, recLogo.y, null);
-		Font f = FontG.font(8*Engine.GameScale);
+		Font f = FontG.font(8*Engine.SCALE);
 		String value = Engine.VERSION;
 		int wF = FontG.getWidth(value, f);
 		int hF = FontG.getHeight(value, f);
-		int x = Engine.getWidth() - wF - Engine.GameScale;
+		int x = Engine.getWidth() - wF - Engine.SCALE;
 		int y = Engine.getHeight() - hF/2;
 		Rectangle recDesc = new Rectangle(x, y - hF, wF, hF);
 		if(Mouse.On_Mouse(recDesc))
@@ -163,8 +160,7 @@ public class Menu implements Activity, Receiver {
 	        }
 		}
 		if(Mouse.clickOn(Mouse_Button.LEFT, recLogo)) {
-			String url = "https://github.com/luzonni/CBE-Java";
-
+			String url = "https://github.com/luzonni/Code-Breakers-Escape";
 	        try {
 	            if (Desktop.isDesktopSupported()) {
 	                Desktop desktop = Desktop.getDesktop();

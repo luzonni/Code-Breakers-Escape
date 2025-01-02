@@ -2,7 +2,7 @@ package com.coffee.main.activity;
 
 import java.awt.Graphics2D;
 
-import com.coffee.command.Receiver;
+import com.coffee.ui.command.Receiver;
 
 public interface Activity extends Receiver {
 	

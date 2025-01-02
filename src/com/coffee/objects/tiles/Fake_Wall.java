@@ -28,10 +28,10 @@ public class Fake_Wall extends Tile {
 		g.dispose();
 		int[] colors = sprite.getRGB(0, 0, sprite.getWidth(), sprite.getHeight(), null, 0, sprite.getWidth());
 		for(int i = 0; i < 24; i++) {
-			int x = Engine.RAND.nextInt(sprite.getWidth()/Engine.GameScale)*Engine.GameScale;
-			int y = Engine.RAND.nextInt(sprite.getHeight()/Engine.GameScale)*Engine.GameScale;
-			for(int yy = y; yy < y + Engine.GameScale; yy++)
-				for(int xx = x; xx < x + Engine.GameScale; xx++) {
+			int x = Engine.RAND.nextInt(sprite.getWidth()/Engine.SCALE)*Engine.SCALE;
+			int y = Engine.RAND.nextInt(sprite.getHeight()/Engine.SCALE)*Engine.SCALE;
+			for(int yy = y; yy < y + Engine.SCALE; yy++)
+				for(int xx = x; xx < x + Engine.SCALE; xx++) {
 					colors[(xx)+(yy)*sprite.getWidth()] = 0x00000000;
 				}
 		}
@@ -47,10 +47,10 @@ public class Fake_Wall extends Tile {
 				Tile tile = map[i];
 				if(tile.equals(this)) {
 					map[i] = Tile.Factory(TileTag.Floor, (int)getX(), (int)getY());
-					for(int y = (int)getY()/Engine.GameScale; y < (int)getY()/Engine.GameScale + getHeight()/Engine.GameScale; y++)
-						for(int x = (int)getX()/Engine.GameScale; x < (int)getX()/Engine.GameScale + getWidth()/Engine.GameScale; x++)
+					for(int y = (int)getY()/Engine.SCALE; y < (int)getY()/Engine.SCALE + getHeight()/Engine.SCALE; y++)
+						for(int x = (int)getX()/Engine.SCALE; x < (int)getX()/Engine.SCALE + getWidth()/Engine.SCALE; x++)
 							if(Engine.RAND.nextInt(100) < 15)
-								Game.getLevel().addParticle(new Kaboom(x*Engine.GameScale, y*Engine.GameScale));
+								Game.getLevel().addParticle(new Kaboom(x*Engine.SCALE, y*Engine.SCALE));
 				}
 			}
 		}

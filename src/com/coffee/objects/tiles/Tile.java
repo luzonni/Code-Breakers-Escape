@@ -6,7 +6,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import com.coffee.command.Commands;
+import com.coffee.ui.command.Commands;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
@@ -14,12 +14,11 @@ import com.coffee.main.activity.Game;
 import com.coffee.objects.Objects;
 import com.coffee.objects.Variables;
 import com.coffee.objects.entity.Entity;
-import com.coffee.objects.entity.Spine;
 
 public abstract class Tile extends Objects {
 
 	public static int getSize() {
-		return Engine.GameScale*16;
+		return Engine.SCALE *16;
 	}
 	
 	public static Tile Factory(TileTag tag, int x, int y) {
@@ -81,7 +80,7 @@ public abstract class Tile extends Objects {
 	}
 
 	public BufferedImage[] getSprite(String name, Color color) {
-		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath + "/tiles/" + name + ".png", Engine.GameScale);
+		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath + "/tiles/" + name + ".png", Engine.SCALE);
 		spriteSheet.replaceColor(Theme.PRIMARY, color.getRGB());
 		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
 		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
@@ -94,7 +93,7 @@ public abstract class Tile extends Objects {
 	}
 	
 	public BufferedImage[] getSprite(String name, Color color, int verticalIndex) {
-		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath + "/tiles/" + name + ".png", Engine.GameScale);
+		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath + "/tiles/" + name + ".png", Engine.SCALE);
 		spriteSheet.replaceColor(Theme.PRIMARY, color.getRGB());
 		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
 		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());

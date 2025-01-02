@@ -3,9 +3,8 @@ package com.coffee.objects.entity;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.util.List;
 
-import com.coffee.command.Commands;
+import com.coffee.ui.command.Commands;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
@@ -134,7 +133,7 @@ public abstract class Entity extends Objects {
     }
 	
 	public BufferedImage[] getSprite(String name) {
-		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.GameScale);
+		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.SCALE);
 		spriteSheet.replaceColor(Theme.PRIMARY, Theme.Color_Primary.getRGB());
 		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
 		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
@@ -147,7 +146,7 @@ public abstract class Entity extends Objects {
 	}
 	
 	public BufferedImage[] getSprite(String name, Color color) {
-		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.GameScale);
+		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.SCALE);
 		spriteSheet.replaceColor(Theme.PRIMARY, color.getRGB());
 		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
 		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
@@ -160,7 +159,7 @@ public abstract class Entity extends Objects {
 	}
 	
 	public BufferedImage[] getSprite(String name, Color color, int verticalIndex) {
-		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.GameScale);
+		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.SCALE);
 		spriteSheet.replaceColor(Theme.PRIMARY, color.getRGB());
 		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
 		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());

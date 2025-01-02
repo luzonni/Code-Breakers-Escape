@@ -54,8 +54,8 @@ public class Grid {
 		int yy = Y - h/2;
 		for(int y = 0; y < Height; y++) {
 			for(int x = 0; x < Width; x++) {
-				int px = xx + x * Tile.getSize() + Engine.GameScale;
-				int py = yy + y * Tile.getSize() + Engine.GameScale;
+				int px = xx + x * Tile.getSize() + Engine.SCALE;
+				int py = yy + y * Tile.getSize() + Engine.SCALE;
 				if(Mouse.pressingOnMap(Mouse_Button.LEFT, new Rectangle(px, py, Tile.getSize(), Tile.getSize()), Creator.getCam()))
 					if(Grid[x+y*Width] == null) {
 						Grid[x+y*Width] = object;
@@ -88,8 +88,8 @@ public class Grid {
 		int yy = Y - h/2;
 		for(int y = 0; y < Height; y++) {
 			for(int x = 0; x < Width; x++) {
-				int px = xx + x * Tile.getSize() + Engine.GameScale;
-				int py = yy + y * Tile.getSize() + Engine.GameScale;
+				int px = xx + x * Tile.getSize() + Engine.SCALE;
+				int py = yy + y * Tile.getSize() + Engine.SCALE;
 				if(Grid[x+y*Width] != null) {
 					if(Mouse.clickOnMap(Mouse_Button.RIGHT, new Rectangle(px, py, Tile.getSize(), Tile.getSize()), Creator.getCam())) {
 						Grid[x+y*Width] = null;
@@ -114,10 +114,10 @@ public class Grid {
 		for(int y = 0; y < Height; y++) {
 			for(int x = 0; x < Width; x++) {
 				g.setColor(new Color(Theme.Color_Secondary.getRed(), Theme.Color_Secondary.getGreen(), Theme.Color_Secondary.getBlue(), 60));
-				int px = xx + x * Tile.getSize() + Engine.GameScale;
-				int py = yy + y * Tile.getSize() + Engine.GameScale;
+				int px = xx + x * Tile.getSize() + Engine.SCALE;
+				int py = yy + y * Tile.getSize() + Engine.SCALE;
 				if(renderGrid)
-					g.fillRect(px, py, Tile.getSize() - 2*Engine.GameScale, Tile.getSize() - 2*Engine.GameScale);
+					g.fillRect(px, py, Tile.getSize() - 2*Engine.SCALE, Tile.getSize() - 2*Engine.SCALE);
 				if(Grid[x+y*Width] != null)
 					g.drawImage(Grid[x+y*Width].getSprite(), px , py, null);
 				

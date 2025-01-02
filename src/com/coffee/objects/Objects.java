@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Comparator;
 
-import com.coffee.command.Receiver;
+import com.coffee.ui.command.Receiver;
 import com.coffee.objects.entity.Entity;
 import com.coffee.objects.entity.EntityTag;
 import com.coffee.objects.tiles.Tile;

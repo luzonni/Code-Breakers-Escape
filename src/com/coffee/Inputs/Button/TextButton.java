@@ -25,6 +25,12 @@ public class TextButton extends Button {
 		super(Name, x_per, y_per, parent, size);
 		word = new StringBuilder();
 	}
+
+	public void setText(String[] last) {
+		for(String s : last) {
+			word.append(last);
+		}
+	}
 	
 	private void writing(char[] Caracteres) {
 		if(Mouse.clickOn(Mouse_Button.LEFT, getBounds())) {
@@ -124,7 +130,7 @@ public class TextButton extends Button {
 	
 	public void render(Graphics2D g) {
 		refresh();
-		g.setStroke(new BasicStroke(Engine.GameScale));
+		g.setStroke(new BasicStroke(Engine.SCALE));
 		g.setFont(font);
 		g.setColor(Theme.Color_Tertiary);
 		g.fillRect(getBounds().x, getBounds().y, getBounds().width, getBounds().height);
@@ -139,7 +145,6 @@ public class TextButton extends Button {
 		g.drawString(value, getBounds().x + margin/2, getBounds().y + margin/2 + h);
 		g.setColor(Theme.Color_Primary);
 		if(selected)
-			g.fillRect(getBounds().x + (FontG.getWidth(word.substring(0, index_write), font)) + margin/2, getBounds().y + margin/2, Engine.GameScale, h);
+			g.fillRect(getBounds().x + (FontG.getWidth(word.substring(0, index_write), font)) + margin/2, getBounds().y + margin/2, Engine.SCALE, h);
 	}
-	
 }

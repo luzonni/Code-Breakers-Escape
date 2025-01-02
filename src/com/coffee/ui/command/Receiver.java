@@ -1,4 +1,4 @@
-package com.coffee.command;
+package com.coffee.ui.command;
 
 import com.coffee.main.Engine;
 import com.coffee.main.activity.Game;

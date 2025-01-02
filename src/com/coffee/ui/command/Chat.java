@@ -1,4 +1,4 @@
-package com.coffee.command;
+package com.coffee.ui.command;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -38,8 +38,8 @@ class Chat {
 	}
 	
 	protected void tick() {
-		x = Engine.getWidth() - 4*Engine.GameScale;
-		y = Engine.UI.getConsole().textButton.getBounds().y - 5*Engine.GameScale;
+		x = Engine.getWidth() - 4*Engine.SCALE;
+		y = Engine.UI.getConsole().textButton.getBounds().y - 5*Engine.SCALE;
 		for(int i = 0; i < phrases.size(); i++)
 			phrases.get(i).tick();
 		for(int i = 0; i < phrases.size(); i++) {
@@ -104,7 +104,7 @@ class Chat {
 				this.base_write = phrase;
 			}else
 				this.phrase = new StringBuilder(phrase);
-			this.padding = 4 * Engine.GameScale;
+			this.padding = 4 * Engine.SCALE;
 		}
 		
 		public void tick() {

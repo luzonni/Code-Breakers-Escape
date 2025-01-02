@@ -24,7 +24,7 @@ public class Skull extends Entity {
 		if(sprites == null)
 			sprites = getSprite("skull", Theme.Color_Primary);
 		index_sprite = Engine.RAND.nextInt(sprites.length);
-		getValues().addInt("speed", Engine.GameScale * 8);
+		getValues().addInt("speed", Engine.SCALE * 8);
 		this.timer = new Timer(2);
 		this.setDepth(1);
 		this.setVar(Variables.Selectable, true);

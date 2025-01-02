@@ -6,13 +6,12 @@ import java.awt.Graphics2D;
 
 import com.coffee.Inputs.Mouse;
 import com.coffee.Inputs.Mouse_Button;
-import com.coffee.command.Receiver;
 import com.coffee.exceptions.Dead;
 import com.coffee.level.Level;
 import com.coffee.level.Next;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
-import com.coffee.main.tools.Responsive;
+import com.coffee.ui.Inventory;
 import com.coffee.ui.win.Helper;
 import com.coffee.objects.Camera;
 import com.coffee.objects.Objects;
@@ -21,23 +20,24 @@ import com.coffee.objects.entity.Player;
 
 public class Game implements Activity {
 	
-	private Camera camera;
-	private Level level;
-	private Next next;
-	public static Responsive middle = Responsive.createPoint(null, 50, 50);
-	
+	private final Camera camera;
+	private final Level level;
+	private final Next next;
+	private final Inventory inventory;
+
 	public static Helper helper;
 	
 	private int lastX_mouse, lastY_mouse;
 	private float f = 0;
 	private boolean change;
-	private Activity activityToReturn;
+	private final Activity activityToReturn;
 
 	public Game(Level level, Next next, Activity activityToReturn) {
 		this.level = level;
 		this.next = next;
 		this.activityToReturn = activityToReturn;
 		camera = new Camera();
+		inventory = new Inventory(3);
 		camera.start();
 	}
 
@@ -89,6 +89,12 @@ public class Game implements Activity {
 			return ((Game) activity).level;
 		throw new RuntimeException("Not in game");
 	}
+
+	public static Inventory getInventory() {
+		if(Engine.ACTIVITY instanceof Game game)
+			return game.inventory;
+		throw new RuntimeException("Not in Game");
+	}
 	
 	public static Camera getCam() {
 		Activity activity = Engine.ACTIVITY;
@@ -108,6 +114,7 @@ public class Game implements Activity {
 			lastY_mouse = Mouse.getY() + getCam().getY();
 		}
 		f();
+		inventory.tick();
 	}
 	
 	public static void start(Level level) {
@@ -164,12 +171,13 @@ public class Game implements Activity {
 			int y = this.level.getSelected().getBounds().y  - getCam().getY() + per;
 			int w = this.level.getSelected().getBounds().width - per*2;
 			int h = this.level.getSelected().getBounds().height - per*2;
-			g.setStroke(new BasicStroke(Engine.GameScale + per));
+			g.setStroke(new BasicStroke(Engine.SCALE + per));
 			g.setColor(Theme.Color_Tertiary);
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, f));
 			g.drawRect(x, y, w, h);
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
 		}
+		inventory.render(g);
 	}
 	
 	public void dispose() {

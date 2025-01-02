@@ -58,8 +58,8 @@ public class Saw extends Entity {
 				if(botton_index < 0)
 					botton_index = dirs.length-1;
 			}
-		Tile botton_tile = level.getTile((getMiddle().x + dirs[botton_index].getX()*Engine.GameScale) / Tile.getSize(), (getMiddle().y + dirs[botton_index].getY()*Engine.GameScale) / Tile.getSize());
-		Tile next_tile = level.getTile((getMiddle().x + dirs[index].getX()*Engine.GameScale) / Tile.getSize(), (getMiddle().y + dirs[index].getY()*Engine.GameScale) / Tile.getSize());
+		Tile botton_tile = level.getTile((getMiddle().x + dirs[botton_index].getX()*Engine.SCALE) / Tile.getSize(), (getMiddle().y + dirs[botton_index].getY()*Engine.SCALE) / Tile.getSize());
+		Tile next_tile = level.getTile((getMiddle().x + dirs[index].getX()*Engine.SCALE) / Tile.getSize(), (getMiddle().y + dirs[index].getY()*Engine.SCALE) / Tile.getSize());
 		if(next_tile.isSolid() && botton_tile.isSolid()) {
 			int next = index + 1;
 			if(next > dirs.length-1)
@@ -75,7 +75,7 @@ public class Saw extends Entity {
 	}
 
 	private void moving(Directions dir) {
-		int speed = Engine.GameScale;
+		int speed = Engine.SCALE;
 		if(dir.equals(Directions.Left)) {
 			this.setX(this.getX() - speed);
 		}else if(dir.equals(Directions.Up)) {

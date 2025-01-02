@@ -45,7 +45,7 @@ public class Fly extends Entity {
 			indexAnim = 0;
 			if(timer.tiktak()) {
 				Tile end_point_tile = getFarTile();
-				if(Game.getLevel().getTile((int)(getMiddle().x/Engine.GameScale), (int)(getMiddle().y/Engine.GameScale)) != end_point_tile) {
+				if(Game.getLevel().getTile((int)(getMiddle().x/Engine.SCALE), (int)(getMiddle().y/Engine.SCALE)) != end_point_tile) {
 					Game.getLevel().addParticle(new Interrogation(end_point_tile.getMiddle().x, end_point_tile.getMiddle().y));
 					ai.buildPath(this, end_point_tile.getMiddle(), 20);
 					if(!ai.follow(ai.direction())) {

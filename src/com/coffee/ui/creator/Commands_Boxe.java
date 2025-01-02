@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.coffee.Inputs.Mouse;
 import com.coffee.Inputs.Mouse_Button;
-import com.coffee.command.Commands;
+import com.coffee.ui.command.Commands;
 import com.coffee.graphics.FontG;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
@@ -70,7 +70,7 @@ public class Commands_Boxe {
 		Responsive R_1 = Responsive.createPoint(null, 85, 5);
 		Responsive R_2 = Responsive.createPoint(null, 98, 5);
 		int w = R_2.getPosition().x - R_1.getPosition().x;
-		int padding = 5*Engine.GameScale;
+		int padding = 5*Engine.SCALE;
 		
 		int h_box_list = 0;
 		for(int i = 0; i < list.length; i++) {
@@ -93,11 +93,11 @@ public class Commands_Boxe {
 		if(list == null || default_list == null)
 			return;
 		g.setColor(new Color(Theme.Color_Primary.getRed(), Theme.Color_Primary.getGreen(), Theme.Color_Primary.getBlue(), 60));
-		g.fillRect(box_list.x - Engine.GameScale, box_list.y - Engine.GameScale, box_list.width + Engine.GameScale*2, box_list.height + Engine.GameScale*2);
+		g.fillRect(box_list.x - Engine.SCALE, box_list.y - Engine.SCALE, box_list.width + Engine.SCALE *2, box_list.height + Engine.SCALE *2);
 		g.setColor(Theme.Color_Tertiary);
 		int size = (int)(((double)list.length / (double)Commands.values().length)*box_list.height);
 		double a = ((double)size * ((double)(page) / (double)(list.length)));
-		g.fillRect(box_list.x + box_list.width - Engine.GameScale, (int)(box_list.y + a), Engine.GameScale, size);
+		g.fillRect(box_list.x + box_list.width - Engine.SCALE, (int)(box_list.y + a), Engine.SCALE, size);
 		g.setColor(new Color(Theme.Color_Primary.getRed(), Theme.Color_Primary.getGreen(), Theme.Color_Primary.getBlue(), 60));
 		if(!default_list.isEmpty())
 			g.fillRect(box_default_list.x, box_default_list.y, box_default_list.width, box_default_list.height);
@@ -109,7 +109,7 @@ public class Commands_Boxe {
 	
 	private class C {
 		
-		private Font font = FontG.font(8*Engine.GameScale);
+		private Font font = FontG.font(8*Engine.SCALE);
 		private Commands command;
 		private Rectangle bounds;
 		

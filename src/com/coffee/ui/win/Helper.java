@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.coffee.Inputs.Mouse;
 import com.coffee.Inputs.Mouse_Button;
-import com.coffee.command.Commands;
+import com.coffee.ui.command.Commands;
 import com.coffee.graphics.FontG;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
@@ -88,7 +88,7 @@ public class Helper extends View {
 		
 		private Rectangle bounds;
 		private Commands c;
-		private int padding = 5*Engine.GameScale;
+		private int padding = 5*Engine.SCALE;
 		
 		public Comman(Commands c) {
 			this.c = c;
@@ -104,7 +104,7 @@ public class Helper extends View {
 			int hF = FontG.getHeight(name, font());
 			g.drawString(name, padding + x, padding + y + hF);
 			if(on) {
-				g.drawLine(x + padding, y + hF + 2*Engine.GameScale + padding, x + wF + padding, y + hF + 2*Engine.GameScale + padding);
+				g.drawLine(x + padding, y + hF + 2*Engine.SCALE + padding, x + wF + padding, y + hF + 2*Engine.SCALE + padding);
 			}
 		}
 		

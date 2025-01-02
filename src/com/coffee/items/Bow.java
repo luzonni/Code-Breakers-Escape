@@ -25,27 +25,27 @@ public class Bow extends Item {
 		switch (dir) {
 			case Up:
 				y -= Tile.getSize();
-				Arrow a = new Arrow(x, y, -Math.PI/2, 5*Engine.GameScale);
+				Arrow a = new Arrow(x, y, -Math.PI/2, 5*Engine.SCALE);
 				Game.getLevel().addEntity(a);
-				player.getInventory().remove(this);
+				Game.getInventory().remove(this);
 				break;
 			case Down:
 				y += Tile.getSize();
-				a = new Arrow(x, y, Math.PI/2, 5*Engine.GameScale);
+				a = new Arrow(x, y, Math.PI/2, 5*Engine.SCALE);
 				Game.getLevel().addEntity(a);
-				player.getInventory().remove(this);
+				Game.getInventory().remove(this);
 				break;
 			case Left:
 				x -= Tile.getSize();
-				a = new Arrow(x, y, Math.PI, 5*Engine.GameScale);
+				a = new Arrow(x, y, Math.PI, 5*Engine.SCALE);
 				Game.getLevel().addEntity(a);
-				player.getInventory().remove(this);
+				Game.getInventory().remove(this);
 				break;
 			case Right:
 				x += Tile.getSize();
-				a = new Arrow(x, y, 0, 5*Engine.GameScale);
+				a = new Arrow(x, y, 0, 5*Engine.SCALE);
 				Game.getLevel().addEntity(a);
-				player.getInventory().remove(this);
+				Game.getInventory().remove(this);
 				break;
 			default:
 				break;

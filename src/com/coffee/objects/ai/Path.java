@@ -35,16 +35,16 @@ public class Path implements Runnable {
 		int x = (int)entity.getX();
 		int y = (int)entity.getY();
 		if(dir.equals(Directions.Left)) {
-			x -= Engine.GameScale;
+			x -= Engine.SCALE;
 			entity.setX(x);
 		}else if(dir.equals(Directions.Right)) {
-			x += Engine.GameScale;
+			x += Engine.SCALE;
 			entity.setX(x);
 		}else if(dir.equals(Directions.Up)) {
-			y -= Engine.GameScale;
+			y -= Engine.SCALE;
 			entity.setY(y);
 		}else if(dir.equals(Directions.Down)) {
-			y += Engine.GameScale;
+			y += Engine.SCALE;
 			entity.setY(y);
 		}
 		return true;
@@ -105,7 +105,7 @@ public class Path implements Runnable {
 					yF = node.parent.y*Tile.getSize() + Tile.getSize()/2;
 				}
 				Graphics2D g2 = (Graphics2D)g;
-				g2.setStroke(new BasicStroke(Engine.GameScale));
+				g2.setStroke(new BasicStroke(Engine.SCALE));
 				g2.setColor(Color.red);
 				g2.drawLine(xi - Game.getCam().getX(), yi - Game.getCam().getY(), xF - Game.getCam().getX(), yF - Game.getCam().getY());
 			}

@@ -20,7 +20,7 @@ public class Barrel extends Entity {
         if(sprite == null) {
             sprite = getSprite("barrel");
         }
-        getValues().addInt("speed", Engine.GameScale * 2);
+        getValues().addInt("speed", Engine.SCALE * 2);
         setVar(Variables.Selectable, true);
         setVar(Variables.Movable, true);
         setVar(Variables.Removable, true);

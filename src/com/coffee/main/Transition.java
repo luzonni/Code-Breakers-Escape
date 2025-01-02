@@ -29,8 +29,8 @@ class Transition implements Runnable {
 	}
 	
 	private void tick() {
-		int W = Engine.getWidth()/Engine.GameScale;
-		int H = Engine.getHeight()/Engine.GameScale;
+		int W = Engine.getWidth()/Engine.SCALE;
+		int H = Engine.getHeight()/Engine.SCALE;
 		BufferedImage image = new BufferedImage(W, H, BufferedImage.TYPE_INT_ARGB);
 		int[] rgb = new int[W*H];
 		for(int y = 0; y < H; y++)

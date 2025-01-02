@@ -2,7 +2,7 @@ package com.coffee.items;
 
 import java.awt.image.BufferedImage;
 
-import com.coffee.command.Commands;
+import com.coffee.ui.command.Commands;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
@@ -103,7 +103,7 @@ public abstract class Item {
 	}
 	
 	public static BufferedImage[] getSprite(String name) {
-		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/items/"+name+".png", Engine.GameScale);
+		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/items/"+name+".png", Engine.SCALE);
 		spriteSheet.replaceColor(Theme.PRIMARY, Theme.Color_Primary.getRGB());
 		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
 		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());

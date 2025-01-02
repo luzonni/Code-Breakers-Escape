@@ -18,7 +18,7 @@ public class Miniboll extends Entity {
 	public Miniboll(int x, int y, double radians) {
 		super(-1, x, y);
 		this.radians = radians;
-		this.setSize(2*Engine.GameScale, 2*Engine.GameScale);
+		this.setSize(2*Engine.SCALE, 2*Engine.SCALE);
 	}
 
 	@Override
@@ -28,10 +28,10 @@ public class Miniboll extends Entity {
 
 	@Override
 	public void tick() {
-		this.setX(getX() + Engine.GameScale*Math.cos(radians)*2);
-		this.setY(getY() + Engine.GameScale*Math.sin(radians)*2);
-		int x_next = (int)(getMiddle().x + Engine.GameScale*Math.cos(radians)*2) / Tile.getSize();
-		int y_next = (int)(getMiddle().y + Engine.GameScale*Math.sin(radians)*2) / Tile.getSize();
+		this.setX(getX() + Engine.SCALE *Math.cos(radians)*2);
+		this.setY(getY() + Engine.SCALE *Math.sin(radians)*2);
+		int x_next = (int)(getMiddle().x + Engine.SCALE *Math.cos(radians)*2) / Tile.getSize();
+		int y_next = (int)(getMiddle().y + Engine.SCALE *Math.sin(radians)*2) / Tile.getSize();
 		int x = (int)(getMiddle().x) / Tile.getSize();
 		int y = (int)(getMiddle().y) / Tile.getSize();
 		Tile vertinal_tile = Game.getLevel().getTile(x_next, y);

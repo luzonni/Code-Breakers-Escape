@@ -17,9 +17,9 @@ public class Lazer extends Entity {
 
     public Lazer(int x, int y, Directions direction) {
         super(-1, x, y);
-        pi = new Point(x + direction.getDir()[0]*Engine.GameScale*8, y + direction.getDir()[1]*Engine.GameScale*8);
+        pi = new Point(x + direction.getDir()[0]*Engine.SCALE *8, y + direction.getDir()[1]*Engine.SCALE *8);
         getOE().setDirection(direction);
-        setSize(Engine.GameScale, Engine.GameScale);
+        setSize(Engine.SCALE, Engine.SCALE);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class Lazer extends Entity {
     public void tick() {
         setX(pi.x);
         setY(pi.y);
-        while(getOE().slide(Engine.GameScale*4)) {}
+        while(getOE().slide(Engine.SCALE *4)) {}
         List<Entity> entities = Game.getLevel().getEntities();
         for(int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
@@ -42,13 +42,13 @@ public class Lazer extends Entity {
             }
         }
         if(Engine.RAND.nextInt(100) < 20)
-            Game.getLevel().addParticle(new Dust((int)getX() + Engine.GameScale, (int)getY() + Engine.GameScale, getOE().getReverse().getRadians()));
+            Game.getLevel().addParticle(new Dust((int)getX() + Engine.SCALE, (int)getY() + Engine.SCALE, getOE().getReverse().getRadians()));
     }
 
     @Override
     public void render(Graphics2D g) {
         g.setColor(Theme.Color_Primary);
-        g.setStroke(new BasicStroke(Engine.RAND.nextInt(Engine.GameScale*2) + 1));
+        g.setStroke(new BasicStroke(Engine.RAND.nextInt(Engine.SCALE *2) + 1));
         g.drawLine(pi.x - Game.getCam().getX(), pi.y - Game.getCam().getY(), (int)getX() - Game.getCam().getX(), (int)getY() - Game.getCam().getY());
     }
 

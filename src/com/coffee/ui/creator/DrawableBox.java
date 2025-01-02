@@ -82,9 +82,9 @@ public class DrawableBox implements Runnable {
 	}
 	
 	private Rectangle getBounds() {
-		int x = this.center.getBounds().x - (this.Width*Engine.GameScale)/2;
-		int y = this.center.getBounds().y - (this.Height*Engine.GameScale)/2;
-		return new Rectangle(x, y, this.Width * Engine.GameScale, this.Height * Engine.GameScale);
+		int x = this.center.getBounds().x - (this.Width*Engine.SCALE)/2;
+		int y = this.center.getBounds().y - (this.Height*Engine.SCALE)/2;
+		return new Rectangle(x, y, this.Width * Engine.SCALE, this.Height * Engine.SCALE);
 	}
 	
 	private Rectangle GridBounds() {
@@ -100,8 +100,8 @@ public class DrawableBox implements Runnable {
 		this.size_drawn -= scroll;
 		if(size_drawn < 2)
 			this.size_drawn = 2;
-		int x_d = (Mouse.getX() - getBounds().x + Creator.getCam().getX())/Engine.GameScale;
-		int y_d = (Mouse.getY() - getBounds().y + Creator.getCam().getY())/Engine.GameScale;
+		int x_d = (Mouse.getX() - getBounds().x + Creator.getCam().getX())/Engine.SCALE;
+		int y_d = (Mouse.getY() - getBounds().y + Creator.getCam().getY())/Engine.SCALE;
 		if(Mouse.pressingOn(Mouse_Button.LEFT, getBounds())) {
 			g.setColor(Theme.Color_Secondary);
 			g.fillOval(x_d - size_drawn/2, y_d - size_drawn/2, size_drawn, size_drawn);
@@ -111,19 +111,19 @@ public class DrawableBox implements Runnable {
 			g.fillOval(x_d - size_drawn/2, y_d - size_drawn/2, size_drawn, size_drawn);
 		}
 		g.setColor(Theme.Color_Tertiary);
-		g.fillRect(this.Width/2 - (this.grid.width*16)/2, this.Height/2 - (this.grid.height*16)/2, GridBounds().width/Engine.GameScale, GridBounds().height/Engine.GameScale);
+		g.fillRect(this.Width/2 - (this.grid.width*16)/2, this.Height/2 - (this.grid.height*16)/2, GridBounds().width/Engine.SCALE, GridBounds().height/Engine.SCALE);
 		g.setColor(Theme.Color_Primary);
 		g.drawRect(0, 0, Width-1, Height-1);
 	}
 	
 	public void render(Graphics2D g) {
-		int x = this.center.getBounds().x - (this.Width*Engine.GameScale)/2;
-		int y = this.center.getBounds().y - (this.Height*Engine.GameScale)/2;
-		g.drawImage(picture, x - Creator.getCam().getX(), y - Creator.getCam().getY(), this.Width*Engine.GameScale, this.Height*Engine.GameScale, null);
+		int x = this.center.getBounds().x - (this.Width*Engine.SCALE)/2;
+		int y = this.center.getBounds().y - (this.Height*Engine.SCALE)/2;
+		g.drawImage(picture, x - Creator.getCam().getX(), y - Creator.getCam().getY(), this.Width*Engine.SCALE, this.Height*Engine.SCALE, null);
 		if(this.drawnable) {
 			int x_mouse = Mouse.getX();
 			int y_mouse = Mouse.getY();
-			g.setStroke(new BasicStroke(Engine.GameScale));
+			g.setStroke(new BasicStroke(Engine.SCALE));
 			g.setColor(Theme.Color_Primary);
 			g.drawOval(x_mouse - size_drawn, y_mouse - size_drawn, size_drawn*2, size_drawn*2);
 		}

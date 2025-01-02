@@ -14,7 +14,7 @@ public class Interrogation extends Particle {
 	public Interrogation(int x, int y) {
 		super(x, y);
 		if(sprite == null)
-			sprite = getSprite("interrogation", Theme.Color_Primary)[0].getSubimage(0, 0, 5*Engine.GameScale, 9*Engine.GameScale);
+			sprite = getSprite("interrogation", Theme.Color_Primary)[0].getSubimage(0, 0, 5*Engine.SCALE, 9*Engine.SCALE);
 		setSize(sprite.getWidth(), sprite.getHeight());
 		setX(getX() - (Tile.getSize()/4 - Engine.RAND.nextInt(Tile.getSize()/2)));
 		setY(getY());
@@ -27,7 +27,7 @@ public class Interrogation extends Particle {
 
 	@Override
 	public void tick() {
-		setY(getY() - 1*Engine.GameScale);
+		setY(getY() - 1*Engine.SCALE);
 		dead();
 	}
 

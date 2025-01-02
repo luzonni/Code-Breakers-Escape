@@ -3,7 +3,7 @@ package com.coffee.objects.entity;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import com.coffee.command.Commands;
+import com.coffee.ui.command.Commands;
 import com.coffee.items.CMD;
 import com.coffee.items.Item;
 import com.coffee.main.Engine;
@@ -31,12 +31,12 @@ public class Computer extends Entity {
 	public void tick() {
 		Player player = Game.getPlayer();
 		if(player.collidingWith(this)) {
-			Item[] items = player.getInventory().getList();
+			Item[] items = Game.getInventory().getList();
 			for(Item item : items) {
 				if(item instanceof CMD) {
 					Commands c = ((CMD)item).getCMD();
 					Game.getLevel().addKey(c);
-					player.getInventory().remove(item);
+					Game.getInventory().remove(item);
 				}
 			}
 		}

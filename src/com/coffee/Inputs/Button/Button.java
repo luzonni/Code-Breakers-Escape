@@ -52,7 +52,7 @@ public class Button {
 	}
 
 	public Button(String Name, int x_per, int y_per, Responsive parent, int size) {
-		this.font = FontG.font(Engine.GameScale*size);
+		this.font = FontG.font(Engine.SCALE *size);
 		this.Name = Name;
 		margin = size*3;
 		addSprite();

@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.coffee.Inputs.Mouse;
 import com.coffee.Inputs.Mouse_Button;
-import com.coffee.command.Receiver;
+import com.coffee.ui.command.Receiver;
 import com.coffee.level.Level;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
@@ -165,7 +165,7 @@ public class LevelMap implements Activity, Receiver {
 	
 	@Override
 	public void render(Graphics2D g) {
-		g.setStroke(new BasicStroke(Engine.GameScale*2));
+		g.setStroke(new BasicStroke(Engine.SCALE *2));
 		for(int i = 0; i < levels.length; i++) {
 			if(i < levels.length-1) {
 				Point cur = levels[i].getPoint();

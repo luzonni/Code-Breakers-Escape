@@ -1,9 +1,7 @@
-package com.coffee.command;
+package com.coffee.ui.command;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.coffee.Inputs.Keyboard;
 import com.coffee.Inputs.Button.TextButton;
@@ -17,21 +15,19 @@ import com.coffee.main.tools.Responsive;
 public class Console {
 	
 	private final Chat chat;
-	private final List<String[]> lastCommands;
 
 	protected TextButton textButton;
 	private BufferedImage icon;
 	private final BufferedImage arrow;
 
 	public Console() {
-		chat = new Chat(FontG.font(10 * Engine.GameScale));
-		lastCommands = new ArrayList<String[]>();
+		chat = new Chat(FontG.font(10 * Engine.SCALE));
 		textButton = new TextButton("Command", 50, 95, null, 10);
 		arrow = loadArrow();
 	}
 
 	private BufferedImage loadArrow() {
-		SpriteSheet sheet = new SpriteSheet(Engine.ResPath+"/ui/arrow.png", Engine.GameScale);
+		SpriteSheet sheet = new SpriteSheet(Engine.ResPath+"/ui/arrow.png", Engine.SCALE);
 		sheet.replaceColor(Theme.PRIMARY, Theme.Color_Primary.getRGB());
 		sheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
 		sheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
@@ -69,12 +65,10 @@ public class Console {
 		Keyboard.Writing(textButton.isSelect());
 		String[] commands = textButton.getText(null);
 		if(commands != null) {
-			String Callback = "Wrong command";
 			try {
-				Callback = Engine.UI.getReceiver().giveCommand(commands);
+				String Callback = Engine.UI.getReceiver().giveCommand(commands);
 				if(!Callback.isBlank()) {
 					print(Callback, true);
-					lastCommands.add(commands);
 				}
 			}catch (ConsoleError e) {
 				print(e.getMessage(), true);
@@ -96,12 +90,12 @@ public class Console {
 		if(this.icon == null)
 			return;
 		Responsive res = Responsive.createPoint(textButton.getResponsive(), -1, 0);
-		int x = res.getBounds().x - icon.getWidth()/2 - Engine.GameScale*23;
+		int x = res.getBounds().x - icon.getWidth()/2 - Engine.SCALE *23;
 		int y = res.getBounds().y - icon.getHeight()/2;
 		int w = icon.getWidth();
 		int h = icon.getHeight();
 		g.setColor(Theme.Color_Primary);
-		g.drawRect(x - Engine.GameScale*2, y - Engine.GameScale*2, w + Engine.GameScale*3, h + Engine.GameScale*3);
+		g.drawRect(x - Engine.SCALE *2, y - Engine.SCALE *2, w + Engine.SCALE *3, h + Engine.SCALE *3);
 		g.drawImage(this.arrow, x + w/2 + this.arrow.getWidth()/2, y, null);
 		g.drawImage(this.icon, x, y, null);
 	}

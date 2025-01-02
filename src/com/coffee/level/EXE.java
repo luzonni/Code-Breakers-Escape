@@ -2,8 +2,8 @@ package com.coffee.level;
 
 import com.coffee.Inputs.Mouse;
 import com.coffee.Inputs.Mouse_Button;
-import com.coffee.command.Commands;
-import com.coffee.command.Receiver;
+import com.coffee.ui.command.Commands;
+import com.coffee.ui.command.Receiver;
 import com.coffee.exceptions.ConsoleError;
 import com.coffee.items.Bow;
 import com.coffee.items.Item;
@@ -46,7 +46,7 @@ public class EXE {
         String dir_name = (keys[1].substring(0, 1).toUpperCase() + keys[1].substring(1).toLowerCase());
         Directions dir = Directions.valueOf(dir_name);
         Player player = Game.getPlayer();
-        Item[] items = player.getInventory().getList();
+        Item[] items = Game.getInventory().getList();
         for(Item item : items)
             if(item instanceof Bow) {
                 ((Bow)item).shot(player, dir);
@@ -57,7 +57,7 @@ public class EXE {
     }
 
     protected static void put(String[] keys, Receiver receiver) {
-        Item[] items = Game.getPlayer().getInventory().getList();
+        Item[] items = Game.getInventory().getList();
         for(int i = 0; i < items.length; i++) {
             if(items[i] instanceof Placeable) {
                 if(((Placeable)items[i]).place(keys)) {

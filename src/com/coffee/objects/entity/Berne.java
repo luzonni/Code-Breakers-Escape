@@ -29,7 +29,7 @@ public class Berne extends Entity {
 		if(timer > 15) {
 			timer = 0;
 			indexAnim++;
-			this.setX(this.getX() + Engine.GameScale);
+			this.setX(this.getX() + Engine.SCALE);
 		}
 		if(indexAnim > sprite.length-1) {
 			indexAnim = 0;

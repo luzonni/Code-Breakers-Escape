@@ -16,7 +16,7 @@ class Spit extends Entity {
 	public Spit(int x, int y, Directions dir) {
 		super(-1, x, y);
 		this.dir = dir;
-		setSize(2*Engine.GameScale, 2*Engine.GameScale);
+		setSize(2*Engine.SCALE, 2*Engine.SCALE);
 	}
 
 	@Override
@@ -29,9 +29,9 @@ class Spit extends Entity {
 		if(colliding())
 			Game.getLevel().getEntities().remove(this);
 		if(this.dir.equals(Directions.Left))
-			setX(getX() - 2*Engine.GameScale);
+			setX(getX() - 2*Engine.SCALE);
 		else
-			setX(getX() + 2*Engine.GameScale);
+			setX(getX() + 2*Engine.SCALE);
 		Player p = Game.getPlayer();
 		if(this.collidingWith(p))
 			p.kill();

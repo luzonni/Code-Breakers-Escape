@@ -18,10 +18,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.coffee.Inputs.Mouse;
-import com.coffee.Inputs.Mouse_Button;
-import com.coffee.command.Commands;
-import com.coffee.command.Receiver;
+import com.coffee.ui.command.Commands;
+import com.coffee.ui.command.Receiver;
 import com.coffee.ui.creator.DrawableBox;
 import com.coffee.exceptions.Dead;
 import com.coffee.graphics.FontG;
@@ -298,7 +296,7 @@ public class Level implements Receiver {
 	public void render(Graphics2D g) {
 		drawPicture(g);
 		g.setColor(new Color(Theme.Color_Secondary.getRed(), Theme.Color_Secondary.getGreen(), Theme.Color_Secondary.getBlue(), 90));
-		g.fillRect(bounds.x - Engine.GameScale - Game.getCam().getX(), bounds.y - Engine.GameScale - Game.getCam().getY(), bounds.width + Engine.GameScale*2, bounds.height + Engine.GameScale*2);
+		g.fillRect(bounds.x - Engine.SCALE - Game.getCam().getX(), bounds.y - Engine.SCALE - Game.getCam().getY(), bounds.width + Engine.SCALE *2, bounds.height + Engine.SCALE *2);
 		for(int i = 0; i < map.length; i++)
 			map[i].render(g);
 		for(int i = 0; i < entities.size(); i++) {
@@ -308,7 +306,7 @@ public class Level implements Receiver {
 				g.setColor(new Color(Theme.Color_Primary.getRed(), Theme.Color_Primary.getGreen(), Theme.Color_Primary.getBlue(), 80));
 				g.fillRect((int)e.getX() - Game.getCam().getX(), (int)e.getY() - Game.getCam().getY(), e.getWidth(), e.getHeight());
 				g.setColor(Theme.Color_Primary);
-				g.setStroke(new BasicStroke(Engine.GameScale));
+				g.setStroke(new BasicStroke(Engine.SCALE));
 				g.drawRect( (int)e.getX() - Game.getCam().getX(), (int)e.getY() - Game.getCam().getY(), e.getWidth(), e.getHeight());
 			}
 		}
@@ -319,35 +317,35 @@ public class Level implements Receiver {
 	}
 	
 	private void renderName(Graphics2D g) {
-		Font f = FontG.font(10*Engine.GameScale);
+		Font f = FontG.font(10*Engine.SCALE);
 		String value = getName();
 		int hF = FontG.getHeight(value, f);
 		int x = getBounds().x;
 		int y = getBounds().y - hF/2;
 		g.setFont(f);
 		g.setColor(Theme.Color_Secondary);
-		g.drawString(value, x + Engine.GameScale - Game.getCam().getX(), y + Engine.GameScale - Game.getCam().getY());
+		g.drawString(value, x + Engine.SCALE - Game.getCam().getX(), y + Engine.SCALE - Game.getCam().getY());
 		g.setColor(Theme.Color_Primary);
 		g.drawString(value, x - Game.getCam().getX(), y - Game.getCam().getY());
 	}
 	
 	private void renderBuilder(Graphics2D g) {
-		Font f = FontG.font(8*Engine.GameScale);
+		Font f = FontG.font(8*Engine.SCALE);
 		String value = (String)getLevel().get("BUILDER");
 		int wF = FontG.getWidth(value, f);
 		int hF = FontG.getHeight(value, f);
 		int x = getBounds().x + getBounds().width - wF;
-		int y = getBounds().y + getBounds().height + hF + Engine.GameScale;
+		int y = getBounds().y + getBounds().height + hF + Engine.SCALE;
 		g.setFont(f);
 		g.setColor(Theme.Color_Secondary);
-		g.drawString(value, x + Engine.GameScale - Game.getCam().getX(), y + Engine.GameScale - Game.getCam().getY());
+		g.drawString(value, x + Engine.SCALE - Game.getCam().getX(), y + Engine.SCALE - Game.getCam().getY());
 		g.setColor(Theme.Color_Primary);
 		g.drawString(value, x - Game.getCam().getX(), y - Game.getCam().getY());
 	}
 	
 	private void drawPicture(Graphics2D g) {
-		int w = picture.getWidth()*Engine.GameScale;
-		int h = picture.getHeight()*Engine.GameScale;
+		int w = picture.getWidth()*Engine.SCALE;
+		int h = picture.getHeight()*Engine.SCALE;
 		int x = (bounds.x + bounds.width/2) - w/2;
 		int y = (bounds.y + bounds.height/2) - h/2;
 		g.drawImage(picture, x - Game.getCam().getX(), y - Game.getCam().getY(), w, h, null);

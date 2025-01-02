@@ -49,7 +49,7 @@ public class Cannon extends Entity {
 			double r = radians - Math.PI/2; 
 			int x = (int)getMiddle().x + (int)(Math.cos(r)*Tile.getSize()/1.75);
 			int y = (int)getMiddle().y + (int)(Math.sin(r)*Tile.getSize()/1.75);
-			Game.getLevel().addEntity(new IronBall(x, y, r, Engine.GameScale*3));
+			Game.getLevel().addEntity(new IronBall(x, y, r, Engine.SCALE *3));
 			//TODO Sound.play("poft");
 		}
 	}

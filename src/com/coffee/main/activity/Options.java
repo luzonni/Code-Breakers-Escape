@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.coffee.Inputs.Button.Button;
-import com.coffee.command.Receiver;
+import com.coffee.ui.command.Receiver;
 import com.coffee.graphics.FontG;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
@@ -20,7 +20,6 @@ public class Options implements Activity, Receiver {
 	private Responsive colors;
 	private Responsive fullscreen;
 	private Responsive resolution;
-	private Responsive scale;
 	private Responsive setter;
 	
 	private int PALLET;
@@ -37,28 +36,24 @@ public class Options implements Activity, Receiver {
 	public void enter() {
 		PALLET = Theme.INDEX_PALLET;
 		RESOLUTION = Engine.INDEX_RES;
-		GAME_SCALE = Engine.GameScale;
+		GAME_SCALE = Engine.SCALE;
 		buttons = new HashMap<String, Button>();
-		volume = Responsive.createPoint(center, 0, -50*Engine.GameScale);
-		buttons.put("plus_volum", new Button("->", -12*Engine.GameScale, 0, volume, 8));
-		buttons.put("minus_volum", new Button("<-", 12*Engine.GameScale, 0, volume, 8));
+		volume = Responsive.createPoint(center, 0, -50*Engine.SCALE);
+		buttons.put("plus_volum", new Button("->", -12*Engine.SCALE, 0, volume, 8));
+		buttons.put("minus_volum", new Button("<-", 12*Engine.SCALE, 0, volume, 8));
 		
-		colors = Responsive.createPoint(volume, 0, 35*Engine.GameScale);
-		buttons.put("plus_color", new Button("->", -12*Engine.GameScale, 0, colors, 8));
-		buttons.put("minus_color", new Button("<-", 12*Engine.GameScale, 0, colors, 8));
+		colors = Responsive.createPoint(volume, 0, 35*Engine.SCALE);
+		buttons.put("plus_color", new Button("->", -12*Engine.SCALE, 0, colors, 8));
+		buttons.put("minus_color", new Button("<-", 12*Engine.SCALE, 0, colors, 8));
 		
-		fullscreen = Responsive.createPoint(colors, 0, 35*Engine.GameScale);
+		fullscreen = Responsive.createPoint(colors, 0, 35*Engine.SCALE);
 		buttons.put("bool_fullscreen", new Button("" + Engine.FullScreen, 0, 0, fullscreen, 8));
 		
-		resolution = Responsive.createPoint(fullscreen, 0, 35*Engine.GameScale);
-		buttons.put("plus_resolution", new Button("->", 12*Engine.GameScale, 0, resolution, 8));
-		buttons.put("minus_resolution", new Button("<-", -12*Engine.GameScale, 0, resolution, 8));
+		resolution = Responsive.createPoint(fullscreen, 0, 35*Engine.SCALE);
+		buttons.put("plus_resolution", new Button("->", 12*Engine.SCALE, 0, resolution, 8));
+		buttons.put("minus_resolution", new Button("<-", -12*Engine.SCALE, 0, resolution, 8));
 		
-		scale = Responsive.createPoint(resolution, 0, 25*Engine.GameScale);
-		buttons.put("plus_scale", new Button("->", 12*Engine.GameScale, 0, scale, 8));
-		buttons.put("minus_scale", new Button("<-", -12*Engine.GameScale, 0, scale, 8));
-		
-		setter = Responsive.createPoint(scale, 0, 20*Engine.GameScale);
+		setter = Responsive.createPoint(resolution, 0, 20*Engine.SCALE);
 		buttons.put("setter", new Button("Set", 0, 0, setter, 8));
 		Engine.UI.addOption("Back", () -> {
 			Engine.setActivity(new Menu());
@@ -85,12 +80,8 @@ public class Options implements Activity, Receiver {
 			this.RESOLUTION ++;
 		if(buttons.get("minus_resolution").function() && this.RESOLUTION - 1 >= 0)
 			this.RESOLUTION --;
-		if(buttons.get("plus_scale").function() && this.GAME_SCALE + 1 <= 6)
-			this.GAME_SCALE ++;
-		if(buttons.get("minus_scale").function() && this.GAME_SCALE - 1 >= 2)
-			this.GAME_SCALE --;
 		if(buttons.get("setter").function()) {
-			Engine.ME.setConfig(Engine.Volume, PALLET, Engine.FullScreen, RESOLUTION, GAME_SCALE);
+			Engine.ME.setConfig(Engine.Volume, PALLET, Engine.FullScreen, RESOLUTION);
 			Engine.restart();
 		}
 	}
@@ -102,23 +93,22 @@ public class Options implements Activity, Receiver {
 		render_colors(g);
 		render_fullscreen(g);
 		render_resolution(g);
-		render_scale(g);
 	}
 	
 	private void render_volum(Graphics2D g) {
 		if(!buttons.containsKey("plus_volum") || !buttons.containsKey("minus_volum"))
 			return;
 		String value = "Volum: " + Engine.Volume;
-		Font font = FontG.font(12*Engine.GameScale);
+		Font font = FontG.font(12*Engine.SCALE);
 		int wF = FontG.getWidth(value, font);
 		int hF = FontG.getHeight(value, font);
 		int x = volume.getPosition().x - wF/2;
 		int y = volume.getPosition().y + hF/2;
-		buttons.get("plus_volum").getResponsive().setRelative(wF/2 + 2*Engine.GameScale, 0);
-		buttons.get("minus_volum").getResponsive().setRelative(-wF/2 - 2*Engine.GameScale, 0);
+		buttons.get("plus_volum").getResponsive().setRelative(wF/2 + 2*Engine.SCALE, 0);
+		buttons.get("minus_volum").getResponsive().setRelative(-wF/2 - 2*Engine.SCALE, 0);
 		g.setFont(font);
 		g.setColor(Theme.Color_Tertiary);
-		g.drawString(value, x + Engine.GameScale, y + Engine.GameScale);
+		g.drawString(value, x + Engine.SCALE, y + Engine.SCALE);
 		g.setColor(Theme.Color_Primary);
 		g.drawString(value, x, y);
 	}
@@ -127,17 +117,17 @@ public class Options implements Activity, Receiver {
 		if(!buttons.containsKey("plus_color") || !buttons.containsKey("minus_color"))
 			return;
 		String value = "Colors:";
-		Font font = FontG.font(12*Engine.GameScale);
+		Font font = FontG.font(12*Engine.SCALE);
 		int wF = FontG.getWidth(value, font);
 		int hF = FontG.getHeight(value, font);
 		int xS = colors.getPosition().x - wF/2;
 		int yS = colors.getPosition().y - hF;
 		g.setFont(font);
 		g.setColor(Theme.Color_Tertiary);
-		g.drawString(value, xS + Engine.GameScale, yS + Engine.GameScale);
+		g.drawString(value, xS + Engine.SCALE, yS + Engine.SCALE);
 		g.setColor(Theme.Color_Primary);
 		g.drawString(value, xS, yS);
-		int size = 12*Engine.GameScale;
+		int size = 12*Engine.SCALE;
 		int wB = Theme.PALLET[this.PALLET].length * size;
 		int xB = colors.getPosition().x - wB/2;
 		int yB = colors.getPosition().y - size/2;
@@ -145,20 +135,20 @@ public class Options implements Activity, Receiver {
 			g.setColor(Theme.PALLET[this.PALLET][i]);
 			g.fillRect(xB + i*size, yB, size, size);
 		}
-		buttons.get("plus_color").getResponsive().setRelative(wB/2 + 2*Engine.GameScale, 0);
-		buttons.get("minus_color").getResponsive().setRelative(-wB/2 - 2*Engine.GameScale, 0);
+		buttons.get("plus_color").getResponsive().setRelative(wB/2 + 2*Engine.SCALE, 0);
+		buttons.get("minus_color").getResponsive().setRelative(-wB/2 - 2*Engine.SCALE, 0);
 	}
 	
 	private void render_fullscreen(Graphics2D g) {
 		String value = "Fullscreen:";
-		Font font = FontG.font(12*Engine.GameScale);
+		Font font = FontG.font(12*Engine.SCALE);
 		int wF = FontG.getWidth(value, font);
 		int hF = FontG.getHeight(value, font);
 		int xS = fullscreen.getPosition().x - wF/2;
 		int yS = fullscreen.getPosition().y - hF;
 		g.setFont(font);
 		g.setColor(Theme.Color_Tertiary);
-		g.drawString(value, xS + Engine.GameScale, yS + Engine.GameScale);
+		g.drawString(value, xS + Engine.SCALE, yS + Engine.SCALE);
 		g.setColor(Theme.Color_Primary);
 		g.drawString(value, xS, yS);
 	}
@@ -167,14 +157,14 @@ public class Options implements Activity, Receiver {
 		if(!buttons.containsKey("plus_resolution") || !buttons.containsKey("minus_resolution"))
 			return;
 		String value = "Resolution:";
-		Font font = FontG.font(12*Engine.GameScale);
+		Font font = FontG.font(12*Engine.SCALE);
 		int wF = FontG.getWidth(value, font);
 		int hF = FontG.getHeight(value, font);
 		int xS = resolution.getPosition().x - wF/2;
 		int yS = resolution.getPosition().y - hF;
 		g.setFont(font);
 		g.setColor(Theme.Color_Tertiary);
-		g.drawString(value, xS + Engine.GameScale, yS + Engine.GameScale);
+		g.drawString(value, xS + Engine.SCALE, yS + Engine.SCALE);
 		g.setColor(Theme.Color_Primary);
 		g.drawString(value, xS, yS);
 		String value_res = Engine.resolutions[this.RESOLUTION][0] + " / " + Engine.resolutions[this.RESOLUTION][1];
@@ -184,31 +174,11 @@ public class Options implements Activity, Receiver {
 		int yS_res = resolution.getPosition().y + hF_res/2;
 		g.setFont(font);
 		g.setColor(Theme.Color_Tertiary);
-		g.drawString(value_res, xS_res + Engine.GameScale, yS_res + Engine.GameScale);
+		g.drawString(value_res, xS_res + Engine.SCALE, yS_res + Engine.SCALE);
 		g.setColor(Theme.Color_Primary);
 		g.drawString(value_res, xS_res, yS_res);
-		buttons.get("plus_resolution").getResponsive().setRelative(wF_res/2 + 2*Engine.GameScale, 0);
-		buttons.get("minus_resolution").getResponsive().setRelative(-wF_res/2 - 2*Engine.GameScale, 0);
-	}
-	
-	private void render_scale(Graphics2D g) {
-		if(!buttons.containsKey("plus_scale") || !buttons.containsKey("minus_scale"))
-			return;
-		String value = "Game Scale: " + this.GAME_SCALE;
-		if(this.GAME_SCALE == 3)
-			value += " (Recomended)";
-		Font font = FontG.font(12*Engine.GameScale);
-		int wF = FontG.getWidth(value, font);
-		int hF = FontG.getHeight(value, font);
-		int x = scale.getPosition().x - wF/2;
-		int y = scale.getPosition().y + hF/2;
-		buttons.get("plus_scale").getResponsive().setRelative(wF/2 + 2*Engine.GameScale, 0);
-		buttons.get("minus_scale").getResponsive().setRelative(-wF/2 - 2*Engine.GameScale, 0);
-		g.setFont(font);
-		g.setColor(Theme.Color_Tertiary);
-		g.drawString(value, x + Engine.GameScale, y + Engine.GameScale);
-		g.setColor(Theme.Color_Primary);
-		g.drawString(value, x, y);
+		buttons.get("plus_resolution").getResponsive().setRelative(wF_res/2 + 2*Engine.SCALE, 0);
+		buttons.get("minus_resolution").getResponsive().setRelative(-wF_res/2 - 2*Engine.SCALE, 0);
 	}
 	
 	@Override

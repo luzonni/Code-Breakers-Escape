@@ -34,9 +34,9 @@ public class Door extends Tile {
 	public void tick() {
 		Player p = Game.getPlayer();
 		if(this.isSolid() && p.getOE().nextTile() == this) 
-			for(Item item : p.getInventory().getList())
+			for(Item item : Game.getInventory().getList())
 				if(item instanceof Key) {
-					p.getInventory().remove(item);
+					Game.getInventory().remove(item);
 					open();
 				}
 	}

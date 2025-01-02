@@ -50,7 +50,7 @@ public class Selected {
 			int y = selected.getBounds().y + per;
 			int w = selected.getBounds().width - per*2;
 			int h = selected.getBounds().height - per*2;
-			g.setStroke(new BasicStroke(Engine.GameScale + per));
+			g.setStroke(new BasicStroke(Engine.SCALE + per));
 			g.setColor(Theme.Color_Tertiary);
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, f));
 			g.drawRect(x, y, w, h);

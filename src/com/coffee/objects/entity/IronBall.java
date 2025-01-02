@@ -19,8 +19,8 @@ class IronBall extends Entity {
 	private final int speed;
 
 	public IronBall(int x, int y, double radians, int speed) {
-		super(0, x - 5*Engine.GameScale, y - 5*Engine.GameScale);
-		this.setSize(10*Engine.GameScale, 10*Engine.GameScale);
+		super(0, x - 5*Engine.SCALE, y - 5*Engine.SCALE);
+		this.setSize(10*Engine.SCALE, 10*Engine.SCALE);
 		this.radians = radians;
 		this.speed = speed;
 		if(sprite == null) 

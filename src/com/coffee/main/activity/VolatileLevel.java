@@ -24,7 +24,7 @@ class VolatileLevel {
 	public VolatileLevel(Level level) {
 		this.level = level;
 		this.bounds = new Rectangle(Engine.RAND.nextInt(Engine.getWidth()), Engine.RAND.nextInt(Engine.getHeight()), 0, 0);
-		this.font = FontG.font(14*Engine.GameScale);
+		this.font = FontG.font(14*Engine.SCALE);
 		this.Name = level.getName();
 		this.blocked = true;
 	}
@@ -52,7 +52,7 @@ class VolatileLevel {
 	private void setBounds() {
 		int w = fontWidth();
 		int h = fontHeight();
-		bounds.setSize(w + Engine.GameScale*3, h + Engine.GameScale*2);
+		bounds.setSize(w + Engine.SCALE *3, h + Engine.SCALE *2);
 	}
 	
 	public int fontWidth() {
@@ -84,7 +84,7 @@ class VolatileLevel {
 		else
 			g.setColor(Theme.Color_Primary);
 		g.setFont(font);
-		g.drawString(Name, bounds.x + Engine.GameScale*2, bounds.y + fontHeight());
+		g.drawString(Name, bounds.x + Engine.SCALE *2, bounds.y + fontHeight());
 		g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
 	}
 	

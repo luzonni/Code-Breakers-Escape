@@ -76,9 +76,9 @@ public class Cleft extends Entity {
 
     @Override
     public void render(Graphics2D g) {
-        renderRect(Engine.GameScale * 8, true, g);
-        renderRect(Engine.GameScale * 4, false, g);
-        renderRect(Engine.GameScale * 12, false, g);
+        renderRect(Engine.SCALE * 8, true, g);
+        renderRect(Engine.SCALE * 4, false, g);
+        renderRect(Engine.SCALE * 12, false, g);
     }
 
     private void renderRect(int size, boolean fill, Graphics2D g) {
@@ -93,7 +93,7 @@ public class Cleft extends Entity {
             g.fillRect(x, y, size, size);
         }else {
             g.setColor(Theme.Color_Secondary);
-            g.setStroke(new BasicStroke(Engine.GameScale));
+            g.setStroke(new BasicStroke(Engine.SCALE));
             g.drawRect(x, y, size, size);
         }
         g.rotate(-rr, getMiddle().x - Game.getCam().getX(), getMiddle().y - Game.getCam().getY());

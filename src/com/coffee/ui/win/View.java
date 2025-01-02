@@ -29,10 +29,10 @@ public abstract class View {
 	
 	public View(String name) {
 		this.name = name;
-		this.font = FontG.font(8*Engine.GameScale);
-		bar = new Rectangle(72*Engine.GameScale, 12*Engine.GameScale);
-		showButton = new Rectangle(12*Engine.GameScale, 12*Engine.GameScale);
-		boxContent = new Rectangle(84*Engine.GameScale, 0);
+		this.font = FontG.font(8*Engine.SCALE);
+		bar = new Rectangle(72*Engine.SCALE, 12*Engine.SCALE);
+		showButton = new Rectangle(12*Engine.SCALE, 12*Engine.SCALE);
+		boxContent = new Rectangle(84*Engine.SCALE, 0);
 	}
 	
 	public void setLocation(int x, int y) {
@@ -41,8 +41,8 @@ public abstract class View {
 	
 	protected void resize(int w, int h) {
 		int wS = showButton.width;
-		if(w < 72*Engine.GameScale)
-			w = 72*Engine.GameScale;
+		if(w < 72*Engine.SCALE)
+			w = 72*Engine.SCALE;
 		bar.setSize(w - wS, bar.height);
 		boxContent.setSize(w, h);
 	}
@@ -93,7 +93,7 @@ public abstract class View {
 	
 	public void render(Graphics2D g) {
 		barSystem();
-		g.setStroke(new BasicStroke(Engine.GameScale));
+		g.setStroke(new BasicStroke(Engine.SCALE));
 		g.setColor(Theme.Color_Tertiary);
 		g.fillRect(bar.x, bar.y, bar.width + showButton.width, bar.height + boxContent.height);
 		renderBar(g);

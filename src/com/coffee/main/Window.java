@@ -141,7 +141,7 @@ public class Window extends Canvas implements Runnable {
 		g.setColor(Color.WHITE);
 		int middleX = getWidth()/2;
 		int middleY = getHeight()/2;
-		Font font = FontG.font(Engine.GameScale*16);
+		Font font = FontG.font(Engine.SCALE *16);
 		String name = "Capulus";
 		int w = FontG.getWidth(name, font);
 		int h = FontG.getHeight(name, font);

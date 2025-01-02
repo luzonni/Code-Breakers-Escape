@@ -48,7 +48,7 @@ public class Bomb extends Entity {
 		}
 		if(activity) {
 			count++;
-			Game.getLevel().addParticle(new Dust(getMiddle().x + positions[index][0]*Engine.GameScale, getMiddle().y + positions[index][1]*Engine.GameScale, -Math.PI/2));
+			Game.getLevel().addParticle(new Dust(getMiddle().x + positions[index][0]*Engine.SCALE, getMiddle().y + positions[index][1]*Engine.SCALE, -Math.PI/2));
 			if(count > 15) {
 				count = 0;
 				index++;

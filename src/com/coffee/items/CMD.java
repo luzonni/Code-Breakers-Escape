@@ -1,6 +1,6 @@
 package com.coffee.items;
 
-import com.coffee.command.Commands;
+import com.coffee.ui.command.Commands;
 
 public class CMD extends Item {
 

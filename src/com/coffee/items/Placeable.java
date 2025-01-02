@@ -23,7 +23,7 @@ public class Placeable extends Item {
 		if(entity == null || !entity.getClass().getSimpleName().equalsIgnoreCase(name))
 			return false;
 		Game.getLevel().addEntity(entity);
-		Game.getPlayer().getInventory().remove(this);
+		Game.getInventory().remove(this);
 		return true;
 	}
 

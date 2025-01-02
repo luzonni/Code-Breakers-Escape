@@ -40,7 +40,7 @@ public class EntityItem extends Entity {
 		item.tick();
 		Player p = Game.getPlayer();
 		if(p.collidingWith(this)) {
-			if(p.getInventory().put(item)) {
+			if(Game.getInventory().put(item)) {
 				Game.getLevel().getEntities().remove(this);
 			}
 		}

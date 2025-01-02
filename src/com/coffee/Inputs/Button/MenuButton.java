@@ -29,7 +29,7 @@ public class MenuButton extends Button {
 	}
 	
 	private BufferedImage[] buildIcon() {
-		SpriteSheet sp = new SpriteSheet(Engine.ResPath+"/ui/menubutton.png", Engine.GameScale);
+		SpriteSheet sp = new SpriteSheet(Engine.ResPath+"/ui/menubutton.png", Engine.SCALE);
 		sp.replaceColor(Theme.PRIMARY, Theme.Color_Primary.getRGB());
 		sp.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
 		sp.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
@@ -44,7 +44,7 @@ public class MenuButton extends Button {
 		Responsive res = getResponsive();
 		if(!actionButtons.isEmpty()) 
 			res = actionButtons.get(actionButtons.size()-1).getResponsive();
-		ActionButton acb = new ActionButton(name, Engine.GameScale*3, 0, res, Engine.GameScale * size, action);
+		ActionButton acb = new ActionButton(name, Engine.SCALE *3, 0, res, Engine.SCALE * size, action);
 		actionButtons.add(acb);
 	}
 

@@ -43,12 +43,12 @@ public class Engine implements Runnable {
 	//Game configs
 	public static boolean FullScreen = false;
 	public static boolean AlwaysOnTop = false;
-	public static int GameScale = 3;
+	public static final int SCALE = 3;
 	public static int Volume = 50;
 	public static boolean ANTIALIASING = false;
 	public static boolean OpenGL = false;
 
-	public static final int[][] resolutions = {{800, 600}, {1280, 720}, {1366, 768}, {1600, 900}, {1920, 1080}, {2560, 1440}, {3840, 2160}};
+	public static final int[][] resolutions = {{1280, 720}, {1366, 768}, {1600, 900}, {1920, 1080}, {2560, 1440}, {3840, 2160}};
 	public static int INDEX_RES = 1;
 
 	public static final String ResPath = "/com/coffee/res";
@@ -64,7 +64,7 @@ public class Engine implements Runnable {
 	public static Activity ACTIVITY;
 	public static boolean ACTIVITY_RUNNING;
 	
-	public static String[] LEVELS = {"start"};
+	public static String[] LEVELS = {"start", "what's_this"};
 	public static int INDEX_LEVEL = 0;
 	
 	public static Random RAND;
@@ -140,7 +140,7 @@ public class Engine implements Runnable {
 		String path = System.getProperty("user.dir") + "/config.json";
 		File file = new File(path);
 		if(!file.exists()) 
-			setConfig(Engine.Volume, Theme.INDEX_PALLET, Engine.FullScreen, Engine.INDEX_RES, Engine.GameScale);
+			setConfig(Engine.Volume, Theme.INDEX_PALLET, Engine.FullScreen, Engine.INDEX_RES);
 		JSONObject object = null;
 		try {
 			InputStream istream = new FileInputStream(file);
@@ -153,17 +153,15 @@ public class Engine implements Runnable {
 		Theme.INDEX_PALLET = ((Number)object.get("PALLET")).intValue();
 		Engine.FullScreen = (Boolean) object.get("FULLSCREEN");
 		Engine.INDEX_RES = ((Number)object.get("RESOLUTION")).intValue();
-		Engine.GameScale = ((Number)object.get("SCALE")).intValue();
 	}
 	
-	public void setConfig(int volume, int pallet, boolean foolscreen, int res, int scale) {
+	public void setConfig(int volume, int pallet, boolean fullScreen, int res) {
 		String path = System.getProperty("user.dir") + "/config.json";
 		JSONObject object = new JSONObject();
 		object.put("VOLUM", volume);
 		object.put("PALLET", pallet);
-		object.put("FULLSCREEN", foolscreen);
+		object.put("FULLSCREEN", fullScreen);
 		object.put("RESOLUTION", res);
-		object.put("SCALE", scale);
 		try {
 			FileWriter writer = new FileWriter(path);
 			writer.write(object.toJSONString());
@@ -187,14 +185,14 @@ public class Engine implements Runnable {
 		INDEX_NOISE++;
 		if(INDEX_NOISE > NOISE.length-1)
 			INDEX_NOISE = 0;
-		if(NOISE[INDEX_NOISE] == null || NOISE[INDEX_NOISE].getWidth() != WINDOW.getWidth()/GameScale)
+		if(NOISE[INDEX_NOISE] == null || NOISE[INDEX_NOISE].getWidth() != WINDOW.getWidth()/ SCALE)
 			NOISE[INDEX_NOISE] = buildNoise();
 		return NOISE[INDEX_NOISE];
 	}
 	
 	private static BufferedImage buildNoise() {
-		int width = WINDOW.getWidth()/GameScale;
-		int height = WINDOW.getHeight()/GameScale;
+		int width = WINDOW.getWidth()/ SCALE;
+		int height = WINDOW.getHeight()/ SCALE;
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		int[] rgb = new int[width*height];
 		for(int y = 0; y < height; y++)
