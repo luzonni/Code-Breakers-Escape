@@ -14,6 +14,7 @@ import com.coffee.main.activity.Game;
 import com.coffee.objects.Objects;
 import com.coffee.objects.Variables;
 import com.coffee.objects.entity.Entity;
+import com.coffee.objects.entity.Spine;
 
 public abstract class Tile extends Objects {
 
@@ -51,14 +52,6 @@ public abstract class Tile extends Objects {
             }
             case Crate -> {
                 tile = new Crate(id, x, y);
-                yield tile;
-            }
-            case Spine -> {
-                tile = new Spine(id, x, y);
-                yield tile;
-            }
-            case Vase -> {
-                tile = new Vase(id, x, y);
                 yield tile;
             }
 			case Thron -> {
@@ -148,10 +141,12 @@ public abstract class Tile extends Objects {
 		if(take(keys, Commands.move)) {
 			EXE.move(keys, this);
 			used(Commands.move);
+			return "";
 		}
 		if(take(keys, Commands.remove)) {
 			EXE.remove(this);
 			used(Commands.remove);
+			return "";
 		}
 		return message;
 	}

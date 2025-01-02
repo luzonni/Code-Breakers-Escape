@@ -28,7 +28,7 @@ import com.coffee.objects.Objects;
 
 public class Engine implements Runnable {
 	
-	public static final String VERSION = "Version: Alpha 0.1";
+	public static final String VERSION = "Version: Alpha 1.0";
 	
 	public static volatile Engine ME = null;
 	
@@ -64,8 +64,8 @@ public class Engine implements Runnable {
 	public static Activity ACTIVITY;
 	public static boolean ACTIVITY_RUNNING;
 	
-	public static String[] LEVELS = {"start", "lilly", "maybe"};
-	public static int INDEX_LEVEL = 1;
+	public static String[] LEVELS = {"start"};
+	public static int INDEX_LEVEL = 0;
 	
 	public static Random RAND;
 

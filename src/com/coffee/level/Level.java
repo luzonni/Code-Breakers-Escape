@@ -228,9 +228,7 @@ public class Level implements Receiver {
 			return null;
 		try {
 			tile = getMap()[x+y*(bounds.width/Tile.getSize())];
-		}catch (ArrayIndexOutOfBoundsException e) {
-			
-		}
+		}catch (ArrayIndexOutOfBoundsException ignore) { }
 		return tile;
 	}
 	
@@ -264,9 +262,11 @@ public class Level implements Receiver {
 
 		if(take(keys, Commands.shot)) {
 			EXE.shot(keys, this);
+			return "";
 		}
 		if(take(keys, Commands.put)) {
 			EXE.put(keys, this);
+			return "";
 		}
 		return message;
 	}

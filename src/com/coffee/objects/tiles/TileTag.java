@@ -9,8 +9,6 @@ public enum TileTag {
     Gate,
     Box,
     Crate,
-    Spine,
-    Vase,
     Thron,
     Repellent,
     Fake_Wall,

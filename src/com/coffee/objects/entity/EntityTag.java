@@ -7,8 +7,10 @@ public enum EntityTag {
     CrossBow,
     Ant,
     Button,
+    Spine,
     Computer,
     Skull,
+    Vase,
     Pluuter,
     Karto,
     Saw,
@@ -23,7 +25,8 @@ public enum EntityTag {
     Blaster_Right,
     Blaster_Down,
     Blaster_Left,
-    Cleft;
+    Cleft,
+    Worm;
 
     public int getId() {
         return this.ordinal();

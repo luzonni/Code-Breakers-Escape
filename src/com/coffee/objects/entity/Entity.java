@@ -50,6 +50,10 @@ public abstract class Entity extends Objects {
                 entity = new Button(id, x, y);
                 yield entity;
             }
+			case Spine -> {
+				entity = new Spine(id, x, y);
+				yield entity;
+			}
 			case Computer -> {
                 entity = new Computer(id, x, y);
                 yield entity;
@@ -118,6 +122,14 @@ public abstract class Entity extends Objects {
 				entity = new Cleft(id, x, y);
 				yield entity;
 			}
+			case Worm -> {
+				entity = new Worm(id, x, y);
+				yield entity;
+			}
+			case Vase -> {
+				entity = new Vase(id, x, y);
+				yield entity;
+			}
         };
     }
 	
@@ -173,21 +185,25 @@ public abstract class Entity extends Objects {
 		if(take(keys, Commands.remove)) {
 			EXE.remove(this);
 			used(Commands.remove);
+			return "";
 		}
 
 		if(take(keys, Commands.move)) {
 			EXE.move(keys, this);
 			used(Commands.move);
+			return "";
 		}
 
 		if(take(keys, Commands.freeze)) {
-			EXE.freeze(keys, this);
+			EXE.freeze(this);
 			used(Commands.freeze);
+			return "";
 		}
 
 		if(take(keys, Commands.revive)) {
 			EXE.revive(this);
 			used(Commands.revive);
+			return "";
 		}
 
 		return message;

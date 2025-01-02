@@ -1,13 +1,12 @@
-package com.coffee.objects.tiles;
+package com.coffee.objects.entity;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
-import com.coffee.objects.entity.Player;
 
-public class Spine extends Tile {
+public class Spine extends Entity {
 
 	private static BufferedImage[] sprite;
 	private int indexAnim;
@@ -28,7 +27,7 @@ public class Spine extends Tile {
 	@Override
 	public void tick() {
 		Player p = Game.getPlayer();
-		if(this.centralizedWith(p)) {
+		if(getOE().centralizedWith(p)) {
 			actived = true;
 			if(indexAnim == sprite.length-1) {
 				p.kill();
@@ -49,8 +48,7 @@ public class Spine extends Tile {
 
 	@Override
 	public void render(Graphics2D g) {
-		renderTile(Floor.sprite[Floor.index], g);
-		renderTile(getSprite(), g);
+		renderEntity(getSprite(), g);
 	}
 	
 	@Override

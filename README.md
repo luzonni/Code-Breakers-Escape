@@ -1,4 +1,4 @@
-# Jogo de estratégia.
+# Jogo de estratégia sandbox.
 
 # Conceito do Jogo:
 Em cada nível, você assumirá o controle de um personagem que deve navegar por ambientes complexos e superar obstáculos diversos, usando comandos inteligentes e movendo seu personagem de forma estratégica para prosseguir.

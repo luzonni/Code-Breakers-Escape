@@ -21,7 +21,6 @@ public class EXE {
         new Thread(() -> {
             Level level = Game.getLevel();
             while(level.getSelected() == null) {
-                System.out.println("search");
                 for(int i = 0; i < level.getMap().length; i++) {
                     Tile T = level.getMap()[i];
                     if(Mouse.pressingOnMap(Mouse_Button.LEFT, T.getBounds(), Game.getCam()) && T.getVar(Variables.Selectable)) {

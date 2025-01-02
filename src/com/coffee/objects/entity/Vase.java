@@ -1,4 +1,4 @@
-package com.coffee.objects.tiles;
+package com.coffee.objects.entity;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -6,9 +6,9 @@ import java.awt.image.BufferedImage;
 import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Variables;
-import com.coffee.objects.entity.Player;
+import com.coffee.objects.tiles.Tile;
 
-public class Vase extends Tile {
+public class Vase extends Entity {
 	
 	protected static BufferedImage[] sprite;
 	private int durability;
@@ -19,7 +19,7 @@ public class Vase extends Tile {
 			sprite = getSprite("vase", Theme.Color_Primary);
 		setVar(Variables.Selectable, true);
 		setVar(Variables.Movable, true);
-		this.setSolid(true);
+		setEffect(Variables.Breakable);
 	}
 
 	@Override
@@ -30,21 +30,21 @@ public class Vase extends Tile {
 	@Override
 	public void tick() {
 		Player P = Game.getPlayer();
-		if(P.getOE().nextTile() == this) {
+		Tile currentTile = Game.getLevel().getTile((int)getX()/Tile.getSize(), (int)getY()/Tile.getSize());
+		if(P.getOE().nextTile() == currentTile) {
 			durability = 1;
 		}else if(durability == 1){
 			durability = 2;
 		}
 		if(durability >= sprite.length-1) {
-			this.setSolid(false);
+			setVar(Variables.Breakable, false);
 			durability = sprite.length-1;
 		}
 	}
 	
 	@Override
 	public void render(Graphics2D g) {
-		renderTile(Floor.sprite[Floor.index], g);
-		renderTile(getSprite(), g);
+		renderEntity(getSprite(), g);
 	}
 	
 	@Override

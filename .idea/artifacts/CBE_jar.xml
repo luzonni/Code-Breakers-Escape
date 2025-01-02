@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="Code Break's Ecape:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Code_Break_s_Ecape_jar</output-path>
+  <artifact type="jar" name="CBE:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CBE</output-path>
     <root id="archive" name="Code Break's Ecape.jar">
       <element id="module-output" name="Code Break's Ecape" />
       <element id="extracted-dir" path="$PROJECT_DIR$/res/com/coffee/res/source/json-simple-1.1.1.jar" path-in-jar="/" />

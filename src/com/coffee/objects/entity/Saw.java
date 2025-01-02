@@ -9,19 +9,19 @@ import com.coffee.main.Theme;
 import com.coffee.main.activity.Game;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Variables;
+import com.coffee.objects.particles.Speck;
 import com.coffee.objects.tiles.Tile;
 
 public class Saw extends Entity {
 
 	private static BufferedImage sprite;
 	private double rotate;
-	private Directions dir;
 
 	public Saw(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null)
 			sprite = getSprite("saw", Theme.Color_Primary)[0];
-		this.dir = Directions.Idle;
+		getOE().setDirection(Directions.Idle);
 		setDepth(4);
 	}
 
@@ -32,27 +32,27 @@ public class Saw extends Entity {
 		int y = getMiddle().y / Tile.getSize();
 		Level level = Game.getLevel();
 		Tile tile = level.getTile(x, y);
-		if(this.dir.equals(Directions.Idle)) {
+		if(this.getOE().getDirection().equals(Directions.Idle)) {
 			for(int i = 0; i < dirs.length; i++) {
 				if(level.getTile((int)tile.getX()/Tile.getSize() + dirs[i].getX(), (int)getY()/Tile.getSize() + dirs[i].getY()).isSolid()) {
 					int index = i + 1;
 					if(index > dirs.length-1)
 						index = 0;
-					this.dir = dirs[index];
-					this.setX(tile.getX() + (tile.getWidth()/2) * dirs[i].getX());
-					this.setY(tile.getY() + (tile.getHeight()/2) * dirs[i].getY());
+					getOE().setDirection(dirs[index]);
+					this.setX(tile.getX() + (tile.getWidth()/2d) * dirs[i].getX());
+					this.setY(tile.getY() + (tile.getHeight()/2d) * dirs[i].getY());
 					break;
 				}
 			}
 		}
-		if(tile.isSolid() || tile == null) {
+		if(tile.isSolid()) {
 			kill();
 			return;
 		}
 		int botton_index = 0;
 		int index = 0;
 		for(int i = 0; i < dirs.length; i++)
-			if(this.dir.equals(dirs[i])) {
+			if(this.getOE().getDirection().equals(dirs[i])) {
 				index = i;
 				botton_index = i - 1;
 				if(botton_index < 0)
@@ -64,14 +64,14 @@ public class Saw extends Entity {
 			int next = index + 1;
 			if(next > dirs.length-1)
 				next = 0;
-			this.dir = dirs[next];
+			getOE().setDirection(dirs[next]);
 		}else if(!next_tile.isSolid() && !botton_tile.isSolid()) {
 			int next = index - 1;
 			if(next < 0)
 				next = dirs.length-1;
-			this.dir = dirs[next];
+			getOE().setDirection(dirs[next]);
 		}
-		moving(dir);
+		moving(getOE().getDirection());
 	}
 
 	private void moving(Directions dir) {
@@ -96,6 +96,16 @@ public class Saw extends Entity {
 	public void tick() {
 		Level level = Game.getLevel();
 		system();
+		if(!isColliding(level)) {
+			kill();
+			return;
+		}
+		killing();
+		this.rotate -= 0.15;
+		spawnParticles();
+	}
+
+	private boolean isColliding(Level level) {
 		boolean colliding = false;
 		for(int i = 0; i < level.getMap().length; i++) {
 			Tile t = level.getMap()[i];
@@ -103,17 +113,24 @@ public class Saw extends Entity {
 				colliding = true;
 			}
 		}
-		if(!colliding) {
-			kill();
-			return;
-		}
+		return colliding;
+	}
+
+	private void killing() {
 		for(int i = 0; i < Game.getLevel().getEntities().size(); i++) {
 			Entity entity = Game.getLevel().getEntities().get(i);
 			if(entity.getVar(Variables.Alive) && entity.collidingWith(this)) {
 				entity.kill();
 			}
 		}
-		this.rotate -= 0.15;
+	}
+
+	private void spawnParticles() {
+		int x_particle = getMiddle().x;
+		int y_particle = getMiddle().y;
+		for(int i = 0; i < 5; i++) {
+			Game.getLevel().addParticle(new Speck(x_particle, y_particle));
+		}
 	}
 
 	@Override

@@ -32,6 +32,40 @@ public class Geometry {
 			System.out.println();
 		}
 	}
-	
-	
+
+	public static class AngleFollower {
+
+		private double currentAngle;
+
+		public AngleFollower(double initialAngle) {
+			this.currentAngle = initialAngle;
+		}
+
+		public double getAngle() {
+			return currentAngle;
+		}
+
+		public void followAngle(double targetAngle, double step) {
+			currentAngle = normalizeAngle(currentAngle);
+			targetAngle = normalizeAngle(targetAngle);
+			double delta = targetAngle - currentAngle;
+			if (delta > 180) {
+				delta -= 360;
+			} else if (delta < -180) {
+				delta += 360;
+			}
+			if (Math.abs(delta) <= step) {
+				currentAngle = targetAngle;
+			} else {
+				currentAngle += Math.signum(delta) * step;
+			}
+			currentAngle = normalizeAngle(currentAngle);
+		}
+
+		private double normalizeAngle(double angle) {
+			return (angle % 360 + 360) % 360;
+		}
+	}
+
+
 }
