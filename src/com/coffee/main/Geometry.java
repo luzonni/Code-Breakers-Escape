@@ -22,17 +22,6 @@ public class Geometry {
 		return boundingRect.intersects(rect);
 	}
 
-	public static void main(String[] args) {
-		//Mega sena da virada
-		Random rand = new Random(456456);
-		for(int i = 0; i < 5; i++) {
-			for(int j = 0; j < 6; j++) {
-				System.out.print(rand.nextInt(60) + " ");
-			}
-			System.out.println();
-		}
-	}
-
 	public static class AngleFollower {
 
 		private double currentAngle;
