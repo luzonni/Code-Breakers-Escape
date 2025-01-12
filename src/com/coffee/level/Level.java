@@ -2,11 +2,7 @@ package com.coffee.level;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,9 +85,8 @@ public class Level implements Receiver {
 	
 	private JSONObject getLevel(String level_name) {
 		try {
-			URL path = getClass().getResource(Engine.ResPath+"/levels/"+level_name+".json");
-			InputStream istream = path.openStream();
-			Reader isr = new InputStreamReader(istream);
+			File levelFile = new File(Engine.currentPath() + "/levels/" + level_name + ".json");
+			Reader isr = new FileReader(levelFile);
 			JSONParser parse = new JSONParser();
 			parse.reset();
 			JSONObject Json = (JSONObject) parse.parse(isr);

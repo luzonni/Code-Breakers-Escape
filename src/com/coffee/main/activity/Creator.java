@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.coffee.exceptions.ConsoleError;
 import com.coffee.main.Theme;
 import com.coffee.objects.entity.EntityTag;
 import com.coffee.objects.tiles.TileTag;
@@ -200,24 +201,28 @@ public class Creator implements Activity {
 	public String giveCommand(String[] keys) {
 		String message = "";
 		if(keys[0].equalsIgnoreCase("load")) {
-			String level_name = "";
-			for(int i = 1; i < keys.length; i++)
-				level_name += keys[i] + " ";
-			level_name = level_name.strip().replace(" ", "_").replace("\"", "").toLowerCase().strip();
-			File dir = new File(System.getProperty("user.dir")+"/"+level_name+".json");
-			if(dir.exists() && Level.isLevel(dir)) {
-				JSONObject level = Level.getLevel(dir);
-				Engine.setActivity(new Creator(level));
-			}else {
-				message = "Level not found";
-			}
+			loadLevel(keys);
 		}
 		if(keys[0].equalsIgnoreCase("try") || keys[0].equalsIgnoreCase("t")) {
 			testeAndSaveLevel();
 		}
 		return message;
 	}
-	
+
+	private static void loadLevel(String[] keys) {
+		String level_name = "";
+		for(int i = 1; i < keys.length; i++)
+			level_name += keys[i] + " ";
+		level_name = level_name.strip().replace(" ", "_").replace("\"", "").toLowerCase().strip();
+		File dir = new File(Engine.currentPath() + "/created/" + level_name + ".json");
+		if(dir.exists() && Level.isLevel(dir)) {
+			JSONObject level = Level.getLevel(dir);
+			Engine.setActivity(new Creator(level));
+		}else {
+			throw new ConsoleError("Level not found");
+		}
+	}
+
 	private final char[] cs = new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 	private void getLevel() {
 		if(sizes == null)
@@ -301,7 +306,9 @@ public class Creator implements Activity {
 		Saver saver = new Saver(NAME, BUILDER, COMMANDS.toArray(new Commands[0]), MAP_TILES.getArray(), MAP_ENTITIES.getArray(), picture.getPixels(), WIDTH, HEIGHT);
 		JSONObject level_file = saver.create();
 		Engine.setActivity(new Game(new Level(level_file), () -> {
-			File curPath = new File(System.getProperty("user.dir"));
+			File curPath = new File(System.getProperty("user.dir") + "/created");
+			if(!curPath.exists())
+				curPath.mkdir();
 			boolean wasSaved = saver.save(curPath, level_file);
 			if(wasSaved)
 				Engine.UI.getConsole().print("Saved in directory: " + curPath.getAbsolutePath(), true);

@@ -16,14 +16,14 @@ import com.coffee.objects.tiles.Tile;
 
 public class Saver {
 	
-	private String name;
-	private String builder;
-	private Commands[] commands;
-	private Objects[] map;
-	private Objects[] entities;
-	private int[] picture;
-	private int width;
-	private int height;
+	private final String name;
+	private final String builder;
+	private final Commands[] commands;
+	private final Objects[] map;
+	private final Objects[] entities;
+	private final int[] picture;
+	private final int width;
+	private final int height;
 
 	public Saver(String Name, String builder_name, Commands[] Commands, Objects[] MAP, Objects[] Entities, int[] PICTURE, int Width, int Height) {
 		this.name = Name;
@@ -50,9 +50,7 @@ public class Saver {
 				comman.add(commands[i].name());
 		}
 		object.put("COMMANDS", comman);
-		
-		
-		
+
 		JSONArray array_tile = new JSONArray();
 		for(int y = 0; y < height; y++) {
 			for(int x = 0; x < width; x++) {
@@ -66,9 +64,7 @@ public class Saver {
 			}
 		}
 		object.put("TILE", array_tile);
-		
-		
-		
+
 		JSONArray entity_array = new JSONArray();
 		for(int y = 0; y < height; y++) {
 			for(int x = 0; x < width; x++) {
@@ -85,9 +81,7 @@ public class Saver {
 			}
 		}
 		object.put("ENTITY", entity_array);
-		
-		
-		
+
 		JSONArray pic = new JSONArray();
 		for(int i = 0; i < picture.length; i++) {
 			if(picture[i] == Theme.Color_Primary.getRGB())

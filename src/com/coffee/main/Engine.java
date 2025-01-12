@@ -26,6 +26,8 @@ import com.coffee.main.sound.Sound;
 import com.coffee.ui.UserInterface;
 import com.coffee.objects.Objects;
 
+import javax.swing.*;
+
 public class Engine implements Runnable {
 	
 	public static final String VERSION = "Version: Alpha 1.0";
@@ -45,6 +47,7 @@ public class Engine implements Runnable {
 	public static boolean AlwaysOnTop = false;
 	public static final int SCALE = 3;
 	public static int Volume = 50;
+	public static int Music = 50;
 	public static boolean ANTIALIASING = false;
 	public static boolean OpenGL = false;
 
@@ -64,34 +67,62 @@ public class Engine implements Runnable {
 	public static Activity ACTIVITY;
 	public static boolean ACTIVITY_RUNNING;
 	
-	public static String[] LEVELS = {"start", "what's_this"};
+	public static String[] LEVELS = getLEVELS();
 	public static int INDEX_LEVEL = 0;
 	
 	public static Random RAND;
 
+	public static String currentPath() {
+		return System.getProperty("user.dir");
+	}
+
+	private static String[] getLEVELS() {
+		//TODO criar ordenador!
+		File[] files = new File(currentPath() + "/levels/").listFiles();
+		String[] levels = new String[files.length];
+		for(int i = 0; i < files.length; i++) {
+			levels[i] = files[i].getName().split("\\.")[0];
+			System.out.println(files[i].getName());
+		}
+		return levels;
+	}
 
 	public static void main(String[] args) {
-		for(String s : args)
-			System.out.println(s);
-		FontG.addFont("septem");
-		Sound.load();
-		RAND = new Random();
-		ME = new Engine();
-		ME.start(args);
+		try {
+			for (String s : args)
+				System.out.println(s);
+			FontG.addFont("septem");
+			Sound.load();
+			RAND = new Random();
+			ME = new Engine();
+			ME.start(args);
+		}catch (RuntimeException e) {
+			e.printStackTrace();
+			StringBuilder trace = new StringBuilder();
+			for(StackTraceElement s : e.getStackTrace()) {
+				trace.append(s.toString()).append("\n");
+			}
+			JOptionPane.showMessageDialog(
+					null,                      // Janela pai (null para centralizar na tela)
+					"Ocorreu um erro: " + e.getMessage() + "\n" + trace, // Mensagem de erro
+					"Erro",                   // Título da janela
+					JOptionPane.ERROR_MESSAGE // Ícone de erro
+			);
+		}
 	}
 	
 	public Engine() {
 		getConfig();
-	}
+    }
 
 	public synchronized void start(String[] levelName) {
 		Theme.SET_PALLET();
 		WINDOW = new Window(GameTag + " / The Universe");
 
 		UI = new UserInterface();
-		if(levelName != null && levelName.length > 0 && !levelName[0].isBlank())
-			ACTIVITY = new Creator(Level.getLevel(new File(levelName[0] + ".json")));
-		else
+		if(levelName != null && levelName.length > 0 && !levelName[0].isBlank()) {
+			ACTIVITY = new Creator(Level.getLevel(new File(currentPath() + "/created/" + levelName[0] + ".json")));
+		}else
 			ACTIVITY = new Menu();
 		ACTIVITY.enter();
 		ACTIVITY_RUNNING = true;
@@ -238,6 +269,7 @@ public class Engine implements Runnable {
 		int Hz = 0;
 		int frames = 0;
 		double timer = System.currentTimeMillis();
+		WINDOW.requestFocus();
 		while(isRunning) {
 			try {
 				long nowHZ = System.nanoTime();

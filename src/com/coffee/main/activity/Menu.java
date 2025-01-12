@@ -14,6 +14,8 @@ import java.util.List;
 import com.coffee.Inputs.Mouse;
 import com.coffee.Inputs.Mouse_Button;
 import com.coffee.Inputs.Button.Button;
+import com.coffee.main.sound.Musics;
+import com.coffee.main.sound.Sound;
 import com.coffee.ui.command.Receiver;
 import com.coffee.graphics.FontG;
 import com.coffee.graphics.SpriteSheet;
@@ -31,7 +33,7 @@ public class Menu implements Activity, Receiver {
 	private Responsive logo_res;
 	private BufferedImage background;
 	
-	private static List<Buoyant> list;
+	private static List<Bubble> bubbles;
 	
 	public Menu() {
 		Responsive center = Responsive.createPoint(null, 50, 10);
@@ -39,8 +41,8 @@ public class Menu implements Activity, Receiver {
 		P = new Button("Play", -10, 0, C.getResponsive(), 10);
 		O = new Button("Options", 5, 0, center, 10);
 		Q = new Button("Quit", 10, 0, O.getResponsive(), 8);
-		if(list == null)
-			list = new ArrayList<Buoyant>();
+		if(bubbles == null)
+			bubbles = new ArrayList<Bubble>();
 		SpriteSheet sp = new SpriteSheet(Engine.ResPath + "/ui/LogoName.png", 3*Engine.SCALE);
 		sp.replaceColor(0xffffffff, Theme.Color_Primary.getRGB());
 		sp.replaceColor(0xff000000, Theme.Color_Tertiary.getRGB());
@@ -50,19 +52,13 @@ public class Menu implements Activity, Receiver {
 	
 	@Override
 	public void enter() {
-//		if(list.isEmpty()) {
-//			List<Buoyant> toDispose = new ArrayList<>();
-//			int amount = Engine.RAND.nextInt(45) + 5;
-//			for(int i = 0; i < amount; i++) {
-//				List<BufferedImage> list_sprites = new ArrayList<BufferedImage>();
-//
-//
-//
-//				int x = Engine.RAND.nextInt(Engine.getWidth() - Tile.getSize());
-//				int y = Engine.RAND.nextInt(Engine.getHeight() - Tile.getSize());
-//				list.add(new Buoyant(list_sprites.get(Engine.RAND.nextInt(list_sprites.size())), x, y, Tile.getSize(), Tile.getSize()));
-//			}
-//		}
+		for(int i = 0; i < 50; i++) {
+			int x = Engine.RAND.nextInt(Engine.getWidth() - 16 * Engine.SCALE);
+			int y = Engine.RAND.nextInt(Engine.getHeight() - 16 * Engine.SCALE);
+			Bubble bu = new Bubble(x, y);
+			bubbles.add(bu);
+		}
+		Sound.play(Musics.Music1, true);
 	}
 	
 	private void drawBackground() {
@@ -87,14 +83,14 @@ public class Menu implements Activity, Receiver {
 		logo_res.setPosition();
 		if(background == null || (background.getWidth() != Engine.getWidth() || background.getHeight() != Engine.getHeight()))
 			drawBackground();
-		for(int i = 0; i < list.size(); i++) {
-			list.get(i).tick();
+		for(int i = 0; i < bubbles.size(); i++) {
+			bubbles.get(i).tick();
 		}
 		if(Mouse.click(Mouse_Button.LEFT)) {
 			int x = Mouse.getX();
 			int y = Mouse.getY();
-			for(int i = 0; i < list.size(); i++) {
-				Buoyant b = list.get(i);
+			for(int i = 0; i < bubbles.size(); i++) {
+				Bubble b = bubbles.get(i);
 				if(Geometry.Theta(x, y, b.middle().x, b.middle().y) < 64*Engine.SCALE) {
 					double a = Math.atan2(b.middle().y - y, b.middle().x - x);
 					b.direction = a;
@@ -119,8 +115,8 @@ public class Menu implements Activity, Receiver {
 	
 	public void render(Graphics2D g) {
 		g.drawImage(background, 0, 0, null);
-		for(int i = 0; i < list.size(); i++) {
-			list.get(i).render(g);
+		for(int i = 0; i < bubbles.size(); i++) {
+			bubbles.get(i).render(g);
 		}
 		P.render(g);
 		C.render(g);
@@ -243,31 +239,37 @@ public class Menu implements Activity, Receiver {
 	}
 
 	public void dispose() {
-		list.clear();
+		bubbles.clear();
+		//TODO stop menu music!
+		Sound.stop(Musics.Music1);
 	}
-	
-	private static class Buoyant {
-		
-		private BufferedImage sprite;
+
+	private static class Bubble {
+
+		private final BufferedImage sprite;
 		private double x, y;
-		private int width, height;
+		private final int size;
 		private double direction;
 		private int speed;
-		private int default_speed;
-		private double rotation;
+		private final int default_speed;
 		private int timer;
-		
-		public Buoyant(BufferedImage sprite, double x, double y, int width, int height) {
-			this.sprite = sprite;
+
+		public Bubble(double x, double y) {
+			this.sprite = getSprite();
 			this.x = x;
 			this.y = y;
-			this.width = width;
-			this.height = height;
+			this.size = 16 * Engine.SCALE;
 			this.direction = Engine.RAND.nextDouble() * (Math.PI*2);
 			this.speed = Engine.RAND.nextInt(2) + 1;
 			this.default_speed = speed;
 		}
-		
+
+		private BufferedImage getSprite() {
+			SpriteSheet sheet = new SpriteSheet(Engine.ResPath + "/ui/bubble.png", Engine.SCALE);
+			sheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
+			return sheet.getImage();
+		}
+
 		public void tick() {
 			if(this.x > Engine.getWidth() - Tile.getSize() || this.x < 0) {
 				double defx = Math.cos(direction);
@@ -283,25 +285,22 @@ public class Menu implements Activity, Receiver {
 			}
 			this.x += Math.cos(direction) * speed;
 			this.y += Math.sin(direction) * speed;
-			this.rotation += (double)this.speed / 100d;
 			this.timer++;
 			if(timer > 5 && this.speed > this.default_speed) {
 				this.timer = 0;
-				this.speed -= 0.15;
+				this.speed -= 0.15d;
 			}
 		}
-		
+
 		public Point middle() {
-			return new Point((int)x + width/2, (int)y + height/2);
+			return new Point((int)x + size/2, (int)y + size/2);
 		}
-		
+
 		public void render(Graphics2D g) {
-			g.rotate(rotation, x + width/2, y + height/2);
-			g.drawImage(sprite, (int)x, (int)y, width, height, null);
-			g.rotate(-rotation, x + width/2, y + height/2);
+			g.drawImage(sprite, (int)x, (int)y, size, size, null);
 		}
-		
+
 	}
-	
+
 	
 }
