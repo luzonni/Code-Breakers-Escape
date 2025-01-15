@@ -48,7 +48,7 @@ class Spit extends Entity {
 	
 	@Override
 	public void render(Graphics2D g) {
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		g.fillRect((int)getX() - Game.getCam().getX(), (int)getY() - Game.getCam().getY(), getWidth(), getHeight());
 	}
 	

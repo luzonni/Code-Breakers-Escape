@@ -35,21 +35,21 @@ public class DrawableBox implements Runnable {
 		this.size_drawn = 4;
 		this.picture = new BufferedImage(this.Width, this.Height, BufferedImage.TYPE_INT_RGB);
 		this.g = this.picture.getGraphics();
-		g.setColor(Theme.Color_Tertiary);
+		g.setColor(Theme.Tertiary);
 		g.fillRect(0, 0, Width, Height);
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		g.drawRect(0, 0, Width-1, Height-1);
 		this.start();
 	}
 	
-	public static int[] convertPixels(int picture[]) {
+	public static int[] convertPixels(int[] picture) {
 		int[] pixels = new int[picture.length];
 		for(int i = 0; i < pixels.length; i++) {
 			if(picture[i] >= 0 && picture[i] <= 2) 
-				pixels[i] = Theme.PALLET[Theme.INDEX_PALLET][picture[i]].getRGB();
+				pixels[i] = Engine.THEME.getPallet()[picture[i]].getRGB();
 			else
-				for(int ii = 0; ii < Theme.PALLET[Theme.INDEX_PALLET].length; ii++)
-					if(picture[i] == Theme.PALLET[Theme.INDEX_PALLET][ii].getRGB())
+				for(int ii = 0; ii < Engine.THEME.getPallet().length; ii++)
+					if(picture[i] == Engine.THEME.getPallet()[ii].getRGB())
 						pixels[i] = ii;
 		}
 		return pixels;
@@ -103,16 +103,16 @@ public class DrawableBox implements Runnable {
 		int x_d = (Mouse.getX() - getBounds().x + Creator.getCam().getX())/Engine.SCALE;
 		int y_d = (Mouse.getY() - getBounds().y + Creator.getCam().getY())/Engine.SCALE;
 		if(Mouse.pressingOn(Mouse_Button.LEFT, getBounds())) {
-			g.setColor(Theme.Color_Secondary);
+			g.setColor(Theme.Secondary);
 			g.fillOval(x_d - size_drawn/2, y_d - size_drawn/2, size_drawn, size_drawn);
 		}
 		if(Mouse.pressingOn(Mouse_Button.RIGHT, getBounds())) {
-			g.setColor(Theme.Color_Tertiary);
+			g.setColor(Theme.Tertiary);
 			g.fillOval(x_d - size_drawn/2, y_d - size_drawn/2, size_drawn, size_drawn);
 		}
-		g.setColor(Theme.Color_Tertiary);
+		g.setColor(Theme.Tertiary);
 		g.fillRect(this.Width/2 - (this.grid.width*16)/2, this.Height/2 - (this.grid.height*16)/2, GridBounds().width/Engine.SCALE, GridBounds().height/Engine.SCALE);
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		g.drawRect(0, 0, Width-1, Height-1);
 	}
 	
@@ -124,7 +124,7 @@ public class DrawableBox implements Runnable {
 			int x_mouse = Mouse.getX();
 			int y_mouse = Mouse.getY();
 			g.setStroke(new BasicStroke(Engine.SCALE));
-			g.setColor(Theme.Color_Primary);
+			g.setColor(Theme.Primary);
 			g.drawOval(x_mouse - size_drawn, y_mouse - size_drawn, size_drawn*2, size_drawn*2);
 		}
 	}

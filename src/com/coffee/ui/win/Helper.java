@@ -99,7 +99,7 @@ public class Helper extends View {
 		
 		public void render(int x, int y, boolean on, Graphics2D g) {
 			String name = c.getName();
-			g.setColor(Theme.Color_Primary);
+			g.setColor(Theme.Primary);
 			int wF = FontG.getWidth(name, font());
 			int hF = FontG.getHeight(name, font());
 			g.drawString(name, padding + x, padding + y + hF);

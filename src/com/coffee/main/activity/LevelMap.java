@@ -171,9 +171,9 @@ public class LevelMap implements Activity, Receiver {
 				Point cur = levels[i].getPoint();
 				Point next = levels[i+1].getPoint();
 				if(levels[i+1].isBlocked())
-					g.setColor(Theme.Color_Secondary);
+					g.setColor(Theme.Secondary);
 				else 
-					g.setColor(Theme.Color_Primary);
+					g.setColor(Theme.Primary);
 				g.drawLine(cur.x, cur.y, next.x, next.y);
 			}
 			VolatileLevel vl = levels[i];

@@ -20,7 +20,7 @@ public class Saw extends Entity {
 	public Saw(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null)
-			sprite = getSprite("saw", Theme.Color_Primary)[0];
+			sprite = getSprite("saw", Theme.Primary)[0];
 		getOE().setDirection(Directions.Idle);
 		setDepth(4);
 	}

@@ -16,7 +16,7 @@ public class Spine extends Entity {
 	public Spine(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null)
-			sprite = this.getSprite("spine", Theme.Color_Primary);
+			sprite = this.getSprite("spine", Theme.Primary);
 	}
 
 	@Override

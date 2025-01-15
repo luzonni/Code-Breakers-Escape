@@ -13,7 +13,7 @@ public class Wall extends Tile {
 	public Wall(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null) {
-			sprite = getSprite("wall", Theme.Color_Primary);
+			sprite = getSprite("wall", Theme.Primary);
 			index = Engine.RAND.nextInt(sprite.length);
 		}
 		this.setSolid(true);

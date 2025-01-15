@@ -19,7 +19,7 @@ public class Blaster extends Entity {
     public Blaster(int id, int x, int y, Directions direction) {
         super(id, x, y);
         if(sprite == null) {
-            sprite = getSprite("blaster", Theme.Color_Primary);
+            sprite = getSprite("blaster", Theme.Primary);
         }
         getOE().setDirection(direction);
         t = new Timer(1);

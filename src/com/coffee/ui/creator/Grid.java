@@ -113,7 +113,7 @@ public class Grid {
 		int yy = Y - h/2;
 		for(int y = 0; y < Height; y++) {
 			for(int x = 0; x < Width; x++) {
-				g.setColor(new Color(Theme.Color_Secondary.getRed(), Theme.Color_Secondary.getGreen(), Theme.Color_Secondary.getBlue(), 60));
+				g.setColor(new Color(Theme.Secondary.getRed(), Theme.Secondary.getGreen(), Theme.Secondary.getBlue(), 60));
 				int px = xx + x * Tile.getSize() + Engine.SCALE;
 				int py = yy + y * Tile.getSize() + Engine.SCALE;
 				if(renderGrid)

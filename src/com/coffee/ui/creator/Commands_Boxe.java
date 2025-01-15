@@ -92,13 +92,13 @@ public class Commands_Boxe {
 	public void render(Graphics2D g) {
 		if(list == null || default_list == null)
 			return;
-		g.setColor(new Color(Theme.Color_Primary.getRed(), Theme.Color_Primary.getGreen(), Theme.Color_Primary.getBlue(), 60));
+		g.setColor(new Color(Theme.Primary.getRed(), Theme.Primary.getGreen(), Theme.Primary.getBlue(), 60));
 		g.fillRect(box_list.x - Engine.SCALE, box_list.y - Engine.SCALE, box_list.width + Engine.SCALE *2, box_list.height + Engine.SCALE *2);
-		g.setColor(Theme.Color_Tertiary);
+		g.setColor(Theme.Tertiary);
 		int size = (int)(((double)list.length / (double)Commands.values().length)*box_list.height);
 		double a = ((double)size * ((double)(page) / (double)(list.length)));
 		g.fillRect(box_list.x + box_list.width - Engine.SCALE, (int)(box_list.y + a), Engine.SCALE, size);
-		g.setColor(new Color(Theme.Color_Primary.getRed(), Theme.Color_Primary.getGreen(), Theme.Color_Primary.getBlue(), 60));
+		g.setColor(new Color(Theme.Primary.getRed(), Theme.Primary.getGreen(), Theme.Primary.getBlue(), 60));
 		if(!default_list.isEmpty())
 			g.fillRect(box_default_list.x, box_default_list.y, box_default_list.width, box_default_list.height);
 		for(C c : list)
@@ -123,9 +123,9 @@ public class Commands_Boxe {
 		
 		public void render(Graphics2D g) {
 			if(Mouse.On_Mouse(bounds))
-				g.setColor(new Color(Theme.Color_Primary.getRed(), Theme.Color_Primary.getGreen(), Theme.Color_Primary.getBlue(), 100));
+				g.setColor(new Color(Theme.Primary.getRed(), Theme.Primary.getGreen(), Theme.Primary.getBlue(), 100));
 			else
-				g.setColor(Theme.Color_Primary);
+				g.setColor(Theme.Primary);
 			g.setFont(font);
 			String value = command.getName();
 			int hF = FontG.getHeight(value, font);

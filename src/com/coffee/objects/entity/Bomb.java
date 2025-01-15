@@ -26,7 +26,7 @@ public class Bomb extends Entity {
 	public Bomb(int id, int x, int y) {
 		super(id, x, y);
 		if(sprites == null) {
-			sprites = getSprite("bomb", Theme.Color_Primary);
+			sprites = getSprite("bomb", Theme.Primary);
 		}
 		setVar(Variables.Selectable, true);
 		setVar(Variables.Movable, true);

@@ -132,18 +132,18 @@ public class TextButton extends Button {
 		refresh();
 		g.setStroke(new BasicStroke(Engine.SCALE));
 		g.setFont(font);
-		g.setColor(Theme.Color_Tertiary);
+		g.setColor(Theme.Tertiary);
 		g.fillRect(getBounds().x, getBounds().y, getBounds().width, getBounds().height);
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		g.drawRect(getBounds().x, getBounds().y, getBounds().width, getBounds().height);
 		String value = getWord();
 		int h = FontG.getHeight(value, font);
 		if(word.isEmpty())
-			g.setColor(Theme.Color_Secondary);
+			g.setColor(Theme.Secondary);
 		else
-			g.setColor(Theme.Color_Primary);
+			g.setColor(Theme.Primary);
 		g.drawString(value, getBounds().x + margin/2, getBounds().y + margin/2 + h);
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		if(selected)
 			g.fillRect(getBounds().x + (FontG.getWidth(word.substring(0, index_write), font)) + margin/2, getBounds().y + margin/2, Engine.SCALE, h);
 	}

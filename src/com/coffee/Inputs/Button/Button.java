@@ -33,21 +33,21 @@ public class Button {
 		int height = sprites[0].getHeight();
 		Graphics2D g = (Graphics2D) sprites[0].getGraphics();
 		g.setFont(this.font);
-		g.setColor(Theme.Color_Tertiary);
+		g.setColor(Theme.Tertiary);
 		g.fillRect(0, 0, width, height);
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		g.setStroke(stroke);
 		g.drawRect(0, 0, width, height);
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		g.drawString(this.Name, width/2 - wF/2 + margin/2, height/2 + hF/4);
 		g = (Graphics2D) sprites[1].getGraphics();
 		g.setFont(this.font);
-		g.setColor(Theme.Color_Secondary);
+		g.setColor(Theme.Secondary);
 		g.fillRect(0, 0, width, height);
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		g.setStroke(stroke);
 		g.drawRect(0, 0, width, height);
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		g.drawString(this.Name, width/2 - wF/2 + margin/2, height/2 + hF/4);
 	}
 

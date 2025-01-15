@@ -18,7 +18,7 @@ public class Computer extends Entity {
 	public Computer(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null)
-			sprite = getSprite("server", Theme.Color_Primary);
+			sprite = getSprite("server", Theme.Primary);
 		this.index = Engine.RAND.nextInt(sprite.length);
 	}
 

@@ -13,7 +13,7 @@ public class Thorn extends Tile {
 	public Thorn(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null)
-			sprite = getSprite("thorn", Theme.Color_Primary)[0];
+			sprite = getSprite("thorn", Theme.Primary)[0];
 		this.setSolid(true);
 	}
 	

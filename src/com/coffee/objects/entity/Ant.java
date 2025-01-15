@@ -22,7 +22,7 @@ public class Ant extends Entity {
 	public Ant(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null) 
-			sprite = getSprite("ant", Theme.Color_Primary);
+			sprite = getSprite("ant", Theme.Primary);
 		ai = new Path();
 		timer = new Timer(1);
 		setDepth(1);

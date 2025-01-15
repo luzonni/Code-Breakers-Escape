@@ -84,11 +84,11 @@ public class Saver {
 
 		JSONArray pic = new JSONArray();
 		for(int i = 0; i < picture.length; i++) {
-			if(picture[i] == Theme.Color_Primary.getRGB())
+			if(picture[i] == Theme.Primary.getRGB())
 				pic.add(0);
-			else if(picture[i] == Theme.Color_Secondary.getRGB())
+			else if(picture[i] == Theme.Secondary.getRGB())
 				pic.add(1);
-			else if(picture[i] == Theme.Color_Tertiary.getRGB())
+			else if(picture[i] == Theme.Tertiary.getRGB())
 				pic.add(2);
 		}
 		object.put("PICTURE", pic);

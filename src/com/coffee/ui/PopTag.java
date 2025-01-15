@@ -29,13 +29,13 @@ public class PopTag {
         int wF = FontG.getWidth(name, f);
         int hF = FontG.getHeight(name, f);
         g.setFont(f);
-        g.setColor(Theme.Color_Tertiary);
+        g.setColor(Theme.Tertiary);
         g.fillRect(x + 8*Engine.SCALE, y + 17*Engine.SCALE - hF, wF + 2*Engine.SCALE, hF);
-        g.setColor(Theme.Color_Secondary);
+        g.setColor(Theme.Secondary);
         g.fillRect(x + 7*Engine.SCALE, y + 16*Engine.SCALE - hF, wF + 2*Engine.SCALE, hF);
-        g.setColor(Theme.Color_Tertiary);
+        g.setColor(Theme.Tertiary);
         g.drawString(name, x + 9*Engine.SCALE, y + 15*Engine.SCALE);
-        g.setColor(Theme.Color_Primary);
+        g.setColor(Theme.Primary);
         g.drawString(name, x + 8*Engine.SCALE, y + 14*Engine.SCALE);
         clear();
     }

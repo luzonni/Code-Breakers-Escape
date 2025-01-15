@@ -6,18 +6,10 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.Random;
 
 import com.coffee.level.Level;
 import com.coffee.main.activity.Creator;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import com.coffee.graphics.FontG;
 import com.coffee.main.activity.Activity;
@@ -42,17 +34,10 @@ public class Engine implements Runnable {
 	public static int FRAMES;
 	public static int HERTZ;
 
-	//Game configs
-	public static boolean FullScreen = false;
-	public static boolean AlwaysOnTop = false;
-	public static final int SCALE = 3;
-	public static int Volume = 50;
-	public static int Music = 50;
-	public static boolean ANTIALIASING = false;
-	public static boolean OpenGL = false;
-
+	public static Configs CONFIG;
+	public static Theme THEME;
+	public static final int SCALE = 3; //TODO fix scale game!
 	public static final int[][] resolutions = {{1280, 720}, {1366, 768}, {1600, 900}, {1920, 1080}, {2560, 1440}, {3840, 2160}};
-	public static int INDEX_RES = 1;
 
 	public static final String ResPath = "/com/coffee/res";
 	public static final String GameTag = "Code Break's Escape";
@@ -67,24 +52,13 @@ public class Engine implements Runnable {
 	public static Activity ACTIVITY;
 	public static boolean ACTIVITY_RUNNING;
 	
-	public static String[] LEVELS = getLEVELS();
+	public static String[] LEVELS = {"start", "2", "3"};
 	public static int INDEX_LEVEL = 0;
 	
 	public static Random RAND;
 
 	public static String currentPath() {
 		return System.getProperty("user.dir");
-	}
-
-	private static String[] getLEVELS() {
-		//TODO criar ordenador!
-		File[] files = new File(currentPath() + "/levels/").listFiles();
-		String[] levels = new String[files.length];
-		for(int i = 0; i < files.length; i++) {
-			levels[i] = files[i].getName().split("\\.")[0];
-			System.out.println(files[i].getName());
-		}
-		return levels;
 	}
 
 	public static void main(String[] args) {
@@ -102,23 +76,20 @@ public class Engine implements Runnable {
 			for(StackTraceElement s : e.getStackTrace()) {
 				trace.append(s.toString()).append("\n");
 			}
-			JOptionPane.showMessageDialog(
-					null,                      // Janela pai (null para centralizar na tela)
-					"Ocorreu um erro: " + e.getMessage() + "\n" + trace, // Mensagem de erro
-					"Erro",                   // Título da janela
-					JOptionPane.ERROR_MESSAGE // Ícone de erro
-			);
+			String message = "Ocorreu um erro: " + e.getMessage() + "\n" + trace;
+			JOptionPane.showMessageDialog(null, message, "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
 	public Engine() {
-		getConfig();
+		Engine.CONFIG = new Configs();
+		Engine.THEME = new Theme();
+
     }
 
 	public synchronized void start(String[] levelName) {
-		Theme.SET_PALLET();
+		THEME.update();
 		WINDOW = new Window(GameTag + " / The Universe");
-
 		UI = new UserInterface();
 		if(levelName != null && levelName.length > 0 && !levelName[0].isBlank()) {
 			ACTIVITY = new Creator(Level.getLevel(new File(currentPath() + "/created/" + levelName[0] + ".json")));
@@ -153,7 +124,7 @@ public class Engine implements Runnable {
 	}
 
 	public static int[] getResolution() {
-		return Engine.resolutions[Engine.INDEX_RES];
+		return Engine.resolutions[Engine.CONFIG.getInt("RESOLUTION_INDEX")];
 	}
 	
 	public synchronized static void setActivity(Activity activity) {
@@ -165,41 +136,6 @@ public class Engine implements Runnable {
 			ACTIVITY_RUNNING = true;
 			UI.setReceiver(Engine.ACTIVITY);
 		});
-	}
-	
-	private void getConfig() {
-		String path = System.getProperty("user.dir") + "/config.json";
-		File file = new File(path);
-		if(!file.exists()) 
-			setConfig(Engine.Volume, Theme.INDEX_PALLET, Engine.FullScreen, Engine.INDEX_RES);
-		JSONObject object = null;
-		try {
-			InputStream istream = new FileInputStream(file);
-			Reader isr = new InputStreamReader(istream);
-			JSONParser parse = new JSONParser();
-			parse.reset();
-			object = (JSONObject) parse.parse(isr);
-		}catch (Exception e) {}
-		Engine.Volume = ((Number)object.get("VOLUM")).intValue();
-		Theme.INDEX_PALLET = ((Number)object.get("PALLET")).intValue();
-		Engine.FullScreen = (Boolean) object.get("FULLSCREEN");
-		Engine.INDEX_RES = ((Number)object.get("RESOLUTION")).intValue();
-	}
-	
-	public void setConfig(int volume, int pallet, boolean fullScreen, int res) {
-		String path = System.getProperty("user.dir") + "/config.json";
-		JSONObject object = new JSONObject();
-		object.put("VOLUM", volume);
-		object.put("PALLET", pallet);
-		object.put("FULLSCREEN", fullScreen);
-		object.put("RESOLUTION", res);
-		try {
-			FileWriter writer = new FileWriter(path);
-			writer.write(object.toJSONString());
-			writer.close();
-		} catch (IOException e) {
-			
-		}
 	}
 
 	public static int getWidth() {
@@ -222,13 +158,13 @@ public class Engine implements Runnable {
 	}
 	
 	private static BufferedImage buildNoise() {
-		int width = WINDOW.getWidth()/ SCALE;
-		int height = WINDOW.getHeight()/ SCALE;
+		int width = WINDOW.getWidth() / SCALE;
+		int height = WINDOW.getHeight() / SCALE;
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		int[] rgb = new int[width*height];
 		for(int y = 0; y < height; y++)
 			for(int x = 0; x < width; x++) {
-				rgb[x+y*width] = new Color(Theme.Color_Primary.getRed(), Theme.Color_Primary.getGreen(), Theme.Color_Primary.getBlue(), RAND.nextInt(35)).getRGB();
+				rgb[x+y*width] = new Color(Theme.Primary.getRed(), Theme.Primary.getGreen(), Theme.Primary.getBlue(), RAND.nextInt(35)).getRGB();
 			}
 		image.setRGB(0, 0, width, height, rgb, 0, width);	
 		return image;
@@ -236,9 +172,9 @@ public class Engine implements Runnable {
 	
 	private Graphics2D getGraphics() {
 		Graphics2D graphics = (Graphics2D) Buffer.getDrawGraphics();
-		if(ANTIALIASING)
+		if(CONFIG.getBool("ANTIALIASING"))
 			graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		graphics.setColor(Theme.Color_Tertiary);
+		graphics.setColor(THEME.Tertiary);
 		graphics.fillRect(0, 0, WINDOW.getWidth(), WINDOW.getHeight());
 		graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
 
@@ -316,13 +252,6 @@ public class Engine implements Runnable {
 		}
 		stop();
 	}
-	
-	
-	public static void listAllThreads() {
-		Thread.getAllStackTraces().keySet().forEach(thread -> {
-			System.out.println("Thread: " + thread.getName() + " - Estado: " + thread.getState());
-		});		
-    }
 
 }
 

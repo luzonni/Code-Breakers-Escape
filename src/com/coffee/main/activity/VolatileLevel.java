@@ -75,14 +75,14 @@ class VolatileLevel {
 	public void render(Graphics2D g) {
 		setBounds();
 		if(bounds.contains(Mouse.getX(), Mouse.getY()) && !isBlocked())
-			g.setColor(Theme.Color_Secondary);
+			g.setColor(Theme.Secondary);
 		else
-			g.setColor(Theme.Color_Tertiary);
+			g.setColor(Theme.Tertiary);
 		g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
 		if(blocked)
-			g.setColor(Theme.Color_Secondary);
+			g.setColor(Theme.Secondary);
 		else
-			g.setColor(Theme.Color_Primary);
+			g.setColor(Theme.Primary);
 		g.setFont(font);
 		g.drawString(Name, bounds.x + Engine.SCALE *2, bounds.y + fontHeight());
 		g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);

@@ -36,7 +36,7 @@ public class Boom extends Particle {
 	@Override
 	public void render(Graphics2D g) {
 		g.rotate(rotate, getMiddle().x - Game.getCam().getX(), getMiddle().y - Game.getCam().getY());
-		renderParticle(Theme.Color_Tertiary, g);
+		renderParticle(Theme.Tertiary, g);
 		g.rotate(-rotate, getMiddle().x - Game.getCam().getX(), getMiddle().y - Game.getCam().getY());
 		
 	}

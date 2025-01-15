@@ -47,7 +47,7 @@ public class Lazer extends Entity {
 
     @Override
     public void render(Graphics2D g) {
-        g.setColor(Theme.Color_Primary);
+        g.setColor(Theme.Primary);
         g.setStroke(new BasicStroke(Engine.RAND.nextInt(Engine.SCALE *2) + 1));
         g.drawLine(pi.x - Game.getCam().getX(), pi.y - Game.getCam().getY(), (int)getX() - Game.getCam().getX(), (int)getY() - Game.getCam().getY());
     }

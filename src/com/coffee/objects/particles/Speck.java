@@ -15,7 +15,7 @@ public class Speck extends Particle {
         super(x, y);
         this.radians = Engine.RAND.nextDouble()*(Math.PI*2);
         this.speed = Engine.RAND.nextDouble() + 1;
-        c = Engine.RAND.nextBoolean() ? Theme.Color_Primary : Theme.Color_Secondary;
+        c = Engine.RAND.nextBoolean() ? Theme.Primary : Theme.Secondary;
         setSize(Engine.SCALE, Engine.SCALE);
     }
 

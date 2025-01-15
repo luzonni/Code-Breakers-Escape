@@ -15,7 +15,7 @@ public class Repellent extends Tile {
 	public Repellent(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null)
-			sprite = getSprite("repellent", Theme.Color_Primary)[0];
+			sprite = getSprite("repellent", Theme.Primary)[0];
 	}
 
 	@Override

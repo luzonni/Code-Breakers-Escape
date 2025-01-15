@@ -20,8 +20,8 @@ public class Player extends Entity {
 	
 	private void buildSprites() {
 		SpriteSheet sp = new SpriteSheet(Engine.ResPath+"/entity/Player.png", Engine.SCALE);
-		sp.replaceColor(0xffffffff, Theme.Color_Primary.getRGB());
-		sp.replaceColor(0xff000000, Theme.Color_Tertiary.getRGB());
+		sp.replaceColor(0xffffffff, Theme.Primary.getRGB());
+		sp.replaceColor(0xff000000, Theme.Tertiary.getRGB());
 		sprite = new BufferedImage[2][7];
 		for(int i = 0; i < sprite[0].length; i++) {
 			sprite[0][i] = sp.getSprite(i*16, 0);

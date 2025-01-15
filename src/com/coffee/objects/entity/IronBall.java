@@ -24,7 +24,7 @@ class IronBall extends Entity {
 		this.radians = radians;
 		this.speed = speed;
 		if(sprite == null) 
-			sprite = getSprite("IronBall", Theme.Color_Primary)[0];
+			sprite = getSprite("IronBall", Theme.Primary)[0];
 		for(int i = 0; i < 30; i++)
 			Game.getLevel().addParticle(new Boom(getMiddle().x, getMiddle().y, radians - Math.PI/2 + Engine.RAND.nextDouble()*Math.PI));
 	}

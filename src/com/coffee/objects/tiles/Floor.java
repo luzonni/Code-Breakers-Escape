@@ -14,7 +14,7 @@ public class Floor extends Tile {
 	public Floor(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null) {
-			sprite = getSprite("floor", Theme.Color_Secondary);
+			sprite = getSprite("floor", Theme.Secondary);
 			index = Engine.RAND.nextInt(sprite.length);
 		}
 		this.setSolid(false);

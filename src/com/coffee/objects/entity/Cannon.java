@@ -22,9 +22,9 @@ public class Cannon extends Entity {
 	public Cannon(int id, int x, int y) {
 		super(id, x, y);
 		if(base == null)
-			base = getSprite("Cannon", Theme.Color_Tertiary)[0];
+			base = getSprite("Cannon", Theme.Tertiary)[0];
 		if(cannon == null)
-			cannon = getSprite("Cannon", Theme.Color_Primary)[1];
+			cannon = getSprite("Cannon", Theme.Primary)[1];
 		timer = new Timer(2 + Engine.RAND.nextInt(5));
 		setVar(Variables.Selectable, true);
 		setVar(Variables.Movable, true);

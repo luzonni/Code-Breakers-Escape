@@ -134,9 +134,9 @@ public abstract class Entity extends Objects {
 	
 	public BufferedImage[] getSprite(String name) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.SCALE);
-		spriteSheet.replaceColor(Theme.PRIMARY, Theme.Color_Primary.getRGB());
-		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
-		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
+		spriteSheet.replaceColor(Theme.PRIMARY, Theme.Primary.getRGB());
+		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
+		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Tertiary.getRGB());
 		int length = spriteSheet.getWidth()/16;
 		BufferedImage[] sprites = new BufferedImage[length];
 		for(int i = 0; i < length; i++) {
@@ -148,8 +148,8 @@ public abstract class Entity extends Objects {
 	public BufferedImage[] getSprite(String name, Color color) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.SCALE);
 		spriteSheet.replaceColor(Theme.PRIMARY, color.getRGB());
-		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
-		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
+		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
+		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Tertiary.getRGB());
 		int lenght = (spriteSheet.getWidth())/16;
 		BufferedImage[] sprites = new BufferedImage[lenght];
 		for(int i = 0; i < lenght; i++) {
@@ -161,8 +161,8 @@ public abstract class Entity extends Objects {
 	public BufferedImage[] getSprite(String name, Color color, int verticalIndex) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.SCALE);
 		spriteSheet.replaceColor(Theme.PRIMARY, color.getRGB());
-		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
-		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
+		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
+		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Tertiary.getRGB());
 		int lenght = (spriteSheet.getWidth())/16;
 		BufferedImage[] sprites = new BufferedImage[lenght];
 		for(int i = 0; i < lenght; i++)

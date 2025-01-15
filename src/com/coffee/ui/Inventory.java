@@ -83,10 +83,10 @@ public class Inventory {
 		int x = Engine.getWidth()/2 - width/2;
 		int y = Engine.getHeight()/24;
 		for(int i = 0; i < size; i++) {
-			g.setColor(Theme.Color_Secondary);
+			g.setColor(Theme.Secondary);
 			g.fillRect(x + i*16*Engine.SCALE, y, 16*Engine.SCALE, 16*Engine.SCALE);
 			g.setStroke(new BasicStroke(Engine.SCALE));
-			g.setColor(Theme.Color_Primary);
+			g.setColor(Theme.Primary);
 			g.drawRect(x + i*16*Engine.SCALE, y, 16*Engine.SCALE, 16*Engine.SCALE);
 			if(inventory[i] != null)
 				g.drawImage(inventory[i].getSprite(), x + i*16*Engine.SCALE, y, 16*Engine.SCALE, 16*Engine.SCALE, null);

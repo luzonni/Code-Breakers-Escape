@@ -23,7 +23,7 @@ public class Portalizer extends Tile {
     public Portalizer(int id, int x, int y) {
         super(id, x, y);
         if(sprites == null) {
-            sprites = getSprite("portalizer", Theme.Color_Primary);
+            sprites = getSprite("portalizer", Theme.Primary);
             index = Engine.RAND.nextInt(sprites.length);
         }
         timer = new Timer(5);

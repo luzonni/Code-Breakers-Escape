@@ -22,9 +22,9 @@ public class Crossbow extends Entity {
 	public Crossbow(int id, int x, int y) {
 		super(id, x, y);
 		if(base == null)
-			base = getSprite("CrossBow", Theme.Color_Tertiary)[0];
+			base = getSprite("CrossBow", Theme.Tertiary)[0];
 		if(bow == null)
-			bow = getSprite("CrossBow", Theme.Color_Primary)[1];
+			bow = getSprite("CrossBow", Theme.Primary)[1];
 		setVar(Variables.Selectable, true);
 		setVar(Variables.Movable, true);
 	}

@@ -3,7 +3,6 @@ package com.coffee.level;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -290,7 +289,7 @@ public class Level implements Receiver {
 	
 	public void render(Graphics2D g) {
 		drawPicture(g);
-		g.setColor(new Color(Theme.Color_Secondary.getRed(), Theme.Color_Secondary.getGreen(), Theme.Color_Secondary.getBlue(), 90));
+		g.setColor(new Color(Theme.Secondary.getRed(), Theme.Secondary.getGreen(), Theme.Secondary.getBlue(), 90));
 		g.fillRect(bounds.x - Engine.SCALE - Game.getCam().getX(), bounds.y - Engine.SCALE - Game.getCam().getY(), bounds.width + Engine.SCALE *2, bounds.height + Engine.SCALE *2);
 		for(int i = 0; i < map.length; i++)
 			map[i].render(g);
@@ -298,9 +297,9 @@ public class Level implements Receiver {
 			Entity e = entities.get(i);
 			e.render(g);
 			if(e.getVar(Variables.Freeze)) {
-				g.setColor(new Color(Theme.Color_Primary.getRed(), Theme.Color_Primary.getGreen(), Theme.Color_Primary.getBlue(), 80));
+				g.setColor(new Color(Theme.Primary.getRed(), Theme.Primary.getGreen(), Theme.Primary.getBlue(), 80));
 				g.fillRect((int)e.getX() - Game.getCam().getX(), (int)e.getY() - Game.getCam().getY(), e.getWidth(), e.getHeight());
-				g.setColor(Theme.Color_Primary);
+				g.setColor(Theme.Primary);
 				g.setStroke(new BasicStroke(Engine.SCALE));
 				g.drawRect( (int)e.getX() - Game.getCam().getX(), (int)e.getY() - Game.getCam().getY(), e.getWidth(), e.getHeight());
 			}
@@ -318,9 +317,9 @@ public class Level implements Receiver {
 		int x = getBounds().x;
 		int y = getBounds().y - hF/2;
 		g.setFont(f);
-		g.setColor(Theme.Color_Secondary);
+		g.setColor(Theme.Secondary);
 		g.drawString(value, x + Engine.SCALE - Game.getCam().getX(), y + Engine.SCALE - Game.getCam().getY());
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		g.drawString(value, x - Game.getCam().getX(), y - Game.getCam().getY());
 	}
 	
@@ -332,9 +331,9 @@ public class Level implements Receiver {
 		int x = getBounds().x + getBounds().width - wF;
 		int y = getBounds().y + getBounds().height + hF + Engine.SCALE;
 		g.setFont(f);
-		g.setColor(Theme.Color_Secondary);
+		g.setColor(Theme.Secondary);
 		g.drawString(value, x + Engine.SCALE - Game.getCam().getX(), y + Engine.SCALE - Game.getCam().getY());
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		g.drawString(value, x - Game.getCam().getX(), y - Game.getCam().getY());
 	}
 	
@@ -347,6 +346,6 @@ public class Level implements Receiver {
 	}
 	
 	public void dispose() {
-		
+		Engine.UI.getConsole().cleatIcon();
 	}
 }

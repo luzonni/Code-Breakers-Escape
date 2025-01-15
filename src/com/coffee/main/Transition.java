@@ -36,16 +36,16 @@ class Transition implements Runnable {
 		for(int y = 0; y < H; y++)
 			for(int x = 0; x < W; x++) {
 				if(Engine.RAND.nextBoolean())
-					rgb[x+y*W] = Theme.Color_Tertiary.getRGB();
+					rgb[x+y*W] = Theme.Tertiary.getRGB();
 				else if(Engine.RAND.nextBoolean())
-					rgb[x+y*W] = Theme.Color_Primary.getRGB();
+					rgb[x+y*W] = Theme.Primary.getRGB();
 				else {
-					rgb[x+y*W] = new Color(Theme.Color_Primary.getRed(), Theme.Color_Primary.getGreen(), Theme.Color_Primary.getBlue(), Engine.RAND.nextInt(255)).getRGB();
+					rgb[x+y*W] = new Color(Theme.Primary.getRed(), Theme.Primary.getGreen(), Theme.Primary.getBlue(), Engine.RAND.nextInt(255)).getRGB();
 				}
 			}
 		image.setRGB(0, 0, W, H, rgb, 0, W);
 		Graphics g = image.getGraphics();
-		g.setColor(new Color(Theme.Color_Secondary.getRed(), Theme.Color_Secondary.getGreen(), Theme.Color_Secondary.getBlue(), 180));
+		g.setColor(new Color(Theme.Secondary.getRed(), Theme.Secondary.getGreen(), Theme.Secondary.getBlue(), 180));
 		g.fillRect(0, Engine.RAND.nextInt(Engine.getHeight()), W, H/6);
 		
 		g.dispose();

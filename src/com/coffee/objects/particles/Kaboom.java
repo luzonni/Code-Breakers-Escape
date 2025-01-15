@@ -18,7 +18,7 @@ public class Kaboom extends Particle {
 		super(x, y);
 		this.radians = Engine.RAND.nextDouble()*(Math.PI*2);
 		this.speed = Engine.RAND.nextDouble();
-		c = Engine.RAND.nextBoolean() ? Theme.Color_Primary : Theme.Color_Tertiary;
+		c = Engine.RAND.nextBoolean() ? Theme.Primary : Theme.Tertiary;
 	}
 
 	@Override

@@ -64,7 +64,7 @@ public class Miniboll extends Entity {
 
 	@Override
 	public void render(Graphics2D g) {
-		g.setColor((count % 2 == 0) ? Theme.Color_Primary : Theme.Color_Tertiary);
+		g.setColor((count % 2 == 0) ? Theme.Primary : Theme.Tertiary);
 		g.fillRect((int)getX() - Game.getCam().getX(), (int)getY() - Game.getCam().getY(), getWidth(), getHeight());
 	}
 	

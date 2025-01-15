@@ -79,7 +79,7 @@ public class Shelf {
 		int Y = getResponsive().getBounds().y - Engine.SCALE;
 		int width = getResponsive().getBounds().width + Engine.SCALE *3;
 		int height = getResponsive().getBounds().height + Engine.SCALE *2;
-		g.setColor(new Color(Theme.Color_Primary.getRed(), Theme.Color_Primary.getGreen(), Theme.Color_Primary.getBlue(), 60));
+		g.setColor(new Color(Theme.Primary.getRed(), Theme.Primary.getGreen(), Theme.Primary.getBlue(), 60));
 		g.fillRect(X, Y, width, height);
 		for(int i = 0; i < inventory.length; i++) {
 			Objects t = inventory[i];
@@ -95,13 +95,13 @@ public class Shelf {
 					Engine.UI.getPopTag().setText(t.getClass().getSimpleName());
 				}
 			}
-			g.setColor(new Color(Theme.Color_Secondary.getRed(), Theme.Color_Secondary.getGreen(), Theme.Color_Secondary.getBlue(), 60));
+			g.setColor(new Color(Theme.Secondary.getRed(), Theme.Secondary.getGreen(), Theme.Secondary.getBlue(), 60));
 			g.fillRect(x + 2*Engine.SCALE, y + 2*Engine.SCALE, w, h);
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, t == Creator.getSelected() ? 1f : 0.5f));
 			g.drawImage(t.getSprite(), x , y, Tile.getSize(), Tile.getSize(), null);
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
-		g.setColor(Theme.Color_Tertiary);
+		g.setColor(Theme.Tertiary);
 		int size = (int)(((double)inventory.length / (double)default_inventory.length)*getResponsive().getBounds().height);
 		double a = ((double)size * ((double)(page) / (double)(inventory.length)));
 		g.fillRect(getResponsive().getBounds().x + getResponsive().getBounds().width, (int)(getResponsive().getBounds().y + a), Engine.SCALE, size);
@@ -116,9 +116,9 @@ public class Shelf {
 		int xx = x + w/2 - wF/2;
 		int yy = y - Engine.SCALE *2;
 		g.setFont(f);
-		g.setColor(Theme.Color_Secondary);
+		g.setColor(Theme.Secondary);
 		g.drawString(value, xx + Engine.SCALE, yy + Engine.SCALE);
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		g.drawString(value, xx , yy);
 	}
 

@@ -31,7 +31,7 @@ public class Window extends Canvas implements Runnable {
 	
 	public Window(String name) {
 		this.name = name;
-		createOpenGl(Engine.OpenGL);
+		createOpenGl(Engine.CONFIG.getBool("OPEN_GL"));
 		initFrame();
 		Mouse m = new Mouse();
 		Keyboard k = new Keyboard();
@@ -53,11 +53,11 @@ public class Window extends Canvas implements Runnable {
 	public void initFrame(){
 		this.frame = new JFrame(this.name);
 		frame.add(this);
-		frame.setUndecorated(Engine.FullScreen);
+		frame.setUndecorated(Engine.CONFIG.getBool("FULLSCREEN"));
 		frame.setResizable(false);
-		frame.setAlwaysOnTop(Engine.AlwaysOnTop);
+		frame.setAlwaysOnTop(Engine.CONFIG.getBool("AWAYES_ON_TOP"));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		if(Engine.FullScreen) {
+		if(Engine.CONFIG.getBool("FULLSCREEN")) {
 			GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 			gd.setFullScreenWindow(frame);
 			if (!gd.isFullScreenSupported()) {
@@ -71,13 +71,13 @@ public class Window extends Canvas implements Runnable {
 		frame.pack();
 		try {
 			SpriteSheet icon = new SpriteSheet(Engine.ResPath+"/ui/icon.png", 3);
-			icon.replaceColor(Theme.PRIMARY, Theme.Color_Primary.getRGB());
-			icon.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
-			icon.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
+			icon.replaceColor(Theme.PRIMARY, Engine.THEME.Primary.getRGB());
+			icon.replaceColor(Theme.SECONDARY, Engine.THEME.Secondary.getRGB());
+			icon.replaceColor(Theme.TERTIARY, Engine.THEME.Tertiary.getRGB());
 			SpriteSheet cursor = new SpriteSheet(Engine.ResPath+"/ui/cursor.png", 2);
-			cursor.replaceColor(Theme.PRIMARY, Theme.Color_Primary.getRGB());
-			cursor.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
-			cursor.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
+			cursor.replaceColor(Theme.PRIMARY, Engine.THEME.Primary.getRGB());
+			cursor.replaceColor(Theme.SECONDARY, Engine.THEME.Secondary.getRGB());
+			cursor.replaceColor(Theme.TERTIARY, Engine.THEME.Tertiary.getRGB());
 			Cursor c = toolkit.createCustomCursor(cursor.getImage(), new Point(0,0), "cursor");
 			frame.setCursor(c);
 			frame.setIconImage(icon.getImage());

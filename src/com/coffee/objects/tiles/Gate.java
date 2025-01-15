@@ -15,7 +15,7 @@ private static BufferedImage[] sprite;
 	public Gate(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null) {
-			sprite = getSprite("reforced_door", Theme.Color_Primary);
+			sprite = getSprite("reforced_door", Theme.Primary);
 		}
 		this.setSolid(true);
 	}

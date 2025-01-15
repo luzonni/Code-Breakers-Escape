@@ -15,7 +15,7 @@ public class Crate extends Tile {
 	public Crate(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null) {
-			sprite = getSprite("crate", Theme.Color_Primary);
+			sprite = getSprite("crate", Theme.Primary);
 			index = Engine.RAND.nextInt(sprite.length);
 		}
 		this.setSolid(true);

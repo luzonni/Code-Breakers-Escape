@@ -94,15 +94,15 @@ public abstract class View {
 	public void render(Graphics2D g) {
 		barSystem();
 		g.setStroke(new BasicStroke(Engine.SCALE));
-		g.setColor(Theme.Color_Tertiary);
+		g.setColor(Theme.Tertiary);
 		g.fillRect(bar.x, bar.y, bar.width + showButton.width, bar.height + boxContent.height);
 		renderBar(g);
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		g.drawRect(boxContent.x, boxContent.y, boxContent.width, boxContent.height);
 	}
 	
 	private void renderBar(Graphics2D g) {
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		g.drawRect(bar.x, bar.y, bar.width, bar.height);
 		if(!show)
 			g.drawLine(showButton.x + showButton.width/2, showButton.y + showButton.height/2 - 8, showButton.x + showButton.width/2, showButton.y + showButton.height/2 + 8);

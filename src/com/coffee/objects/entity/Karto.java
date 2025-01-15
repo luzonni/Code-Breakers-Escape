@@ -18,8 +18,8 @@ public class Karto extends Entity {
 		super(id, x, y);
 		if(sprites == null) {
 			sprites = new BufferedImage[2][];
-			sprites[0] = getSprite("karto", Theme.Color_Primary, 0);
-			sprites[1] = getSprite("karto", Theme.Color_Primary, 1);
+			sprites[0] = getSprite("karto", Theme.Primary, 0);
+			sprites[1] = getSprite("karto", Theme.Primary, 1);
 		}
 		setVar(Variables.Alive, true);
 	}

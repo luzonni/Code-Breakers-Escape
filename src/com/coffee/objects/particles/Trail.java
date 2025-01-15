@@ -15,7 +15,7 @@ public class Trail extends Particle {
 	public Trail(int x, int y) {
 		super(x, y);
 		if(sprites == null)
-			sprites = getSprite("trail", Theme.Color_Primary);
+			sprites = getSprite("trail", Theme.Primary);
 		setSize(sprites[index].getWidth(), sprites[index].getHeight());
 		setX(x - getWidth()/2);
 		setY(y - getHeight()/2);	

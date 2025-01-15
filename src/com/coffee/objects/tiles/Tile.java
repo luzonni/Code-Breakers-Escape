@@ -82,8 +82,8 @@ public abstract class Tile extends Objects {
 	public BufferedImage[] getSprite(String name, Color color) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath + "/tiles/" + name + ".png", Engine.SCALE);
 		spriteSheet.replaceColor(Theme.PRIMARY, color.getRGB());
-		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
-		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
+		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
+		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Tertiary.getRGB());
 		int length = spriteSheet.getWidth()/16;
 		BufferedImage[] sprites = new BufferedImage[length];
 		for(int i = 0; i < length; i++) {
@@ -95,8 +95,8 @@ public abstract class Tile extends Objects {
 	public BufferedImage[] getSprite(String name, Color color, int verticalIndex) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath + "/tiles/" + name + ".png", Engine.SCALE);
 		spriteSheet.replaceColor(Theme.PRIMARY, color.getRGB());
-		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
-		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
+		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
+		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Tertiary.getRGB());
 		int length = (spriteSheet.getWidth())/16;
 		BufferedImage[] sprites = new BufferedImage[length];
 		for(int i = 0; i < length; i++) {

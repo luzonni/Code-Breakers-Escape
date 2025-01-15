@@ -29,9 +29,9 @@ public class Pluuter extends Entity {
 		super(id, x, y);
 		if(sprites == null) {
 			sprites = new BufferedImage[3][];
-			sprites[0] = getSprite("pluuter", Theme.Color_Primary, 0);
-			sprites[1] = getSprite("pluuter", Theme.Color_Primary, 1);
-			sprites[2] = getSprite("pluuter", Theme.Color_Primary, 2);
+			sprites[0] = getSprite("pluuter", Theme.Primary, 0);
+			sprites[1] = getSprite("pluuter", Theme.Primary, 1);
+			sprites[2] = getSprite("pluuter", Theme.Primary, 2);
 		}
 		setVar(Variables.Alive, true);
 		this.dir = Directions.Idle;

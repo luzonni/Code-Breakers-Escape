@@ -357,7 +357,7 @@ public class Creator implements Activity {
 		create_button.render(g);
 		String value = "/";
 		Font f = FontG.font(12*Engine.SCALE);
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		g.setFont(f);
 		int x = Engine.getWidth()/2 - FontG.getWidth(value, f)/2 + Engine.SCALE;
 		int y = Engine.getHeight()/2 + FontG.getHeight(value, f)/2;

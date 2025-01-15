@@ -16,7 +16,7 @@ public class Button extends Entity {
 	public Button(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null)
-			sprite = getSprite("button", Theme.Color_Primary);
+			sprite = getSprite("button", Theme.Primary);
 		setEffect(Variables.Movable);
 		setDepth(0);
 	}

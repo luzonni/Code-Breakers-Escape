@@ -44,8 +44,8 @@ public class Menu implements Activity, Receiver {
 		if(bubbles == null)
 			bubbles = new ArrayList<Bubble>();
 		SpriteSheet sp = new SpriteSheet(Engine.ResPath + "/ui/LogoName.png", 3*Engine.SCALE);
-		sp.replaceColor(0xffffffff, Theme.Color_Primary.getRGB());
-		sp.replaceColor(0xff000000, Theme.Color_Tertiary.getRGB());
+		sp.replaceColor(0xffffffff, Theme.Primary.getRGB());
+		sp.replaceColor(0xff000000, Theme.Tertiary.getRGB());
 		Logo = sp.getImage();
 		logo_res = Responsive.createRectangle(null, new Rectangle(Logo.getWidth(), Logo.getHeight()), 50, 50);
 	}
@@ -64,8 +64,8 @@ public class Menu implements Activity, Receiver {
 	private void drawBackground() {
 		background = new BufferedImage(Engine.getWidth(), Engine.getHeight(), BufferedImage.TYPE_INT_ARGB);
 		SpriteSheet sp = new SpriteSheet(Engine.ResPath+"/ui/background.png", 2*Engine.SCALE);
-		sp.replaceColor(0xffffffff, Theme.Color_Secondary.getRGB());
-		sp.replaceColor(0xff000000, Theme.Color_Tertiary.getRGB());
+		sp.replaceColor(0xffffffff, Theme.Secondary.getRGB());
+		sp.replaceColor(0xff000000, Theme.Tertiary.getRGB());
 		Graphics2D g = (Graphics2D)background.getGraphics();
 		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f));
 		int w = Engine.getWidth() / sp.getWidth();
@@ -132,9 +132,9 @@ public class Menu implements Activity, Receiver {
 		int y = Engine.getHeight() - hF/2;
 		Rectangle recDesc = new Rectangle(x, y - hF, wF, hF);
 		if(Mouse.On_Mouse(recDesc))
-			g.setColor(Theme.Color_Secondary);
+			g.setColor(Theme.Secondary);
 		else
-			g.setColor(Theme.Color_Primary);
+			g.setColor(Theme.Primary);
 		g.setFont(f);
 		g.drawString(value, x, y);
 		if(Mouse.clickOn(Mouse_Button.LEFT, recDesc)) {
@@ -266,7 +266,7 @@ public class Menu implements Activity, Receiver {
 
 		private BufferedImage getSprite() {
 			SpriteSheet sheet = new SpriteSheet(Engine.ResPath + "/ui/bubble.png", Engine.SCALE);
-			sheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
+			sheet.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
 			return sheet.getImage();
 		}
 

@@ -16,7 +16,7 @@ public class Door extends Tile {
 	public Door(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null) {
-			sprite = getSprite("door", Theme.Color_Primary);
+			sprite = getSprite("door", Theme.Primary);
 		}
 		this.setSolid(true);
 	}

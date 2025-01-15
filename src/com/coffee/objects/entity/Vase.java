@@ -16,7 +16,7 @@ public class Vase extends Entity {
 	public Vase(int id, int x, int y) {
 		super(id, x, y);
 		if(sprite == null)
-			sprite = getSprite("vase", Theme.Color_Primary);
+			sprite = getSprite("vase", Theme.Primary);
 		setVar(Variables.Selectable, true);
 		setVar(Variables.Movable, true);
 		setEffect(Variables.Breakable);

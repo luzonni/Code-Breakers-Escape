@@ -28,9 +28,9 @@ public class Console {
 
 	private BufferedImage loadArrow() {
 		SpriteSheet sheet = new SpriteSheet(Engine.ResPath+"/ui/arrow.png", Engine.SCALE);
-		sheet.replaceColor(Theme.PRIMARY, Theme.Color_Primary.getRGB());
-		sheet.replaceColor(Theme.SECONDARY, Theme.Color_Secondary.getRGB());
-		sheet.replaceColor(Theme.TERTIARY, Theme.Color_Tertiary.getRGB());
+		sheet.replaceColor(Theme.PRIMARY, Theme.Primary.getRGB());
+		sheet.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
+		sheet.replaceColor(Theme.TERTIARY, Theme.Tertiary.getRGB());
 		return sheet.getImage();
 	}
 	
@@ -94,7 +94,7 @@ public class Console {
 		int y = res.getBounds().y - icon.getHeight()/2;
 		int w = icon.getWidth();
 		int h = icon.getHeight();
-		g.setColor(Theme.Color_Primary);
+		g.setColor(Theme.Primary);
 		g.drawRect(x - Engine.SCALE *2, y - Engine.SCALE *2, w + Engine.SCALE *3, h + Engine.SCALE *3);
 		g.drawImage(this.arrow, x + w/2 + this.arrow.getWidth()/2, y, null);
 		g.drawImage(this.icon, x, y, null);

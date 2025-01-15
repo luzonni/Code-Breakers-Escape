@@ -89,10 +89,10 @@ public class Cleft extends Entity {
             rr *= -1;
         g.rotate(rr, getMiddle().x - Game.getCam().getX(), getMiddle().y - Game.getCam().getY());
         if(fill) {
-            g.setColor(Theme.Color_Primary);
+            g.setColor(Theme.Primary);
             g.fillRect(x, y, size, size);
         }else {
-            g.setColor(Theme.Color_Secondary);
+            g.setColor(Theme.Secondary);
             g.setStroke(new BasicStroke(Engine.SCALE));
             g.drawRect(x, y, size, size);
         }

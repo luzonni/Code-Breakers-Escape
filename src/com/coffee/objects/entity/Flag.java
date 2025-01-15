@@ -15,7 +15,7 @@ public class Flag extends Entity {
 	public Flag(int id, int x, int y) {
 		super(id, x, y);
 		if(sprites == null)
-			sprites = getSprite("Flag", Theme.Color_Primary);
+			sprites = getSprite("Flag", Theme.Primary);
 		setDepth(0);
 	}
 	
