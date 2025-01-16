@@ -1,4 +1,4 @@
-package com.coffee.main.activity;
+package com.coffee.main.activity.creator;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -9,23 +9,20 @@ import java.util.List;
 
 import com.coffee.exceptions.ConsoleError;
 import com.coffee.main.Theme;
+import com.coffee.main.activity.Activity;
+import com.coffee.main.activity.Menu;
+import com.coffee.main.activity.game.Game;
 import com.coffee.objects.entity.EntityTag;
 import com.coffee.objects.tiles.TileTag;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.coffee.Inputs.Button.Button;
-import com.coffee.Inputs.Button.TextButton;
+import com.coffee.inputs.buttons.Button;
+import com.coffee.inputs.buttons.TextButton;
 import com.coffee.ui.command.Commands;
-import com.coffee.ui.creator.Commands_Boxe;
-import com.coffee.ui.creator.DrawableBox;
-import com.coffee.ui.creator.Grid;
-import com.coffee.ui.creator.Shelf;
-import com.coffee.ui.creator.Saver;
-import com.coffee.ui.creator.Selected;
 import com.coffee.graphics.FontG;
 import com.coffee.items.Item;
-import com.coffee.level.Level;
+import com.coffee.main.activity.game.Level;
 import com.coffee.main.Engine;
 import com.coffee.main.tools.Responsive;
 import com.coffee.objects.Camera;
@@ -199,14 +196,24 @@ public class Creator implements Activity {
 	
 	@Override
 	public String giveCommand(String[] keys) {
-		String message = "";
-		if(keys[0].equalsIgnoreCase("load")) {
+		if(keys[0].equalsIgnoreCase("load") && keys.length > 1) {
 			loadLevel(keys);
+			return "";
 		}
 		if(keys[0].equalsIgnoreCase("try") || keys[0].equalsIgnoreCase("t")) {
 			testeAndSaveLevel();
+			return "";
 		}
-		return message;
+		if(keys[0].equalsIgnoreCase("rename") && keys.length == 2) {
+			if(!this.NAME.isBlank()) {
+				Engine.UI.getConsole().print("Renamed to \"" + keys[1] + "\"", true);
+				this.NAME = keys[1];
+				return "";
+			}else {
+				throw new ConsoleError("The level name not beginning");
+			}
+		}
+		return "I'm not sure what you told me...";
 	}
 
 	private static void loadLevel(String[] keys) {

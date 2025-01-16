@@ -2,7 +2,7 @@ package com.coffee.objects.entity;
 
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.Game;
+import com.coffee.main.activity.game.Game;
 import com.coffee.objects.particles.Speck;
 
 import java.awt.*;

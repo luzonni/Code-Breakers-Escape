@@ -1,7 +1,7 @@
 package com.coffee.items;
 
 import com.coffee.main.Engine;
-import com.coffee.main.activity.Game;
+import com.coffee.main.activity.game.Game;
 import com.coffee.objects.Directions;
 import com.coffee.objects.entity.Arrow;
 import com.coffee.objects.entity.Player;

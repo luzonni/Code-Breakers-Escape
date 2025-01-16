@@ -7,8 +7,8 @@ import java.io.Serial;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-import com.coffee.Inputs.Keyboard;
-import com.coffee.Inputs.Mouse;
+import com.coffee.inputs.Keyboard;
+import com.coffee.inputs.Mouse;
 import com.coffee.graphics.FontG;
 import com.coffee.graphics.SpriteSheet;
 
@@ -31,7 +31,7 @@ public class Window extends Canvas implements Runnable {
 	
 	public Window(String name) {
 		this.name = name;
-		createOpenGl(Engine.CONFIG.getBool("OPEN_GL"));
+		createOpenGl(Engine.SETTINGS.getBool("OPEN_GL"));
 		initFrame();
 		Mouse m = new Mouse();
 		Keyboard k = new Keyboard();
@@ -53,11 +53,11 @@ public class Window extends Canvas implements Runnable {
 	public void initFrame(){
 		this.frame = new JFrame(this.name);
 		frame.add(this);
-		frame.setUndecorated(Engine.CONFIG.getBool("FULLSCREEN"));
-		frame.setResizable(false);
-		frame.setAlwaysOnTop(Engine.CONFIG.getBool("AWAYES_ON_TOP"));
+		frame.setUndecorated(Engine.SETTINGS.getBool("FULLSCREEN"));
+		frame.setResizable(true);
+		frame.setAlwaysOnTop(Engine.SETTINGS.getBool("AWAYES_ON_TOP"));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		if(Engine.CONFIG.getBool("FULLSCREEN")) {
+		if(Engine.SETTINGS.getBool("FULLSCREEN")) {
 			GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 			gd.setFullScreenWindow(frame);
 			if (!gd.isFullScreenSupported()) {

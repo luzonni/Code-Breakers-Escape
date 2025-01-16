@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import com.coffee.main.Theme;
-import com.coffee.main.activity.Game;
+import com.coffee.main.activity.game.Game;
 import com.coffee.objects.entity.Entity;
 
 public class Repellent extends Tile {

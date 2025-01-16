@@ -1,8 +1,8 @@
 package com.coffee.objects.entity;
 
-import com.coffee.level.Level;
+import com.coffee.main.activity.game.Level;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.Game;
+import com.coffee.main.activity.game.Game;
 import com.coffee.main.tools.Timer;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Variables;

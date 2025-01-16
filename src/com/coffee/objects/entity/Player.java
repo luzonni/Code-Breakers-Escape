@@ -3,7 +3,7 @@ package com.coffee.objects.entity;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import com.coffee.Inputs.Keyboard;
+import com.coffee.inputs.Keyboard;
 import com.coffee.graphics.Flip;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;

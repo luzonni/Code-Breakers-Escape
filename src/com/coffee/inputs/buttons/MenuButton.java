@@ -1,11 +1,11 @@
-package com.coffee.Inputs.Button;
+package com.coffee.inputs.buttons;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.coffee.Inputs.Mouse;
+import com.coffee.inputs.Mouse;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;

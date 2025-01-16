@@ -1,4 +1,4 @@
-package com.coffee.level;
+package com.coffee.main.activity.game;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,12 +15,11 @@ import org.json.simple.parser.JSONParser;
 
 import com.coffee.ui.command.Commands;
 import com.coffee.ui.command.Receiver;
-import com.coffee.ui.creator.DrawableBox;
+import com.coffee.main.activity.creator.DrawableBox;
 import com.coffee.exceptions.Dead;
 import com.coffee.graphics.FontG;
 import com.coffee.items.Item;
 import com.coffee.main.Engine;
-import com.coffee.main.activity.Game;
 import com.coffee.objects.Objects;
 import com.coffee.objects.Variables;
 import com.coffee.objects.entity.Entity;

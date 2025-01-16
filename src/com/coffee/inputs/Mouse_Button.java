@@ -1,4 +1,4 @@
-package com.coffee.Inputs;
+package com.coffee.inputs;
 
 public enum Mouse_Button {
 	

@@ -8,10 +8,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.coffee.Inputs.Mouse;
-import com.coffee.Inputs.Mouse_Button;
+import com.coffee.inputs.Mouse;
+import com.coffee.inputs.Mouse_Button;
+import com.coffee.main.activity.game.Game;
 import com.coffee.ui.command.Receiver;
-import com.coffee.level.Level;
+import com.coffee.main.activity.game.Level;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
 import com.coffee.main.tools.Geometry;

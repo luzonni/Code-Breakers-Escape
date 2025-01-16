@@ -10,7 +10,7 @@ import com.coffee.ui.command.Commands;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.Game;
+import com.coffee.main.activity.game.Game;
 import com.coffee.objects.Objects;
 import com.coffee.objects.Variables;
 import com.coffee.objects.entity.Entity;

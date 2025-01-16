@@ -3,8 +3,8 @@ package com.coffee.ui.command;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import com.coffee.Inputs.Keyboard;
-import com.coffee.Inputs.Button.TextButton;
+import com.coffee.inputs.Keyboard;
+import com.coffee.inputs.buttons.TextButton;
 import com.coffee.exceptions.ConsoleError;
 import com.coffee.graphics.FontG;
 import com.coffee.graphics.SpriteSheet;

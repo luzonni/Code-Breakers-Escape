@@ -1,9 +1,9 @@
 package com.coffee.objects.entity;
 
 import com.coffee.main.Engine;
-import com.coffee.main.Geometry;
+import com.coffee.main.tools.Geometry;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.Game;
+import com.coffee.main.activity.game.Game;
 import com.coffee.objects.Directions;
 import com.coffee.objects.particles.Dust;
 

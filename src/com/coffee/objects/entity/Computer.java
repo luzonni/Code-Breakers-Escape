@@ -8,7 +8,7 @@ import com.coffee.items.CMD;
 import com.coffee.items.Item;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.Game;
+import com.coffee.main.activity.game.Game;
 
 public class Computer extends Entity {
 	

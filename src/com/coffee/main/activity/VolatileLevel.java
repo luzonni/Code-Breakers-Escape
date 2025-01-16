@@ -5,10 +5,10 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import com.coffee.Inputs.Mouse;
-import com.coffee.Inputs.Mouse_Button;
+import com.coffee.inputs.Mouse;
+import com.coffee.inputs.Mouse_Button;
 import com.coffee.graphics.FontG;
-import com.coffee.level.Level;
+import com.coffee.main.activity.game.Level;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
 

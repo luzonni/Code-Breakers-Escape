@@ -1,4 +1,4 @@
-package com.coffee.Inputs.Button;
+package com.coffee.inputs.buttons;
 
 import com.coffee.main.tools.ActionBack;
 import com.coffee.main.tools.Responsive;

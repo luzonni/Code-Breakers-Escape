@@ -3,10 +3,10 @@ package com.coffee.objects.entity;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import com.coffee.level.Level;
+import com.coffee.main.activity.game.Level;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.Game;
+import com.coffee.main.activity.game.Game;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Variables;
 import com.coffee.objects.particles.Speck;

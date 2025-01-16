@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.coffee.main.Engine;
-import com.coffee.main.Geometry;
-import com.coffee.main.activity.Game;
+import com.coffee.main.tools.Geometry;
+import com.coffee.main.activity.game.Game;
 import com.coffee.main.tools.Timer;
 import com.coffee.objects.Variables;
 import com.coffee.objects.ai.Path;

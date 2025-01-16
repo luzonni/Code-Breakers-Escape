@@ -8,8 +8,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Random;
 
-import com.coffee.level.Level;
-import com.coffee.main.activity.Creator;
+import com.coffee.main.activity.game.Level;
+import com.coffee.main.activity.creator.Creator;
 
 import com.coffee.graphics.FontG;
 import com.coffee.main.activity.Activity;
@@ -34,9 +34,9 @@ public class Engine implements Runnable {
 	public static int FRAMES;
 	public static int HERTZ;
 
-	public static Configs CONFIG;
+	public static Setting SETTINGS;
 	public static Theme THEME;
-	public static final int SCALE = 3; //TODO fix scale game!
+	public static final int SCALE = 3;
 	public static final int[][] resolutions = {{1280, 720}, {1366, 768}, {1600, 900}, {1920, 1080}, {2560, 1440}, {3840, 2160}};
 
 	public static final String ResPath = "/com/coffee/res";
@@ -82,7 +82,7 @@ public class Engine implements Runnable {
 	}
 	
 	public Engine() {
-		Engine.CONFIG = new Configs();
+		Engine.SETTINGS = new Setting();
 		Engine.THEME = new Theme();
 
     }
@@ -124,7 +124,7 @@ public class Engine implements Runnable {
 	}
 
 	public static int[] getResolution() {
-		return Engine.resolutions[Engine.CONFIG.getInt("RESOLUTION_INDEX")];
+		return Engine.resolutions[Engine.SETTINGS.getInt("RESOLUTION_INDEX")];
 	}
 	
 	public synchronized static void setActivity(Activity activity) {
@@ -172,7 +172,7 @@ public class Engine implements Runnable {
 	
 	private Graphics2D getGraphics() {
 		Graphics2D graphics = (Graphics2D) Buffer.getDrawGraphics();
-		if(CONFIG.getBool("ANTIALIASING"))
+		if(SETTINGS.getBool("ANTIALIASING"))
 			graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics.setColor(THEME.Tertiary);
 		graphics.fillRect(0, 0, WINDOW.getWidth(), WINDOW.getHeight());

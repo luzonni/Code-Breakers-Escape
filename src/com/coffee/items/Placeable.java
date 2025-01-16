@@ -1,6 +1,6 @@
 package com.coffee.items;
 
-import com.coffee.main.activity.Game;
+import com.coffee.main.activity.game.Game;
 import com.coffee.objects.entity.Entity;
 import com.coffee.objects.entity.EntityTag;
 import com.coffee.objects.tiles.Tile;

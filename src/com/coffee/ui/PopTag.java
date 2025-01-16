@@ -1,6 +1,6 @@
 package com.coffee.ui;
 
-import com.coffee.Inputs.Mouse;
+import com.coffee.inputs.Mouse;
 import com.coffee.graphics.FontG;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;

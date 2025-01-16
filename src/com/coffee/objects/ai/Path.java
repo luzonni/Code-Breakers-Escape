@@ -8,7 +8,7 @@ import java.awt.Point;
 
 import com.coffee.exceptions.NoWayFound;
 import com.coffee.main.Engine;
-import com.coffee.main.activity.Game;
+import com.coffee.main.activity.game.Game;
 import com.coffee.objects.Directions;
 import com.coffee.objects.entity.Entity;
 import com.coffee.objects.tiles.Tile;

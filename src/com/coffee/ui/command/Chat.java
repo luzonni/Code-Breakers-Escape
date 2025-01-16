@@ -11,6 +11,8 @@ import java.util.List;
 import com.coffee.graphics.FontG;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
+import com.coffee.main.sound.Sound;
+import com.coffee.main.sound.Sounds;
 
 class Chat {
 	
@@ -72,14 +74,13 @@ class Chat {
 			Rectangle rec_right_2 = phrases.get(phrases.size()-1).bounds;
 			g.drawLine(rec_right_1.x + rec_right_1.width, rec_right_1.y + rec_right_1.height, rec_right_2.x + rec_right_2.width, rec_right_2.y);
 			//Line Right
-			if(i < phrases.size()-1) {
-				Rectangle rec_left_1 = phrases.get(i).bounds;
-				Rectangle rec_left_2 = phrases.get(i+1).bounds;
+            Rectangle rec_left_1 = phrases.get(i).bounds;
+            if(i < phrases.size()-1) {
+                Rectangle rec_left_2 = phrases.get(i+1).bounds;
 				g.drawLine(rec_left_1.x, rec_left_1.y + rec_left_1.height, rec_left_1.x, rec_left_1.y);
 				g.drawLine(rec_left_1.x, rec_left_1.y, rec_left_2.x, rec_left_2.y + rec_left_2.height);
 			}else {
-				Rectangle rec_left_1 = phrases.get(i).bounds;
-				g.drawLine(rec_left_1.x, rec_left_1.y + rec_left_1.height, rec_left_1.x, rec_left_1.y);		
+                g.drawLine(rec_left_1.x, rec_left_1.y + rec_left_1.height, rec_left_1.x, rec_left_1.y);
 			}
 		}
 	}
@@ -87,9 +88,9 @@ class Chat {
 	private class BoxPhrase {
 		
 		private String base_write;
-		private StringBuilder phrase;
+		private final StringBuilder phrase;
 		private Rectangle bounds;
-		private int padding;
+		private final int padding;
 		private int timer;
 		private final int life = 60*15;
 		private boolean writing;
@@ -125,6 +126,8 @@ class Chat {
 			if(time_write >= 3) {
 				time_write = 0;
 				phrase.append(base_write.charAt(index_writing));
+				//TODO change this chat typing sound!
+				Sound.play(Sounds.Place);
 				index_writing++;
 				if(index_writing >= base_write.length())
 					writing = false;

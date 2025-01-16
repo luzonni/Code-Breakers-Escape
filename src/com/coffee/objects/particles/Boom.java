@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.Game;
+import com.coffee.main.activity.game.Game;
 
 public class Boom extends Particle {
 	

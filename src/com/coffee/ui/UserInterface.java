@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.coffee.Inputs.Button.MenuButton;
+import com.coffee.inputs.buttons.MenuButton;
 import com.coffee.ui.command.Console;
 import com.coffee.ui.command.Receiver;
 import com.coffee.main.Engine;

@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.Game;
+import com.coffee.main.activity.game.Game;
 import com.coffee.objects.Objects;
 
 public abstract class Particle extends Objects {

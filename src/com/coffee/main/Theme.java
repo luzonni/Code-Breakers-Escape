@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,7 +27,7 @@ public class Theme {
     private final List<Color[]> PALLET;
 
     public Theme() {
-        if(Engine.CONFIG == null) {
+        if(Engine.SETTINGS == null) {
             throw new RuntimeException("The configs not initialized!");
         }
         PALLET = new ArrayList<>();
@@ -36,16 +35,7 @@ public class Theme {
     }
 
     private void init() {
-        String path = Engine.currentPath() + "/config.json";
-        File config = new File(path);
-        if(config.exists()) {
-//            Color[][] pallets = Engine.CONFIG.getPallets();
-//            PALLET.addAll(Arrays.asList(pallets));
-            loadSource();
-        }else {
-            loadSource();
-        }
-
+        loadSource();
     }
 
     private void loadSource() {
@@ -72,14 +62,14 @@ public class Theme {
     }
 
     public int getIndex() {
-        return Engine.CONFIG.getInt("PALLET_INDEX");
+        return Engine.SETTINGS.getInt("PALLET_INDEX");
     }
 
     public Color[] getPallet() {
         return PALLET.get(getIndex());
     }
 
-    Color[][] PALLETS() {
+    public Color[][] PALLETS() {
         return this.PALLET.toArray(new Color[][] {});
     }
 

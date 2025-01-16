@@ -1,14 +1,13 @@
-package com.coffee.level;
+package com.coffee.main.activity.game;
 
-import com.coffee.Inputs.Mouse;
-import com.coffee.Inputs.Mouse_Button;
+import com.coffee.inputs.Mouse;
+import com.coffee.inputs.Mouse_Button;
 import com.coffee.ui.command.Commands;
 import com.coffee.ui.command.Receiver;
 import com.coffee.exceptions.ConsoleError;
 import com.coffee.items.Bow;
 import com.coffee.items.Item;
 import com.coffee.items.Placeable;
-import com.coffee.main.activity.Game;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Variables;
 import com.coffee.objects.entity.Entity;

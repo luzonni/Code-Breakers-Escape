@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.coffee.Inputs.Mouse;
+import com.coffee.inputs.Mouse;
 import com.coffee.items.Item;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;

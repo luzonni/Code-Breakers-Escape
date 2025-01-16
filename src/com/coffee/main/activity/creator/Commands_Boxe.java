@@ -1,4 +1,4 @@
-package com.coffee.ui.creator;
+package com.coffee.main.activity.creator;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,8 +7,8 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.coffee.Inputs.Mouse;
-import com.coffee.Inputs.Mouse_Button;
+import com.coffee.inputs.Mouse;
+import com.coffee.inputs.Mouse_Button;
 import com.coffee.ui.command.Commands;
 import com.coffee.graphics.FontG;
 import com.coffee.main.Engine;

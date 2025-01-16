@@ -1,14 +1,13 @@
-package com.coffee.ui.creator;
+package com.coffee.main.activity.creator;
 
 import java.awt.*;
 
-import com.coffee.Inputs.Mouse;
-import com.coffee.Inputs.Mouse_Button;
+import com.coffee.inputs.Mouse;
+import com.coffee.inputs.Mouse_Button;
 import com.coffee.graphics.FontG;
 import com.coffee.items.Item;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.Creator;
 import com.coffee.main.tools.Responsive;
 import com.coffee.objects.Objects;
 import com.coffee.objects.entity.EntityItem;
