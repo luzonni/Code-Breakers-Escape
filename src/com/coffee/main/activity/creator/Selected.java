@@ -8,7 +8,7 @@ import com.coffee.main.Engine;
 import com.coffee.main.Theme;
 import com.coffee.objects.Objects;
 
-public class Selected {
+class Selected {
 	
 	private Objects SELECTED;
 	

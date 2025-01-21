@@ -11,6 +11,9 @@ import com.coffee.exceptions.ConsoleError;
 import com.coffee.main.Theme;
 import com.coffee.main.activity.Activity;
 import com.coffee.main.activity.Menu;
+import com.coffee.main.activity.creator.frame.Framer;
+import com.coffee.main.activity.creator.ui.Commands_Shelf;
+import com.coffee.main.activity.creator.ui.Shelf;
 import com.coffee.main.activity.game.Game;
 import com.coffee.objects.entity.EntityTag;
 import com.coffee.objects.tiles.TileTag;
@@ -46,8 +49,8 @@ public class Creator implements Activity {
 	private Shelf inventoryTiles;
 	private Shelf inventoryEntities;
 	private Shelf inventoryItems;
-	private Commands_Boxe c_b;
-	private DrawableBox picture;
+	private Commands_Shelf c_b;
+	private Framer picture;
 	
 	private final Camera camera;
 	
@@ -140,7 +143,7 @@ public class Creator implements Activity {
 			name_sublime = new TextButton("level name", 0, -12*Engine.SCALE, center, 8);
 			name_builder = new TextButton("your nick or @", 0, -6*Engine.SCALE, name_sublime.getResponsive(), 8);
 			create_button = new Button("create", 0, 12*Engine.SCALE, center, 8);
-			c_b = new Commands_Boxe(null);
+			c_b = new Commands_Shelf(null);
 		}
 	}
 	
@@ -184,14 +187,14 @@ public class Creator implements Activity {
 			String name = (String)commands.get(i);
 			COMMANDS.add(Commands.valueOf(name));
 		}
-		c_b = new Commands_Boxe(COMMANDS);
-		
-		picture = new DrawableBox(center, new Rectangle(this.WIDTH, this.HEIGHT));
+		c_b = new Commands_Shelf(COMMANDS);
+
+		picture = new Framer(center, new Rectangle(this.WIDTH, this.HEIGHT));
 		JSONArray list_pixels = (JSONArray)level.get("PICTURE");
 		int[] pixels = new int[list_pixels.size()];
 		for(int i = 0; i < list_pixels.size(); i++)
 			pixels[i] = ((Number)list_pixels.get(i)).intValue();
-		picture.setPixels(DrawableBox.convertPixels(pixels));
+		picture.setPixels(Framer.convertPixels(pixels));
 	}
 	
 	@Override
@@ -248,7 +251,7 @@ public class Creator implements Activity {
 			addButtonsMenu();
 			MAP_TILES = new Grid(new Tile[w*h], w, h);
 			MAP_ENTITIES = new Grid(new Entity[w*h], w, h);
-			picture = new DrawableBox(center, new Rectangle(w, h));
+			picture = new Framer(center, new Rectangle(w, h));
 			WIDTH = w;
 			HEIGHT = h;
 			sizes = null;
@@ -330,7 +333,7 @@ public class Creator implements Activity {
 			Engine.setActivity(new Creator(null));
 		});
 		Engine.UI.addOption("draw", ()-> {
-			picture.setDrawnable(!picture.isDrawing());
+			picture.setDrawable(!picture.isDrawing());
 		});
 		Engine.UI.addOption("try", this::testeAndSaveLevel);
 	}

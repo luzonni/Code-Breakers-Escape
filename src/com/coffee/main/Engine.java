@@ -174,7 +174,7 @@ public class Engine implements Runnable {
 		Graphics2D graphics = (Graphics2D) Buffer.getDrawGraphics();
 		if(SETTINGS.getBool("ANTIALIASING"))
 			graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		graphics.setColor(THEME.Tertiary);
+		graphics.setColor(Theme.Tertiary);
 		graphics.fillRect(0, 0, WINDOW.getWidth(), WINDOW.getHeight());
 		graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
 

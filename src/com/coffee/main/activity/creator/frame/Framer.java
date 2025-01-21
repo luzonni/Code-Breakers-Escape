@@ -1,43 +1,44 @@
-package com.coffee.main.activity.creator;
+package com.coffee.main.activity.creator.frame;
 
-import java.awt.BasicStroke;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import com.coffee.inputs.Mouse;
 import com.coffee.inputs.Mouse_Button;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
+import com.coffee.main.activity.creator.Creator;
 import com.coffee.main.tools.Responsive;
 import com.coffee.objects.tiles.Tile;
 
-public class DrawableBox implements Runnable {
+public class Framer implements Runnable {
+
+    private volatile boolean running;
 	
-	private Thread thread;
-	private volatile boolean running;
-	
-	private Responsive center;
-	private int Width, Height;
-	private Rectangle grid;
+	private final Responsive center;
+	private final int Width;
+    private final int Height;
+	private final Rectangle grid;
 	public BufferedImage picture;
-	private Graphics g;
+	private final Graphics2D g;
 	private int size_drawn;
-	private volatile boolean drawnable;
+	private volatile boolean drawable;
+
+	private Dock dock;
 	
-	public DrawableBox(Responsive center, Rectangle grid) {
+	public Framer(Responsive center, Rectangle grid) {
 		this.center = center;
 		this.grid = grid;
 		this.Width = 256*4;
 		this.Height = 256*4;
 		this.size_drawn = 4;
 		this.picture = new BufferedImage(this.Width, this.Height, BufferedImage.TYPE_INT_RGB);
-		this.g = this.picture.getGraphics();
+		this.g = (Graphics2D) this.picture.getGraphics();
 		g.setColor(Theme.Tertiary);
 		g.fillRect(0, 0, Width, Height);
 		g.setColor(Theme.Primary);
 		g.drawRect(0, 0, Width-1, Height-1);
+		dock = new Dock();
 		this.start();
 	}
 	
@@ -56,8 +57,7 @@ public class DrawableBox implements Runnable {
 	
 	public synchronized void start() {
 		this.running = true;
-		this.thread = new Thread(this);
-		this.thread.start();
+        new Thread(this).start();
 	}
 	
 	public synchronized void stop() {
@@ -73,11 +73,11 @@ public class DrawableBox implements Runnable {
 	}
 
 	public boolean isDrawing() {
-		return this.drawnable;
+		return this.drawable;
 	}
 	
-	public void setDrawnable(boolean drawnable) {
-		this.drawnable = drawnable;
+	public void setDrawable(boolean drawable) {
+		this.drawable = drawable;
 	}
 	
 	private Rectangle getBounds() {
@@ -101,9 +101,9 @@ public class DrawableBox implements Runnable {
 			this.size_drawn = 2;
 		int x_d = (Mouse.getX() - getBounds().x + Creator.getCam().getX())/Engine.SCALE;
 		int y_d = (Mouse.getY() - getBounds().y + Creator.getCam().getY())/Engine.SCALE;
+
 		if(Mouse.pressingOn(Mouse_Button.LEFT, getBounds())) {
-			g.setColor(Theme.Secondary);
-			g.fillOval(x_d - size_drawn/2, y_d - size_drawn/2, size_drawn, size_drawn);
+			dock.getPainter().paint(x_d, y_d, size_drawn, g);
 		}
 		if(Mouse.pressingOn(Mouse_Button.RIGHT, getBounds())) {
 			g.setColor(Theme.Tertiary);
@@ -114,12 +114,19 @@ public class DrawableBox implements Runnable {
 		g.setColor(Theme.Primary);
 		g.drawRect(0, 0, Width-1, Height-1);
 	}
+
+	public void tick() {
+		if(this.drawable) {
+			dock.tick();
+		}
+	}
 	
 	public void render(Graphics2D g) {
 		int x = this.center.getBounds().x - (this.Width*Engine.SCALE)/2;
 		int y = this.center.getBounds().y - (this.Height*Engine.SCALE)/2;
 		g.drawImage(picture, x - Creator.getCam().getX(), y - Creator.getCam().getY(), this.Width*Engine.SCALE, this.Height*Engine.SCALE, null);
-		if(this.drawnable) {
+		if(this.drawable) {
+			dock.render(g);
 			int x_mouse = Mouse.getX();
 			int y_mouse = Mouse.getY();
 			g.setStroke(new BasicStroke(Engine.SCALE));
@@ -132,7 +139,7 @@ public class DrawableBox implements Runnable {
 	public void run() {
 		while(running) {
 			try {
-				if(this.drawnable)
+				if(this.drawable)
 					draw();
 				Thread.sleep(1);
 			} catch (InterruptedException e) {

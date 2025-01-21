@@ -71,13 +71,13 @@ public class Window extends Canvas implements Runnable {
 		frame.pack();
 		try {
 			SpriteSheet icon = new SpriteSheet(Engine.ResPath+"/ui/icon.png", 3);
-			icon.replaceColor(Theme.PRIMARY, Engine.THEME.Primary.getRGB());
-			icon.replaceColor(Theme.SECONDARY, Engine.THEME.Secondary.getRGB());
-			icon.replaceColor(Theme.TERTIARY, Engine.THEME.Tertiary.getRGB());
+			icon.replaceColor(Theme.PRIMARY, Theme.Primary.getRGB());
+			icon.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
+			icon.replaceColor(Theme.TERTIARY, Theme.Tertiary.getRGB());
 			SpriteSheet cursor = new SpriteSheet(Engine.ResPath+"/ui/cursor.png", 2);
-			cursor.replaceColor(Theme.PRIMARY, Engine.THEME.Primary.getRGB());
-			cursor.replaceColor(Theme.SECONDARY, Engine.THEME.Secondary.getRGB());
-			cursor.replaceColor(Theme.TERTIARY, Engine.THEME.Tertiary.getRGB());
+			cursor.replaceColor(Theme.PRIMARY, Theme.Primary.getRGB());
+			cursor.replaceColor(Theme.TERTIARY, Theme.Tertiary.getRGB());
+			cursor.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
 			Cursor c = toolkit.createCustomCursor(cursor.getImage(), new Point(0,0), "cursor");
 			frame.setCursor(c);
 			frame.setIconImage(icon.getImage());

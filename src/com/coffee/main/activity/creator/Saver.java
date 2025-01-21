@@ -14,7 +14,7 @@ import com.coffee.objects.entity.Entity;
 import com.coffee.objects.entity.EntityItem;
 import com.coffee.objects.tiles.Tile;
 
-public class Saver {
+class Saver {
 	
 	private final String name;
 	private final String builder;

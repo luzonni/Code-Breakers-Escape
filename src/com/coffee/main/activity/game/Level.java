@@ -15,7 +15,7 @@ import org.json.simple.parser.JSONParser;
 
 import com.coffee.ui.command.Commands;
 import com.coffee.ui.command.Receiver;
-import com.coffee.main.activity.creator.DrawableBox;
+import com.coffee.main.activity.creator.frame.Framer;
 import com.coffee.exceptions.Dead;
 import com.coffee.graphics.FontG;
 import com.coffee.items.Item;
@@ -161,7 +161,7 @@ public class Level implements Receiver {
 		int w = 256*4;
 		int h = 256*4;
 		picture = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-		picture.setRGB(0, 0, w, h, DrawableBox.convertPixels(pixels), 0, w);
+		picture.setRGB(0, 0, w, h, Framer.convertPixels(pixels), 0, w);
 	}
 
 	public JSONObject getLevel() {

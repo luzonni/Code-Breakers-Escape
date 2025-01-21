@@ -1,4 +1,4 @@
-package com.coffee.main.activity.creator;
+package com.coffee.main.activity.creator.ui;
 
 import java.awt.*;
 
@@ -8,6 +8,7 @@ import com.coffee.graphics.FontG;
 import com.coffee.items.Item;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
+import com.coffee.main.activity.creator.Creator;
 import com.coffee.main.tools.Responsive;
 import com.coffee.objects.Objects;
 import com.coffee.objects.entity.EntityItem;

@@ -14,7 +14,7 @@ import com.coffee.main.tools.Responsive;
 import com.coffee.objects.Objects;
 import com.coffee.objects.tiles.Tile;
 
-public class Grid {
+class Grid {
 
 	private final Objects[] Grid;
 	private final int Width, Height;

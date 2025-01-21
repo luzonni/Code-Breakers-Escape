@@ -1,4 +1,4 @@
-package com.coffee.main.activity.creator;
+package com.coffee.main.activity.creator.ui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,7 +15,7 @@ import com.coffee.main.Engine;
 import com.coffee.main.Theme;
 import com.coffee.main.tools.Responsive;
 
-public class Commands_Boxe {
+public class Commands_Shelf {
 	
 	private Rectangle box_list;
 	private Rectangle box_default_list;
@@ -23,7 +23,7 @@ public class Commands_Boxe {
 	private int page;
 	private List<C> default_list;
 	
-	public Commands_Boxe(List<Commands> commands) {
+	public Commands_Shelf(List<Commands> commands) {
 		this.box_list = new Rectangle();
 		this.box_default_list = new Rectangle();
 		this.default_list = new ArrayList<C>();
