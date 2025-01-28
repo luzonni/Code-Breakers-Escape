@@ -8,12 +8,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Random;
 
-import com.coffee.main.activity.game.Level;
-import com.coffee.main.activity.creator.Creator;
+import com.coffee.activity.game.Level;
+import com.coffee.activity.creator.Creator;
 
 import com.coffee.graphics.FontG;
-import com.coffee.main.activity.Activity;
-import com.coffee.main.activity.Menu;
+import com.coffee.activity.Activity;
+import com.coffee.activity.Menu;
 import com.coffee.main.sound.Sound;
 import com.coffee.ui.UserInterface;
 import com.coffee.objects.Objects;

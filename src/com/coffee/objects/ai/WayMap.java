@@ -1,6 +1,6 @@
 package com.coffee.objects.ai;
 
-import com.coffee.main.activity.game.Game;
+import com.coffee.activity.game.Game;
 import com.coffee.objects.tiles.Tile;
 
 class WayMap {

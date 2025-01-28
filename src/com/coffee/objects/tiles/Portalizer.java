@@ -2,7 +2,7 @@ package com.coffee.objects.tiles;
 
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.game.Game;
+import com.coffee.activity.game.Game;
 import com.coffee.main.tools.Timer;
 import com.coffee.objects.Variables;
 import com.coffee.objects.entity.Cleft;

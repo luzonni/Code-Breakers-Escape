@@ -1,7 +1,7 @@
 package com.coffee.ui.command;
 
 import com.coffee.main.Engine;
-import com.coffee.main.activity.game.Game;
+import com.coffee.activity.game.Game;
 
 public interface Receiver {
 

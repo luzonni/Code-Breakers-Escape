@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import com.coffee.graphics.Flip;
-import com.coffee.main.activity.game.Game;
+import com.coffee.activity.game.Game;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Variables;
 import com.coffee.objects.tiles.Tile;

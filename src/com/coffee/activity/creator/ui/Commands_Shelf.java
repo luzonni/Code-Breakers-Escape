@@ -1,4 +1,4 @@
-package com.coffee.main.activity.creator.ui;
+package com.coffee.activity.creator.ui;
 
 import java.awt.Color;
 import java.awt.Font;

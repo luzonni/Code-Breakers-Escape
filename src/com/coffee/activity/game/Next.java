@@ -1,4 +1,4 @@
-package com.coffee.main.activity.game;
+package com.coffee.activity.game;
 
 public interface Next {
 	

@@ -1,4 +1,4 @@
-package com.coffee.main.activity.creator.ui;
+package com.coffee.activity.creator.ui;
 
 import java.awt.*;
 
@@ -8,7 +8,7 @@ import com.coffee.graphics.FontG;
 import com.coffee.items.Item;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.creator.Creator;
+import com.coffee.activity.creator.Creator;
 import com.coffee.main.tools.Responsive;
 import com.coffee.objects.Objects;
 import com.coffee.objects.entity.EntityItem;
@@ -105,7 +105,6 @@ public class Shelf {
 		int size = (int)(((double)inventory.length / (double)default_inventory.length)*getResponsive().getBounds().height);
 		double a = ((double)size * ((double)(page) / (double)(inventory.length)));
 		g.fillRect(getResponsive().getBounds().x + getResponsive().getBounds().width, (int)(getResponsive().getBounds().y + a), Engine.SCALE, size);
-
 		renderTitle(X, Y, width, height, g);
 	}
 

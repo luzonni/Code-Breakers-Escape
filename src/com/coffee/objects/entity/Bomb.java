@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import com.coffee.main.Engine;
 import com.coffee.main.tools.Geometry;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.game.Game;
+import com.coffee.activity.game.Game;
 import com.coffee.objects.Variables;
 import com.coffee.objects.particles.Dust;
 import com.coffee.objects.particles.Kaboom;

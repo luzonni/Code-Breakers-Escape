@@ -1,4 +1,4 @@
-package com.coffee.main.activity.creator;
+package com.coffee.activity.creator;
 
 import java.io.File;
 import java.io.FileWriter;

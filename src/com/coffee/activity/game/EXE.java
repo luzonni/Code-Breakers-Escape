@@ -1,4 +1,4 @@
-package com.coffee.main.activity.game;
+package com.coffee.activity.game;
 
 import com.coffee.inputs.Mouse;
 import com.coffee.inputs.Mouse_Button;

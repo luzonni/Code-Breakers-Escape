@@ -1,4 +1,4 @@
-package com.coffee.main.activity.creator;
+package com.coffee.activity.creator;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -9,12 +9,12 @@ import java.util.List;
 
 import com.coffee.exceptions.ConsoleError;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.Activity;
-import com.coffee.main.activity.Menu;
-import com.coffee.main.activity.creator.frame.Framer;
-import com.coffee.main.activity.creator.ui.Commands_Shelf;
-import com.coffee.main.activity.creator.ui.Shelf;
-import com.coffee.main.activity.game.Game;
+import com.coffee.activity.Activity;
+import com.coffee.activity.Menu;
+import com.coffee.activity.creator.frame.Framer;
+import com.coffee.activity.creator.ui.Commands_Shelf;
+import com.coffee.activity.creator.ui.Shelf;
+import com.coffee.activity.game.Game;
 import com.coffee.objects.entity.EntityTag;
 import com.coffee.objects.tiles.TileTag;
 import org.json.simple.JSONArray;
@@ -25,7 +25,7 @@ import com.coffee.inputs.buttons.TextButton;
 import com.coffee.ui.command.Commands;
 import com.coffee.graphics.FontG;
 import com.coffee.items.Item;
-import com.coffee.main.activity.game.Level;
+import com.coffee.activity.game.Level;
 import com.coffee.main.Engine;
 import com.coffee.main.tools.Responsive;
 import com.coffee.objects.Camera;
@@ -80,7 +80,7 @@ public class Creator implements Activity {
 			}
 			index++;
 		}
-		Responsive res = Responsive.createPoint(Engine.UI.getMenuPosition(), -1, 30*Engine.SCALE);
+		Responsive res = Responsive.createPoint(Engine.UI.getMenuPosition(), -1, 60*Engine.SCALE);
 		inventoryTiles = new Shelf("Tiles", tiles.toArray(new Tile[0]), res, 1, 1, size);
 	}
 	
@@ -216,6 +216,10 @@ public class Creator implements Activity {
 				throw new ConsoleError("The level name not beginning");
 			}
 		}
+		if(keys[0].equalsIgnoreCase("name") && keys.length == 1) {
+			Engine.UI.getConsole().print("The level name is " + NAME, true);
+			return "";
+		}
 		return "I'm not sure what you told me...";
 	}
 
@@ -271,7 +275,7 @@ public class Creator implements Activity {
 		Selected.tick();
 		getLevel();
 		grids();
-		if(picture != null && !picture.isDrawing()) {
+		if(picture != null && !picture.isRunning()) {
 			Tile t = (Tile) inventoryTiles.getItem();
 			if(t != null)
 				Selected.set(t);
@@ -290,7 +294,7 @@ public class Creator implements Activity {
 			return;
 		MAP_TILES.tick();
 		MAP_ENTITIES.tick();
-		if(picture != null && !picture.isDrawing()) {
+		if(picture != null && !picture.isRunning()) {
 			if(getSelected() instanceof Tile) {
 				MAP_TILES.setGrid(getSelected());
 			}
@@ -313,6 +317,9 @@ public class Creator implements Activity {
 	}
 	
 	private void testeAndSaveLevel() {
+		synchronized (this) {
+			this.picture.stop();
+		}
 		Saver saver = new Saver(NAME, BUILDER, COMMANDS.toArray(new Commands[0]), MAP_TILES.getArray(), MAP_ENTITIES.getArray(), picture.getPixels(), WIDTH, HEIGHT);
 		JSONObject level_file = saver.create();
 		Engine.setActivity(new Game(new Level(level_file), () -> {
@@ -333,7 +340,11 @@ public class Creator implements Activity {
 			Engine.setActivity(new Creator(null));
 		});
 		Engine.UI.addOption("draw", ()-> {
-			picture.setDrawable(!picture.isDrawing());
+			if(!picture.isRunning()) {
+				picture.start();
+			}else {
+				picture.stop();
+			}
 		});
 		Engine.UI.addOption("try", this::testeAndSaveLevel);
 	}
@@ -347,7 +358,7 @@ public class Creator implements Activity {
 			MAP_TILES.render(g, true);
 		if(MAP_ENTITIES != null)
 			MAP_ENTITIES.render(g, false);
-		if(picture != null && !picture.isDrawing()) {
+		if(picture != null && !picture.isRunning()) {
 			inventoryTiles.render(g);
 			inventoryEntities.render(g);
 			inventoryItems.render(g);

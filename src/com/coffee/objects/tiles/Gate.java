@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import com.coffee.main.Theme;
-import com.coffee.main.activity.game.Game;
+import com.coffee.activity.game.Game;
 import com.coffee.objects.entity.Button;
 import com.coffee.objects.entity.Entity;
 

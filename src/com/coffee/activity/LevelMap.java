@@ -1,4 +1,4 @@
-package com.coffee.main.activity;
+package com.coffee.activity;
 
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
@@ -10,9 +10,9 @@ import java.util.List;
 
 import com.coffee.inputs.Mouse;
 import com.coffee.inputs.Mouse_Button;
-import com.coffee.main.activity.game.Game;
+import com.coffee.activity.game.Game;
 import com.coffee.ui.command.Receiver;
-import com.coffee.main.activity.game.Level;
+import com.coffee.activity.game.Level;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
 import com.coffee.main.tools.Geometry;

@@ -2,9 +2,9 @@ package com.coffee.objects.entity;
 
 import java.awt.Rectangle;
 
-import com.coffee.main.activity.game.Level;
+import com.coffee.activity.game.Level;
 import com.coffee.main.Engine;
-import com.coffee.main.activity.game.Game;
+import com.coffee.activity.game.Game;
 import com.coffee.objects.Directions;
 import com.coffee.objects.tiles.Tile;
 

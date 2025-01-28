@@ -1,4 +1,4 @@
-package com.coffee.main.activity.creator.frame;
+package com.coffee.activity.creator.frame;
 
 public enum Shapes {
 
@@ -18,6 +18,7 @@ public enum Shapes {
     Cancel,
     Check,
     Flag,
-    Player;
+    Player,
+    Death;
 
 }

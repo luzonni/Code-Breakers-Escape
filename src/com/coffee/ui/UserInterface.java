@@ -8,7 +8,7 @@ import com.coffee.inputs.buttons.MenuButton;
 import com.coffee.ui.command.Console;
 import com.coffee.ui.command.Receiver;
 import com.coffee.main.Engine;
-import com.coffee.main.activity.Menu;
+import com.coffee.activity.Menu;
 import com.coffee.main.tools.ActionBack;
 import com.coffee.main.tools.Responsive;
 import com.coffee.ui.win.View;

@@ -1,4 +1,4 @@
-package com.coffee.main.activity;
+package com.coffee.activity;
 
 import java.awt.Graphics2D;
 

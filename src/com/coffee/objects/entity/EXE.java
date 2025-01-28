@@ -1,7 +1,7 @@
 package com.coffee.objects.entity;
 
 import com.coffee.exceptions.ConsoleError;
-import com.coffee.main.activity.game.Game;
+import com.coffee.activity.game.Game;
 import com.coffee.objects.Variables;
 import com.coffee.objects.tiles.Tile;
 

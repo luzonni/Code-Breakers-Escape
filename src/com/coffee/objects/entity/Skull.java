@@ -8,7 +8,7 @@ import java.util.List;
 import com.coffee.graphics.Flip;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.game.Game;
+import com.coffee.activity.game.Game;
 import com.coffee.main.tools.Timer;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Variables;

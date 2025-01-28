@@ -1,4 +1,4 @@
-package com.coffee.main.activity.option;
+package com.coffee.activity.option;
 
 import com.coffee.inputs.buttons.Button;
 import com.coffee.main.Engine;

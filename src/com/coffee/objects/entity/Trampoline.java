@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import com.coffee.main.Engine;
-import com.coffee.main.activity.game.Game;
+import com.coffee.activity.game.Game;
 import com.coffee.objects.Directions;
 import com.coffee.objects.particles.Dust;
 

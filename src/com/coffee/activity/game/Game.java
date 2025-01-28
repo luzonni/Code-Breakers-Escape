@@ -1,4 +1,4 @@
-package com.coffee.main.activity.game;
+package com.coffee.activity.game;
 
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
@@ -7,8 +7,8 @@ import java.awt.Graphics2D;
 import com.coffee.inputs.Mouse;
 import com.coffee.inputs.Mouse_Button;
 import com.coffee.exceptions.Dead;
-import com.coffee.main.activity.Activity;
-import com.coffee.main.activity.LevelMap;
+import com.coffee.activity.Activity;
+import com.coffee.activity.LevelMap;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
 import com.coffee.ui.Inventory;

@@ -1,4 +1,4 @@
-package com.coffee.main.activity.game;
+package com.coffee.activity.game;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,7 +15,7 @@ import org.json.simple.parser.JSONParser;
 
 import com.coffee.ui.command.Commands;
 import com.coffee.ui.command.Receiver;
-import com.coffee.main.activity.creator.frame.Framer;
+import com.coffee.activity.creator.frame.Framer;
 import com.coffee.exceptions.Dead;
 import com.coffee.graphics.FontG;
 import com.coffee.items.Item;

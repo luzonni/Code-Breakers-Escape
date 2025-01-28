@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
-import com.coffee.main.activity.game.Game;
+import com.coffee.activity.game.Game;
 
 public class Kaboom extends Particle {
 

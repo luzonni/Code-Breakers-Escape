@@ -3,9 +3,9 @@ package com.coffee.objects.tiles;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import com.coffee.main.activity.game.Level;
+import com.coffee.activity.game.Level;
 import com.coffee.main.Engine;
-import com.coffee.main.activity.game.Game;
+import com.coffee.activity.game.Game;
 import com.coffee.objects.particles.Kaboom;
 
 public class Fake_Wall extends Tile {

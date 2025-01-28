@@ -1,18 +1,12 @@
-package com.coffee.main.activity.option;
+package com.coffee.activity.option;
 
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.coffee.inputs.Mouse;
-import com.coffee.inputs.Mouse_Button;
 import com.coffee.inputs.buttons.Button;
-import com.coffee.main.Setting;
-import com.coffee.main.Theme;
-import com.coffee.main.activity.Activity;
-import com.coffee.main.activity.Menu;
-import com.coffee.main.activity.game.Game;
-import com.coffee.objects.Camera;
+import com.coffee.activity.Activity;
+import com.coffee.activity.Menu;
 import com.coffee.ui.command.Receiver;
 import com.coffee.main.Engine;
 import com.coffee.main.tools.Responsive;

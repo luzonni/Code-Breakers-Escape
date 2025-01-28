@@ -1,4 +1,4 @@
-package com.coffee.main.activity;
+package com.coffee.activity;
 
 import java.awt.AlphaComposite;
 import java.awt.Desktop;
@@ -14,8 +14,8 @@ import java.util.List;
 import com.coffee.inputs.Mouse;
 import com.coffee.inputs.Mouse_Button;
 import com.coffee.inputs.buttons.Button;
-import com.coffee.main.activity.creator.Creator;
-import com.coffee.main.activity.option.Options;
+import com.coffee.activity.creator.Creator;
+import com.coffee.activity.option.Options;
 import com.coffee.main.sound.Musics;
 import com.coffee.main.sound.Sound;
 import com.coffee.ui.command.Receiver;
