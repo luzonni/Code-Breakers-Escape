@@ -7,6 +7,7 @@ public enum Shapes {
     Rectangle,
     Spray,
     Spray_Circle,
+    InputText,
     Arrow_Right,
     Arrow_Left,
     Arrow_Up,

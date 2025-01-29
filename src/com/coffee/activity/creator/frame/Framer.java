@@ -2,6 +2,7 @@ package com.coffee.activity.creator.frame;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 import com.coffee.inputs.Mouse;
 import com.coffee.inputs.Mouse_Button;
@@ -20,9 +21,10 @@ public class Framer implements Runnable {
     private final int Height;
 	private final Rectangle grid;
 	public BufferedImage picture;
-	public BufferedImage viewer;
-	private Graphics2D viewG;
 	private final Graphics2D drawG;
+
+	public volatile BufferedImage viewer;
+	private Graphics2D viewG;
 
 	private final Dock dock;
 	
@@ -35,11 +37,11 @@ public class Framer implements Runnable {
 		this.viewer = new BufferedImage(this.Width, this.Height, BufferedImage.TYPE_INT_ARGB);
 		this.viewG = (Graphics2D) this.viewer.getGraphics();
 		this.drawG = (Graphics2D) this.picture.getGraphics();
-		drawG.setColor(Theme.Tertiary);
-		drawG.fillRect(0, 0, Width, Height);
-		drawG.setColor(Theme.Primary);
-		drawG.drawRect(0, 0, Width-1, Height-1);
-		dock = new Dock();
+		this.drawG.setColor(Theme.Tertiary);
+		this.drawG.fillRect(0, 0, Width, Height);
+		this.drawG.setColor(Theme.Primary);
+		this.drawG.drawRect(0, 0, Width-1, Height-1);
+		this.dock = new Dock();
 	}
 
 	public boolean isRunning() {
@@ -59,11 +61,6 @@ public class Framer implements Runnable {
 		return pixels;
 	}
 
-	private void clearView() {
-		this.viewer = new BufferedImage(viewer.getWidth(), viewer.getHeight(), BufferedImage.TYPE_INT_ARGB);
-		this.viewG = (Graphics2D) viewer.getGraphics();
-	}
-	
 	public synchronized void start() {
 		this.running = true;
         new Thread(this).start();
@@ -92,20 +89,18 @@ public class Framer implements Runnable {
 		int h = grid.height * Tile.getSize();
 		return new Rectangle(center.getBounds().x - w/2, center.getBounds().y - h/2, w, h);
 	}
-	
-	private void draw() {
-		clearView();
+
+	private synchronized void draw() {
 		tick();
 		if(Engine.UI.overButtons() || dock.over())
 			return;
 		int x_d = (Mouse.getX() - getBounds().x + Creator.getCam().getX()) / Engine.SCALE;
 		int y_d = (Mouse.getY() - getBounds().y + Creator.getCam().getY()) / Engine.SCALE;
+		viewG.drawImage(picture, 0, 0, null);
 		dock.getPainter().paint(x_d, y_d, viewG);
 		if(Mouse.pressingOn(Mouse_Button.LEFT, getBounds())) {
 			dock.getPainter().paint(x_d, y_d, drawG);
 		}
-		viewG.setColor(Theme.Tertiary);
-		viewG.fillRect(this.Width/2 - (this.grid.width*16)/2, this.Height/2 - (this.grid.height*16)/2, GridBounds().width/Engine.SCALE, GridBounds().height/Engine.SCALE);
 		drawG.setColor(Theme.Tertiary);
 		drawG.fillRect(this.Width/2 - (this.grid.width*16)/2, this.Height/2 - (this.grid.height*16)/2, GridBounds().width/Engine.SCALE, GridBounds().height/Engine.SCALE);
 		drawG.setColor(Theme.Primary);
@@ -121,8 +116,10 @@ public class Framer implements Runnable {
 		int y = this.center.getBounds().y - (this.Height*Engine.SCALE)/2;
 		g.drawImage(picture, x - Creator.getCam().getX(), y - Creator.getCam().getY(), this.Width*Engine.SCALE, this.Height*Engine.SCALE, null);
 		if(isRunning()) {
-			g.drawImage(viewer, x - Creator.getCam().getX(), y - Creator.getCam().getY(), this.Width * Engine.SCALE, this.Height * Engine.SCALE, null);
-			dock.render(g);
+			synchronized (this) {
+				g.drawImage(viewer, x - Creator.getCam().getX(), y - Creator.getCam().getY(), this.Width * Engine.SCALE, this.Height * Engine.SCALE, null);
+				dock.render(g);
+			}
 		}
 	}
 
@@ -132,7 +129,6 @@ public class Framer implements Runnable {
 			try {
 				draw();
 				Thread.sleep(1);
-				System.out.println("Runnint");
 			} catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

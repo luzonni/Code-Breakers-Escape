@@ -56,7 +56,7 @@ public class TextButton extends Button {
 			return;
 		}
 		char keyChar = Caracteres == null ? Keyboard.getKeyChar() : Keyboard.getKeyChar(Caracteres);
-		if(keyChar != '?') {
+		if(keyChar != Keyboard.NONE) {
 			word.insert(index_write, keyChar);
 			//TODO trocar o som!
 			Sound.play(Sounds.Click);

@@ -52,7 +52,7 @@ public class Engine implements Runnable {
 	public static Activity ACTIVITY;
 	public static boolean ACTIVITY_RUNNING;
 	
-	public static String[] LEVELS = {"start", "2", "3"};
+	public static String[] LEVELS = {"move!", "start", "2", "3"};
 	public static int INDEX_LEVEL = 0;
 	
 	public static Random RAND;
@@ -241,7 +241,7 @@ public class Engine implements Runnable {
 					frames = 0;
 					Engine.HERTZ = Hz;
 					Hz = 0;
-					timer+=1000;
+					timer += 1000;
 				}
 				Thread.sleep(1); //Otimização de CPU ( limita a renderização ilimitada )
 			}catch(Exception e) {

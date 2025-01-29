@@ -3,10 +3,11 @@ package com.coffee.inputs;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Keyboard implements KeyListener{
+public class Keyboard implements KeyListener {
 	
 	//Instances
 	private static boolean BlockWithWriting;
+	private static boolean pressKeyboard;
 	private static boolean PressedChar;
 	private static char LastKeyChar;
 	public static Key[] Keys = {
@@ -43,7 +44,8 @@ public class Keyboard implements KeyListener{
 	private static char[] Caracteres = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
 										'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
 										'1','2','3','4','5','6','7','8','9','0','-','+','=','.','[',']','(',')','{','}',';','!','\'','@','_','\"'};
-	
+
+	public static final char NONE = '∎';
 	
 	public static void Writing(boolean writing) {
 		BlockWithWriting = writing;
@@ -77,7 +79,7 @@ public class Keyboard implements KeyListener{
 				}
 			}
 		}
-		return '?';
+		return NONE;
 	}
 	
 	public static char getKeyChar(char[] Caracteres) {
@@ -89,7 +91,11 @@ public class Keyboard implements KeyListener{
 				}
 			}
 		}
-		return '?';
+		return NONE;
+	}
+
+	public static boolean keyboardPressed() {
+		return PressedChar;
 	}
 	
 	@Override

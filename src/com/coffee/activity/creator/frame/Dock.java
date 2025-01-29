@@ -1,6 +1,8 @@
 package com.coffee.activity.creator.frame;
 
+import com.coffee.graphics.FontG;
 import com.coffee.graphics.SpriteSheet;
+import com.coffee.inputs.Keyboard;
 import com.coffee.inputs.Mouse;
 import com.coffee.inputs.Mouse_Button;
 import com.coffee.main.Engine;
@@ -21,16 +23,22 @@ class Dock {
     private final SpriteSheet sheet;
 
     private int sizeDraw;
+    private final StringBuilder drawText;
     private final Rectangle sizeDrawBounds;
 
     private final int pageSize = 6;
     private int page;
 
+    private static final char[] Caracteres = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+            'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+            '1','2','3','4','5','6','7','8','9','0','-','+','=','.','[',']','(',')','{','}',';','!','\'','@','_','\"','?','/','\\','^','<','>','#','*'};
+
     public Dock() {
         Responsive pointDock = Responsive.createPoint(null, 3, 50);
         selected = Shapes.Circle;
-        colorSelected = Theme.Secondary;
+        colorSelected = Theme.Primary;
         this.sizeDraw = 16;
+        this.drawText = new StringBuilder("Text");
         sheet = new SpriteSheet(Engine.ResPath + "/icons/shapes.png", Engine.SCALE + 1);
         buildItens();
         dockBounds = new Rectangle(getImage(0).getWidth(), getImage(0).getHeight()*pageSize);
@@ -72,12 +80,33 @@ class Dock {
             int yy = y + (int)(distance * Math.sin(angle));
             g.fillRect(xx , yy, 1, 1);
         });
+        items.put(Shapes.InputText, (int x, int y, Graphics2D g) -> {
+            Font font = FontG.font(sizeDraw);
+            g.setFont(font);
+            g.setColor(colorSelected);
+            g.drawString(this.drawText.toString(), x, y);
+            this.writeInputDrawText();
+        });
         Shapes[] shapes = Shapes.values();
-        for(int i = 5; i < shapes.length; i++) {
+        for(int i = 6; i < shapes.length; i++) {
             Shapes shape = shapes[i];
             items.put(shape, (int x, int y, Graphics2D g) -> {
                 g.drawImage(getImage(shape.ordinal()), x - sizeDraw, y - sizeDraw, sizeDraw *2, sizeDraw *2, null);
             });
+        }
+    }
+
+    private void writeInputDrawText() {
+        char key = Keyboard.getKeyChar(Caracteres);
+        System.out.println(key);
+        if(key != Keyboard.NONE) {
+            drawText.append(key);
+        }
+        if(Keyboard.KeyPressed("Space")) {
+            drawText.append(" ");
+        }
+        if(Keyboard.KeyPressed("Back_Space") && !drawText.isEmpty()) {
+            drawText.delete(drawText.length()-1, drawText.length());
         }
     }
 
@@ -95,17 +124,22 @@ class Dock {
             int p = page + scroll;
             if(p >= 0 && p + pageSize <= items.size())
                 page = p;
-        }
-        Shapes[] shapes = Shapes.values();
-        if(Mouse.On_Mouse(sizeDrawBounds)) {
+        }else {
             int scrool = Mouse.Scrool();
             if(scrool > 0 && this.sizeDraw > 2) {
                 this.sizeDraw -= 2;
             }else if(scrool < 0 && this.sizeDraw < 64) {
                 this.sizeDraw += 2;
             }
+        }
+        if(Mouse.On_Mouse(sizeDrawBounds)) {
             if(Mouse.clickOn(Mouse_Button.LEFT, sizeDrawBounds)) {
                 this.colorSelected = this.colorSelected == Theme.Primary ? Theme.Secondary : Theme.Primary;
+                if(this.colorSelected == Theme.Primary) {
+                    sheet.replaceColor(Theme.Secondary.getRGB(), Theme.Primary.getRGB());
+                }else {
+                    sheet.replaceColor(Theme.Primary.getRGB(), Theme.Secondary.getRGB());
+                }
             }
         }
     }
@@ -115,19 +149,7 @@ class Dock {
     }
 
     public void render(Graphics2D g) {
-        //renderIcon(g);
         renderDock(g);
-    }
-
-    private void renderIcon(Graphics2D g) {
-        if(!Engine.UI.overButtons() && !over()) {
-            g.setColor(colorSelected);
-            BufferedImage sprite = getImage(selected.ordinal());
-            int size = (int)((double)sizeDraw * ((double)Engine.SCALE+1.2d));
-            int x = Mouse.getX() - size/2;
-            int y = Mouse.getY() - size/2;
-            g.drawImage(sprite, x, y, size, size, null);
-        }
     }
 
     private void renderDock(Graphics2D g) {
