@@ -33,7 +33,7 @@ public class Shelf {
 	private void setList(int page_size) {
 		this.getResponsive().setSize(Tile.getSize(), Tile.getSize()*page_size);
 		if(Mouse.On_Mouse(getResponsive().getBounds())) {
-			int scroll = Mouse.Scrool();
+			int scroll = Mouse.Scroll();
 			int p = page + scroll;
 			if(p >= 0 && p + page_size <= default_inventory.length)
 				page = p;

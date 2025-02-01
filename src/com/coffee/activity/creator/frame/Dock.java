@@ -7,6 +7,7 @@ import com.coffee.inputs.Mouse;
 import com.coffee.inputs.Mouse_Button;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
+import com.coffee.main.Window;
 import com.coffee.main.tools.Responsive;
 
 import java.awt.*;
@@ -31,7 +32,7 @@ class Dock {
 
     private static final char[] Caracteres = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
             'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-            '1','2','3','4','5','6','7','8','9','0','-','+','=','.','[',']','(',')','{','}',';','!','\'','@','_','\"','?','/','\\','^','<','>','#','*'};
+            '1','2','3','4','5','6','7','8','9','0','-','+','=','.','[',']','(',')','{','}',';','!','\'','@','_','\"','?','/','\\','^','<','>','#','*',','};
 
     public Dock() {
         Responsive pointDock = Responsive.createPoint(null, 3, 50);
@@ -83,8 +84,14 @@ class Dock {
         items.put(Shapes.InputText, (int x, int y, Graphics2D g) -> {
             Font font = FontG.font(sizeDraw);
             g.setFont(font);
+            int hf = FontG.getHeight(this.drawText.toString(), font);
+            x += Engine.SCALE * 3;
+            y += hf/2;
             g.setColor(colorSelected);
-            g.drawString(this.drawText.toString(), x, y);
+            String[] lines = this.drawText.toString().split("\n");
+            for(int i = 0; i < lines.length; i++) {
+                g.drawString(lines[i], x, y + hf * i);
+            }
             this.writeInputDrawText();
         });
         Shapes[] shapes = Shapes.values();
@@ -98,12 +105,14 @@ class Dock {
 
     private void writeInputDrawText() {
         char key = Keyboard.getKeyChar(Caracteres);
-        System.out.println(key);
         if(key != Keyboard.NONE) {
             drawText.append(key);
         }
         if(Keyboard.KeyPressed("Space")) {
             drawText.append(" ");
+        }
+        if(Keyboard.KeyPressed("Enter")) {
+            drawText.append("\n");
         }
         if(Keyboard.KeyPressed("Back_Space") && !drawText.isEmpty()) {
             drawText.delete(drawText.length()-1, drawText.length());
@@ -120,15 +129,15 @@ class Dock {
 
     public void tick() {
         if(Mouse.On_Mouse(dockBounds)) {
-            int scroll = Mouse.Scrool();
+            int scroll = Mouse.Scroll();
             int p = page + scroll;
             if(p >= 0 && p + pageSize <= items.size())
                 page = p;
         }else {
-            int scrool = Mouse.Scrool();
-            if(scrool > 0 && this.sizeDraw > 2) {
+            int scroll = Mouse.Scroll();
+            if(scroll > 0 && this.sizeDraw > 2) {
                 this.sizeDraw -= 2;
-            }else if(scrool < 0 && this.sizeDraw < 64) {
+            }else if(scroll < 0 && this.sizeDraw < 64) {
                 this.sizeDraw += 2;
             }
         }
@@ -142,6 +151,11 @@ class Dock {
                 }
             }
         }
+    }
+
+    private void setCursorIcon() {
+        BufferedImage cursorIcon = sheet.getSprite(16 * selected.ordinal(), 0);
+        Engine.WINDOW.setCursor(getImage(selected.ordinal()), new Point(cursorIcon.getWidth()/2, cursorIcon.getHeight()/2));
     }
 
     public Painter getPainter() {
@@ -166,6 +180,11 @@ class Dock {
             g.drawImage(sprite, x, y, null);
             if(Mouse.clickOn(Mouse_Button.LEFT, new Rectangle(x, y, w, h))) {
                 this.selected = shape;
+                if(selected.equals(Shapes.Eraser) || selected.equals(Shapes.InputText)) {
+                    setCursorIcon();
+                }else {
+                    Engine.WINDOW.resetCursor();
+                }
             }
         }
         g.fillOval(sizeDrawBounds.x, sizeDrawBounds.y, sizeDrawBounds.width, sizeDrawBounds.height);

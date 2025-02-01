@@ -2,6 +2,7 @@ package com.coffee.main;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.io.Serial;
 
 import javax.swing.JFrame;
@@ -20,6 +21,7 @@ public class Window extends Canvas implements Runnable {
 	private final String name;
 	private Thread thread;
 	private JFrame frame;
+	private SpriteSheet cursor;
 	private final Toolkit toolkit = Toolkit.getDefaultToolkit();
 	private int C_W, C_H;
 	boolean oglEnabled = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment()
@@ -74,12 +76,11 @@ public class Window extends Canvas implements Runnable {
 			icon.replaceColor(Theme.PRIMARY, Theme.Primary.getRGB());
 			icon.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
 			icon.replaceColor(Theme.TERTIARY, Theme.Tertiary.getRGB());
-			SpriteSheet cursor = new SpriteSheet(Engine.ResPath+"/ui/cursor.png", 2);
+			cursor = new SpriteSheet(Engine.ResPath+"/ui/cursor.png", 2);
 			cursor.replaceColor(Theme.PRIMARY, Theme.Primary.getRGB());
 			cursor.replaceColor(Theme.TERTIARY, Theme.Tertiary.getRGB());
 			cursor.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
-			Cursor c = toolkit.createCustomCursor(cursor.getImage(), new Point(0,0), "cursor");
-			frame.setCursor(c);
+			setCursor(cursor.getImage());
 			frame.setIconImage(icon.getImage());
 		}catch(Exception ignore) { }
 		frame.setLocationRelativeTo(null);
@@ -87,6 +88,21 @@ public class Window extends Canvas implements Runnable {
 		createBufferStrategy(3);
 		Engine.Buffer = getBufferStrategy();
 		start();
+	}
+
+	public synchronized void setCursor(BufferedImage cursor) {
+		Cursor c = toolkit.createCustomCursor(cursor, new Point(0,0), "cursor");
+		frame.setCursor(c);
+	}
+
+	public synchronized void setCursor(BufferedImage cursor, Point pointClick) {
+		Cursor c = toolkit.createCustomCursor(cursor, pointClick, "cursor");
+		frame.setCursor(c);
+	}
+
+	public synchronized void resetCursor() {
+		Cursor c = toolkit.createCustomCursor(cursor.getImage(), new Point(0,0), "cursor");
+		frame.setCursor(c);
 	}
 	
 	private void closeFrame() {

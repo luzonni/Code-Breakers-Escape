@@ -149,7 +149,7 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 		return yClicked;
 	}
 	
-	public static int Scrool() {
+	public static int Scroll() {
 		if(scrollChanged) {
 			scrollChanged = false;
 			return scroolSide;

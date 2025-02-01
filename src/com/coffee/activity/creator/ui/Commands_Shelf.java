@@ -17,11 +17,11 @@ import com.coffee.main.tools.Responsive;
 
 public class Commands_Shelf {
 	
-	private Rectangle box_list;
-	private Rectangle box_default_list;
+	private final Rectangle box_list;
+	private final Rectangle box_default_list;
 	private C[] list;
 	private int page;
-	private List<C> default_list;
+	private final List<C> default_list;
 	
 	public Commands_Shelf(List<Commands> commands) {
 		this.box_list = new Rectangle();
@@ -53,7 +53,7 @@ public class Commands_Shelf {
 	private void createList(int list_Size) {
 		Commands[] l = Commands.values();
 		if(Mouse.On_Mouse(box_list)) {
-			int scrool = Mouse.Scrool();
+			int scrool = Mouse.Scroll();
 			int p = page + scrool;
 			if(p >= 0 && p + list_Size <= l.length)
 				page = p;

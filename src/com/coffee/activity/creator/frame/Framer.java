@@ -9,6 +9,7 @@ import com.coffee.inputs.Mouse_Button;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
 import com.coffee.activity.creator.Creator;
+import com.coffee.main.Window;
 import com.coffee.main.tools.Responsive;
 import com.coffee.objects.tiles.Tile;
 
@@ -68,6 +69,7 @@ public class Framer implements Runnable {
 	
 	public synchronized void stop() {
 		this.running = false;
+		Engine.WINDOW.resetCursor();
 	}
 	
 	public void setPixels(int[] pixels) {
