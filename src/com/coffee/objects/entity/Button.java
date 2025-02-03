@@ -2,6 +2,7 @@ package com.coffee.objects.entity;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import com.coffee.main.Theme;
 import com.coffee.activity.game.Game;
@@ -32,13 +33,27 @@ public class Button extends Entity {
 	
 	private void click(boolean bool) {
 		if(this.pressed != bool) {
-			//TODO Sound.play(Sounds.Poft); ajeitar som "poft"
 			this.pressed = bool;
 		}
+	}
+
+	private boolean allButtonsPressed() {
+		List<Entity> entities = Game.getLevel().getEntities();
+		for(int i = 0; i < entities.size(); i++) {
+			Entity e = entities.get(i);
+			if(e instanceof Button button && !button.isPressed()) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	@Override
 	public void tick() {
+		if(allButtonsPressed()) {
+			this.pressed = true;
+			return;
+		}
 		for(Entity e : Game.getLevel().getEntities())
 			if(e != this && e.collidingWith(this)) {
 				click(true);

@@ -52,7 +52,7 @@ public class Engine implements Runnable {
 	public static Activity ACTIVITY;
 	public static boolean ACTIVITY_RUNNING;
 	
-	public static String[] LEVELS = {"move!", "commands..."};
+	public static String[] LEVELS = {"move!", "commands...", "be_fast", "maze"};
 	public static int INDEX_LEVEL = 0;
 	
 	public static Random RAND;
