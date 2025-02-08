@@ -24,6 +24,7 @@ public class Blaster extends Entity {
         getOE().setDirection(direction);
         t = new Timer(1);
         setVar(Variables.Breakable, false);
+        setVar(Variables.Alive, true);
         lazer = new Lazer(getMiddle().x, getMiddle().y, getOE().getDirection());
     }
 

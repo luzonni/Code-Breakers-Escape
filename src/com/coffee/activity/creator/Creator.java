@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.coffee.exceptions.ConsoleError;
+import com.coffee.inputs.Mouse;
 import com.coffee.main.Theme;
 import com.coffee.activity.Activity;
 import com.coffee.activity.Menu;
@@ -291,6 +292,11 @@ public class Creator implements Activity {
 	
 	private void grids() {
 		if(MAP_TILES == null || MAP_ENTITIES == null)
+			return;
+		if(Mouse.On_Mouse(inventoryEntities.getResponsive().getBounds()) ||
+			Mouse.On_Mouse(inventoryItems.getResponsive().getBounds()) ||
+			Mouse.On_Mouse(inventoryTiles.getResponsive().getBounds()) ||
+			Engine.UI.overButtons() || c_b.over())
 			return;
 		MAP_TILES.tick();
 		MAP_ENTITIES.tick();

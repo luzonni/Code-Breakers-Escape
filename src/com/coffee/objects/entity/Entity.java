@@ -225,14 +225,6 @@ public abstract class Entity extends Objects {
 			Game.getLevel().addParticle(new Kaboom(getMiddle().x, getMiddle().y));
 		Game.getLevel().getEntities().remove(this);
 		Sound.play(Sounds.Die);
-		if(this instanceof Player ) {
-			new Thread(() -> {
-                try {
-                    Thread.sleep(1000);
-                	Game.restart();
-                } catch (Exception ignore) { }
-            }).start();
-		}
 	}
 
 	public void disappear() {

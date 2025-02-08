@@ -20,9 +20,10 @@ public class EntityItem extends Entity {
 		this.item = item;
 		timer[0] = new Timer(1);
 		timer[1] = new Timer(2);
-		setVar(Variables.Selectable, true);
-		setVar(Variables.Movable, true);
-		setVar(Variables.Removable, true);
+		setEffect(Variables.Alive);
+		setEffect(Variables.Selectable);
+		setEffect(Variables.Movable);
+		setEffect(Variables.Removable);
 	}
 	
 	@Override

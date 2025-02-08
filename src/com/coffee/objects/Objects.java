@@ -6,6 +6,9 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Comparator;
 
+import com.coffee.activity.game.Game;
+import com.coffee.exceptions.OutMap;
+import com.coffee.main.Engine;
 import com.coffee.ui.command.Receiver;
 import com.coffee.objects.entity.Entity;
 import com.coffee.objects.entity.EntityTag;
@@ -56,10 +59,20 @@ public abstract class Objects implements Receiver {
 	}
 	
 	public void setX(double X) {
+		if(Engine.ACTIVITY instanceof Game) {
+			Rectangle bounds = Game.getLevel().getBounds();
+			if (X < bounds.x || X > bounds.width)
+				throw new OutMap("Out bounds map");
+		}
 		this.getValues().setDouble("x", X);
 	}
 	
 	public void setY(double Y) {
+		if(Engine.ACTIVITY instanceof Game) {
+			Rectangle bounds = Game.getLevel().getBounds();
+			if(Y < bounds.y || Y > bounds.height)
+				throw new OutMap("Out bounds map");
+		}
 		this.getValues().setDouble("y", Y);
 	}
 	

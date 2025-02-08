@@ -23,7 +23,7 @@ class EXE {
         int x = (int)entity.getX() / Tile.getSize();
         int y = (int)entity.getY() / Tile.getSize();
         int x_next = Integer.parseInt(keys[1]);
-        int y_next = Integer.parseInt(keys[2]);
+        int y_next = Integer.parseInt(keys[2])*-1;
         int map_width = Game.getLevel().getBounds().width / Tile.getSize();
         int map_height = Game.getLevel().getBounds().height / Tile.getSize();
         if(x + x_next < 0 || x + x_next > map_width || y + y_next < 0 || y + y_next > map_height) {

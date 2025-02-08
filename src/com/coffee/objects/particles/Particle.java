@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import com.coffee.exceptions.OutMap;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
@@ -46,7 +47,25 @@ public abstract class Particle extends Objects {
 		}
 		return sprites;
 	}
-	
+
+	@Override
+	public void setX(double X) {
+		try {
+			super.setX(X);
+		}catch (OutMap o) {
+			this.dead();
+		}
+	}
+
+	@Override
+	public void setY(double Y) {
+		try {
+			super.setY(Y);
+		}catch (OutMap o) {
+			this.dead();
+		}
+	}
+
 	public void dead() {
 		f -= 0.02F;
 		if(f < 0) {

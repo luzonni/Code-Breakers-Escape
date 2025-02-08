@@ -5,6 +5,7 @@ import com.coffee.main.tools.Geometry;
 import com.coffee.main.Theme;
 import com.coffee.activity.game.Game;
 import com.coffee.objects.Directions;
+import com.coffee.objects.Variables;
 import com.coffee.objects.particles.Dust;
 
 import java.awt.*;
@@ -37,8 +38,8 @@ public class Lazer extends Entity {
             Entity e = entities.get(i);
             if(e == this)
                 continue;
-            if(Geometry.isRectangleBetweenPoints(e.getBounds(), pi, getMiddle())) {
-                e.kill();
+            if(Geometry.isRectangleBetweenPoints(e.getBounds(), pi, getMiddle()) && e.getVar(Variables.Alive)) {
+               e.kill();
             }
         }
         if(Engine.RAND.nextInt(100) < 20)

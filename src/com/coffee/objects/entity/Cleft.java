@@ -3,6 +3,7 @@ package com.coffee.objects.entity;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
 import com.coffee.activity.game.Game;
+import com.coffee.objects.Variables;
 import com.coffee.objects.particles.Speck;
 
 import java.awt.*;
@@ -17,6 +18,10 @@ public class Cleft extends Entity {
 
     public Cleft(int id, int x, int y) {
         super(id, x, y);
+        setEffect(Variables.Selectable);
+        setEffect(Variables.Movable);
+        setEffect(Variables.Removable);
+        setEffect(Variables.Reanimable);
     }
 
     @Override

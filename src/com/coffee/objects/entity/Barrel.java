@@ -48,7 +48,7 @@ public class Barrel extends Entity {
         List<Entity> entities = Game.getLevel().getEntities();
         for(int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
-            if(e == this) // Mesma entidade
+            if(e == this || !e.getVar(Variables.Alive)) // Mesma entidade
                 continue;
             if(e.collidingWith(this))  // Caso o barril esteja sobre alguma entidade
                 overEntity = true;

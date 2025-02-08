@@ -3,13 +3,17 @@ package com.coffee.objects.entity;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import com.coffee.activity.game.Game;
 import com.coffee.inputs.Keyboard;
 import com.coffee.graphics.Flip;
 import com.coffee.graphics.SpriteSheet;
 import com.coffee.main.Engine;
 import com.coffee.main.Theme;
+import com.coffee.main.sound.Sound;
+import com.coffee.main.sound.Sounds;
 import com.coffee.objects.Directions;
 import com.coffee.objects.Variables;
+import com.coffee.objects.particles.Kaboom;
 
 public class Player extends Entity {
 	
@@ -54,6 +58,20 @@ public class Player extends Entity {
 		}
 		keyDirection();
 		getOE().slide(getSpeed());
+	}
+
+	@Override
+	public void kill() {
+		for(int i = 0; i < 40; i++)
+			Game.getLevel().addParticle(new Kaboom(getMiddle().x, getMiddle().y));
+		Game.getLevel().getEntities().remove(this);
+		Sound.play(Sounds.Die);
+		new Thread(() -> {
+			try {
+				Thread.sleep(1000);
+				Game.restart();
+			} catch (Exception ignore) { }
+		}).start();
 	}
 	
 	private void keyDirection() {

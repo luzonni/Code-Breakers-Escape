@@ -73,7 +73,6 @@ public class SpriteSheet {
 				g.setColor(Color.magenta);
 				g.fillRect(x*16 - 8, y*16 - 8, 8, 8);
 			}
-				
 		return img;
 	}
 	

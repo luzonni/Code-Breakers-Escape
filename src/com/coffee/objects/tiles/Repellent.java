@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.coffee.main.Theme;
 import com.coffee.activity.game.Game;
+import com.coffee.objects.Variables;
 import com.coffee.objects.entity.Entity;
 
 public class Repellent extends Tile {
@@ -16,6 +17,7 @@ public class Repellent extends Tile {
 		super(id, x, y);
 		if(sprite == null)
 			sprite = getSprite("repellent", Theme.Primary)[0];
+		setVar(Variables.Breakable, true);
 	}
 
 	@Override
@@ -28,7 +30,7 @@ public class Repellent extends Tile {
 		List<Entity> entities = Game.getLevel().getEntities();
 		for(int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
-			if(this.collidingWith(entity)) {
+			if(entity.getOE().overTile() == this) {
 				entity.getOE().setDirection(entity.getOE().getReverse());
 			}
 		}

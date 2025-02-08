@@ -4,6 +4,7 @@ import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 
+import com.coffee.exceptions.OutMap;
 import com.coffee.inputs.Mouse;
 import com.coffee.inputs.Mouse_Button;
 import com.coffee.exceptions.Dead;
@@ -104,7 +105,11 @@ public class Game implements Activity {
 	}
 	
 	public void tick() {
-		level.tick();
+		try {
+			level.tick();
+		}catch (OutMap o) {
+			restart();
+		}
 		if(Mouse.pressing(Mouse_Button.SCROOL)) {
 			int x = lastX_mouse - Mouse.getX();
 			int y = lastY_mouse - Mouse.getY();
