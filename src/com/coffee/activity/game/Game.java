@@ -125,12 +125,14 @@ public class Game implements Activity {
 	public static void start(Level level) {
 		Engine.setActivity(new Game(level, () -> {
 			Level nextLevel = null;
-			for(int i = 0; i < Engine.LEVELS.length; i++) 
-				if(Engine.LEVELS[i].equalsIgnoreCase(level.getName()) && i + 1 < Engine.LEVELS.length) {
-					nextLevel = new Level(Engine.LEVELS[i+1]);
-					Engine.INDEX_LEVEL = i+1;
+			for(int i = 0; i < Engine.LEVELS.length; i++) {
+				String currentLevelName = Engine.LEVELS[i].replace("_", " ");
+				if (currentLevelName.equalsIgnoreCase(level.getName()) && i + 1 < Engine.LEVELS.length) {
+					nextLevel = new Level(Engine.LEVELS[i + 1]);
+					Engine.INDEX_LEVEL = i + 1;
 					break;
 				}
+			}
 			if(nextLevel != null) 
 				Game.start(nextLevel);
 			else 
@@ -153,11 +155,10 @@ public class Game implements Activity {
 	
 	private void f() {
 		if(change) {
-			f += 0.02;
+			f += 0.02f;
 		}else {
-			f -= 0.02;
+			f -= 0.02f;
 		}
-		
 		if(f > 1f) {
 			f = 1f;
 			change = false;

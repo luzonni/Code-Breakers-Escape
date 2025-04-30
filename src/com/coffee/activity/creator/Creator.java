@@ -62,6 +62,11 @@ public class Creator implements Activity {
 	private Grid MAP_TILES; 
 	private Grid MAP_ENTITIES;
 	private int WIDTH, HEIGHT;
+
+	private final char[] nums = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+	private final char[] chars = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+			'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+			'1','2','3','4','5','6','7','8','9','0'};
 	
 	public Creator(JSONObject level) {
 		this.level = level;
@@ -238,14 +243,13 @@ public class Creator implements Activity {
 		}
 	}
 
-	private final char[] cs = new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 	private void getLevel() {
 		if(sizes == null)
 			return;
-		NAME = name_sublime.readText(null);
+		NAME = name_sublime.readText(chars);
 		BUILDER = name_builder.readText(null);
-		String string_w = sizes[0].readText(cs);
-		String string_h = sizes[1].readText(cs);
+		String string_w = sizes[0].readText(nums);
+		String string_h = sizes[1].readText(nums);
 		if(string_w == "" || string_h == "")
 			return;
 		int w = Integer.parseInt(string_w);

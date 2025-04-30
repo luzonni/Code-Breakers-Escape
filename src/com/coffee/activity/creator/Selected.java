@@ -29,9 +29,9 @@ class Selected {
 	
 	public void tick() {
 		if(change) 
-			f += 0.02;
+			f += 0.02f;
 		else 
-			f -= 0.02;
+			f -= 0.02f;
 		if(f > 1f) {
 			f = 1f;
 			change = false;

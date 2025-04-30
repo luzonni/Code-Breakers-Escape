@@ -51,7 +51,6 @@ public class LevelMap implements Activity, Receiver {
 				VolatileLevel vl = levels[i];
 				if(!vl.isBlocked()) {
 					newList.add(vl);
-					continue;
 				}else {
 					newList.add(vl);
 					break;

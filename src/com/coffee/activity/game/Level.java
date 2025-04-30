@@ -97,12 +97,11 @@ public class Level implements Receiver {
 	
 	public static JSONObject getLevel(File level_file) {
 		try {
-			InputStream istream = new FileInputStream(level_file);
-			Reader isr = new InputStreamReader(istream);
+			InputStream stream = new FileInputStream(level_file);
+			Reader isr = new InputStreamReader(stream);
 			JSONParser parse = new JSONParser();
 			parse.reset();
-			JSONObject Json = (JSONObject) parse.parse(isr);
-			return Json;
+			return (JSONObject) parse.parse(isr);
 		}catch (Exception e) {
 			
 		}

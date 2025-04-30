@@ -62,6 +62,7 @@ public class Ant extends Entity {
 	@Override
 	public void render(Graphics2D g) {
 		renderEntity(getSprite(), g);
+		//ai.render(g);
 	}
 	
 	@Override
