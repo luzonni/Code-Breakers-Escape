@@ -15,7 +15,7 @@ public abstract class FontG {
 	
 	public static void addFont(String name) {
 		try {
-			stream = ClassLoader.getSystemClassLoader().getResourceAsStream("com/coffee/res/ui/" + name + ".ttf");
+			stream = ClassLoader.getSystemClassLoader().getResourceAsStream("com/coffee/resources/ui/" + name + ".ttf");
 			font = Font.createFont(Font.TRUETYPE_FONT, stream);
 		} catch (FontFormatException | IOException e) {
 			System.out.println("ERROR!");

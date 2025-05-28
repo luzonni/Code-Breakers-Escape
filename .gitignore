@@ -1,10 +1,11 @@
 out/
 config.json
 .idea
-config.json
-res/META-INF
+.vscode
+config.jsonres/META-INF
 bin/
 Project
 TODO
 created
 backupClasses
+Code Break's Ecape.iml

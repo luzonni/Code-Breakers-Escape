@@ -39,7 +39,7 @@ public class Engine implements Runnable {
 	public static final int SCALE = 3;
 	public static final int[][] resolutions = {{1280, 720}, {1366, 768}, {1600, 900}, {1920, 1080}, {2560, 1440}, {3840, 2160}};
 
-	public static final String ResPath = "/com/coffee/res";
+	public static final String ResPath = "/com/coffee/resources";
 	public static final String GameTag = "Code Break's Escape";
 	public static double MaxFrames = 60;
 	
