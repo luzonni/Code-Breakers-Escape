@@ -1,6 +1,7 @@
 out/
 config.json
 .idea
+.vscode
 config.json
 res/META-INF
 bin/

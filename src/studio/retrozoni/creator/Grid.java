@@ -1,0 +1,126 @@
+package studio.retrozoni.creator;
+
+import studio.retrozoni.engine.inputs.Mouse;
+import studio.retrozoni.engine.inputs.Mouse_Button;
+import studio.retrozoni.engine.Engine;
+import studio.retrozoni.engine.Theme;
+import studio.retrozoni.engine.sound.Sound;
+import studio.retrozoni.engine.sound.Sounds;
+import studio.retrozoni.engine.tools.Responsive;
+import studio.retrozoni.game.objects.Objects;
+import studio.retrozoni.game.objects.tiles.Tile;
+
+import java.awt.*;
+
+class Grid {
+
+	private final Objects[] Grid;
+	private final int Width, Height;
+
+	private int lastX_mouse, lastY_mouse;
+	
+	public Grid(Objects[] Grid, int Width, int Height) {
+		this.Grid = Grid;
+		this.Width = Width;
+		this.Height = Height;
+	}
+	
+	public void tick() {
+		move();
+	}
+	
+	private void move() {
+		if(Grid != null)
+			if(Mouse.pressing(Mouse_Button.SCROOL)) {
+				int x = lastX_mouse - Mouse.getX();
+				int y = lastY_mouse - Mouse.getY();
+				Creator.getCam().setPosition(x, y);
+			}else {
+				lastX_mouse = Mouse.getX() + Creator.getCam().getX();
+				lastY_mouse = Mouse.getY() + Creator.getCam().getY();
+			}
+	}
+	
+	public void setGrid(Objects object) {
+		Responsive center = Creator.getCenter();
+		int X = center.getPosition().x;
+		int Y = center.getPosition().y;
+		int w = Width * Tile.getSize();
+		int h = Height * Tile.getSize();
+		int xx = X - w/2;
+		int yy = Y - h/2;
+		for(int y = 0; y < Height; y++) {
+			for(int x = 0; x < Width; x++) {
+				int px = xx + x * Tile.getSize() + Engine.SCALE;
+				int py = yy + y * Tile.getSize() + Engine.SCALE;
+				if(Mouse.pressingOnMap(Mouse_Button.LEFT, new Rectangle(px, py, Tile.getSize(), Tile.getSize()), Creator.getCam()))
+					if(Grid[x+y*Width] == null) {
+						Grid[x+y*Width] = object;
+						Sound.play(Sounds.Place);
+					}
+			}
+		}
+	}
+	
+	public Rectangle getBounds() {
+		Responsive center = Creator.getCenter();
+		int w = Width * Tile.getSize();
+		int h = Height * Tile.getSize();
+		int x = center.getPosition().x - w/2;
+		int y = center.getPosition().y - h/2;
+		return new Rectangle(x - Creator.getCam().getX(), y - Creator.getCam().getY(), w, h);
+	}
+	
+	public Objects[] getArray() {
+		return this.Grid;
+	}
+	
+	public void clearGrid() {
+		Responsive center = Creator.getCenter();
+		int X = center.getPosition().x;
+		int Y = center.getPosition().y;
+		int w = Width * Tile.getSize();
+		int h = Height * Tile.getSize();
+		int xx = X - w/2;
+		int yy = Y - h/2;
+		for(int y = 0; y < Height; y++) {
+			for(int x = 0; x < Width; x++) {
+				int px = xx + x * Tile.getSize() + Engine.SCALE;
+				int py = yy + y * Tile.getSize() + Engine.SCALE;
+				if(Grid[x+y*Width] != null) {
+					if(Mouse.clickOnMap(Mouse_Button.RIGHT, new Rectangle(px, py, Tile.getSize(), Tile.getSize()), Creator.getCam())) {
+						Grid[x+y*Width] = null;
+						Sound.play(Sounds.Clear);
+						return;
+					}
+				}
+			}
+		}
+	}
+	
+	public void render(Graphics2D g, boolean renderGrid) {
+		if(Grid == null)
+			return;
+		Responsive center = Creator.getCenter();
+		int X = center.getPosition().x - Creator.getCam().getX();
+		int Y = center.getPosition().y - Creator.getCam().getY();
+		int w = Width * Tile.getSize();
+		int h = Height * Tile.getSize();
+		int xx = X - w/2;
+		int yy = Y - h/2;
+		for(int y = 0; y < Height; y++) {
+			for(int x = 0; x < Width; x++) {
+				g.setColor(new Color(Theme.Secondary.getRed(), Theme.Secondary.getGreen(), Theme.Secondary.getBlue(), 60));
+				int px = xx + x * Tile.getSize() + Engine.SCALE;
+				int py = yy + y * Tile.getSize() + Engine.SCALE;
+				if(renderGrid)
+					g.fillRect(px, py, Tile.getSize() - 2*Engine.SCALE, Tile.getSize() - 2*Engine.SCALE);
+				if(Grid[x+y*Width] != null)
+					g.drawImage(Grid[x+y*Width].getSprite(), px , py, null);
+				
+			}
+		}
+		
+	}
+
+}

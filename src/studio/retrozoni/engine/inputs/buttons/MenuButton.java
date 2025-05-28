@@ -1,0 +1,107 @@
+package studio.retrozoni.engine.inputs.buttons;
+
+import studio.retrozoni.engine.graphics.SpriteSheet;
+import studio.retrozoni.engine.inputs.Mouse;
+import studio.retrozoni.engine.Engine;
+import studio.retrozoni.engine.Theme;
+import studio.retrozoni.engine.tools.ActionBack;
+import studio.retrozoni.engine.tools.Responsive;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MenuButton extends Button {
+	
+	private List<ActionButton> actionButtons;
+	private boolean showing = true;
+	private BufferedImage icon[];
+	private int indexAnim;
+	private int size;
+	
+	public MenuButton(int x_per, int y_per, Responsive parent, int size) {
+		super("Menu", x_per, y_per, parent, size);
+		this.size = size;
+		icon = buildIcon();
+		getResponsive().setSize(icon[0].getWidth(), icon[0].getHeight());
+		actionButtons = new ArrayList<ActionButton>();
+	}
+	
+	private BufferedImage[] buildIcon() {
+		SpriteSheet sp = new SpriteSheet(Engine.ResPath+"/ui/menubutton.png", Engine.SCALE);
+		sp.replaceColor(Theme.PRIMARY, Theme.Primary.getRGB());
+		sp.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
+		sp.replaceColor(Theme.TERTIARY, Theme.Tertiary.getRGB());
+		BufferedImage[] icons = new BufferedImage[sp.getWidth()/10];
+		for(int i = 0; i < icons.length; i++) {
+			icons[i] = sp.getSprite(i*10, 0, 10, 10);
+		}
+		return icons;
+	}
+	
+	public void addOption(String name, ActionBack action) {
+		Responsive res = getResponsive();
+		if(!actionButtons.isEmpty()) 
+			res = actionButtons.get(actionButtons.size()-1).getResponsive();
+		ActionButton acb = new ActionButton(name, Engine.SCALE *3, 0, res, Engine.SCALE * size, action);
+		actionButtons.add(acb);
+	}
+
+	public void clearOption() {
+		this.actionButtons.clear();
+	}
+	
+	public boolean overMenu() {
+		if(Mouse.On_Mouse(getBounds()))
+			return true;
+		if(this.showing)
+			for(int i = 0; i < actionButtons.size(); i++)
+				if(Mouse.On_Mouse(actionButtons.get(i).getBounds()))
+					return true;
+		return false;
+	}
+
+	public void hide() {
+		this.showing = false;
+	}
+	
+	@Override
+	public boolean function() {
+		anim();
+		if(showing) {
+			for(int i = 0; i < actionButtons.size(); i++) {
+				ActionButton acb = actionButtons.get(i);
+				if(acb.function()) {
+					acb.action();
+				}
+			}
+		}
+		if(super.function()) {
+			this.showing = !this.showing;
+		}
+		return super.function();
+	}
+	
+	private void anim() {
+		if(showing) {
+			if(indexAnim < icon.length-1)
+				indexAnim++;
+		}else {
+			if(indexAnim > 0)
+				indexAnim--;
+		}
+	}
+	
+	@Override
+	public void render(Graphics2D g) {
+		g.drawImage(icon[indexAnim], getBounds().x, getBounds().y, null);
+		if(showing) {
+			for(int i = 0; i < actionButtons.size(); i++) {
+				actionButtons.get(i).render(g);
+			}
+		}
+		
+	}
+	
+}
