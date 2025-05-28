@@ -2,7 +2,7 @@ package studio.retrozoni.activities.game.objects.particles;
 
 import studio.retrozoni.activities.game.Game;
 import studio.retrozoni.engine.exceptions.OutMap;
-import studio.retrozoni.engine.graphics.SpriteSheet;
+import studio.retrozoni.engine.graphics.sprites.SpriteSheet;
 import studio.retrozoni.engine.Engine;
 import studio.retrozoni.engine.Theme;
 import studio.retrozoni.activities.game.objects.Objects;
@@ -28,22 +28,10 @@ public abstract class Particle extends Objects {
 	public String giveCommand(String[] keys) {
 		return null;
 	}
-	
+
 	@Override
-	public BufferedImage getSprite() {
-		return null;
-	}
-	
-	protected BufferedImage[] getSprite(String name, Color color) {
-		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/particles/"+name+".png", Engine.SCALE);
-		spriteSheet.replaceColor(0xffffffff, color.getRGB());
-		spriteSheet.replaceColor(0xff000000, Theme.Tertiary.getRGB());
-		int lenght = (spriteSheet.getWidth())/16;
-		BufferedImage[] sprites = new BufferedImage[lenght];
-		for(int i = 0; i < lenght; i++) {
-			sprites[i] = spriteSheet.getSprite(i*(16), 0, 16, 16);
-		}
-		return sprites;
+	protected void loadSprite(String name) {
+		loadSprites("particles", name);
 	}
 
 	@Override

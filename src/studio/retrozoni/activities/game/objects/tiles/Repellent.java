@@ -11,18 +11,10 @@ import java.util.List;
 
 public class Repellent extends Tile {
 	
-	public static BufferedImage sprite;
-
 	public Repellent(int id, int x, int y) {
 		super(id, x, y);
-		if(sprite == null)
-			sprite = getSprite("repellent", Theme.Primary)[0];
+		loadSprite("repellent");
 		setVar(Variables.Breakable, true);
-	}
-
-	@Override
-	public BufferedImage getSprite() {
-		return sprite;
 	}
 
 	@Override
@@ -35,15 +27,10 @@ public class Repellent extends Tile {
 			}
 		}
 	}
-
-	@Override
-	public void render(Graphics2D g) {
-		renderTile(sprite, g);
-	}
 	
 	@Override
 	public void dispose() {
-		sprite = null;
+
 	}
 
 }

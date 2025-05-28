@@ -5,7 +5,7 @@ import studio.retrozoni.activities.levels.LevelMap;
 import studio.retrozoni.activities.options.Options;
 import studio.retrozoni.engine.Activity;
 import studio.retrozoni.engine.graphics.FontHandler;
-import studio.retrozoni.engine.graphics.SpriteSheet;
+import studio.retrozoni.engine.graphics.sprites.SpriteSheet;
 import studio.retrozoni.engine.inputs.Mouse;
 import studio.retrozoni.engine.inputs.Mouse_Button;
 import studio.retrozoni.engine.inputs.buttons.Button;

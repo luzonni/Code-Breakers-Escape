@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
-public class Flip {
+public class SpriteHandler {
 	
 	public static BufferedImage Horizontal(BufferedImage image) {
 		return createFlippedY(image);

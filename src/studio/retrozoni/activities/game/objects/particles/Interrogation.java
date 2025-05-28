@@ -9,14 +9,11 @@ import java.awt.image.BufferedImage;
 
 public class Interrogation extends Particle {
 	
-	private static BufferedImage sprite;
-	
 	public Interrogation(int x, int y) {
 		super(x, y);
-		if(sprite == null)
-			sprite = getSprite("interrogation", Theme.Primary)[0].getSubimage(0, 0, 5*Engine.SCALE, 9*Engine.SCALE);
-		setSize(sprite.getWidth(), sprite.getHeight());
-		setX(getX() - (Tile.getSize()/4 - Engine.RAND.nextInt(Tile.getSize()/2)));
+		loadSprite("interrogation");
+		setSize(getSprite().getWidth(), getSprite().getHeight());
+		setX(getX() - (Tile.getSize()/4d - Engine.RAND.nextInt(Tile.getSize()/2)));
 		setY(getY());
 	}
 
@@ -27,13 +24,13 @@ public class Interrogation extends Particle {
 
 	@Override
 	public void tick() {
-		setY(getY() - 1*Engine.SCALE);
+		setY(getY() - 1d*Engine.SCALE);
 		dead();
 	}
 
 	@Override
 	public void render(Graphics2D g) {
-		renderParticle(sprite, g);
+		renderParticle(getSprite(), g);
 	}
 
 }

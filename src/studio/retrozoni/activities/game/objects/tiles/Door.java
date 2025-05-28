@@ -3,6 +3,7 @@ package studio.retrozoni.activities.game.objects.tiles;
 import studio.retrozoni.activities.game.Game;
 import studio.retrozoni.activities.game.items.Item;
 import studio.retrozoni.activities.game.items.Key;
+import studio.retrozoni.engine.Engine;
 import studio.retrozoni.engine.Theme;
 import studio.retrozoni.activities.game.objects.entity.Player;
 
@@ -10,28 +11,20 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Door extends Tile {
-
-	private static BufferedImage[] sprite;
 	
 	public Door(int id, int x, int y) {
 		super(id, x, y);
-		if(sprite == null) {
-			sprite = getSprite("door", Theme.Primary);
-		}
+		loadSprite("door");
 		this.setSolid(true);
 	}
 	
 	public void open() {
 		this.setSolid(false);
 	}
-	
-	@Override
-	public BufferedImage getSprite() {
-		return sprite[isSolid() ? 0 : 1];
-	}
-	
+
 	@Override
 	public void tick() {
+		getSheet().setIndex(isSolid() ? 0 : 1);
 		Player p = Game.getPlayer();
 		if(this.isSolid() && p.getOE().nextTile() == this) 
 			for(Item item : Game.getInventory().getList())
@@ -43,13 +36,14 @@ public class Door extends Tile {
 
 	@Override
 	public void render(Graphics2D g) {
-		renderTile(Floor.sprite[Floor.index], g);
+		BufferedImage spriteFloor = Engine.sheetHolder.getSheet("tiles", "floot").getSprite();
+		renderTile(spriteFloor, g);
 		renderTile(getSprite(), g);
 	}
 	
 	@Override
 	public void dispose() {
-		sprite = null;
+
 	}
 
 }

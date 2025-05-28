@@ -1,7 +1,7 @@
 package studio.retrozoni.activities.game.objects.entity;
 
 import studio.retrozoni.activities.game.Game;
-import studio.retrozoni.engine.graphics.Flip;
+import studio.retrozoni.engine.graphics.SpriteHandler;
 import studio.retrozoni.engine.Engine;
 import studio.retrozoni.engine.tools.Geometry;
 import studio.retrozoni.activities.game.objects.Directions;
@@ -47,7 +47,7 @@ public class Worm extends Entity {
 
     @Override
     public BufferedImage getSprite() {
-        return Flip.Rotate(Flip.Vertical(sprites[0]), (int)Math.toDegrees(this.radians));
+        return SpriteHandler.Rotate(SpriteHandler.Vertical(sprites[0]), (int)Math.toDegrees(this.radians));
     }
 
     @Override

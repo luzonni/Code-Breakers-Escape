@@ -1,4 +1,4 @@
-package studio.retrozoni.engine.graphics;
+package studio.retrozoni.engine.graphics.sprites;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -33,11 +33,10 @@ public class SpriteSheet {
 	public BufferedImage replaceColor(int c1, int c2) {
 		int w = spritesheet.getWidth();
 		int h = spritesheet.getHeight();
-		int rgb[] = spritesheet.getRGB(0, 0, w, h, null, 0, w);
+		int[] rgb = spritesheet.getRGB(0, 0, w, h, null, 0, w);
 		for(int i = 0; i < rgb.length; i++)
 			if(rgb[i] == c1)
 				rgb[i] = c2;
-//		BufferedImage newSprite = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 		spritesheet.setRGB(0, 0, w, h, rgb, 0, w);
 		return spritesheet;
 	}

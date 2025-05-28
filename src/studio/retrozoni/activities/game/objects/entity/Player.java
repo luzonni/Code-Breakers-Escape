@@ -1,11 +1,10 @@
 package studio.retrozoni.activities.game.objects.entity;
 
 import studio.retrozoni.activities.game.Game;
-import studio.retrozoni.engine.graphics.Flip;
-import studio.retrozoni.engine.graphics.SpriteSheet;
+import studio.retrozoni.engine.graphics.SpriteHandler;
+import studio.retrozoni.engine.graphics.sprites.Sprites;
 import studio.retrozoni.engine.inputs.Keyboard;
 import studio.retrozoni.engine.Engine;
-import studio.retrozoni.engine.Theme;
 import studio.retrozoni.engine.sound.Sound;
 import studio.retrozoni.engine.sound.Sounds;
 import studio.retrozoni.activities.game.objects.Directions;
@@ -16,28 +15,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
-	
-	private BufferedImage[][] sprite;
+
 	private boolean collide;
-	private int indexAnim;
 	private int ticksAnim = 0;
-	
-	private void buildSprites() {
-		SpriteSheet sp = new SpriteSheet(Engine.ResPath+"/entity/Player.png", Engine.SCALE);
-		sp.replaceColor(0xffffffff, Theme.Primary.getRGB());
-		sp.replaceColor(0xff000000, Theme.Tertiary.getRGB());
-		sprite = new BufferedImage[2][7];
-		for(int i = 0; i < sprite[0].length; i++) {
-			sprite[0][i] = sp.getSprite(i*16, 0);
-		}
-		for(int i = 0; i < sprite[1].length; i++) {
-			sprite[1][i] = sp.getSprite(i*16, 16);
-		}
-	}
 	
 	public Player(int id, int x, int y, Directions direction) {
 		super(id, x, y);
-		buildSprites();
+		loadSprite("player");
 		getValues().addInt("speed", Engine.SCALE * 8);
 		setDepth(3);
 		setVar(Variables.Alive, true);
@@ -51,10 +35,7 @@ public class Player extends Entity {
 		ticksAnim++;
 		if(ticksAnim > 7) {
 			ticksAnim = 0;
-			indexAnim++;
-		}
-		if(indexAnim > sprite[getOE().colliding(getOE().getDirection()) ? 0 : 1].length - 1) {
-			indexAnim = 0;
+			getSheet().plusIndex();
 		}
 		keyDirection();
 		getOE().slide(getSpeed());
@@ -128,10 +109,10 @@ public class Player extends Entity {
 		String message = super.giveCommand(values);
 		
 		switch (values[0]) {
-		case "speed", "Speed": 
-			setSpeed(Integer.parseInt(values[1]));
-			message = "Speed change to " + values[1];
-			break;
+			case "speed", "Speed":
+				setSpeed(Integer.parseInt(values[1]));
+				message = "Speed change to " + values[1];
+				break;
 		}
 		return message;
 	}
@@ -146,20 +127,22 @@ public class Player extends Entity {
 	
 	@Override
 	public BufferedImage getSprite() {
-		return sprite[0][indexAnim];
+		int state = getOE().colliding(getOE().getDirection()) ? 0 : 1;
+		getSheet().setState(state);
+		return getSheet().getSprite();
 	}
 	
 	public BufferedImage Sprite() {
-		BufferedImage image = sprite[getOE().colliding(getOE().getDirection()) ? 0 : 1][indexAnim];
+		BufferedImage image = getSprite();
 		switch (getOE().getDirection()) {
 		case Up: 
-			image = Flip.Horizontal(image);
+			image = SpriteHandler.Horizontal(image);
 			break;
 		case Right:
-			image = Flip.Rotate(image, -90);
+			image = SpriteHandler.Rotate(image, -90);
 			break;
 		case Left:
-			image = Flip.Rotate(image, 90);
+			image = SpriteHandler.Rotate(image, 90);
 			break;
 		default:
 			break;

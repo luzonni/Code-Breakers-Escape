@@ -1,9 +1,12 @@
 package studio.retrozoni.engine;
 
+import org.json.simple.JSONObject;
 import studio.retrozoni.activities.menu.Menu;
 import studio.retrozoni.activities.creator.Creator;
 import studio.retrozoni.activities.game.Level;
 import studio.retrozoni.engine.graphics.FontHandler;
+import studio.retrozoni.engine.graphics.sprites.SheetHolder;
+import studio.retrozoni.engine.io.Resources;
 import studio.retrozoni.engine.sound.Sound;
 import studio.retrozoni.activities.game.objects.Objects;
 import studio.retrozoni.engine.ui.UserInterface;
@@ -34,7 +37,8 @@ public class Engine implements Runnable {
 	public static final String ResPath = "/studio/retrozoni/resources";
 	public static final String GameTag = "Code Break's Escape";
 	public static double MaxFrames = 60;
-	
+
+	public static SheetHolder sheetHolder;
 	public static Window WINDOW;
 	public static UserInterface UI;
 	private static BufferedImage[] NOISE;
@@ -54,16 +58,24 @@ public class Engine implements Runnable {
 	}
 
 	public Engine(String[] args) {
+		FontHandler.loadFont("septem");
+		Sound.load();
 		Engine.SETTINGS = new Setting();
 		Engine.THEME = new Theme();
-		FontHandler.addFont("septem");
-		Sound.load();
+		THEME.update();
 		RAND = new Random();
+
+		try {
+			JSONObject handler = Resources.getJsonFile("/studio/retrozoni/resources/sheets", "handler");
+			Engine.sheetHolder = new SheetHolder(handler);
+		}catch (Exception e) {
+			System.err.println("Erro ao carregar o handler do sheetHandler");
+			e.printStackTrace();
+		}
 		start(args);
     }
 
 	public synchronized void start(String[] levelName) {
-		THEME.update();
 		WINDOW = new Window(GameTag + " / The Universe");
 		UI = new UserInterface();
 		if(levelName != null && levelName.length > 0 && !levelName[0].isBlank()) {
@@ -75,7 +87,7 @@ public class Engine implements Runnable {
 		UI.setReceiver(ACTIVITY);
 		
 		thread = new Thread(this, "Thread - Game");
-		isRunning = true;
+		Engine.isRunning = true;
 		thread.start();
 	}
 	

@@ -1,7 +1,7 @@
 package studio.retrozoni.activities.game.objects.tiles;
 
 import studio.retrozoni.activities.game.Game;
-import studio.retrozoni.engine.graphics.SpriteSheet;
+import studio.retrozoni.engine.graphics.sprites.SpriteSheet;
 import studio.retrozoni.engine.Engine;
 import studio.retrozoni.engine.Theme;
 import studio.retrozoni.activities.game.objects.Objects;
@@ -77,30 +77,9 @@ public abstract class Tile extends Objects {
 		this.setSize(getSize(), getSize());
 	}
 
-	public BufferedImage[] getSprite(String name, Color color) {
-		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath + "/tiles/" + name + ".png", Engine.SCALE);
-		spriteSheet.replaceColor(Theme.PRIMARY, color.getRGB());
-		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
-		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Tertiary.getRGB());
-		int length = spriteSheet.getWidth()/16;
-		BufferedImage[] sprites = new BufferedImage[length];
-		for(int i = 0; i < length; i++) {
-			sprites[i] = spriteSheet.getSprite(i*(16), 0, 16, 16);
-		}
-		return sprites;
-	}
-	
-	public BufferedImage[] getSprite(String name, Color color, int verticalIndex) {
-		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath + "/tiles/" + name + ".png", Engine.SCALE);
-		spriteSheet.replaceColor(Theme.PRIMARY, color.getRGB());
-		spriteSheet.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
-		spriteSheet.replaceColor(Theme.TERTIARY, Theme.Tertiary.getRGB());
-		int length = (spriteSheet.getWidth())/16;
-		BufferedImage[] sprites = new BufferedImage[length];
-		for(int i = 0; i < length; i++) {
-			sprites[i] = spriteSheet.getSprite(i*(16), 16*verticalIndex, 16, 16);
-		}
-		return sprites;
+	@Override
+	protected void loadSprite(String name) {
+		loadSprites("tiles", name);
 	}
 
 	public boolean isSolid() {

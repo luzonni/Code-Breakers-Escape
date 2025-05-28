@@ -1,7 +1,7 @@
 package studio.retrozoni.activities.game.objects.entity;
 
 import studio.retrozoni.activities.game.Game;
-import studio.retrozoni.engine.graphics.Flip;
+import studio.retrozoni.engine.graphics.SpriteHandler;
 import studio.retrozoni.activities.game.objects.Directions;
 import studio.retrozoni.activities.game.objects.Variables;
 import studio.retrozoni.activities.game.objects.tiles.Tile;
@@ -71,7 +71,7 @@ public class Fish extends Entity {
 	public void render(Graphics2D g) {
 		BufferedImage currentSprite = sprite[indexAnim];
 		if(getOE().getDirection() == Directions.Right)
-			currentSprite = Flip.Vertical(currentSprite);
+			currentSprite = SpriteHandler.Vertical(currentSprite);
 		renderEntity(currentSprite, g);
 	}
 	

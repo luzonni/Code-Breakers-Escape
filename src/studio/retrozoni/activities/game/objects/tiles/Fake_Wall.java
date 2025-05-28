@@ -21,7 +21,7 @@ public class Fake_Wall extends Tile {
 	}
 	
 	private BufferedImage buildSprite() {
-		BufferedImage cur_sprite = Wall.sprite[Wall.index];
+		BufferedImage cur_sprite = Engine.sheetHolder.getSheet("tiles", "wall").getSprite();
 		BufferedImage sprite = new BufferedImage(cur_sprite.getWidth(), cur_sprite.getHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics g = sprite.getGraphics();
 		g.drawImage(cur_sprite, 0, 0, null);

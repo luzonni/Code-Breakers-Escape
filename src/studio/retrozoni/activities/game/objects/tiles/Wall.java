@@ -7,26 +7,21 @@ import java.awt.image.BufferedImage;
 
 public class Wall extends Tile {
 	
-	protected static BufferedImage[] sprite;
-	protected static int index;
+	protected static int index = -1;
 	
 	public Wall(int id, int x, int y) {
 		super(id, x, y);
-		if(sprite == null) {
-			sprite = getSprite("wall", Theme.Primary);
-			index = Engine.RAND.nextInt(sprite.length);
+		loadSprite("wall");
+		if(index == -1) {
+			index = Engine.RAND.nextInt(getSheet().size());
+			getSheet().setIndex(index);
 		}
 		this.setSolid(true);
 	}
 	
 	@Override
-	public BufferedImage getSprite() {
-		return sprite[index];
-	}
-	
-	@Override
 	public void dispose() {
-		sprite = null;
+
 	}
 	
 }

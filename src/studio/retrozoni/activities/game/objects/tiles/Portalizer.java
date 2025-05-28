@@ -16,24 +16,19 @@ import java.util.List;
 
 public class Portalizer extends Tile {
 
-    private static BufferedImage[] sprites;
-    private static int index;
+    private static int index = -1;
     private final Timer timer;
 
     public Portalizer(int id, int x, int y) {
         super(id, x, y);
-        if(sprites == null) {
-            sprites = getSprite("portalizer", Theme.Primary);
-            index = Engine.RAND.nextInt(sprites.length);
+        loadSprite("portalizer");
+        if(index == -1) {
+            index = Engine.RAND.nextInt(getSheet().size());
+            getSheet().setIndex(index);
         }
         timer = new Timer(5);
         setVar(Variables.Selectable, true);
         setVar(Variables.Movable, true);
-    }
-
-    @Override
-    public BufferedImage getSprite() {
-        return sprites[index];
     }
 
     public void tick() {
@@ -58,12 +53,13 @@ public class Portalizer extends Tile {
 
     @Override
     public void render(Graphics2D g) {
-        renderTile(Floor.sprite[Floor.index], g);
+        BufferedImage spriteFloor = Engine.sheetHolder.getSheet("tiles", "floot").getSprite();
+        renderTile(spriteFloor, g);
         super.render(g);
     }
 
     @Override
     public void dispose() {
-        sprites = null;
+
     }
 }

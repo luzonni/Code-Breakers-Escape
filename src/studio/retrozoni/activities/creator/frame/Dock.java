@@ -1,7 +1,7 @@
 package studio.retrozoni.activities.creator.frame;
 
 import studio.retrozoni.engine.graphics.FontHandler;
-import studio.retrozoni.engine.graphics.SpriteSheet;
+import studio.retrozoni.engine.graphics.sprites.SpriteSheet;
 import studio.retrozoni.engine.inputs.Keyboard;
 import studio.retrozoni.engine.inputs.Mouse;
 import studio.retrozoni.engine.inputs.Mouse_Button;

@@ -1,6 +1,6 @@
 package studio.retrozoni.engine.inputs.buttons;
 
-import studio.retrozoni.engine.graphics.SpriteSheet;
+import studio.retrozoni.engine.graphics.sprites.SpriteSheet;
 import studio.retrozoni.engine.inputs.Mouse;
 import studio.retrozoni.engine.Engine;
 import studio.retrozoni.engine.Theme;

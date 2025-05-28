@@ -1,7 +1,7 @@
 package studio.retrozoni.activities.game.objects.entity;
 
 import studio.retrozoni.activities.game.Game;
-import studio.retrozoni.engine.graphics.Flip;
+import studio.retrozoni.engine.graphics.SpriteHandler;
 import studio.retrozoni.engine.Engine;
 import studio.retrozoni.engine.Theme;
 import studio.retrozoni.engine.tools.Timer;
@@ -38,13 +38,13 @@ public class Skull extends Entity {
 		Directions dir = getOE().getDirection();
 		switch (dir) {
 			case Up: 
-				image = Flip.Horizontal(image);
+				image = SpriteHandler.Horizontal(image);
 				break;
 			case Right:
-				image = Flip.Rotate(image, -90);
+				image = SpriteHandler.Rotate(image, -90);
 				break;
 			case Left:
-				image = Flip.Rotate(image, 90);
+				image = SpriteHandler.Rotate(image, 90);
 				break;
 			default:
 				break;

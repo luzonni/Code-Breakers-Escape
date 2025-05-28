@@ -2,7 +2,7 @@ package studio.retrozoni.engine.ui.command;
 
 import studio.retrozoni.engine.exceptions.ConsoleError;
 import studio.retrozoni.engine.graphics.FontHandler;
-import studio.retrozoni.engine.graphics.SpriteSheet;
+import studio.retrozoni.engine.graphics.sprites.SpriteSheet;
 import studio.retrozoni.engine.inputs.Keyboard;
 import studio.retrozoni.engine.inputs.buttons.TextButton;
 import studio.retrozoni.engine.Engine;

@@ -1,7 +1,7 @@
 package studio.retrozoni.activities.game.objects.entity;
 
 import studio.retrozoni.activities.game.Game;
-import studio.retrozoni.engine.graphics.SpriteSheet;
+import studio.retrozoni.engine.graphics.sprites.SpriteSheet;
 import studio.retrozoni.engine.Engine;
 import studio.retrozoni.engine.Theme;
 import studio.retrozoni.engine.sound.Sound;
@@ -130,7 +130,12 @@ public abstract class Entity extends Objects {
 			}
         };
     }
-	
+
+	@Override
+	protected void loadSprite(String name) {
+		loadSprites("entities", name);
+	}
+
 	public BufferedImage[] getSprite(String name) {
 		SpriteSheet spriteSheet = new SpriteSheet(Engine.ResPath+"/entity/"+name+".png", Engine.SCALE);
 		spriteSheet.replaceColor(Theme.PRIMARY, Theme.Primary.getRGB());

@@ -7,13 +7,10 @@ import studio.retrozoni.activities.game.objects.entity.Player;
 import java.awt.image.BufferedImage;
 
 public class Thorn extends Tile {
-	
-	private static BufferedImage sprite;
 
 	public Thorn(int id, int x, int y) {
 		super(id, x, y);
-		if(sprite == null)
-			sprite = getSprite("thorn", Theme.Primary)[0];
+		loadSprite("thron");
 		this.setSolid(true);
 	}
 	
@@ -24,13 +21,8 @@ public class Thorn extends Tile {
 	}
 
 	@Override
-	public BufferedImage getSprite() {
-		return sprite;
-	}
-	
-	@Override
 	public void dispose() {
-		sprite = null;
+
 	}
 
 }

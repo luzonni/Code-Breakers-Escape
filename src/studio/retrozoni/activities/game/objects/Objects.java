@@ -7,6 +7,7 @@ import studio.retrozoni.activities.game.objects.entity.Entity;
 import studio.retrozoni.activities.game.objects.entity.EntityTag;
 import studio.retrozoni.activities.game.objects.tiles.Tile;
 import studio.retrozoni.activities.game.objects.tiles.TileTag;
+import studio.retrozoni.engine.graphics.sprites.Sprites;
 import studio.retrozoni.engine.ui.command.Receiver;
 
 import java.awt.*;
@@ -14,8 +15,9 @@ import java.awt.image.BufferedImage;
 import java.util.Comparator;
 
 public abstract class Objects implements Receiver {
-	
-	private Values values;
+
+	private Sprites sheet;
+	private final Values values;
 	
 	public Objects(int ID) {
 		this.values = new Values();
@@ -30,7 +32,19 @@ public abstract class Objects implements Receiver {
 				this.values.addBoolean(type.getName(), false);
 	}
 
-	public abstract BufferedImage getSprite();
+	protected void loadSprites(String module, String spriteName) {
+		this.sheet = Engine.sheetHolder.getSheet(module, spriteName);
+	}
+
+	protected abstract void loadSprite(String name);
+
+	public BufferedImage getSprite() {
+		return getSheet().getSprite();
+	}
+
+	public Sprites getSheet() {
+		return this.sheet;
+	}
 	
 	public int ID() {
 		return getValues().getInt("id");

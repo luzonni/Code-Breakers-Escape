@@ -1,7 +1,7 @@
 package studio.retrozoni.engine;
 
 import studio.retrozoni.engine.graphics.FontHandler;
-import studio.retrozoni.engine.graphics.SpriteSheet;
+import studio.retrozoni.engine.graphics.sprites.SpriteSheet;
 import studio.retrozoni.engine.inputs.Keyboard;
 import studio.retrozoni.engine.inputs.Mouse;
 
@@ -70,11 +70,11 @@ public class Window extends Canvas implements Runnable {
 		}
 		frame.pack();
 		try {
-			SpriteSheet icon = new SpriteSheet(Engine.ResPath+"/ui/icon.png", 3);
+			SpriteSheet icon = new SpriteSheet(Engine.ResPath+"/sheets/ui/icon.png", 3);
 			icon.replaceColor(Theme.PRIMARY, Theme.Primary.getRGB());
 			icon.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
 			icon.replaceColor(Theme.TERTIARY, Theme.Tertiary.getRGB());
-			cursor = new SpriteSheet(Engine.ResPath+"/ui/cursor.png", 2);
+			cursor = new SpriteSheet(Engine.ResPath+"/sheets/ui/cursor.png", 2);
 			cursor.replaceColor(Theme.PRIMARY, Theme.Primary.getRGB());
 			cursor.replaceColor(Theme.TERTIARY, Theme.Tertiary.getRGB());
 			cursor.replaceColor(Theme.SECONDARY, Theme.Secondary.getRGB());
@@ -192,7 +192,6 @@ public class Window extends Canvas implements Runnable {
 					tick();
 					delta_HZ--;
 				}
-				
 			}catch(Exception e) {
 				System.out.println("ERROR!");
 				e.printStackTrace();

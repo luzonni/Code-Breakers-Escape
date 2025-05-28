@@ -1,7 +1,7 @@
 package studio.retrozoni.activities.game.objects.entity;
 
 import studio.retrozoni.activities.game.Game;
-import studio.retrozoni.engine.graphics.Flip;
+import studio.retrozoni.engine.graphics.SpriteHandler;
 import studio.retrozoni.engine.Engine;
 import studio.retrozoni.engine.Theme;
 import studio.retrozoni.activities.game.objects.Directions;
@@ -120,7 +120,7 @@ public class Pluuter extends Entity {
 	public void render(Graphics2D g) {
 		BufferedImage sprite = getSprite();
 		if(this.side.equals(Directions.Left))
-			sprite = Flip.Vertical(sprite);
+			sprite = SpriteHandler.Vertical(sprite);
 		renderEntity(sprite, g);
 	}
 	

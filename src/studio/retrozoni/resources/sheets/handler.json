@@ -1,0 +1,92 @@
+{
+  "mainPath": "studio.retrozoni.resources.sheets",
+  "modules": [
+    {
+      "module": "entities",
+      "sprites": [
+        "player",
+        "ant",
+        "arrow",
+        "barrel",
+        "berne",
+        "blaster",
+        "bomb",
+        "button",
+        "cannon",
+        "crossbow",
+        "fish",
+        "flag",
+        "fly",
+        "iron_ball",
+        "karto",
+        "door",
+        "pluuter",
+        "saw",
+        "server",
+        "skull",
+        "spine",
+        "teleporter",
+        "vase",
+        "worm"
+      ],
+      "defaultSize": {
+        "width": 16,
+        "height": 16
+      }
+    },
+    {
+      "module": "particles",
+      "sprites": [
+
+      ],
+      "defaultSize": {
+        "width": 16,
+        "height": 16
+      }
+    },
+    {
+      "module": "tiles",
+      "sprites": [
+
+      ],
+      "defaultSize": {
+        "width": 16,
+        "height": 16
+      }
+    },
+    {
+      "module": "items",
+      "sprites": [
+
+      ],
+      "defaultSize": {
+        "width": 16,
+        "height": 16
+      }
+    },
+    {
+      "module": "ui",
+      "sprites": [
+        "arrow"
+      ],
+      "defaultSize": {
+        "width": 16,
+        "height": 16
+      }
+    }
+  ],
+  "specificsSizes": {
+    "player": {
+      "width": 16,
+      "height": 16
+    },
+    "dust": {
+      "width": 3,
+      "height": 3
+    },
+    "interrogation": {
+      "width": 5,
+      "height": 9
+    }
+  }
+}

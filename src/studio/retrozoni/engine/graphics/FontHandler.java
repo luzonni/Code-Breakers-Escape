@@ -10,11 +10,11 @@ import java.util.Map;
 
 public abstract class FontHandler {
 
-	private static final String PATH = "studio/retrozoni/resources/ui/";
+	private static final String PATH = "studio/retrozoni/resources/fonts/";
 
 	private static Map<String, Font> FONTS;
 	
-	public static void addFont(String... fonts) {
+	public static void loadFont(String... fonts) {
 		FONTS = new HashMap<>();
 		try {
 			for(int i = 0; i < fonts.length; i++) {

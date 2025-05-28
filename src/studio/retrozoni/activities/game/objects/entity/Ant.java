@@ -13,16 +13,13 @@ import java.awt.image.BufferedImage;
 
 public class Ant extends Entity {
 	
-	private static BufferedImage[] sprite;
-	private int index_animation;
 	private final Path ai;
 	private final Timer timer;
 	private int tt;
 	
 	public Ant(int id, int x, int y) {
 		super(id, x, y);
-		if(sprite == null) 
-			sprite = getSprite("ant", Theme.Primary);
+		loadSprite("ant");
 		ai = new Path();
 		timer = new Timer(1);
 		setDepth(1);
@@ -32,13 +29,13 @@ public class Ant extends Entity {
 
 	@Override
 	public BufferedImage getSprite() {
-		return sprite[index_animation];
+		return getSheet().getSprite();
 	}
 
 	@Override
 	public void tick() {
 		if(!ai.follow(ai.direction())) {
-			index_animation = 0;
+			getSheet().setIndex(0);
 			if(timer.tiktak()) {
 				Game.getLevel().addParticle(new Interrogation(getMiddle().x, (int)getY() + getWidth()/2));
 			Player P = Game.getPlayer();
@@ -49,10 +46,8 @@ public class Ant extends Entity {
 			tt++;
 			if(tt > 5) {
 				tt = 0;
-				index_animation++;
-			}	
-			if(index_animation > sprite.length-1)
-				index_animation = 1;
+				getSheet().plusIndex();
+			}
 		}
 		Player P = Game.getPlayer();
 		if(this.collidingWith(P))
@@ -67,6 +62,6 @@ public class Ant extends Entity {
 	
 	@Override
 	public void dispose() {
-		sprite = null;
+
 	}
 }

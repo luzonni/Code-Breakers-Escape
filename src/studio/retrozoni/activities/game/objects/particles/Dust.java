@@ -9,7 +9,6 @@ import java.awt.image.BufferedImage;
 
 public class Dust extends Particle {
 	
-	private static BufferedImage[] sprite;
 	private int index;
 	private double rotate;
 	private double radians;
@@ -17,16 +16,11 @@ public class Dust extends Particle {
 
 	public Dust(int x, int y, double radians) {
 		super(x, y);
-		if(sprite == null) {
-			sprite = new BufferedImage[3];
-			sprite[0] = getSprite("dust", Theme.Primary)[0].getSubimage(0, 0, 3*Engine.SCALE, 3*Engine.SCALE);
-			sprite[1] = getSprite("dust", Theme.Secondary)[0].getSubimage(0, 0, 3*Engine.SCALE, 3*Engine.SCALE);
-			sprite[2] = getSprite("dust", Theme.Tertiary)[0].getSubimage(0, 0, 3*Engine.SCALE, 3*Engine.SCALE);
-		}
+		loadSprite("dust");
 		this.radians = radians;
 		this.speed = Engine.RAND.nextDouble();
-		this.index = Engine.RAND.nextInt(sprite.length);
-		setSize(sprite[index].getWidth(), sprite[index].getHeight());
+		getSheet().setState(Engine.RAND.nextInt(getSheet().size()));
+		setSize(getSprite().getWidth(), getSprite().getHeight());
 	}
 
 	@Override
@@ -46,8 +40,9 @@ public class Dust extends Particle {
 
 	@Override
 	public void render(Graphics2D g) {
+		//TODO mudar method de rotação!
 		g.rotate(rotate, getMiddle().x - Game.getCam().getX(), getMiddle().y - Game.getCam().getY());
-		renderParticle(sprite[index], g);
+		renderParticle(getSprite(), g);
 		g.rotate(-rotate, getMiddle().x - Game.getCam().getX(), getMiddle().y - Game.getCam().getY());
 
 	}

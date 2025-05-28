@@ -1,6 +1,6 @@
 package studio.retrozoni.activities.game.items;
 
-import studio.retrozoni.engine.graphics.SpriteSheet;
+import studio.retrozoni.engine.graphics.sprites.SpriteSheet;
 import studio.retrozoni.engine.Engine;
 import studio.retrozoni.engine.Theme;
 import studio.retrozoni.activities.game.objects.entity.EntityItem;
