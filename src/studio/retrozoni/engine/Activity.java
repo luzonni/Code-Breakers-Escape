@@ -1,6 +1,6 @@
 package studio.retrozoni.engine;
 
-import studio.retrozoni.ui.command.Receiver;
+import studio.retrozoni.engine.ui.command.Receiver;
 
 import java.awt.*;
 

@@ -1,6 +1,6 @@
 package studio.retrozoni.engine.exceptions;
 
-import studio.retrozoni.game.objects.entity.Entity;
+import studio.retrozoni.activities.game.objects.entity.Entity;
 
 public class Dead extends RuntimeException {
 

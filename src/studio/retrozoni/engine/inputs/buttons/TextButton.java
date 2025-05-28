@@ -1,6 +1,6 @@
 package studio.retrozoni.engine.inputs.buttons;
 
-import studio.retrozoni.engine.graphics.FontG;
+import studio.retrozoni.engine.graphics.FontHandler;
 import studio.retrozoni.engine.inputs.Keyboard;
 import studio.retrozoni.engine.inputs.Mouse;
 import studio.retrozoni.engine.inputs.Mouse_Button;
@@ -120,8 +120,8 @@ public class TextButton extends Button {
 	
 	private void refresh() {
 		String value = getWord();
-		int width = FontG.getWidth(value, font) + margin;
-		int height = FontG.getHeight(value, font) + margin;
+		int width = FontHandler.getWidth(value, font) + margin;
+		int height = FontHandler.getHeight(value, font) + margin;
 		this.getResponsive().getBounds().setSize(width, height);
 		this.getResponsive().setPosition();
 	}
@@ -135,7 +135,7 @@ public class TextButton extends Button {
 		g.setColor(Theme.Primary);
 		g.drawRect(getBounds().x, getBounds().y, getBounds().width, getBounds().height);
 		String value = getWord();
-		int h = FontG.getHeight(value, font);
+		int h = FontHandler.getHeight(value, font);
 		if(word.isEmpty())
 			g.setColor(Theme.Secondary);
 		else
@@ -143,6 +143,6 @@ public class TextButton extends Button {
 		g.drawString(value, getBounds().x + margin/2, getBounds().y + margin/2 + h);
 		g.setColor(Theme.Primary);
 		if(selected)
-			g.fillRect(getBounds().x + (FontG.getWidth(word.substring(0, index_write), font)) + margin/2, getBounds().y + margin/2, Engine.SCALE, h);
+			g.fillRect(getBounds().x + (FontHandler.getWidth(word.substring(0, index_write), font)) + margin/2, getBounds().y + margin/2, Engine.SCALE, h);
 	}
 }

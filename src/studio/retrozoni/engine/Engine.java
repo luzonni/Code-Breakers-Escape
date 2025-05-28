@@ -1,14 +1,13 @@
 package studio.retrozoni.engine;
 
-import studio.retrozoni.menu.Menu;
-import studio.retrozoni.creator.Creator;
-import studio.retrozoni.game.Level;
-import studio.retrozoni.engine.graphics.FontG;
+import studio.retrozoni.activities.menu.Menu;
+import studio.retrozoni.activities.creator.Creator;
+import studio.retrozoni.activities.game.Level;
+import studio.retrozoni.engine.graphics.FontHandler;
 import studio.retrozoni.engine.sound.Sound;
-import studio.retrozoni.game.objects.Objects;
-import studio.retrozoni.ui.UserInterface;
+import studio.retrozoni.activities.game.objects.Objects;
+import studio.retrozoni.engine.ui.UserInterface;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -57,7 +56,7 @@ public class Engine implements Runnable {
 	public Engine(String[] args) {
 		Engine.SETTINGS = new Setting();
 		Engine.THEME = new Theme();
-		FontG.addFont("septem");
+		FontHandler.addFont("septem");
 		Sound.load();
 		RAND = new Random();
 		start(args);

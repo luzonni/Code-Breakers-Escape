@@ -1,7 +1,7 @@
 package studio.retrozoni.engine.inputs;
 
 
-import studio.retrozoni.game.objects.Camera;
+import studio.retrozoni.activities.game.objects.Camera;
 
 import java.awt.*;
 import java.awt.event.*;

@@ -1,6 +1,6 @@
 package studio.retrozoni.engine.inputs.buttons;
 
-import studio.retrozoni.engine.graphics.FontG;
+import studio.retrozoni.engine.graphics.FontHandler;
 import studio.retrozoni.engine.inputs.Mouse;
 import studio.retrozoni.engine.inputs.Mouse_Button;
 import studio.retrozoni.engine.Engine;
@@ -19,19 +19,19 @@ public class Button {
 	protected int margin;
 
 	public Button(String Name, int x_per, int y_per, Responsive parent, int size) {
-		this.font = FontG.font(Engine.SCALE *size);
+		this.font = FontHandler.font("septem", Engine.SCALE *size);
 		this.Name = Name;
 		margin = size * 3;
-		int W = FontG.getWidth(this.Name, this.font) + margin;
-		int H = FontG.getHeight(this.Name, this.font) + margin;
+		int W = FontHandler.getWidth(this.Name, this.font) + margin;
+		int H = FontHandler.getHeight(this.Name, this.font) + margin;
 		Rectangle rec = new Rectangle(W, H);
 		this.P = Responsive.createRectangle(parent, rec, x_per, y_per);
 	}
 
 	public void setName(String newName) {
 		this.Name = newName;
-		int W = FontG.getWidth(this.Name, this.font) + margin;
-		int H = FontG.getHeight(this.Name, this.font) + margin;
+		int W = FontHandler.getWidth(this.Name, this.font) + margin;
+		int H = FontHandler.getHeight(this.Name, this.font) + margin;
 		this.P.setSize(W, H);
 	}
 	

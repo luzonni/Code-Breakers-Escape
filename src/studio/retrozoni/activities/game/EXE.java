@@ -1,0 +1,71 @@
+package studio.retrozoni.activities.game;
+
+import studio.retrozoni.engine.exceptions.ConsoleError;
+import studio.retrozoni.engine.inputs.Mouse;
+import studio.retrozoni.engine.inputs.Mouse_Button;
+import studio.retrozoni.activities.game.items.Bow;
+import studio.retrozoni.activities.game.items.Item;
+import studio.retrozoni.activities.game.items.Placeable;
+import studio.retrozoni.activities.game.objects.Directions;
+import studio.retrozoni.activities.game.objects.Variables;
+import studio.retrozoni.activities.game.objects.entity.Entity;
+import studio.retrozoni.activities.game.objects.entity.Player;
+import studio.retrozoni.activities.game.objects.tiles.Tile;
+import studio.retrozoni.engine.ui.command.Commands;
+import studio.retrozoni.engine.ui.command.Receiver;
+
+public class EXE {
+
+    protected static void selector(Receiver receiver) {
+        new Thread(() -> {
+            Level level = Game.getLevel();
+            while(level.getSelected() == null) {
+                for(int i = 0; i < level.getMap().length; i++) {
+                    Tile T = level.getMap()[i];
+                    if(Mouse.pressingOnMap(Mouse_Button.LEFT, T.getBounds(), Game.getCam()) && T.getVar(Variables.Selectable)) {
+                        level.selected = T;
+                        receiver.used(Commands.select);
+                    }
+                }
+                for(int i = 0; i < level.getEntities().size(); i++) {
+                    Entity E = level.getEntities().get(i);
+                    if(Mouse.pressingOnMap(Mouse_Button.LEFT, E.getBounds(), Game.getCam()) && E.getVar(Variables.Selectable)) {
+                        level.selected = E;
+                        receiver.used(Commands.select);
+                    }
+                }
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException ignore) {}
+            }
+        }).start();
+    }
+
+    protected static void shot(String[] keys, Receiver receiver) {
+        String dir_name = (keys[1].substring(0, 1).toUpperCase() + keys[1].substring(1).toLowerCase());
+        Directions dir = Directions.valueOf(dir_name);
+        Player player = Game.getPlayer();
+        Item[] items = Game.getInventory().getList();
+        for(Item item : items)
+            if(item instanceof Bow) {
+                ((Bow)item).shot(player, dir);
+                receiver.used(Commands.shot);
+                return;
+            }
+        throw new ConsoleError("You don't have a bow to shoot");
+    }
+
+    protected static void put(String[] keys, Receiver receiver) {
+        Item[] items = Game.getInventory().getList();
+        for(int i = 0; i < items.length; i++) {
+            if(items[i] instanceof Placeable) {
+                if(((Placeable)items[i]).place(keys)) {
+                    receiver.used(Commands.put);
+                }else
+                    throw new ConsoleError("Item not found");
+            }else {
+                throw new ConsoleError("Item not found");
+            }
+        }
+    }
+}

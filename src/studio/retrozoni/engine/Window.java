@@ -1,6 +1,6 @@
 package studio.retrozoni.engine;
 
-import studio.retrozoni.engine.graphics.FontG;
+import studio.retrozoni.engine.graphics.FontHandler;
 import studio.retrozoni.engine.graphics.SpriteSheet;
 import studio.retrozoni.engine.inputs.Keyboard;
 import studio.retrozoni.engine.inputs.Mouse;
@@ -155,10 +155,10 @@ public class Window extends Canvas implements Runnable {
 		g.setColor(Color.WHITE);
 		int middleX = getWidth()/2;
 		int middleY = getHeight()/2;
-		Font font = FontG.font(Engine.SCALE *16);
+		Font font = FontHandler.font("septem", Engine.SCALE *16);
 		String name = "Capulus";
-		int w = FontG.getWidth(name, font);
-		int h = FontG.getHeight(name, font);
+		int w = FontHandler.getWidth(name, font);
+		int h = FontHandler.getHeight(name, font);
 		int x = middleX - w/2;
 		int y = middleY - h/2;
 		g.setFont(font);
